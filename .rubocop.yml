@@ -22,14 +22,6 @@
 #
 # ----------------------------------------------------------------------------
 
-# TODO(alexstephen): Investigate and fix why enabling the AllCops > Exclude
-# actually disabled all rubocop in the Chef project. Adding Include does not
-# have any effect
-# https://bugzilla.graphite.cloudnativeapp.com/show_bug.cgi?id=187
-AllCops:
-  Exclude:
-    - 'recipes/**'
-
 Metrics/AbcSize:
   Max: 25
 
@@ -38,3 +30,7 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Max: 15
+
+Style/FileName:
+  Exclude:
+    - 'recipes/examples~*.rb'

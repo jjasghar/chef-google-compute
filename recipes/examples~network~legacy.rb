@@ -43,5 +43,4 @@ gauth_credential 'mycred' do
   ]
 end
 
-
 # TODO(alexstephen): Add example here

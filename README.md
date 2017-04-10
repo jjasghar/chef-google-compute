@@ -22,7 +22,6 @@ This cookbook was tested on the following operating systems:
 ## Example
 
 ```ruby
-
 # TODO(alexstephen): Add example here
 
 ```
@@ -112,7 +111,6 @@ static.
 #### Example
 
 ```ruby
-
 # TODO(alexstephen): Add example here
 
 ```
@@ -155,7 +153,6 @@ type, use the disk type's full or partial URL.
 #### Example
 
 ```ruby
-
 # TODO(alexstephen): Add example here
 
 ```
@@ -229,7 +226,6 @@ advocate of IPv6 and it is an important future direction.
 #### Example
 
 ```ruby
-
 # TODO(alexstephen): Add example here
 
 ```
@@ -288,7 +284,6 @@ zones
 #### Example
 
 ```ruby
-
 # TODO(alexstephen): Add example here
 
 ```

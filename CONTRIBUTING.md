@@ -61,7 +61,9 @@ chef-codegen:
   * libraries/google/property/string.rb
   * libraries/google/property/time.rb
   * libraries/google/request/base.rb
+  * libraries/google/request/delete.rb
   * libraries/google/request/get.rb
+  * libraries/google/request/post.rb
   * LICENSE
   * metadata.rb
   * README.md
@@ -82,6 +84,8 @@ chef-codegen:
   * spec/disk_type_spec.rb
   * spec/network_spec.rb
   * spec/region_spec.rb
+  * spec/request_delete_spec.rb
+  * spec/request_post_spec.rb
   * spec/spec_helper.rb
 
 Please do *not* edit them directly as they will be clobbered when
