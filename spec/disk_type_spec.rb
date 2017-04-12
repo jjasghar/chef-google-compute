@@ -114,7 +114,7 @@ def expect_network_get_success(id, data = {})
 
   expect(Google::Request::Get).to receive(:new)
     .with(self_link(uri_data(id).merge(data)),
-          instance_of(Google::FakeCredential)) do |args|
+          instance_of(Google::FakeAuthorization)) do |args|
     debug ">> GET #{args}"
     request
   end
@@ -133,7 +133,7 @@ def expect_network_get_failed(id, data = {})
 
   expect(Google::Request::Get).to receive(:new)
     .with(self_link(uri_data(id).merge(data)),
-          instance_of(Google::FakeCredential)) do |args|
+          instance_of(Google::FakeAuthorization)) do |args|
     debug ">> GET [failed] #{args}"
     request
   end
