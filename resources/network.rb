@@ -25,7 +25,8 @@ module Google
       property :ipv4_range, String, desired_state: true
       property :name, String, name_property: true, desired_state: true
       property :subnetworks, Array, desired_state: true
-      property :auto_create_subnetworks, String, desired_state: true
+      property :auto_create_subnetworks,
+               kind_of: [TrueClass, FalseClass], desired_state: true
       property :creation_timestamp, Time, desired_state: true
 
       property :credential, String, desired_state: false, required: true
