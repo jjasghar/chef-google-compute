@@ -76,12 +76,119 @@ chef-codegen:
   * recipes/examples~network~custom.rb
   * recipes/examples~network~legacy.rb
   * recipes/examples~region.rb
+  * recipes/tests~gcompute_address~create~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_address~create~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_address~create~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_address~create~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_address~create~exist~nochange~title_and_name~fail.rb
+  * recipes/tests~gcompute_address~create~exist~nochange~title_and_name~success.rb
+  * recipes/tests~gcompute_address~create~exist~nochange~title_eq_name~fail.rb
+  * recipes/tests~gcompute_address~create~exist~nochange~title_eq_name~success.rb
+  * recipes/tests~gcompute_address~create~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_address~create~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_address~create~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_address~create~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_address~delete~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_address~delete~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_address~delete~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_address~delete~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_address~delete~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_address~delete~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_address~delete~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_address~delete~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_disk_type~create~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_disk_type~create~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_disk_type~create~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_disk_type~create~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_disk_type~create~exist~nochange~title_and_name~fail.rb
+  * recipes/tests~gcompute_disk_type~create~exist~nochange~title_and_name~success.rb
+  * recipes/tests~gcompute_disk_type~create~exist~nochange~title_eq_name~fail.rb
+  * recipes/tests~gcompute_disk_type~create~exist~nochange~title_eq_name~success.rb
+  * recipes/tests~gcompute_disk_type~create~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_disk_type~create~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_disk_type~create~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_disk_type~create~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_disk_type~delete~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_disk_type~delete~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_disk_type~delete~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_disk_type~delete~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_disk_type~delete~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_disk_type~delete~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_disk_type~delete~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_disk_type~delete~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_network~create~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_network~create~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_network~create~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_network~create~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_network~create~exist~nochange~title_and_name~fail.rb
+  * recipes/tests~gcompute_network~create~exist~nochange~title_and_name~success.rb
+  * recipes/tests~gcompute_network~create~exist~nochange~title_eq_name~fail.rb
+  * recipes/tests~gcompute_network~create~exist~nochange~title_eq_name~success.rb
+  * recipes/tests~gcompute_network~create~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_network~create~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_network~create~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_network~create~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_network~delete~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_network~delete~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_network~delete~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_network~delete~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_network~delete~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_network~delete~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_network~delete~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_network~delete~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_region~create~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_region~create~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_region~create~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_region~create~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_region~create~exist~nochange~title_and_name~fail.rb
+  * recipes/tests~gcompute_region~create~exist~nochange~title_and_name~success.rb
+  * recipes/tests~gcompute_region~create~exist~nochange~title_eq_name~fail.rb
+  * recipes/tests~gcompute_region~create~exist~nochange~title_eq_name~success.rb
+  * recipes/tests~gcompute_region~create~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_region~create~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_region~create~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_region~create~noexist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_region~delete~exist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_region~delete~exist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_region~delete~exist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_region~delete~exist~change~title_eq_name~success.rb
+  * recipes/tests~gcompute_region~delete~noexist~change~title_and_name~fail.rb
+  * recipes/tests~gcompute_region~delete~noexist~change~title_and_name~success.rb
+  * recipes/tests~gcompute_region~delete~noexist~change~title_eq_name~fail.rb
+  * recipes/tests~gcompute_region~delete~noexist~change~title_eq_name~success.rb
   * resources/address.rb
   * resources/disk_type.rb
   * resources/network.rb
   * resources/region.rb
   * spec/address_spec.rb
+  * spec/cookbooks/google-gauth/metadata.rb
+  * spec/data/network/gcompute_address/success1~name.yaml
+  * spec/data/network/gcompute_address/success1~title.yaml
+  * spec/data/network/gcompute_address/success2~name.yaml
+  * spec/data/network/gcompute_address/success2~title.yaml
+  * spec/data/network/gcompute_address/success3~name.yaml
+  * spec/data/network/gcompute_address/success3~title.yaml
+  * spec/data/network/gcompute_disk_type/success1~name.yaml
+  * spec/data/network/gcompute_disk_type/success1~title.yaml
+  * spec/data/network/gcompute_disk_type/success2~name.yaml
+  * spec/data/network/gcompute_disk_type/success2~title.yaml
+  * spec/data/network/gcompute_disk_type/success3~name.yaml
+  * spec/data/network/gcompute_disk_type/success3~title.yaml
+  * spec/data/network/gcompute_network/success1~name.yaml
+  * spec/data/network/gcompute_network/success1~title.yaml
+  * spec/data/network/gcompute_network/success2~name.yaml
+  * spec/data/network/gcompute_network/success2~title.yaml
+  * spec/data/network/gcompute_network/success3~name.yaml
+  * spec/data/network/gcompute_network/success3~title.yaml
+  * spec/data/network/gcompute_region/success1~name.yaml
+  * spec/data/network/gcompute_region/success1~title.yaml
+  * spec/data/network/gcompute_region/success2~name.yaml
+  * spec/data/network/gcompute_region/success2~title.yaml
+  * spec/data/network/gcompute_region/success3~name.yaml
+  * spec/data/network/gcompute_region/success3~title.yaml
   * spec/disk_type_spec.rb
+  * spec/fake_auth.rb
+  * spec/fake_cred.rb
   * spec/network_spec.rb
   * spec/region_spec.rb
   * spec/request_delete_spec.rb

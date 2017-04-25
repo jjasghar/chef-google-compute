@@ -26,6 +26,7 @@ source 'https://rubygems.org'
 
 group :test do
   gem 'chef'
+  gem 'chefspec', '~> 6.2.0'
   gem 'metadata-json-lint'
   gem 'rake', '~> 10.0'
   gem 'rspec'

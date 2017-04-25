@@ -23,6 +23,8 @@
 # ----------------------------------------------------------------------------
 
 require 'spec_helper'
+# TODO(alexstephen): Reformat tests to use nested describe blocks
+# TODO(alexstephen): Add title == name tests
 # Test Matrix:
 #
 # +--------------------------------------------------------+
@@ -42,165 +44,392 @@ require 'spec_helper'
 # +--------------------------------------------------------+
 # TODO(alexstephen): Add tests for manage
 # TODO(alexstephen): Add tests for modify
-describe 'gcompute::tests~address~create~exist~change' do
-  # TODO(alexstephen): Create test for create | exist | change | success
-  # Test for updating an object
-end
+context 'gcompute_address' do
+  A_PROJECT_DATA = %w[
+    test\ project#0\ data
+    test\ project#1\ data
+    test\ project#2\ data
+    test\ project#3\ data
+    test\ project#4\ data
+  ].freeze
 
-describe 'gcompute::tests~address~create~exist~change~fail' do
-  # TODO(alexstephen): Create test for create | exist | change | fail
-  subject { -> { raise '[placeholder] This should fail.' } }
+  A_REGION_DATA = %w[
+    test\ region#0\ data
+    test\ region#1\ data
+    test\ region#2\ data
+    test\ region#3\ data
+    test\ region#4\ data
+  ].freeze
 
-  it { is_expected.to raise_error(RuntimeError, /placeholder/) }
-end
+  A_NAME_DATA = %w[
+    test\ name#0\ data
+    test\ name#1\ data
+    test\ name#2\ data
+    test\ name#3\ data
+    test\ name#4\ data
+  ].freeze
 
-describe 'gcompute::tests~address~create~exist~nochange' do
-  # TODO(alexstephen): Create test for create | exist | nochange | success
-  # Test for creating same object again
-end
+  context 'ensure == present' do
+    context 'resource exists' do
+      # Ensure present: resource exists, no change
+      context 'no changes == no action' do
+        # Ensure present: resource exists, no change, no name
+        context 'title == name' do
+          # Ensure present: resource exists, no change, no name, pass
+          context 'title == name (pass)' do
+            # TODO(alexstephen): Implement new test format
+          end
 
-describe 'gcompute::tests~address~create~exist~nochange~fail' do
-  # TODO(alexstephen): Create test for create | exist | nochange | fail
-  subject { -> { raise '[placeholder] This should fail.' } }
+          # Ensure present: resource exists, no change, no name, fail
+          context 'title == name (fail)' do
+            # TODO(alexstephen): Implement new test format.
+            subject { -> { raise '[placeholder] This should fail.' } }
+            it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+          end
+        end
 
-  it { is_expected.to raise_error(RuntimeError, /placeholder/) }
-end
+        # Ensure present: resource exists, no change, has name
+        context 'title != name' do
+          # Ensure present: resource exists, no change, has name, pass
+          context 'title != name (pass)' do
+            # TODO(alexstephen): Implement new test format.
+          end
 
-describe 'gcompute::tests~address~create~noexist~change' do
-  # TODO(alexstephen): Create test for create | noexist | change | success
-  # Test for creating an object
-end
+          # Ensure present: resource exists, no change, has name, fail
+          context 'title != name (fail)' do
+            # TODO(alexstephen): Implement new test format.
+            subject { -> { raise '[placeholder] This should fail.' } }
+            it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+          end
+        end
+      end
 
-describe 'gcompute::tests~address~create~noexist~change~fail' do
-  # TODO(alexstephen): Create test for create | noexist | change | fail
-  subject { -> { raise '[placeholder] This should fail.' } }
+      # Ensure present: resource exists, changes
+      context 'changes == action' do
+        # Ensure present: resource exists, changes, no name
+        context 'title == name' do
+          # Ensure present: resource exists, changes, no name, pass
+          context 'title == name (pass)' do
+            # TODO(alexstephen): Implement new test format.
 
-  it { is_expected.to raise_error(RuntimeError, /placeholder/) }
-end
+            before do
+              expect_network_get_failed 1, name: 'title0'
+              expect_network_create \
+                1,
+                {
+                  'kind' => 'compute#address',
+                  'address' => 'test address#0 data',
+                  'description' => 'test description#0 data',
+                  'name' => 'title0',
+                  'region' => 'test region#0 data'
+                },
+                name: 'title0'
+              expect_network_get_async 1
+            end
 
-describe 'gcompute::tests~address~delete~exist~change' do
-  # TODO(alexstephen): Create test for delete | exists | changed | success
-  # Test for deleting an object
-end
+            let(:runner) do
+              cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
+                                  #{File.expand_path(Dir.pwd)}/spec/cookbooks]
+              ChefSpec::SoloRunner.new(
+                step_into: 'gcompute_address',
+                cookbook_path: cookbook_paths,
+                platform: 'ubuntu',
+                version: '16.04'
+              )
+            end
 
-describe 'gcompute::tests~address~delete~exist~change~fail' do
-  # TODO(alexstephen): Create test for delete | exists | changed | fail
-  subject { -> { raise '[placeholder] This should fail.' } }
+            let(:chef_run) do
+              r_name = 'gcompute::tests~gcompute_address~create~noexist'\
+                       '~change~title_eq_name~success'
+              runner.converge(r_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
+            end
 
-  it { is_expected.to raise_error(RuntimeError, /placeholder/) }
-end
+            subject do
+              chef_run.find_resource(:gcompute_address,
+                                     'title0')
+            end
 
-describe 'gcompute::tests~address~delete~noexist~change' do
-  # TODO(alexstephen): Create test for delete | noexists | changed | success
-  # Test for deleting an object that doesn't exist, throws error
-  subject { -> { raise '[placeholder] This should fail.' } }
+            it 'should run test correctly' do
+              expect(chef_run).to create(:gcompute_address,
+                                         'title0')
+            end
+            it do
+              is_expected
+                .to have_attributes(address: 'test address#0 data')
+            end
+            it do
+              is_expected
+                .to have_attributes(description: 'test description#0 data')
+            end
+            it do
+              is_expected
+                .to have_attributes(name: 'title0')
+            end
+            it do
+              is_expected
+                .to have_attributes(region: 'test region#0 data')
+            end
+          end
 
-  it { is_expected.to raise_error(RuntimeError, /placeholder/) }
-end
+          # Ensure present: resource exists, changes, no name, fail
+          context 'title == name (fail)' do
+            # TODO(alexstephen): Implement new test format.
+            subject { -> { raise '[placeholder] This should fail.' } }
+            it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+          end
+        end
 
-describe 'gcompute::tests~address~delete~noexist~change~fail' do
-  # TODO(alexstephen): Create test for delete | noexists | changed | fail
-  subject { -> { raise '[placeholder] This should fail.' } }
+        # Ensure present: resource exists, changes, has name
+        context 'title != name' do
+          # Ensure present: resource exists, changes, has name, pass
+          context 'title != name (pass)' do
+            # TODO(alexstephen): Implement new test format
+          end
 
-  it { is_expected.to raise_error(RuntimeError, /placeholder/) }
-end
+          # Ensure present: resource exists, changes, has name, fail
+          context 'title != name (fail)' do
+            # TODO(alexstephen): Implement new test format.
+            subject { -> { raise '[placeholder] This should fail.' } }
+            it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+          end
+        end
+      end
+    end
 
-def expect_network_get_success(id, data = {})
-  id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
-  body = load_network_result("success#{id}~#{id_data}.yaml").to_json
+    context 'resource missing' do
+      # Ensure present: resource missing, ignore, no name
+      context 'title == name' do
+        # Ensure present: resource missing, ignore, no name, pass
+        context 'title == name (pass)' do
+          # TODO(alexstephen): Implement new test format
+        end
 
-  request = double('request')
-  allow(request).to receive(:send).and_return(http_success(body))
+        # Ensure present: resource missing, ignore, no name, fail
+        context 'title == name (fail)' do
+          # TODO(alexstephen): Implement new test format.
+          subject { -> { raise '[placeholder] This should fail.' } }
+          it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+        end
+      end
 
-  expect(Google::Request::Get).to receive(:new)
-    .with(self_link(uri_data(id).merge(data)),
-          instance_of(Google::FakeAuthorization)) do |args|
-    debug ">> GET #{args}"
-    request
+      # Ensure present: resource missing, ignore, has name
+      context 'title != name' do
+        # Ensure present: resource missing, ignore, has name, pass
+        context 'title != name (pass)' do
+          # TODO(alexstephen): Implement new test format
+        end
+
+        # Ensure present: resource missing, ignore, has name, fail
+        context 'title != name (fail)' do
+          # TODO(alexstephen): Implement new test format.
+          subject { -> { raise '[placeholder] This should fail.' } }
+          it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+        end
+      end
+    end
   end
-end
 
-def http_success(body)
-  response = Net::HTTPOK.new(1.0, 200, 'OK')
-  response.body = body
-  response.instance_variable_set(:@read, true)
-  response
-end
+  context 'ensure == absent' do
+    context 'resource missing' do
+      # Ensure absent: resource missing, ignore, no name
+      context 'title == name' do
+        # Ensure absent: resource missing, ignore, no name, pass
+        context 'title == name (pass)' do
+          # TODO(alexstephen): Implement new test format.
+        end
 
-def expect_network_get_async(id)
-  body = { kind: 'compute#address' }.to_json
+        # Ensure absent: resource missing, ignore, no name, fail
+        context 'title == name (fail)' do
+          # TODO(alexstephen): Implement new test format.
+          subject { -> { raise '[placeholder] This should fail.' } }
+          it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+        end
+      end
 
-  request = double('request')
-  allow(request).to receive(:send).and_return(http_success(body))
+      # Ensure absent: resource missing, ignore, has name
+      context 'title != name' do
+        # Ensure absent: resource missing, ignore, has name, pass
+        context 'title != name (pass)' do
+          # TODO(alexstephen): Implement new test format.
+        end
 
-  expect(Google::Request::Get).to receive(:new)
-    .with(self_link(uri_data(id)),
-          instance_of(Google::FakeAuthorization)) do |args|
-    debug ">> GET <async> #{args}"
-    request
+        # Ensure absent: resource missing, ignore, has name, fail
+        context 'title != name (fail)' do
+          # TODO(alexstephen): Implement new test format.
+          subject { -> { raise '[placeholder] This should fail.' } }
+          it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+        end
+      end
+    end
+
+    context 'resource exists' do
+      # Ensure absent: resource exists, ignore, no name
+      context 'title == name' do
+        # Ensure absent: resource exists, ignore, no name, pass
+        context 'title == name (pass)' do
+          # TODO(alexstephen): Implement new test format.
+        end
+
+        # Ensure absent: resource exists, ignore, no name, fail
+        context 'title == name (fail)' do
+          # TODO(alexstephen): Implement new test format.
+          subject { -> { raise '[placeholder] This should fail.' } }
+          it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+        end
+      end
+
+      # Ensure absent: resource exists, ignore, has name
+      context 'title != name' do
+        # Ensure absent: resource exists, ignore, has name, pass
+        context 'title != name (pass)' do
+          # TODO(alexstephen): Implement new test format.
+        end
+
+        # Ensure absent: resource exists, ignore, has name, fail
+        context 'title != name (fail)' do
+          # TODO(alexstephen): Implement new test format.
+          subject { -> { raise '[placeholder] This should fail.' } }
+          it { is_expected.to raise_error(RuntimeError, /placeholder/) }
+        end
+      end
+    end
   end
-end
 
-def expect_network_get_failed(id, data = {})
-  request = double('request')
-  allow(request).to receive(:send).and_return(http_failed_object_missing)
-
-  expect(Google::Request::Get).to receive(:new)
-    .with(self_link(uri_data(id).merge(data)),
-          instance_of(Google::FakeAuthorization)) do |args|
-    debug ">> GET [failed] #{args}"
-    request
+  def expand_variables(template, data, extra_data = {})
+    Google::GCOMPUTE::Address
+      .action_class.expand_variables(template, data, extra_data)
   end
-end
 
-def http_failed_object_missing
-  Net::HTTPNotFound.new(1.0, 404, 'Not Found')
-end
+  def expect_network_get_success(id, data = {})
+    id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
+    body = load_network_result("success#{id}~#{id_data}.yaml").to_json
 
-def expect_network_create(id, expected_body, data = {})
-  body = { kind: 'compute#operation',
-           status: 'DONE',
-           targetLink: self_link(uri_data(id)) }.to_json
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
 
-  request = double('request')
-  allow(request).to receive(:send).and_return(http_success(body))
-
-  expect(Google::Request::Post).to receive(:new)
-    .with(collection(uri_data(id).merge(data)),
-          instance_of(Google::FakeAuthorization),
-          'application/json', expected_body.to_json) do |args|
-    debug ">> POST #{args} = body(#{body})"
-    request
+    expect(Google::Request::Get).to receive(:new)
+      .with(self_link(uri_data(id).merge(data)),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug ">> GET #{args}"
+      request
+    end
   end
-end
 
-def expect_network_delete(id, name = nil)
-  delete_data = uri_data(id)
-  delete_data[:name] = name unless name.nil?
-  body = { kind: 'compute#operation',
-           status: 'DONE',
-           targetLink: self_link(uri_data(id)) }.to_json
-
-  request = double('request')
-  allow(request).to receive(:send).and_return(http_success(body))
-
-  expect(Google::Request::Delete).to receive(:new)
-    .with(self_link(delete_data),
-          instance_of(Google::FakeAuthorization)) do |args|
-    debug ">> DELETE #{args}"
-    request
+  def http_success(body)
+    response = Net::HTTPOK.new(1.0, 200, 'OK')
+    response.body = body
+    response.instance_variable_set(:@read, true)
+    response
   end
-end
 
-def load_network_result(file)
-  results = File.join(File.dirname(__FILE__), 'data', 'network',
-                      'gcompute_address', file)
-  raise "Network result data file #{results}" unless File.exist?(results)
-  data = YAML.safe_load(File.read(results))
-  raise "Invalid network results #{results}" unless data.class <= Hash
-  data
-end
+  def expect_network_get_async(id)
+    body = { kind: 'compute#address' }.to_json
 
-def debug(message)
-  puts(message) if ENV['RSPEC_DEBUG']
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    expect(Google::Request::Get).to receive(:new)
+      .with(self_link(uri_data(id)),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug ">> GET <async> #{args}"
+      request
+    end
+  end
+
+  def expect_network_get_failed(id, data = {})
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_failed_object_missing)
+
+    expect(Google::Request::Get).to receive(:new)
+      .with(self_link(uri_data(id).merge(data)),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug ">> GET [failed] #{args}"
+      request
+    end
+  end
+
+  def http_failed_object_missing
+    Net::HTTPNotFound.new(1.0, 404, 'Not Found')
+  end
+
+  def expect_network_create(id, expected_body, data = {})
+    body = { kind: 'compute#operation',
+             status: 'DONE',
+             targetLink: self_link(uri_data(id)) }.to_json
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    expect(Google::Request::Post).to receive(:new)
+      .with(collection(uri_data(id).merge(data)),
+            instance_of(Google::FakeAuthorization),
+            'application/json', expected_body.to_json) do |args|
+      debug ">> POST #{args} = body(#{body})"
+      request
+    end
+  end
+
+  def expect_network_delete(id, name = nil)
+    delete_data = uri_data(id)
+    delete_data[:name] = name unless name.nil?
+    body = { kind: 'compute#operation',
+             status: 'DONE',
+             targetLink: self_link(uri_data(id)) }.to_json
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    expect(Google::Request::Delete).to receive(:new)
+      .with(self_link(delete_data),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug ">> DELETE #{args}"
+      request
+    end
+  end
+
+  def load_network_result(file)
+    results = File.join(File.dirname(__FILE__), 'data', 'network',
+                        'gcompute_address', file)
+    raise "Network result data file #{results}" unless File.exist?(results)
+    data = YAML.safe_load(File.read(results))
+    raise "Invalid network results #{results}" unless data.class <= Hash
+    data
+  end
+
+  def debug(message)
+    puts(message) if ENV['RSPEC_DEBUG']
+  end
+
+  def collection(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables(
+        'projects/{{project}}/regions/{{region}}/addresses',
+        data
+      )
+    )
+  end
+
+  def self_link(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables(
+        'projects/{{project}}/regions/{{region}}/addresses/{{name}}',
+        data
+      )
+    )
+  end
+
+  # Creates variable test data to comply with self_link URI parameters
+  def uri_data(id)
+    {
+      project: A_PROJECT_DATA[(id - 1) % A_PROJECT_DATA.size],
+      region: A_REGION_DATA[(id - 1) % A_REGION_DATA.size],
+      name: A_NAME_DATA[(id - 1) % A_NAME_DATA.size]
+    }
+  end
 end

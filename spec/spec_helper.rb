@@ -22,6 +22,15 @@
 #
 # ----------------------------------------------------------------------------
 
+#----------------------------------------------------------
+# Setup timezone.
+#
+# Our default timezone is UTC, to avoid local time compromise
+# test code seed generation.
+
+ENV['TZ'] = 'UTC'
+
+#----------------------------------------------------------
 require 'simplecov'
 SimpleCov.start
 
@@ -40,8 +49,13 @@ Google::NetworkBlocker.instance.allowed_test_hosts << { host: '::1', port: 80 }
 files = []
 files << 'spec/copyright.rb'
 files << 'spec/copyright_spec.rb'
+files << 'spec/fake_auth.rb'
+files << 'spec/fake_cred.rb'
 files << File.join('libraries', '**', '*.rb')
 files << File.join('resources', '**', '*.rb')
+
+# Require chef first as spec/credential.rb is dependant
+require 'chef'
 
 # Require all files so we can track them via code coverage
 Dir[*files].reject { |p| File.directory? p }
@@ -53,3 +67,13 @@ Dir[*files].reject { |p| File.directory? p }
 
 require 'pp'
 require 'yaml'
+require 'chefspec'
+
+# Matchers required for ChefSpec Resource tests
+def create(res_type, res_name)
+  ChefSpec::Matchers::ResourceMatcher.new(res_type, :create, res_name)
+end
+
+def delete(res_type, res_name)
+  ChefSpec::Matchers::ResourceMatcher.new(res_type, :delete, res_name)
+end

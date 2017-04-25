@@ -42,7 +42,7 @@ module Google
                                                      fetch_auth(@new_resource),
                                                      'application/json',
                                                      resource_to_request)
-            wait_for_operation transport(create_req).request(create_req)
+            wait_for_operation create_req.send, @new_resource
           end
         else
           @current_resource = @new_resource.clone
@@ -72,7 +72,7 @@ module Google
             delete_req =
               ::Google::Request::Delete.new(self_link(@new_resource),
                                             fetch_auth(@new_resource))
-            wait_for_operation delete_req.send
+            wait_for_operation delete_req.send, @new_resource
           end
         end
       end
@@ -272,29 +272,29 @@ module Google
           )
         end
 
-        def wait_for_operation(response)
+        def wait_for_operation(response, resource)
           op_result = return_if_object(response, 'compute#operation')
-          status = Google::HashUtils.navigate(op_result, %w[status])
+          status = ::Google::HashUtils.navigate(op_result, %w[status])
+          wait_done = wait_for_completion(status, op_result, resource)
           fetch_resource(
-            @resource,
-            URI.parse(Google::HashUtils.navigate(wait_for_completion(status,
-                                                                     op_result),
-                                                 %w[targetLink])),
+            resource,
+            URI.parse(::Google::HashUtils.navigate(wait_done,
+                                                   %w[targetLink])),
             'compute#address'
           )
         end
 
-        def wait_for_completion(status, op_result)
-          op_id = Google::HashUtils.navigate(op_result, %w[name])
-          op_uri = async_op_url(@resource, op_id: op_id)
+        def wait_for_completion(status, op_result, resource)
+          op_id = ::Google::HashUtils.navigate(op_result, %w[name])
+          op_uri = async_op_url(resource, op_id: op_id)
           while status != 'DONE'
             debug("Waiting for completion of operation #{op_id}")
             raise_if_errors op_result, %w[error errors], 'message'
             sleep 1.0
             raise "Invalid result '#{status}' on gcompute_address." \
               unless %w[PENDING RUNNING DONE].include?(status)
-            op_result = fetch_resource(@resource, op_uri, 'compute#operation')
-            status = Google::HashUtils.navigate(op_result, %w[status])
+            op_result = fetch_resource(resource, op_uri, 'compute#operation')
+            status = ::Google::HashUtils.navigate(op_result, %w[status])
           end
           op_result
         end
