@@ -103,52 +103,6 @@ context 'gcompute_region' do
           # Ensure present: resource exists, changes, no name, pass
           context 'title == name (pass)' do
             # TODO(alexstephen): Implement new test format.
-
-            before do
-              expect_network_get_failed 1, name: 'title0'
-              expect_network_create \
-                1,
-                {
-                  'kind' => 'compute#region',
-                  'name' => 'title0'
-                },
-                name: 'title0'
-            end
-
-            let(:runner) do
-              cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
-                                  #{File.expand_path(Dir.pwd)}/spec/cookbooks]
-              ChefSpec::SoloRunner.new(
-                step_into: 'gcompute_region',
-                cookbook_path: cookbook_paths,
-                platform: 'ubuntu',
-                version: '16.04'
-              )
-            end
-
-            let(:chef_run) do
-              r_name = 'gcompute::tests~gcompute_region~create~noexist'\
-                       '~change~title_eq_name~success'
-              runner.converge(r_name) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
-              end
-            end
-
-            subject do
-              chef_run.find_resource(:gcompute_region,
-                                     'title0')
-            end
-
-            it 'should run test correctly' do
-              expect(chef_run).to create(:gcompute_region,
-                                         'title0')
-            end
-            it do
-              is_expected
-                .to have_attributes(name: 'title0')
-            end
           end
 
           # Ensure present: resource exists, changes, no name, fail
@@ -181,7 +135,51 @@ context 'gcompute_region' do
       context 'title == name' do
         # Ensure present: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
-          # TODO(alexstephen): Implement new test format
+          before do
+            expect_network_get_failed 1, name: 'title0'
+            expect_network_create \
+              1,
+              {
+                'kind' => 'compute#region',
+                'name' => 'title0'
+              },
+              name: 'title0'
+          end
+
+          let(:runner) do
+            cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
+                                #{File.expand_path(Dir.pwd)}/spec/cookbooks]
+            ChefSpec::SoloRunner.new(
+              step_into: 'gcompute_region',
+              cookbook_path: cookbook_paths,
+              platform: 'ubuntu',
+              version: '16.04'
+            )
+          end
+
+          let(:chef_run) do
+            r_name = 'gcompute::tests~gcompute_region~create~noexist'\
+                     '~change~title_eq_name~success'
+            runner.converge(r_name) do
+              cred = Google::CredentialResourceMock.new('mycred',
+                                                        runner.run_context)
+              runner.resource_collection.insert(cred)
+            end
+          end
+
+          subject do
+            chef_run.find_resource(:gcompute_region,
+                                   'title0')
+          end
+
+          it 'should run test correctly' do
+            expect(chef_run).to create(:gcompute_region,
+                                       'title0')
+          end
+          it do
+            is_expected
+              .to have_attributes(name: 'title0')
+          end
         end
 
         # Ensure present: resource missing, ignore, no name, fail
@@ -221,10 +219,8 @@ context 'gcompute_region' do
           end
 
           let(:runner) do
-            # Second path runs first - gets dummy gauth cookbook
-            # First path guarantees that this cookbook will be loaded
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
+                                #{File.expand_path(Dir.pwd)}/spec/cookbooks]
             ChefSpec::SoloRunner.new(
               step_into: 'gcompute_region',
               cookbook_path: cookbook_paths,
@@ -234,8 +230,7 @@ context 'gcompute_region' do
           end
 
           let(:chef_run) do
-            # TODO(alexstephen): Use format to fit on one line
-            r_name = 'gcompute::tests~gcompute_region~delete~noexist' \
+            r_name = 'gcompute::tests~gcompute_region~delete~noexist'\
                      '~change~title_eq_name~success'
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
@@ -245,7 +240,6 @@ context 'gcompute_region' do
           end
 
           subject do
-            # TODO(alexstephen): Use format to fit on one line
             chef_run.find_resource(:gcompute_region,
                                    'title0')
           end
@@ -295,12 +289,49 @@ context 'gcompute_region' do
           it { is_expected.to raise_error(RuntimeError, /placeholder/) }
         end
       end
-
       # Ensure absent: resource exists, ignore, has name
       context 'title != name' do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
-          # TODO(alexstephen): Implement new test format.
+          before do
+            expect_network_get_success 1, name: 'title0'
+            expect_network_delete 1, 'title0'
+          end
+
+          let(:runner) do
+            cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
+                                #{File.expand_path(Dir.pwd)}/spec/cookbooks]
+            ChefSpec::SoloRunner.new(
+              step_into: 'gcompute_region',
+              cookbook_path: cookbook_paths,
+              platform: 'ubuntu',
+              version: '16.04'
+            )
+          end
+
+          let(:chef_run) do
+            r_name = 'gcompute::tests~gcompute_region~delete~exist'\
+                     '~change~title_eq_name~success'
+            runner.converge(r_name) do
+              cred = Google::CredentialResourceMock.new('mycred',
+                                                        runner.run_context)
+              runner.resource_collection.insert(cred)
+            end
+          end
+
+          subject do
+            chef_run.find_resource(:gcompute_region,
+                                   'title0')
+          end
+
+          it 'should run test correctly' do
+            expect(chef_run).to delete(:gcompute_region,
+                                       'title0')
+          end
+          it do
+            is_expected
+              .to have_attributes(name: 'title0')
+          end
         end
 
         # Ensure absent: resource exists, ignore, has name, fail
