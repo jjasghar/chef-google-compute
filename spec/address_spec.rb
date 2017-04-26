@@ -239,7 +239,57 @@ context 'gcompute_address' do
       context 'title == name' do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
-          # TODO(alexstephen): Implement new test format.
+
+          before do
+            expect_network_get_failed 1, name: 'title0'
+          end
+
+          let(:runner) do
+            # Second path runs first - gets dummy gauth cookbook
+            # First path guarantees that this cookbook will be loaded
+            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
+                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            ChefSpec::SoloRunner.new(
+              step_into: 'gcompute_address',
+              cookbook_path: cookbook_paths,
+              platform: 'ubuntu',
+              version: '16.04'
+            )
+          end
+
+          let(:chef_run) do
+            # TODO(alexstephen): Use format to fit on one line
+            r_name = 'gcompute::tests~gcompute_address~delete~noexist' \
+                     '~change~title_eq_name~success'
+            runner.converge(r_name) do
+              cred = Google::CredentialResourceMock.new('mycred',
+                                                        runner.run_context)
+              runner.resource_collection.insert(cred)
+            end
+          end
+
+          subject do
+            # TODO(alexstephen): Use format to fit on one line
+            chef_run.find_resource(:gcompute_address,
+                                   'title0')
+          end
+
+          it do
+            is_expected
+              .to have_attributes(address: 'test address#0 data')
+          end
+          it do
+            is_expected
+              .to have_attributes(description: 'test description#0 data')
+          end
+          it do
+            is_expected
+              .to have_attributes(name: 'title0')
+          end
+          it do
+            is_expected
+              .to have_attributes(region: 'test region#0 data')
+          end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
