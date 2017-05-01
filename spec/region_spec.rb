@@ -219,8 +219,10 @@ context 'gcompute_region' do
           end
 
           let(:runner) do
-            cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
-                                #{File.expand_path(Dir.pwd)}/spec/cookbooks]
+            # Second path runs first - gets dummy gauth cookbook
+            # First path guarantees that this cookbook will be loaded
+            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
+                              File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
               step_into: 'gcompute_region',
               cookbook_path: cookbook_paths,
@@ -230,7 +232,8 @@ context 'gcompute_region' do
           end
 
           let(:chef_run) do
-            r_name = 'gcompute::tests~gcompute_region~delete~noexist'\
+            # TODO(alexstephen): Use format to fit on one line
+            r_name = 'gcompute::tests~gcompute_region~delete~noexist' \
                      '~change~title_eq_name~success'
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
@@ -240,6 +243,7 @@ context 'gcompute_region' do
           end
 
           subject do
+            # TODO(alexstephen): Use format to fit on one line
             chef_run.find_resource(:gcompute_region,
                                    'title0')
           end
