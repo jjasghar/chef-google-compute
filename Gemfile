@@ -31,6 +31,12 @@ group :test do
   gem 'rake', '~> 10.0'
   gem 'rspec'
   gem 'rspec-mocks'
-  gem 'rubocop', '~> 0.48.1'
+  # TODO(alexstephen): Monitor rubocop upsteam changes
+  # https://github.com/bbatsov/rubocop/pull/4329
+  # Change will allow rubocop to use --ignore-parent-exclusion flag
+  # Current rubocop upstream will not check Chef files because of
+  # AllCops/Exclude
+  gem 'rubocop', git: 'https://github.com/nelsonjr/rubocop.git',
+                 branch: 'feature/ignore-parent-exclude'
   gem 'simplecov'
 end

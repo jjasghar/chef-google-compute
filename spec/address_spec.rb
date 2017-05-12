@@ -237,7 +237,6 @@ context 'gcompute_address' do
       context 'title == name' do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
-
           before do
             expect_network_get_failed 1, name: 'title0'
           end

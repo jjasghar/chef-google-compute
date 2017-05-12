@@ -74,7 +74,6 @@ context 'gcompute_disk_type' do
     context 'no changes == no action' do
       # Ensure ignore: resource exists, no change, no name, pass
       context 'title == name (pass)' do
-
         before do
           allow(Time).to receive(:now).and_return(
             Time.new(2017, 1, 2, 3, 4, 5)

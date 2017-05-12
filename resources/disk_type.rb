@@ -25,8 +25,7 @@ module Google
       property :deprecated_obsolete, Time, desired_state: true
       property :deprecated_replacement, String, desired_state: true
       property :deprecated_state,
-               equal_to: ['DEPRECATED', 'OBSOLETE', 'DELETED'],
-      desired_state: true
+               equal_to: %w[DEPRECATED OBSOLETE DELETED], desired_state: true
       property :description, String, desired_state: true
       property :id, Integer, desired_state: true
       property :name, String, name_property: true, desired_state: true
