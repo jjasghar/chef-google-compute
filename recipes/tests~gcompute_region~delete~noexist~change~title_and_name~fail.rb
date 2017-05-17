@@ -34,5 +34,5 @@ gcompute_region 'title0' do
   action :delete
   project 'test project#0 data'
   credential 'mycred'
-  name 'test name#0 data'
+  r_label 'test name#0 data'
 end

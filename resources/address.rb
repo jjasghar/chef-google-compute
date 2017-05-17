@@ -22,7 +22,7 @@ module Google
       property :creation_timestamp, Time, desired_state: true
       property :description, String, desired_state: true
       property :id, Integer, desired_state: true
-      property :name, String, name_property: true, desired_state: true
+      property :a_label, String, name_property: true, desired_state: true
       property :region, String, desired_state: true
       property :users, Array, desired_state: true
 
@@ -53,7 +53,7 @@ module Google
           @current_resource.description =
             ::Google::Property::String.parse(fetch['description'])
           @current_resource.id = ::Google::Property::Integer.parse(fetch['id'])
-          @current_resource.name =
+          @current_resource.a_label =
             ::Google::Property::String.parse(fetch['name'])
           @current_resource.region =
             ::Google::Property::String.parse(fetch['region'])
@@ -87,7 +87,7 @@ module Google
             kind: 'compute#address',
             address: address,
             description: description,
-            name: name,
+            name: a_label,
             region: region
           ).reject { |_, v| v.nil? }.to_json
         end
@@ -106,7 +106,7 @@ module Google
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.name,
+            name: resource.a_label,
             kind: 'compute#address',
             address: resource.address,
             creation_timestamp: resource.creation_timestamp,

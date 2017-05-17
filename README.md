@@ -144,6 +144,11 @@ static.
 * `users` -
   The URLs of the resources that are using this address.
 
+#### Label
+Set the `a_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
 ### gcompute_disk_type
 Represents a DiskType resource. A DiskType resource represents the type
 of disk to use, such as a pd-ssd or pd-standard. To reference a disk
@@ -204,6 +209,11 @@ type, use the disk type's full or partial URL.
   "10GB-10TB".
 * `zone` -
   URL of the zone where the disk type resides.
+
+#### Label
+Set the `dt_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
 
 ### gcompute_network
 Represents a Network resource.
@@ -275,6 +285,11 @@ advocate of IPv6 and it is an important future direction.
 * `creation_timestamp` -
   Creation timestamp in RFC3339 text format.
 
+#### Label
+Set the `n_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
 ### gcompute_region
 Represents a Region resource. A region is a specific geographical
 location where you can run your resources. Each region has one or more
@@ -330,3 +345,8 @@ zones
   Name of the resource.
 * `zones` -
   List of zones within the region
+
+#### Label
+Set the `r_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"

@@ -82,8 +82,8 @@ context 'gcompute_disk_type' do
         end
 
         let(:runner) do
-          cookbook_paths = %W[#{File.expand_path('..', Dir.pwd)}
-                              #{File.expand_path(Dir.pwd)}/spec/cookbooks]
+          cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
+                            File.join(File.dirname(__FILE__), 'cookbooks')]
           ChefSpec::SoloRunner.new(
             step_into: 'gcompute_disk_type',
             cookbook_path: cookbook_paths,
@@ -93,8 +93,8 @@ context 'gcompute_disk_type' do
         end
 
         let(:chef_run) do
-          r_name = 'gcompute::tests~gcompute_disk_type~create~noexist'\
-                   '~change~title_eq_name~success'
+          r_name = ['gcompute::tests~gcompute_disk_type~create~noexist',
+                    '~change~title_eq_name~success'].join
           runner.converge(r_name) do
             cred = Google::CredentialResourceMock.new('mycred',
                                                       runner.run_context)
@@ -103,14 +103,10 @@ context 'gcompute_disk_type' do
         end
 
         subject do
-          chef_run.find_resource(:gcompute_disk_type,
-                                 'title0')
+          chef_run.find_resource(:gcompute_disk_type, 'title0')
         end
 
-        it do
-          is_expected
-            .to have_attributes(zone: 'test zone#0 data')
-        end
+        it { is_expected.to have_attributes(zone: 'test zone#0 data') }
       end
 
       # Ensure ignore: resource exists, no change, has name, pass

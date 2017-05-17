@@ -28,7 +28,7 @@ module Google
                equal_to: %w[DEPRECATED OBSOLETE DELETED], desired_state: true
       property :description, String, desired_state: true
       property :id, Integer, desired_state: true
-      property :name, String, name_property: true, desired_state: true
+      property :r_label, String, name_property: true, desired_state: true
       property :zones, Array, desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -80,7 +80,7 @@ module Google
           @current_resource.description =
             ::Google::Property::String.parse(fetch['description'])
           @current_resource.id = ::Google::Property::Integer.parse(fetch['id'])
-          @current_resource.name =
+          @current_resource.r_label =
             ::Google::Property::String.parse(fetch['name'])
           @current_resource.zones =
             ::Google::Property::Array.parse(fetch['zones'])
@@ -110,7 +110,7 @@ module Google
         def resource_to_request
           ::Google::HashUtils.camelize_keys(
             kind: 'compute#region',
-            name: name
+            name: r_label
           ).reject { |_, v| v.nil? }.to_json
         end
 
@@ -128,7 +128,7 @@ module Google
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.name,
+            name: resource.r_label,
             kind: 'compute#region',
             creation_timestamp: resource.creation_timestamp,
             deprecated_deleted: resource.deprecated_deleted,

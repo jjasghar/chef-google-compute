@@ -28,7 +28,7 @@ module Google
                equal_to: %w[DEPRECATED OBSOLETE DELETED], desired_state: true
       property :description, String, desired_state: true
       property :id, Integer, desired_state: true
-      property :name, String, name_property: true, desired_state: true
+      property :dt_label, String, name_property: true, desired_state: true
       property :valid_disk_size, String, desired_state: true
       property :zone, String, desired_state: true
 
@@ -83,7 +83,7 @@ module Google
           @current_resource.description =
             ::Google::Property::String.parse(fetch['description'])
           @current_resource.id = ::Google::Property::Integer.parse(fetch['id'])
-          @current_resource.name =
+          @current_resource.dt_label =
             ::Google::Property::String.parse(fetch['name'])
           @current_resource.valid_disk_size =
             ::Google::Property::String.parse(fetch['validDiskSize'])
@@ -131,7 +131,7 @@ module Google
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.name,
+            name: resource.dt_label,
             kind: 'compute#diskType',
             creation_timestamp: resource.creation_timestamp,
             default_disk_size_gb: resource.default_disk_size_gb,

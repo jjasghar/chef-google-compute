@@ -36,6 +36,6 @@ gcompute_address 'title0' do
   credential 'mycred'
   address 'test address#0 data'
   description 'test description#0 data'
-  name 'test name#0 data'
+  a_label 'test name#0 data'
   region 'test region#0 data'
 end

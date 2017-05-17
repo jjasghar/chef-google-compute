@@ -37,6 +37,6 @@ gcompute_network 'title0' do
   description 'test description#0 data'
   gateway_ipv4 'test gateway_ipv4#0 data'
   ipv4_range 'test ipv4_range#0 data'
-  name 'test name#0 data'
+  n_label 'test name#0 data'
   auto_create_subnetworks true
 end

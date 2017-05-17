@@ -23,7 +23,7 @@ module Google
       property :gateway_ipv4, String, desired_state: true
       property :id, Integer, desired_state: true
       property :ipv4_range, String, desired_state: true
-      property :name, String, name_property: true, desired_state: true
+      property :n_label, String, name_property: true, desired_state: true
       property :subnetworks, Array, desired_state: true
       property :auto_create_subnetworks,
                kind_of: [TrueClass, FalseClass], desired_state: true
@@ -56,7 +56,7 @@ module Google
           @current_resource.id = ::Google::Property::Integer.parse(fetch['id'])
           @current_resource.ipv4_range =
             ::Google::Property::String.parse(fetch['IPv4Range'])
-          @current_resource.name =
+          @current_resource.n_label =
             ::Google::Property::String.parse(fetch['name'])
           @current_resource.subnetworks =
             ::Google::Property::Array.parse(fetch['subnetworks'])
@@ -93,7 +93,7 @@ module Google
             description: description,
             gatewayIPv4: gateway_ipv4,
             IPv4Range: ipv4_range,
-            name: name,
+            name: n_label,
             autoCreateSubnetworks: auto_create_subnetworks
           ).reject { |_, v| v.nil? }.to_json
         end
@@ -112,7 +112,7 @@ module Google
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.name,
+            name: resource.n_label,
             kind: 'compute#network',
             description: resource.description,
             gateway_ipv4: resource.gateway_ipv4,
