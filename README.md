@@ -260,7 +260,7 @@ advocate of IPv6 and it is an important future direction.
   read only and is selected by the Google Compute Engine, typically as
   the first usable address in the IPv4Range.
 * `id` -
-  Unique identifier for the resource; defined by the server.
+  The unique identifier for the resource.
 * `ipv4_range` -
   The range of internal addresses that are legal on this network. This
   range is a CIDR specification, for example: 192.168.0.0/16. Provided
