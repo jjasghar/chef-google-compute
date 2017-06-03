@@ -47,6 +47,7 @@ require 'network_blocker'
 Google::NetworkBlocker.instance.allowed_test_hosts << { host: '::1', port: 80 }
 
 files = []
+files << 'spec/bundle.rb'
 files << 'spec/copyright.rb'
 files << 'spec/copyright_spec.rb'
 files << 'spec/fake_auth.rb'

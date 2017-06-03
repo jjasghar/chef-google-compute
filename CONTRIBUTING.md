@@ -207,6 +207,9 @@ central location:
   * libraries/google/hash_utils.rb
   * libraries/google/string_utils.rb
   * LICENSE
+  * spec/bundle.rb
+  * spec/data/poor_recipe.rb
+  * spec/foodcritic_spec.rb
   * spec/hash_utils_spec.rb
   * spec/network_blocker.rb
   * spec/string_utils_spec.rb
