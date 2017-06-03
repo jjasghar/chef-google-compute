@@ -82,6 +82,8 @@ context 'gcompute_address' do
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
               expect_network_get_success 1, name: 'title0'
+              expect_network_get_success 2, name: 'title1'
+              expect_network_get_success 3, name: 'title2'
             end
 
             let(:runner) do
@@ -96,8 +98,8 @@ context 'gcompute_address' do
             end
 
             let(:chef_run) do
-              r_name = ['gcompute::tests~gcompute_address~create~noexist',
-                        '~change~title_eq_name~success'].join
+              r_name = ['gcompute::tests~gcompute_address~create~exist',
+                        '~nochange~title_eq_name'].join
               runner.converge(r_name) do
                 cred = Google::CredentialResourceMock.new('mycred',
                                                           runner.run_context)
@@ -105,19 +107,56 @@ context 'gcompute_address' do
               end
             end
 
-            subject do
-              chef_run.find_resource(:gcompute_address, 'title0')
+            context 'gcompute_address[title0]' do
+              subject do
+                chef_run.find_resource(:gcompute_address, 'title0')
+              end
+              it do
+                is_expected.to have_attributes(address: 'test address#0 data')
+              end
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#0 data')
+              end
+              it { is_expected.to have_attributes(a_label: 'title0') }
+              it do
+                is_expected.to have_attributes(region: 'test region#0 data')
+              end
             end
 
-            it do
-              is_expected.to have_attributes(address: 'test address#0 data')
+            context 'gcompute_address[title1]' do
+              subject do
+                chef_run.find_resource(:gcompute_address, 'title1')
+              end
+              it do
+                is_expected.to have_attributes(address: 'test address#1 data')
+              end
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#1 data')
+              end
+              it { is_expected.to have_attributes(a_label: 'title1') }
+              it do
+                is_expected.to have_attributes(region: 'test region#1 data')
+              end
             end
-            it do
-              is_expected
-                .to have_attributes(description: 'test description#0 data')
+
+            context 'gcompute_address[title2]' do
+              subject do
+                chef_run.find_resource(:gcompute_address, 'title2')
+              end
+              it do
+                is_expected.to have_attributes(address: 'test address#2 data')
+              end
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#2 data')
+              end
+              it { is_expected.to have_attributes(a_label: 'title2') }
+              it do
+                is_expected.to have_attributes(region: 'test region#2 data')
+              end
             end
-            it { is_expected.to have_attributes(a_label: 'title0') }
-            it { is_expected.to have_attributes(region: 'test region#0 data') }
           end
 
           # Ensure present: resource exists, no change, no name, fail
@@ -136,7 +175,9 @@ context 'gcompute_address' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1, name: 'title0'
+              expect_network_get_success 1
+              expect_network_get_success 2
+              expect_network_get_success 3
             end
 
             let(:runner) do
@@ -151,8 +192,8 @@ context 'gcompute_address' do
             end
 
             let(:chef_run) do
-              r_name = ['gcompute::tests~gcompute_address~create~noexist',
-                        '~change~title_eq_name~success'].join
+              r_name = ['gcompute::tests~gcompute_address~create~exist',
+                        '~nochange~title_and_name'].join
               runner.converge(r_name) do
                 cred = Google::CredentialResourceMock.new('mycred',
                                                           runner.run_context)
@@ -160,19 +201,62 @@ context 'gcompute_address' do
               end
             end
 
-            subject do
-              chef_run.find_resource(:gcompute_address, 'title0')
+            context 'gcompute_address[title0]' do
+              subject do
+                chef_run.find_resource(:gcompute_address, 'title0')
+              end
+              it do
+                is_expected.to have_attributes(address: 'test address#0 data')
+              end
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#0 data')
+              end
+              it do
+                is_expected.to have_attributes(a_label: 'test name#0 data')
+              end
+              it do
+                is_expected.to have_attributes(region: 'test region#0 data')
+              end
             end
 
-            it do
-              is_expected.to have_attributes(address: 'test address#0 data')
+            context 'gcompute_address[title1]' do
+              subject do
+                chef_run.find_resource(:gcompute_address, 'title1')
+              end
+              it do
+                is_expected.to have_attributes(address: 'test address#1 data')
+              end
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#1 data')
+              end
+              it do
+                is_expected.to have_attributes(a_label: 'test name#1 data')
+              end
+              it do
+                is_expected.to have_attributes(region: 'test region#1 data')
+              end
             end
-            it do
-              is_expected
-                .to have_attributes(description: 'test description#0 data')
+
+            context 'gcompute_address[title2]' do
+              subject do
+                chef_run.find_resource(:gcompute_address, 'title2')
+              end
+              it do
+                is_expected.to have_attributes(address: 'test address#2 data')
+              end
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#2 data')
+              end
+              it do
+                is_expected.to have_attributes(a_label: 'test name#2 data')
+              end
+              it do
+                is_expected.to have_attributes(region: 'test region#2 data')
+              end
             end
-            it { is_expected.to have_attributes(a_label: 'title0') }
-            it { is_expected.to have_attributes(region: 'test region#0 data') }
           end
 
           # Ensure present: resource exists, no change, has name, fail
@@ -251,7 +335,7 @@ context 'gcompute_address' do
 
           let(:chef_run) do
             r_name = ['gcompute::tests~gcompute_address~create~noexist',
-                      '~change~title_eq_name~success'].join
+                      '~change~title_eq_name'].join
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -313,7 +397,7 @@ context 'gcompute_address' do
 
           let(:chef_run) do
             r_name = ['gcompute::tests~gcompute_address~create~noexist',
-                      '~change~title_and_name~success'].join
+                      '~change~title_and_name'].join
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -374,7 +458,7 @@ context 'gcompute_address' do
           let(:chef_run) do
             # TODO(alexstephen): Use format to fit on one line
             r_name = ['gcompute::tests~gcompute_address~delete~noexist',
-                      '~change~title_eq_name~success'].join
+                      '~change~title_eq_name'].join
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -427,7 +511,7 @@ context 'gcompute_address' do
           let(:chef_run) do
             # TODO(alexstephen): Use format to fit on one line
             r_name = ['gcompute::tests~gcompute_address~delete~noexist',
-                      '~change~title_and_name~success'].join
+                      '~change~title_and_name'].join
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -481,7 +565,7 @@ context 'gcompute_address' do
 
           let(:chef_run) do
             r_name = ['gcompute::tests~gcompute_address~delete~exist',
-                      '~change~title_eq_name~success'].join
+                      '~change~title_eq_name'].join
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -536,7 +620,7 @@ context 'gcompute_address' do
 
           let(:chef_run) do
             r_name = ['gcompute::tests~gcompute_address~delete~exist',
-                      '~change~title_and_name~success'].join
+                      '~change~title_and_name'].join
             runner.converge(r_name) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)

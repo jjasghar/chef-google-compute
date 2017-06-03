@@ -30,11 +30,26 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_address 'title0' do
+gcompute_disk_type 'title0' do
   action :create
   project 'test project#0 data'
   credential 'mycred'
-  address 'test address#0 data'
-  description 'test description#0 data'
-  region 'test region#0 data'
+  zone 'test zone#0 data'
+  dt_label 'test name#0 data'
+end
+
+gcompute_disk_type 'title1' do
+  action :create
+  project 'test project#1 data'
+  credential 'mycred'
+  zone 'test zone#1 data'
+  dt_label 'test name#1 data'
+end
+
+gcompute_disk_type 'title2' do
+  action :create
+  project 'test project#2 data'
+  credential 'mycred'
+  zone 'test zone#2 data'
+  dt_label 'test name#2 data'
 end

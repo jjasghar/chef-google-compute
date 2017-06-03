@@ -79,6 +79,8 @@ context 'gcompute_disk_type' do
             Time.new(2017, 1, 2, 3, 4, 5)
           )
           expect_network_get_success 1, name: 'title0'
+          expect_network_get_success 2, name: 'title1'
+          expect_network_get_success 3, name: 'title2'
         end
 
         let(:runner) do
@@ -93,8 +95,8 @@ context 'gcompute_disk_type' do
         end
 
         let(:chef_run) do
-          r_name = ['gcompute::tests~gcompute_disk_type~create~noexist',
-                    '~change~title_eq_name~success'].join
+          r_name = ['gcompute::tests~gcompute_disk_type~create~exist',
+                    '~nochange~title_eq_name'].join
           runner.converge(r_name) do
             cred = Google::CredentialResourceMock.new('mycred',
                                                       runner.run_context)
@@ -102,16 +104,80 @@ context 'gcompute_disk_type' do
           end
         end
 
-        subject do
-          chef_run.find_resource(:gcompute_disk_type, 'title0')
+        context 'gcompute_disk_type[title0]' do
+          subject do
+            chef_run.find_resource(:gcompute_disk_type, 'title0')
+          end
+          it { is_expected.to have_attributes(zone: 'test zone#0 data') }
         end
 
-        it { is_expected.to have_attributes(zone: 'test zone#0 data') }
+        context 'gcompute_disk_type[title1]' do
+          subject do
+            chef_run.find_resource(:gcompute_disk_type, 'title1')
+          end
+          it { is_expected.to have_attributes(zone: 'test zone#1 data') }
+        end
+
+        context 'gcompute_disk_type[title2]' do
+          subject do
+            chef_run.find_resource(:gcompute_disk_type, 'title2')
+          end
+          it { is_expected.to have_attributes(zone: 'test zone#2 data') }
+        end
       end
 
       # Ensure ignore: resource exists, no change, has name, pass
       context 'title != name (pass)' do
-        # TODO(alexstephen): Implement new test format.
+        before do
+          allow(Time).to receive(:now).and_return(
+            Time.new(2017, 1, 2, 3, 4, 5)
+          )
+          expect_network_get_success 1
+          expect_network_get_success 2
+          expect_network_get_success 3
+        end
+
+        let(:runner) do
+          cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
+                            File.join(File.dirname(__FILE__), 'cookbooks')]
+          ChefSpec::SoloRunner.new(
+            step_into: 'gcompute_disk_type',
+            cookbook_path: cookbook_paths,
+            platform: 'ubuntu',
+            version: '16.04'
+          )
+        end
+
+        let(:chef_run) do
+          r_name = ['gcompute::tests~gcompute_disk_type~create~exist',
+                    '~nochange~title_and_name'].join
+          runner.converge(r_name) do
+            cred = Google::CredentialResourceMock.new('mycred',
+                                                      runner.run_context)
+            runner.resource_collection.insert(cred)
+          end
+        end
+
+        context 'gcompute_disk_type[title0]' do
+          subject do
+            chef_run.find_resource(:gcompute_disk_type, 'title0')
+          end
+          it { is_expected.to have_attributes(zone: 'test zone#0 data') }
+        end
+
+        context 'gcompute_disk_type[title1]' do
+          subject do
+            chef_run.find_resource(:gcompute_disk_type, 'title1')
+          end
+          it { is_expected.to have_attributes(zone: 'test zone#1 data') }
+        end
+
+        context 'gcompute_disk_type[title2]' do
+          subject do
+            chef_run.find_resource(:gcompute_disk_type, 'title2')
+          end
+          it { is_expected.to have_attributes(zone: 'test zone#2 data') }
+        end
       end
     end
 

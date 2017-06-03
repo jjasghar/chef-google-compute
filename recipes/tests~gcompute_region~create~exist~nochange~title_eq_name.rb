@@ -31,8 +31,19 @@ gauth_credential 'mycred' do
 end
 
 gcompute_region 'title0' do
-  action :delete
+  action :create
   project 'test project#0 data'
   credential 'mycred'
-  r_label 'test name#0 data'
+end
+
+gcompute_region 'title1' do
+  action :create
+  project 'test project#1 data'
+  credential 'mycred'
+end
+
+gcompute_region 'title2' do
+  action :create
+  project 'test project#2 data'
+  credential 'mycred'
 end

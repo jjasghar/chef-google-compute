@@ -30,9 +30,47 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_disk_type 'title0' do
-  action :delete
+gcompute_network 'title0' do
+  action :create
   project 'test project#0 data'
   credential 'mycred'
-  zone 'test zone#0 data'
+  description 'test description#0 data'
+  n_label 'test name#0 data'
+  gateway_ipv4 'test gateway_ipv4#0 data'
+  n_label 'test name#0 data'
+  ipv4_range 'test ipv4_range#0 data'
+  n_label 'test name#0 data'
+  n_label 'test name#0 data'
+  auto_create_subnetworks true
+  n_label 'test name#0 data'
+end
+
+gcompute_network 'title1' do
+  action :create
+  project 'test project#1 data'
+  credential 'mycred'
+  description 'test description#1 data'
+  n_label 'test name#1 data'
+  gateway_ipv4 'test gateway_ipv4#1 data'
+  n_label 'test name#1 data'
+  ipv4_range 'test ipv4_range#1 data'
+  n_label 'test name#1 data'
+  n_label 'test name#1 data'
+  auto_create_subnetworks false
+  n_label 'test name#1 data'
+end
+
+gcompute_network 'title2' do
+  action :create
+  project 'test project#2 data'
+  credential 'mycred'
+  description 'test description#2 data'
+  n_label 'test name#2 data'
+  gateway_ipv4 'test gateway_ipv4#2 data'
+  n_label 'test name#2 data'
+  ipv4_range 'test ipv4_range#2 data'
+  n_label 'test name#2 data'
+  n_label 'test name#2 data'
+  auto_create_subnetworks true
+  n_label 'test name#2 data'
 end
