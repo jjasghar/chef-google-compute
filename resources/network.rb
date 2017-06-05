@@ -8,9 +8,9 @@ require 'google/property/boolean'
 require 'google/property/integer'
 require 'google/property/string'
 require 'google/property/time'
+require 'google/request/delete'
 require 'google/request/get'
 require 'google/request/post'
-require 'google/request/delete'
 
 module Google
   module GCOMPUTE
