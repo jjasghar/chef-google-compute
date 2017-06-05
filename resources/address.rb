@@ -83,13 +83,13 @@ module Google
 
       action_class do
         def resource_to_request
-          ::Google::HashUtils.camelize_keys(
+          {
             kind: 'compute#address',
             address: address,
             description: description,
             name: a_label,
             region: region
-          ).reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }.to_json
         end
 
         def cannot_change_resource(message)
@@ -274,6 +274,7 @@ module Google
 
         def wait_for_operation(response, resource)
           op_result = return_if_object(response, 'compute#operation')
+          return if op_result.nil?
           status = ::Google::HashUtils.navigate(op_result, %w[status])
           wait_done = wait_for_completion(status, op_result, resource)
           fetch_resource(

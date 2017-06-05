@@ -108,10 +108,10 @@ module Google
 
       action_class do
         def resource_to_request
-          ::Google::HashUtils.camelize_keys(
+          {
             kind: 'compute#region',
             name: r_label
-          ).reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }.to_json
         end
 
         def cannot_change_resource(message)
