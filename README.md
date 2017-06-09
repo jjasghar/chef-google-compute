@@ -37,9 +37,9 @@ installed when you install this module.
 ```ruby
 gauth_credential 'mycred' do
   action :serviceaccount
-  path '/home/nelsonjr/my_account.json'
+  path ENV['CRED_PATH'] # e.g. '/path/to/my_account.json'
   scopes [
-    'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+    'https://www.googleapis.com/auth/compute'
   ]
 end
 
