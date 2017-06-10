@@ -29,6 +29,7 @@ module Google
     # A class to handle serialization of Time items.
     class Time
       def self.parse(value)
+        return if value.nil?
         ::Time.parse(value)
       end
     end
