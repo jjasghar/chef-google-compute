@@ -23,11 +23,13 @@
 # ----------------------------------------------------------------------------
 
 module Google
-  module Property
-    # A class to handle serialization of String items.
-    class String
-      def self.parse(value)
-        value
+  module Compute
+    module Property
+      # A class to handle serialization of Enumerated items.
+      class Enum
+        def self.parse(value)
+          value
+        end
       end
     end
   end

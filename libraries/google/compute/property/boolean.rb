@@ -22,15 +22,14 @@
 #
 # ----------------------------------------------------------------------------
 
-require 'time'
-
 module Google
-  module Property
-    # A class to handle serialization of Time items.
-    class Time
-      def self.parse(value)
-        return if value.nil?
-        ::Time.parse(value)
+  module Compute
+    module Property
+      # A class to handle serialization of Boolean items.
+      class Boolean
+        def self.parse(value)
+          value
+        end
       end
     end
   end

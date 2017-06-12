@@ -2,11 +2,11 @@
 $LOAD_PATH.unshift ::File.expand_path('../libraries', ::File.dirname(__FILE__))
 
 require 'chef/resource'
+require 'google/compute/property/array'
+require 'google/compute/property/integer'
+require 'google/compute/property/string'
+require 'google/compute/property/time'
 require 'google/hash_utils'
-require 'google/property/array'
-require 'google/property/integer'
-require 'google/property/string'
-require 'google/property/time'
 require 'google/request/delete'
 require 'google/request/get'
 require 'google/request/post'
@@ -47,18 +47,21 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.address =
-            ::Google::Property::String.parse(fetch['address'])
+            ::Google::Compute::Property::String.parse(fetch['address'])
           @current_resource.creation_timestamp =
-            ::Google::Property::Time.parse(fetch['creationTimestamp'])
+            ::Google::Compute::Property::Time.parse(
+              fetch['creationTimestamp']
+            )
           @current_resource.description =
-            ::Google::Property::String.parse(fetch['description'])
-          @current_resource.id = ::Google::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::String.parse(fetch['description'])
+          @current_resource.id =
+            ::Google::Compute::Property::Integer.parse(fetch['id'])
           @current_resource.a_label =
-            ::Google::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.parse(fetch['name'])
           @current_resource.region =
-            ::Google::Property::String.parse(fetch['region'])
+            ::Google::Compute::Property::String.parse(fetch['region'])
           @current_resource.users =
-            ::Google::Property::Array.parse(fetch['users'])
+            ::Google::Compute::Property::Array.parse(fetch['users'])
 
           cannot_change_resource 'Address cannot be edited'
         end

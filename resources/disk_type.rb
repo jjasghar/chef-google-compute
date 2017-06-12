@@ -2,11 +2,11 @@
 $LOAD_PATH.unshift ::File.expand_path('../libraries', ::File.dirname(__FILE__))
 
 require 'chef/resource'
+require 'google/compute/property/enum'
+require 'google/compute/property/integer'
+require 'google/compute/property/string'
+require 'google/compute/property/time'
 require 'google/hash_utils'
-require 'google/property/enum'
-require 'google/property/integer'
-require 'google/property/string'
-require 'google/property/time'
 require 'google/request/delete'
 require 'google/request/get'
 require 'google/request/post'
@@ -53,40 +53,41 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.creation_timestamp =
-            ::Google::Property::Time.parse(fetch['creationTimestamp'])
+            ::Google::Compute::Property::Time.parse(
+              fetch['creationTimestamp']
+            )
           @current_resource.default_disk_size_gb =
-            ::Google::Property::Integer.parse(fetch['defaultDiskSizeGb'])
-          @current_resource.deprecated_deleted = ::Google::Property::Time.parse(
-            ::Google::HashUtils.navigate(fetch, %w[deprecated deleted])
-          )
+            ::Google::Compute::Property::Integer.parse(
+              fetch['defaultDiskSizeGb']
+            )
+          @current_resource.deprecated_deleted =
+            ::Google::Compute::Property::Time.parse(
+              ::Google::HashUtils.navigate(fetch, %w[deprecated deleted])
+            )
           @current_resource.deprecated_deprecated =
-            ::Google::Property::Time.parse(
-              ::Google::HashUtils.navigate(
-                fetch, %w[deprecated deprecated]
-              )
+            ::Google::Compute::Property::Time.parse(
+              ::Google::HashUtils.navigate(fetch, %w[deprecated deprecated])
             )
           @current_resource.deprecated_obsolete =
-            ::Google::Property::Time.parse(
-              ::Google::HashUtils.navigate(
-                fetch, %w[deprecated obsolete]
-              )
+            ::Google::Compute::Property::Time.parse(
+              ::Google::HashUtils.navigate(fetch, %w[deprecated obsolete])
             )
           @current_resource.deprecated_replacement =
-            ::Google::Property::String.parse(
-              ::Google::HashUtils.navigate(
-                fetch, %w[deprecated replacement]
-              )
+            ::Google::Compute::Property::String.parse(
+              ::Google::HashUtils.navigate(fetch, %w[deprecated replacement])
             )
-          @current_resource.deprecated_state = ::Google::Property::Enum.parse(
-            ::Google::HashUtils.navigate(fetch, %w[deprecated state])
-          )
+          @current_resource.deprecated_state =
+            ::Google::Compute::Property::Enum.parse(
+              ::Google::HashUtils.navigate(fetch, %w[deprecated state])
+            )
           @current_resource.description =
-            ::Google::Property::String.parse(fetch['description'])
-          @current_resource.id = ::Google::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::String.parse(fetch['description'])
+          @current_resource.id =
+            ::Google::Compute::Property::Integer.parse(fetch['id'])
           @current_resource.dt_label =
-            ::Google::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.parse(fetch['name'])
           @current_resource.valid_disk_size =
-            ::Google::Property::String.parse(fetch['validDiskSize'])
+            ::Google::Compute::Property::String.parse(fetch['validDiskSize'])
 
           cannot_change_resource 'DiskType cannot be edited'
         end

@@ -23,11 +23,13 @@
 # ----------------------------------------------------------------------------
 
 module Google
-  module Property
-    # A class to handle serialization of Integer items.
-    class Integer
-      def self.parse(value)
-        value.to_i
+  module Compute
+    module Property
+      # A class to handle serialization of Array items.
+      class Array
+        def self.parse(value)
+          value
+        end
       end
     end
   end

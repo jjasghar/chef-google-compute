@@ -54,12 +54,12 @@ chef-codegen:
   * CONTRIBUTING.md
   * Gemfile
   * libraries/__init__.rb
-  * libraries/google/property/array.rb
-  * libraries/google/property/boolean.rb
-  * libraries/google/property/enum.rb
-  * libraries/google/property/integer.rb
-  * libraries/google/property/string.rb
-  * libraries/google/property/time.rb
+  * libraries/google/compute/property/array.rb
+  * libraries/google/compute/property/boolean.rb
+  * libraries/google/compute/property/enum.rb
+  * libraries/google/compute/property/integer.rb
+  * libraries/google/compute/property/string.rb
+  * libraries/google/compute/property/time.rb
   * libraries/google/request/base.rb
   * libraries/google/request/delete.rb
   * libraries/google/request/get.rb
