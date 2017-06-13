@@ -5,10 +5,10 @@ require 'chef/resource'
 require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
-require 'google/compute/property/array'
 require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
+require 'google/compute/property/string_array'
 require 'google/compute/property/time'
 require 'google/hash_utils'
 
@@ -82,7 +82,7 @@ module Google
           @current_resource.r_label =
             ::Google::Compute::Property::String.parse(fetch['name'])
           @current_resource.zones =
-            ::Google::Compute::Property::Array.parse(fetch['zones'])
+            ::Google::Compute::Property::StringArray.parse(fetch['zones'])
 
           cannot_change_resource 'Region cannot be edited'
         end

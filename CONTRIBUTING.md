@@ -63,6 +63,7 @@ chef-codegen:
   * libraries/google/compute/property/enum.rb
   * libraries/google/compute/property/integer.rb
   * libraries/google/compute/property/string.rb
+  * libraries/google/compute/property/string_array.rb
   * libraries/google/compute/property/time.rb
   * LICENSE
   * metadata.rb
