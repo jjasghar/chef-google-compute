@@ -2,15 +2,15 @@
 $LOAD_PATH.unshift ::File.expand_path('../libraries', ::File.dirname(__FILE__))
 
 require 'chef/resource'
+require 'google/compute/network/delete'
+require 'google/compute/network/get'
+require 'google/compute/network/post'
 require 'google/compute/property/array'
 require 'google/compute/property/boolean'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
 require 'google/compute/property/time'
 require 'google/hash_utils'
-require 'google/request/delete'
-require 'google/request/get'
-require 'google/request/post'
 
 module Google
   module GCOMPUTE
@@ -41,10 +41,10 @@ module Google
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
-            create_req = ::Google::Request::Post.new(collection(@new_resource),
-                                                     fetch_auth(@new_resource),
-                                                     'application/json',
-                                                     resource_to_request)
+            create_req = ::Google::Compute::Network::Post.new(
+              collection(@new_resource), fetch_auth(@new_resource),
+              'application/json', resource_to_request
+            )
             wait_for_operation create_req.send, @new_resource
           end
         else
@@ -79,9 +79,9 @@ module Google
                                'compute#network')
         unless fetch.nil?
           converge_by "Deleting gcompute_network[#{name}]" do
-            delete_req =
-              ::Google::Request::Delete.new(self_link(@new_resource),
-                                            fetch_auth(@new_resource))
+            delete_req = ::Google::Compute::Network::Delete.new(
+              self_link(@new_resource), fetch_auth(@new_resource)
+            )
             wait_for_operation delete_req.send, @new_resource
           end
         end
@@ -334,8 +334,9 @@ module Google
         end
 
         def self.fetch_resource(resource, self_link, kind)
-          get_request = ::Google::Request::Get.new(self_link,
-                                                   fetch_auth(resource))
+          get_request = ::Google::Compute::Network::Get.new(
+            self_link, fetch_auth(resource)
+          )
           return_if_object get_request.send, kind
         end
 

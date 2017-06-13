@@ -19,12 +19,12 @@ class TestCred
   end
 end
 
-describe Google::Request::Delete do
+describe Google::Compute::Network::Delete do
   let(:credential) { TestCred.new }
-  let(:uri) { Google::NetworkBlocker::ALLOWED_TEST_URI }
+  let(:uri) { Google::Compute::NetworkBlocker::ALLOWED_TEST_URI }
 
   context 'verify proper request' do
-    before(:each) { Google::NetworkBlocker.instance.allow_delete(uri) }
+    before(:each) { Google::Compute::NetworkBlocker.instance.allow_delete(uri) }
 
     subject { described_class.new(uri, credential).send }
 
@@ -33,7 +33,7 @@ describe Google::Request::Delete do
   end
 
   context 'failed request' do
-    before(:each) { Google::NetworkBlocker.instance.deny(uri) }
+    before(:each) { Google::Compute::NetworkBlocker.instance.deny(uri) }
 
     subject { described_class.new(uri, credential).send }
 

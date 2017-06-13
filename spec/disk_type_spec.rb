@@ -227,7 +227,7 @@ context 'gcompute_disk_type' do
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
 
-    expect(Google::Request::Get).to receive(:new)
+    expect(Google::Compute::Network::Get).to receive(:new)
       .with(self_link(uri_data(id).merge(data)),
             instance_of(Google::FakeAuthorization)) do |args|
       debug ">> GET #{args}"
@@ -246,7 +246,7 @@ context 'gcompute_disk_type' do
     request = double('request')
     allow(request).to receive(:send).and_return(http_failed_object_missing)
 
-    expect(Google::Request::Get).to receive(:new)
+    expect(Google::Compute::Network::Get).to receive(:new)
       .with(self_link(uri_data(id).merge(data)),
             instance_of(Google::FakeAuthorization)) do |args|
       debug ">> GET [failed] #{args}"

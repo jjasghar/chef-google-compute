@@ -54,16 +54,16 @@ chef-codegen:
   * CONTRIBUTING.md
   * Gemfile
   * libraries/__init__.rb
+  * libraries/google/compute/network/base.rb
+  * libraries/google/compute/network/delete.rb
+  * libraries/google/compute/network/get.rb
+  * libraries/google/compute/network/post.rb
   * libraries/google/compute/property/array.rb
   * libraries/google/compute/property/boolean.rb
   * libraries/google/compute/property/enum.rb
   * libraries/google/compute/property/integer.rb
   * libraries/google/compute/property/string.rb
   * libraries/google/compute/property/time.rb
-  * libraries/google/request/base.rb
-  * libraries/google/request/delete.rb
-  * libraries/google/request/get.rb
-  * libraries/google/request/post.rb
   * LICENSE
   * metadata.rb
   * README.md
@@ -161,10 +161,13 @@ chef-codegen:
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
   * spec/fake_cred.rb
+  * spec/network_blocker.rb
+  * spec/network_blocker_spec.rb
+  * spec/network_delete_spec.rb
+  * spec/network_get_spec.rb
+  * spec/network_post_spec.rb
   * spec/network_spec.rb
   * spec/region_spec.rb
-  * spec/request_delete_spec.rb
-  * spec/request_post_spec.rb
   * spec/spec_helper.rb
 
 Please do *not* edit them directly as they will be clobbered when
@@ -183,7 +186,6 @@ central location:
   * spec/data/poor_recipe.rb
   * spec/foodcritic_spec.rb
   * spec/hash_utils_spec.rb
-  * spec/network_blocker.rb
   * spec/string_utils_spec.rb
 
 Please do *not* edit them directly as they will be clobbered when

@@ -44,7 +44,8 @@ require 'network_blocker'
 # Enable access to localhost as Chef creates a fake HTTP to fetch the proxy
 # info. Refer offending code and explanation at:
 # chef-12.19.36/lib/chef/monkey_patches/net_http.rb:49
-Google::NetworkBlocker.instance.allowed_test_hosts << { host: '::1', port: 80 }
+Google::Compute::NetworkBlocker.instance.allowed_test_hosts \
+  << { host: '::1', port: 80 }
 
 files = []
 files << 'spec/bundle.rb'
