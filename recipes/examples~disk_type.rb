@@ -61,4 +61,10 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_disk_type 'pd-standard' do
+  action :create
+  default_disk_size_gb 500
+  zone 'us-central1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

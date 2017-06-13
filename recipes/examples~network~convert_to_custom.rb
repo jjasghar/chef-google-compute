@@ -61,4 +61,19 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+raise "Missing parameter 'network_id'. Please read docs at #{__FILE__}" \
+  unless ENV.key?('network_id')
+
+# The environment variable 'network_id' defines a suffix for a network name when
+# using this example. If running from the command line, you can pass this suffix
+# in via the command line:
+#
+# network_id="some_suffix" chef-client -z --runlist \
+#   "recipe[gcompute::examples~network~auto]"
+puts 'Converting network to Custom'
+gcompute_network "mynetwork-#{ENV['network_id']}" do
+  action :create
+  auto_create_subnetworks false
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

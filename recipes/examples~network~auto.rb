@@ -61,4 +61,29 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+raise "Missing parameter 'network_id'. Please read docs at #{__FILE__}" \
+  unless ENV.key?('network_id')
+# TODO(alexstephen): Create a test case to verify that errors are properly
+# displayed, such as a block like the one below, which will fail because you
+# cannot specify auto_create_subnetworks and ipv4Range at the same time:
+# | gcompute_network { "mynetwork-#{ENV['network_id']}" do
+# |   auto_create_subnetworks true
+# |   ipv4_range '192.168.0.0/16'
+# |   gateway_ipv4 '192.168.0.1'
+# |   project 'google.com:graphite-playground'
+# |   credential 'mycred'
+# | end
+
+# The environment variable 'network_id' defines a suffix for a network name when
+# using this example. If running from the command line, you can pass this suffix
+# in via the command line:
+#
+# network_id="some_suffix" chef-client -z --runlist \
+#   "recipe[gcompute::examples~network~auto]"
+puts 'Creating network with automatically assigned subnetworks'
+gcompute_network "mynetwork-#{ENV['network_id']}" do
+  action :create
+  auto_create_subnetworks true
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

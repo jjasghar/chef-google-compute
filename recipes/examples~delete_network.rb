@@ -61,4 +61,11 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+raise "Missing parameter 'network_id'. Please read docs at #{__FILE__}" \
+  unless ENV.key?('network_id')
+
+gcompute_network "mynetwork-#{ENV['network_id']}" do
+  action :delete
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

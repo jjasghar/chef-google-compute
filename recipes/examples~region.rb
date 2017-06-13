@@ -61,4 +61,8 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_region 'us-west1' do
+  action :create
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

@@ -61,4 +61,9 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_address 'test1' do
+  action :delete
+  region 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

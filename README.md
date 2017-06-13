@@ -140,7 +140,12 @@ static.
 #### Example
 
 ```ruby
-# TODO(alexstephen): Add example here
+gcompute_address 'test1' do
+  action :create
+  region 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
 
 ```
 
@@ -187,7 +192,13 @@ type, use the disk type's full or partial URL.
 #### Example
 
 ```ruby
-# TODO(alexstephen): Add example here
+gcompute_disk_type 'pd-standard' do
+  action :create
+  default_disk_size_gb 500
+  zone 'us-central1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
 
 ```
 
@@ -493,7 +504,12 @@ advocate of IPv6 and it is an important future direction.
 #### Example
 
 ```ruby
-# TODO(alexstephen): Add example here
+gcompute_network "mynetwork" do
+  action :create
+  auto_create_subnetworks true
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
 
 ```
 
@@ -556,7 +572,11 @@ zones
 #### Example
 
 ```ruby
-# TODO(alexstephen): Add example here
+gcompute_region 'us-west1' do
+  action :create
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
 
 ```
 

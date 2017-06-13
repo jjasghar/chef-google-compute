@@ -61,4 +61,22 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+raise "Missing parameter 'network_id'. Please read docs at #{__FILE__}" \
+  unless ENV.key?('network_id')
+# The environment variable 'network_id' defines a suffix for a network name when
+# using this example. If running from the command line, you can pass this suffix
+# in via the command line:
+#
+# network_id="some_suffix" chef-client -z --runlist \
+#   "recipe[gcompute::examples~network~auto]"
+puts 'Creating network in Legacy mode'
+gcompute_network "mynetwork-#{ENV['network_id']}" do
+  # On a legacy network you cannot specify the auto_create_subnetworks
+  # parameter.
+  # | auto_create_subnetworks => false,
+  action :create
+  ipv4_range '192.168.0.0/16'
+  gateway_ipv4 '192.168.0.1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
