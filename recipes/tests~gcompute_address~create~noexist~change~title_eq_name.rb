@@ -30,11 +30,18 @@ gauth_credential 'mycred' do
   ]
 end
 
+gcompute_region 'resource(region,0)' do
+  action :create
+  project 'test project#0 data'
+  credential 'mycred'
+  r_label 'test name#0 data'
+end
+
 gcompute_address 'title0' do
   action :create
   project 'test project#0 data'
   credential 'mycred'
   address 'test address#0 data'
   description 'test description#0 data'
-  region 'test region#0 data'
+  region 'resource(region,0)'
 end

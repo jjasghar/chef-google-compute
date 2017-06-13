@@ -54,11 +54,11 @@ context 'gcompute_address' do
   ].freeze
 
   A_REGION_DATA = %w[
-    test\ region#0\ data
-    test\ region#1\ data
-    test\ region#2\ data
-    test\ region#3\ data
-    test\ region#4\ data
+    resource(region,0)
+    resource(region,1)
+    resource(region,2)
+    resource(region,3)
+    resource(region,4)
   ].freeze
 
   A_NAME_DATA = %w[
@@ -81,16 +81,22 @@ context 'gcompute_address' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1, name: 'title0'
-              expect_network_get_success 2, name: 'title1'
-              expect_network_get_success 3, name: 'title2'
+              expect_network_get_success 1, name: 'title0',
+                                            region: 'test name#0 data'
+              expect_network_get_success 2, name: 'title1',
+                                            region: 'test name#1 data'
+              expect_network_get_success 3, name: 'title2',
+                                            region: 'test name#2 data'
+              expect_network_get_success_region 1
+              expect_network_get_success_region 2
+              expect_network_get_success_region 3
             end
 
             let(:runner) do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: 'gcompute_address',
+                step_into: %w[gcompute_address gcompute_region],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -120,7 +126,7 @@ context 'gcompute_address' do
               end
               it { is_expected.to have_attributes(a_label: 'title0') }
               it do
-                is_expected.to have_attributes(region: 'test region#0 data')
+                is_expected.to have_attributes(region: 'resource(region,0)')
               end
             end
 
@@ -137,7 +143,7 @@ context 'gcompute_address' do
               end
               it { is_expected.to have_attributes(a_label: 'title1') }
               it do
-                is_expected.to have_attributes(region: 'test region#1 data')
+                is_expected.to have_attributes(region: 'resource(region,1)')
               end
             end
 
@@ -154,7 +160,7 @@ context 'gcompute_address' do
               end
               it { is_expected.to have_attributes(a_label: 'title2') }
               it do
-                is_expected.to have_attributes(region: 'test region#2 data')
+                is_expected.to have_attributes(region: 'resource(region,2)')
               end
             end
           end
@@ -175,16 +181,19 @@ context 'gcompute_address' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1
-              expect_network_get_success 2
-              expect_network_get_success 3
+              expect_network_get_success 1, region: 'test name#0 data'
+              expect_network_get_success 2, region: 'test name#1 data'
+              expect_network_get_success 3, region: 'test name#2 data'
+              expect_network_get_success_region 1
+              expect_network_get_success_region 2
+              expect_network_get_success_region 3
             end
 
             let(:runner) do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: 'gcompute_address',
+                step_into: %w[gcompute_address gcompute_region],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -216,7 +225,7 @@ context 'gcompute_address' do
                 is_expected.to have_attributes(a_label: 'test name#0 data')
               end
               it do
-                is_expected.to have_attributes(region: 'test region#0 data')
+                is_expected.to have_attributes(region: 'resource(region,0)')
               end
             end
 
@@ -235,7 +244,7 @@ context 'gcompute_address' do
                 is_expected.to have_attributes(a_label: 'test name#1 data')
               end
               it do
-                is_expected.to have_attributes(region: 'test region#1 data')
+                is_expected.to have_attributes(region: 'resource(region,1)')
               end
             end
 
@@ -254,7 +263,7 @@ context 'gcompute_address' do
                 is_expected.to have_attributes(a_label: 'test name#2 data')
               end
               it do
-                is_expected.to have_attributes(region: 'test region#2 data')
+                is_expected.to have_attributes(region: 'resource(region,2)')
               end
             end
           end
@@ -308,7 +317,8 @@ context 'gcompute_address' do
         # Ensure present: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed 1, name: 'title0'
+            expect_network_get_failed 1, name: 'title0',
+                                         region: 'test name#0 data'
             expect_network_create \
               1,
               {
@@ -316,17 +326,20 @@ context 'gcompute_address' do
                 'address' => 'test address#0 data',
                 'description' => 'test description#0 data',
                 'name' => 'title0',
-                'region' => 'test region#0 data'
+                'region' => 'test name#0 data'
               },
-              name: 'title0'
-            expect_network_get_async 1, name: 'title0'
+              name: 'title0',
+              region: 'test name#0 data'
+            expect_network_get_async 1, name: 'title0',
+                                        region: 'test name#0 data'
+            expect_network_get_success_region 1, region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_address',
+              step_into: %w[gcompute_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -357,7 +370,7 @@ context 'gcompute_address' do
               .to have_attributes(description: 'test description#0 data')
           end
           it { is_expected.to have_attributes(a_label: 'title0') }
-          it { is_expected.to have_attributes(region: 'test region#0 data') }
+          it { is_expected.to have_attributes(region: 'resource(region,0)') }
         end
 
         # Ensure present: resource missing, ignore, no name, fail
@@ -373,22 +386,26 @@ context 'gcompute_address' do
         # Ensure present: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1
+            expect_network_get_failed 1, region: 'test name#0 data'
             expect_network_create \
               1,
-              'kind' => 'compute#address',
-              'address' => 'test address#0 data',
-              'description' => 'test description#0 data',
-              'name' => 'test name#0 data',
-              'region' => 'test region#0 data'
-            expect_network_get_async 1
+              {
+                'kind' => 'compute#address',
+                'address' => 'test address#0 data',
+                'description' => 'test description#0 data',
+                'name' => 'test name#0 data',
+                'region' => 'test name#0 data'
+              },
+              region: 'test name#0 data'
+            expect_network_get_async 1, region: 'test name#0 data'
+            expect_network_get_success_region 1, region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_address',
+              step_into: %w[gcompute_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -419,7 +436,7 @@ context 'gcompute_address' do
               .to have_attributes(description: 'test description#0 data')
           end
           it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-          it { is_expected.to have_attributes(region: 'test region#0 data') }
+          it { is_expected.to have_attributes(region: 'resource(region,0)') }
         end
 
         # Ensure present: resource missing, ignore, has name, fail
@@ -439,7 +456,9 @@ context 'gcompute_address' do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed 1, name: 'title0'
+            expect_network_get_failed 1, name: 'title0',
+                                         region: 'test name#0 data'
+            expect_network_get_success_region 1, region: 'test name#0 data'
           end
 
           let(:runner) do
@@ -448,7 +467,7 @@ context 'gcompute_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_address',
+              step_into: %w[gcompute_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -476,7 +495,7 @@ context 'gcompute_address' do
               .to have_attributes(description: 'test description#0 data')
           end
           it { is_expected.to have_attributes(a_label: 'title0') }
-          it { is_expected.to have_attributes(region: 'test region#0 data') }
+          it { is_expected.to have_attributes(region: 'resource(region,0)') }
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -492,7 +511,8 @@ context 'gcompute_address' do
         # Ensure absent: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1
+            expect_network_get_failed 1, region: 'test name#0 data'
+            expect_network_get_success_region 1, region: 'test name#0 data'
           end
 
           let(:runner) do
@@ -501,7 +521,7 @@ context 'gcompute_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_address',
+              step_into: %w[gcompute_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -529,7 +549,7 @@ context 'gcompute_address' do
               .to have_attributes(description: 'test description#0 data')
           end
           it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-          it { is_expected.to have_attributes(region: 'test region#0 data') }
+          it { is_expected.to have_attributes(region: 'resource(region,0)') }
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -547,16 +567,19 @@ context 'gcompute_address' do
         # Ensure absent: resource exists, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_success 1, name: 'title0'
-            expect_network_delete 1, 'title0'
-            expect_network_get_async 1, name: 'title0'
+            expect_network_get_success 1, name: 'title0',
+                                          region: 'test name#0 data'
+            expect_network_delete 1, 'title0', region: 'test name#0 data'
+            expect_network_get_async 1, name: 'title0',
+                                        region: 'test name#0 data'
+            expect_network_get_success_region 1, region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_address',
+              step_into: %w[gcompute_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -587,7 +610,7 @@ context 'gcompute_address' do
               .to have_attributes(description: 'test description#0 data')
           end
           it { is_expected.to have_attributes(a_label: 'title0') }
-          it { is_expected.to have_attributes(region: 'test region#0 data') }
+          it { is_expected.to have_attributes(region: 'resource(region,0)') }
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -602,16 +625,17 @@ context 'gcompute_address' do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_success 1
-            expect_network_delete 1
-            expect_network_get_async 1
+            expect_network_get_success 1, region: 'test name#0 data'
+            expect_network_delete 1, nil, region: 'test name#0 data'
+            expect_network_get_async 1, region: 'test name#0 data'
+            expect_network_get_success_region 1, region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_address',
+              step_into: %w[gcompute_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -642,7 +666,7 @@ context 'gcompute_address' do
               .to have_attributes(description: 'test description#0 data')
           end
           it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-          it { is_expected.to have_attributes(region: 'test region#0 data') }
+          it { is_expected.to have_attributes(region: 'resource(region,0)') }
         end
 
         # Ensure absent: resource exists, ignore, has name, fail
@@ -757,8 +781,49 @@ context 'gcompute_address' do
     data
   end
 
+  def expect_network_get_success_region(id, data = {})
+    id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
+    body = load_network_result_region("success#{id}~" \
+                                                           "#{id_data}.yaml")
+           .to_json
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    expect(Google::Request::Get).to receive(:new)
+      .with(self_link_region(uri_data(id).merge(data)),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug ">> GET #{args}"
+      request
+    end
+  end
+
+  def load_network_result_region(file)
+    results = File.join(File.dirname(__FILE__), 'data', 'network',
+                        'gcompute_region', file)
+    raise "Network result data file #{results}" unless File.exist?(results)
+    data = YAML.safe_load(File.read(results))
+    raise "Invalid network results #{results}" unless data.class <= Hash
+    data
+  end
+
+  def self_link_region(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables_region(
+        'projects/{{project}}/regions/{{name}}',
+        data
+      )
+    )
+  end
+
   def debug(message)
     puts(message) if ENV['RSPEC_DEBUG']
+  end
+
+  def expand_variables_region(template, data, ext_dat = {})
+    Google::GCOMPUTE::Region
+      .action_class.expand_variables(template, data, ext_dat)
   end
 
   def collection(data)

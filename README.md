@@ -140,9 +140,16 @@ static.
 #### Example
 
 ```ruby
+gcompute_region 'some-region' do
+  action :create
+  r_label 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
 gcompute_address 'test1' do
   action :create
-  region 'us-west1'
+  region 'some-region'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -173,8 +180,7 @@ end
 * `name` -
   Name of the resource.
 * `region` -
-  URL of the region where the regional address resides.
-  This field is not applicable to global addresses.
+  A reference to Region resource
 * `users` -
   The URLs of the resources that are using this address.
 

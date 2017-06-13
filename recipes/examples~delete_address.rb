@@ -61,9 +61,16 @@ gauth_credential 'mycred' do
   ]
 end
 
+gcompute_region 'some-region' do
+  action :create
+  r_label 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
 gcompute_address 'test1' do
   action :delete
-  region 'us-west1'
+  region 'some-region'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

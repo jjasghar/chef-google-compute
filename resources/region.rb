@@ -103,6 +103,12 @@ module Google
 
       # TODO(nelsonjr): Add actions :manage and :modify
 
+      def exports
+        {
+          name: r_label
+        }
+      end
+
       private
 
       action_class do
