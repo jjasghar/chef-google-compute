@@ -30,6 +30,7 @@ module Google
 
         def send
           request = @cred.authorize(builder.new(@link))
+          request['User-Agent'] = generate_user_agent
           transport(request).request(request)
         end
 
@@ -43,6 +44,17 @@ module Google
           transport.set_debug_output $stderr \
             unless ENV['GOOGLE_HTTP_DEBUG'].nil?
           transport
+        end
+
+        private
+
+        def generate_user_agent
+          # TODO(alexstephen): Check how to get the original Chef user agent.
+          # TODO(alexstephen): Check how to fetch cookbook version.
+          version = '1.0.0'
+          [
+            "GoogleChefCompute/#{version} (Graphite)"
+          ].join(' ')
         end
       end
     end
