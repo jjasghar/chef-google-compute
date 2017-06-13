@@ -134,6 +134,12 @@ chef-codegen:
   * spec/data/network/gcompute_disk_type/success2~title.yaml
   * spec/data/network/gcompute_disk_type/success3~name.yaml
   * spec/data/network/gcompute_disk_type/success3~title.yaml
+  * spec/data/network/gcompute_firewall/success1~name.yaml
+  * spec/data/network/gcompute_firewall/success1~title.yaml
+  * spec/data/network/gcompute_firewall/success2~name.yaml
+  * spec/data/network/gcompute_firewall/success2~title.yaml
+  * spec/data/network/gcompute_firewall/success3~name.yaml
+  * spec/data/network/gcompute_firewall/success3~title.yaml
   * spec/data/network/gcompute_network/success1~name.yaml
   * spec/data/network/gcompute_network/success1~title.yaml
   * spec/data/network/gcompute_network/success2~name.yaml
