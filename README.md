@@ -96,6 +96,9 @@ For complete details about the credential cookbook please visit ________
     outgoing traffic and a default "deny" for incoming traffic. For all
     networks except the default network, you must create any firewall rules
     you need.
+* [`gcompute_global_address`](#gcompute_global_address) -
+    Represents a Global Address resource. Global addresses are used for
+    HTTP(S) load balancing.
 * [`gcompute_network`](#gcompute_network) -
     Represents a Network resource.
     Your Cloud Platform Console project can contain multiple networks, and
@@ -486,6 +489,61 @@ you need.
 
 #### Label
 Set the `f_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_global_address
+Represents a Global Address resource. Global addresses are used for
+HTTP(S) load balancing.
+
+
+#### Example
+
+```ruby
+gcompute_global_address 'chef-my-app-loadbalancer' do
+  action :create
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_global_address` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_global_address` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `address` -
+  The static external IP address represented by this resource.
+* `creation_timestamp` -
+  Creation timestamp in RFC3339 text format.
+* `description` -
+  An optional description of this resource.
+  Provide this property when you create the resource.
+* `id` -
+  The unique identifier for the resource. This identifier is defined by
+  the server.
+* `name` -
+  Name of the resource. Provided by the client when the resource is
+  created. The name must be 1-63 characters long, and comply with
+  RFC1035.  Specifically, the name must be 1-63 characters long and
+  match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means
+  the first character must be a lowercase letter, and all following
+  characters must be a dash, lowercase letter, or digit, except the last
+  character, which cannot be a dash.
+* `region` -
+  URL of the region where the regional address resides. This field is
+  not applicable to global addresses.
+
+#### Label
+Set the `ga_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
 

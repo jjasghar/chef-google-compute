@@ -70,8 +70,10 @@ chef-codegen:
   * README.md
   * recipes/examples~address.rb
   * recipes/examples~delete_address.rb
+  * recipes/examples~delete_global_address.rb
   * recipes/examples~delete_network.rb
   * recipes/examples~disk_type.rb
+  * recipes/examples~global_address.rb
   * recipes/examples~network~auto.rb
   * recipes/examples~network~convert_to_custom.rb
   * recipes/examples~network~custom.rb
@@ -97,6 +99,16 @@ chef-codegen:
   * recipes/tests~gcompute_disk_type~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_disk_type~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_disk_type~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_global_address~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_global_address~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_global_address~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_global_address~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_global_address~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_global_address~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_global_address~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_global_address~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_global_address~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_global_address~delete~noexist~change~title_eq_name.rb
   * recipes/tests~gcompute_network~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_network~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_network~create~exist~nochange~title_and_name.rb
@@ -119,6 +131,7 @@ chef-codegen:
   * recipes/tests~gcompute_region~delete~noexist~change~title_eq_name.rb
   * resources/address.rb
   * resources/disk_type.rb
+  * resources/global_address.rb
   * resources/network.rb
   * resources/region.rb
   * spec/address_spec.rb
@@ -147,6 +160,12 @@ chef-codegen:
   * spec/data/network/gcompute_firewall/success2~title.yaml
   * spec/data/network/gcompute_firewall/success3~name.yaml
   * spec/data/network/gcompute_firewall/success3~title.yaml
+  * spec/data/network/gcompute_global_address/success1~name.yaml
+  * spec/data/network/gcompute_global_address/success1~title.yaml
+  * spec/data/network/gcompute_global_address/success2~name.yaml
+  * spec/data/network/gcompute_global_address/success2~title.yaml
+  * spec/data/network/gcompute_global_address/success3~name.yaml
+  * spec/data/network/gcompute_global_address/success3~title.yaml
   * spec/data/network/gcompute_network/success1~name.yaml
   * spec/data/network/gcompute_network/success1~title.yaml
   * spec/data/network/gcompute_network/success2~name.yaml
@@ -162,6 +181,7 @@ chef-codegen:
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
   * spec/fake_cred.rb
+  * spec/global_address_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb
   * spec/network_delete_spec.rb
