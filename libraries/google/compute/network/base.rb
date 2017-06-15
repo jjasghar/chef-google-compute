@@ -53,7 +53,7 @@ module Google
           # TODO(alexstephen): Check how to fetch cookbook version.
           version = '1.0.0'
           [
-            "GoogleChefCompute/#{version} (Graphite)"
+            "GoogleChefCompute/#{version}"
           ].join(' ')
         end
       end
