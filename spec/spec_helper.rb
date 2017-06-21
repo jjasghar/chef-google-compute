@@ -53,7 +53,6 @@ Google::Compute::NetworkBlocker.instance.allowed_test_hosts \
 files = []
 files << 'spec/bundle.rb'
 files << 'spec/copyright.rb'
-files << 'spec/copyright_spec.rb'
 files << 'spec/fake_auth.rb'
 files << 'spec/fake_cred.rb'
 files << File.join('libraries', '**', '*.rb')
