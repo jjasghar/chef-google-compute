@@ -182,10 +182,10 @@ end
   The unique identifier for the resource.
 * `name` -
   Name of the resource.
-* `region` -
-  A reference to Region resource
 * `users` -
   The URLs of the resources that are using this address.
+* `region` -
+  A reference to Region resource
 
 #### Label
 Set the `a_label` property when attempting to set primary key

@@ -23,8 +23,8 @@ module Google
       property :description, String, desired_state: true
       property :id, Integer, desired_state: true
       property :a_label, String, name_property: true, desired_state: true
-      property :region, String, desired_state: true
       property :users, Array, desired_state: true
+      property :region, String, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -58,7 +58,6 @@ module Google
             ::Google::Compute::Property::Integer.parse(fetch['id'])
           @current_resource.a_label =
             ::Google::Compute::Property::String.parse(fetch['name'])
-          @current_resource.region = region
           @current_resource.users =
             ::Google::Compute::Property::StringArray.parse(fetch['users'])
 
@@ -89,10 +88,7 @@ module Google
             kind: 'compute#address',
             address: address,
             description: description,
-            name: a_label,
-            region: @new_resource.resources(
-              "gcompute_region[#{region}]"
-            ).exports[:name]
+            name: a_label
           }.reject { |_, v| v.nil? }.to_json
         end
 
@@ -116,10 +112,10 @@ module Google
             creation_timestamp: resource.creation_timestamp,
             description: resource.description,
             id: resource.id,
+            users: resource.users,
             region: resource.resources(
               "gcompute_region[#{resource.region}]"
-            ).exports[:name],
-            users: resource.users
+            ).exports[:name]
           }.reject { |_, v| v.nil? }
         end
 

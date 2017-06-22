@@ -328,8 +328,7 @@ context 'gcompute_address' do
                 'kind' => 'compute#address',
                 'address' => 'test address#0 data',
                 'description' => 'test description#0 data',
-                'name' => 'title0',
-                'region' => 'test name#0 data'
+                'name' => 'title0'
               },
               name: 'title0',
               region: 'test name#0 data'
@@ -396,8 +395,7 @@ context 'gcompute_address' do
                 'kind' => 'compute#address',
                 'address' => 'test address#0 data',
                 'description' => 'test description#0 data',
-                'name' => 'test name#0 data',
-                'region' => 'test name#0 data'
+                'name' => 'test name#0 data'
               },
               region: 'test name#0 data'
             expect_network_get_async 1, region: 'test name#0 data'
