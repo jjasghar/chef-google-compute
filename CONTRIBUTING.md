@@ -85,6 +85,8 @@ chef-codegen:
 
   * .gitignore
   * .rubocop.yml
+  * Berksfile
+  * chefignore
   * CONTRIBUTING.md
   * Gemfile
   * libraries/__init__.rb
@@ -169,6 +171,7 @@ chef-codegen:
   * resources/network.rb
   * resources/region.rb
   * spec/address_spec.rb
+  * spec/bundle.rb
   * spec/cookbooks/google-gauth/metadata.rb
   * spec/data/network/gcompute_address/success1~name.yaml
   * spec/data/network/gcompute_address/success1~title.yaml
@@ -215,6 +218,7 @@ chef-codegen:
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
   * spec/fake_cred.rb
+  * spec/foodcritic_spec.rb
   * spec/global_address_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb
@@ -228,15 +232,11 @@ chef-codegen:
 The list below contains all the files that were automatically sourced from a
 central location:
 
-  * Berksfile
-  * chefignore
   * Gemfile.lock
   * libraries/google/hash_utils.rb
   * libraries/google/string_utils.rb
   * LICENSE
-  * spec/bundle.rb
   * spec/data/poor_recipe.rb
-  * spec/foodcritic_spec.rb
   * spec/hash_utils_spec.rb
   * spec/string_utils_spec.rb
 
