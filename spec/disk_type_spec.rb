@@ -111,6 +111,7 @@ context 'gcompute_disk_type' do
           subject do
             chef_run.find_resource(:gcompute_disk_type, 'title0')
           end
+
           it { is_expected.to have_attributes(zone: 'test zone#0 data') }
         end
 
@@ -118,6 +119,7 @@ context 'gcompute_disk_type' do
           subject do
             chef_run.find_resource(:gcompute_disk_type, 'title1')
           end
+
           it { is_expected.to have_attributes(zone: 'test zone#1 data') }
         end
 
@@ -125,6 +127,7 @@ context 'gcompute_disk_type' do
           subject do
             chef_run.find_resource(:gcompute_disk_type, 'title2')
           end
+
           it { is_expected.to have_attributes(zone: 'test zone#2 data') }
         end
       end
@@ -165,6 +168,7 @@ context 'gcompute_disk_type' do
           subject do
             chef_run.find_resource(:gcompute_disk_type, 'title0')
           end
+
           it { is_expected.to have_attributes(zone: 'test zone#0 data') }
         end
 
@@ -172,6 +176,7 @@ context 'gcompute_disk_type' do
           subject do
             chef_run.find_resource(:gcompute_disk_type, 'title1')
           end
+
           it { is_expected.to have_attributes(zone: 'test zone#1 data') }
         end
 
@@ -179,6 +184,7 @@ context 'gcompute_disk_type' do
           subject do
             chef_run.find_resource(:gcompute_disk_type, 'title2')
           end
+
           it { is_expected.to have_attributes(zone: 'test zone#2 data') }
         end
       end

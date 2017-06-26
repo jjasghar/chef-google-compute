@@ -106,6 +106,7 @@ context 'gcompute_region' do
               subject do
                 chef_run.find_resource(:gcompute_region, 'title0')
               end
+
               it { is_expected.to have_attributes(r_label: 'title0') }
             end
 
@@ -113,6 +114,7 @@ context 'gcompute_region' do
               subject do
                 chef_run.find_resource(:gcompute_region, 'title1')
               end
+
               it { is_expected.to have_attributes(r_label: 'title1') }
             end
 
@@ -120,6 +122,7 @@ context 'gcompute_region' do
               subject do
                 chef_run.find_resource(:gcompute_region, 'title2')
               end
+
               it { is_expected.to have_attributes(r_label: 'title2') }
             end
           end
@@ -170,27 +173,24 @@ context 'gcompute_region' do
               subject do
                 chef_run.find_resource(:gcompute_region, 'title0')
               end
-              it do
-                is_expected.to have_attributes(r_label: 'test name#0 data')
-              end
+
+              it { is_expected.to have_attributes(r_label: 'test name#0 data') }
             end
 
             context 'gcompute_region[title1]' do
               subject do
                 chef_run.find_resource(:gcompute_region, 'title1')
               end
-              it do
-                is_expected.to have_attributes(r_label: 'test name#1 data')
-              end
+
+              it { is_expected.to have_attributes(r_label: 'test name#1 data') }
             end
 
             context 'gcompute_region[title2]' do
               subject do
                 chef_run.find_resource(:gcompute_region, 'title2')
               end
-              it do
-                is_expected.to have_attributes(r_label: 'test name#2 data')
-              end
+
+              it { is_expected.to have_attributes(r_label: 'test name#2 data') }
             end
           end
 

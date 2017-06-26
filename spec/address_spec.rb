@@ -120,51 +120,66 @@ context 'gcompute_address' do
               subject do
                 chef_run.find_resource(:gcompute_address, 'title0')
               end
+
               it do
                 is_expected.to have_attributes(address: 'test address#0 data')
               end
+
               it do
                 is_expected
                   .to have_attributes(description: 'test description#0 data')
               end
+
               it { is_expected.to have_attributes(a_label: 'title0') }
-              it do
-                is_expected.to have_attributes(region: 'resource(region,0)')
-              end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'region' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_address[title1]' do
               subject do
                 chef_run.find_resource(:gcompute_address, 'title1')
               end
+
               it do
                 is_expected.to have_attributes(address: 'test address#1 data')
               end
+
               it do
                 is_expected
                   .to have_attributes(description: 'test description#1 data')
               end
+
               it { is_expected.to have_attributes(a_label: 'title1') }
-              it do
-                is_expected.to have_attributes(region: 'resource(region,1)')
-              end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'region' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_address[title2]' do
               subject do
                 chef_run.find_resource(:gcompute_address, 'title2')
               end
+
               it do
                 is_expected.to have_attributes(address: 'test address#2 data')
               end
+
               it do
                 is_expected
                   .to have_attributes(description: 'test description#2 data')
               end
+
               it { is_expected.to have_attributes(a_label: 'title2') }
-              it do
-                is_expected.to have_attributes(region: 'resource(region,2)')
-              end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'region' do
+              #   # Add test code here
+              # end
             end
           end
 
@@ -217,57 +232,66 @@ context 'gcompute_address' do
               subject do
                 chef_run.find_resource(:gcompute_address, 'title0')
               end
+
               it do
                 is_expected.to have_attributes(address: 'test address#0 data')
               end
+
               it do
                 is_expected
                   .to have_attributes(description: 'test description#0 data')
               end
-              it do
-                is_expected.to have_attributes(a_label: 'test name#0 data')
-              end
-              it do
-                is_expected.to have_attributes(region: 'resource(region,0)')
-              end
+
+              it { is_expected.to have_attributes(a_label: 'test name#0 data') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'region' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_address[title1]' do
               subject do
                 chef_run.find_resource(:gcompute_address, 'title1')
               end
+
               it do
                 is_expected.to have_attributes(address: 'test address#1 data')
               end
+
               it do
                 is_expected
                   .to have_attributes(description: 'test description#1 data')
               end
-              it do
-                is_expected.to have_attributes(a_label: 'test name#1 data')
-              end
-              it do
-                is_expected.to have_attributes(region: 'resource(region,1)')
-              end
+
+              it { is_expected.to have_attributes(a_label: 'test name#1 data') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'region' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_address[title2]' do
               subject do
                 chef_run.find_resource(:gcompute_address, 'title2')
               end
+
               it do
                 is_expected.to have_attributes(address: 'test address#2 data')
               end
+
               it do
                 is_expected
                   .to have_attributes(description: 'test description#2 data')
               end
-              it do
-                is_expected.to have_attributes(a_label: 'test name#2 data')
-              end
-              it do
-                is_expected.to have_attributes(region: 'resource(region,2)')
-              end
+
+              it { is_expected.to have_attributes(a_label: 'test name#2 data') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'region' do
+              #   # Add test code here
+              # end
             end
           end
 
@@ -367,12 +391,18 @@ context 'gcompute_address' do
                                        'title0')
           end
           it { is_expected.to have_attributes(address: 'test address#0 data') }
+
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
+
           it { is_expected.to have_attributes(a_label: 'title0') }
-          it { is_expected.to have_attributes(region: 'resource(region,0)') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'region' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure present: resource missing, ignore, no name, fail
@@ -432,12 +462,18 @@ context 'gcompute_address' do
                                        'title0')
           end
           it { is_expected.to have_attributes(address: 'test address#0 data') }
+
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
+
           it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-          it { is_expected.to have_attributes(region: 'resource(region,0)') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'region' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure present: resource missing, ignore, has name, fail
@@ -491,12 +527,18 @@ context 'gcompute_address' do
           end
 
           it { is_expected.to have_attributes(address: 'test address#0 data') }
+
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
+
           it { is_expected.to have_attributes(a_label: 'title0') }
-          it { is_expected.to have_attributes(region: 'resource(region,0)') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'region' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -545,12 +587,18 @@ context 'gcompute_address' do
           end
 
           it { is_expected.to have_attributes(address: 'test address#0 data') }
+
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
+
           it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-          it { is_expected.to have_attributes(region: 'resource(region,0)') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'region' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -606,12 +654,18 @@ context 'gcompute_address' do
                                        'title0')
           end
           it { is_expected.to have_attributes(address: 'test address#0 data') }
+
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
+
           it { is_expected.to have_attributes(a_label: 'title0') }
-          it { is_expected.to have_attributes(region: 'resource(region,0)') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'region' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -662,12 +716,18 @@ context 'gcompute_address' do
                                        'title0')
           end
           it { is_expected.to have_attributes(address: 'test address#0 data') }
+
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
+
           it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-          it { is_expected.to have_attributes(region: 'resource(region,0)') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'region' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure absent: resource exists, ignore, has name, fail
