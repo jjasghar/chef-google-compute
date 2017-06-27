@@ -1,4 +1,4 @@
-# Google Compute Engine Cookbook
+# Google Compute Engine Chef Cookbook
 
 This cookbook provides the built-in types and services for Chef to manage
 Google Cloud Compute resources, as native Chef types.

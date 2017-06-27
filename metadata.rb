@@ -35,7 +35,7 @@ long_description '
     Google Cloud Compute resources, as native Chef types.'
 version '0.1.0'
 depends 'google-gauth', '< 0.2.0'
-issues_url 'https://github.com/googlecloudplatform/chef-google-compute/issues' \
+issues_url 'https://github.com/GoogleCloudPlatform/chef-google-compute/issues' \
   if respond_to?(:issues_url)
-source_url 'https://github.com/googlecloudplatform/chef-google-compute' \
+source_url 'https://github.com/GoogleCloudPlatform/chef-google-compute' \
   if respond_to?(:source_url)
