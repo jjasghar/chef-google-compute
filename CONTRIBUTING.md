@@ -108,10 +108,12 @@ chef-codegen:
   * recipes/examples~delete_address.rb
   * recipes/examples~delete_global_address.rb
   * recipes/examples~delete_http_health_check.rb
+  * recipes/examples~delete_https_health_check.rb
   * recipes/examples~delete_network.rb
   * recipes/examples~disk_type.rb
   * recipes/examples~global_address.rb
   * recipes/examples~http_health_check.rb
+  * recipes/examples~https_health_check.rb
   * recipes/examples~network~auto.rb
   * recipes/examples~network~convert_to_custom.rb
   * recipes/examples~network~custom.rb
@@ -157,6 +159,16 @@ chef-codegen:
   * recipes/tests~gcompute_http_health_check~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_http_health_check~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_http_health_check~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_https_health_check~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_https_health_check~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_https_health_check~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_https_health_check~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_https_health_check~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_https_health_check~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_https_health_check~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_https_health_check~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_https_health_check~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_https_health_check~delete~noexist~change~title_eq_name.rb
   * recipes/tests~gcompute_network~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_network~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_network~create~exist~nochange~title_and_name.rb
@@ -181,6 +193,7 @@ chef-codegen:
   * resources/disk_type.rb
   * resources/global_address.rb
   * resources/http_health_check.rb
+  * resources/https_health_check.rb
   * resources/network.rb
   * resources/region.rb
   * spec/address_spec.rb
@@ -222,6 +235,12 @@ chef-codegen:
   * spec/data/network/gcompute_http_health_check/success2~title.yaml
   * spec/data/network/gcompute_http_health_check/success3~name.yaml
   * spec/data/network/gcompute_http_health_check/success3~title.yaml
+  * spec/data/network/gcompute_https_health_check/success1~name.yaml
+  * spec/data/network/gcompute_https_health_check/success1~title.yaml
+  * spec/data/network/gcompute_https_health_check/success2~name.yaml
+  * spec/data/network/gcompute_https_health_check/success2~title.yaml
+  * spec/data/network/gcompute_https_health_check/success3~name.yaml
+  * spec/data/network/gcompute_https_health_check/success3~title.yaml
   * spec/data/network/gcompute_network/success1~name.yaml
   * spec/data/network/gcompute_network/success1~title.yaml
   * spec/data/network/gcompute_network/success2~name.yaml
@@ -240,6 +259,7 @@ chef-codegen:
   * spec/foodcritic_spec.rb
   * spec/global_address_spec.rb
   * spec/http_health_check_spec.rb
+  * spec/https_health_check_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb
   * spec/network_delete_spec.rb
