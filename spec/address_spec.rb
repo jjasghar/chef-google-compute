@@ -107,9 +107,10 @@ context 'gcompute_address' do
             end
 
             let(:chef_run) do
-              r_name = ['gcompute::tests~gcompute_address~create~exist',
-                        '~nochange~title_eq_name'].join
-              runner.converge(r_name) do
+              recipe = ['gcompute::tests', 'gcompute_address',
+                        'create', 'exist', 'nochange',
+                        'title_eq_name'].join('~')
+              runner.converge(recipe) do
                 cred = Google::CredentialResourceMock.new('mycred',
                                                           runner.run_context)
                 runner.resource_collection.insert(cred)
@@ -219,9 +220,10 @@ context 'gcompute_address' do
             end
 
             let(:chef_run) do
-              r_name = ['gcompute::tests~gcompute_address~create~exist',
-                        '~nochange~title_and_name'].join
-              runner.converge(r_name) do
+              recipe = ['gcompute::tests', 'gcompute_address',
+                        'create', 'exist', 'nochange',
+                        'title_and_name'].join('~')
+              runner.converge(recipe) do
                 cred = Google::CredentialResourceMock.new('mycred',
                                                           runner.run_context)
                 runner.resource_collection.insert(cred)
@@ -373,9 +375,9 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            r_name = ['gcompute::tests~gcompute_address~create~noexist',
-                      '~change~title_eq_name'].join
-            runner.converge(r_name) do
+            recipe = ['gcompute::tests~gcompute_address~create~noexist~change',
+                      'title_eq_name'].join('~')
+            runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
               runner.resource_collection.insert(cred)
@@ -444,9 +446,9 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            r_name = ['gcompute::tests~gcompute_address~create~noexist',
-                      '~change~title_and_name'].join
-            runner.converge(r_name) do
+            recipe = ['gcompute::tests~gcompute_address~create~noexist~change',
+                      'title_and_name'].join('~')
+            runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
               runner.resource_collection.insert(cred)
@@ -512,10 +514,9 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            # TODO(alexstephen): Use format to fit on one line
-            r_name = ['gcompute::tests~gcompute_address~delete~noexist',
-                      '~change~title_eq_name'].join
-            runner.converge(r_name) do
+            recipe = ['gcompute::tests~gcompute_address~delete~noexist~change',
+                      'title_eq_name'].join('~')
+            runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
               runner.resource_collection.insert(cred)
@@ -572,10 +573,9 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            # TODO(alexstephen): Use format to fit on one line
-            r_name = ['gcompute::tests~gcompute_address~delete~noexist',
-                      '~change~title_and_name'].join
-            runner.converge(r_name) do
+            recipe = ['gcompute::tests~gcompute_address~delete~noexist~change',
+                      'title_and_name'].join('~')
+            runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
               runner.resource_collection.insert(cred)
@@ -636,9 +636,9 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            r_name = ['gcompute::tests~gcompute_address~delete~exist',
-                      '~change~title_eq_name'].join
-            runner.converge(r_name) do
+            recipe = ['gcompute::tests~gcompute_address~delete~exist~change',
+                      'title_eq_name'].join('~')
+            runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
               runner.resource_collection.insert(cred)
@@ -698,9 +698,9 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            r_name = ['gcompute::tests~gcompute_address~delete~exist',
-                      '~change~title_and_name'].join
-            runner.converge(r_name) do
+            recipe = ['gcompute::tests~gcompute_address~delete~exist~change',
+                      'title_and_name'].join('~')
+            runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
               runner.resource_collection.insert(cred)

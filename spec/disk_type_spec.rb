@@ -98,9 +98,9 @@ context 'gcompute_disk_type' do
         end
 
         let(:chef_run) do
-          r_name = ['gcompute::tests~gcompute_disk_type~create~exist',
-                    '~nochange~title_eq_name'].join
-          runner.converge(r_name) do
+          recipe = ['gcompute::tests~gcompute_disk_type~create~exist~nochange',
+                    'title_eq_name'].join('~')
+          runner.converge(recipe) do
             cred = Google::CredentialResourceMock.new('mycred',
                                                       runner.run_context)
             runner.resource_collection.insert(cred)
@@ -155,9 +155,9 @@ context 'gcompute_disk_type' do
         end
 
         let(:chef_run) do
-          r_name = ['gcompute::tests~gcompute_disk_type~create~exist',
-                    '~nochange~title_and_name'].join
-          runner.converge(r_name) do
+          recipe = ['gcompute::tests~gcompute_disk_type~create~exist~nochange',
+                    'title_and_name'].join('~')
+          runner.converge(recipe) do
             cred = Google::CredentialResourceMock.new('mycred',
                                                       runner.run_context)
             runner.resource_collection.insert(cred)
