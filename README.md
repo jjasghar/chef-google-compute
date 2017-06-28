@@ -133,6 +133,11 @@ For complete details about the credential cookbook please visit ________
     Represents a Region resource. A region is a specific geographical
     location where you can run your resources. Each region has one or more
     zones
+* [`gcompute_ssl_certificate`](#gcompute_ssl_certificate) -
+    An SslCertificate resource. This resource provides a mechanism to
+    upload
+    an SSL key and certificate to the load balancer to serve secure
+    connections from the user.
 
 
 ### gcompute_address
@@ -926,5 +931,97 @@ end
 
 #### Label
 Set the `r_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_ssl_certificate
+An SslCertificate resource. This resource provides a mechanism to upload
+an SSL key and certificate to the load balancer to serve secure
+connections from the user.
+
+
+#### Example
+
+```ruby
+# *******
+# WARNING: This recipe is for example purposes only. It is *not* advisable to
+# have the key embedded like this because if you check this file into source
+# control you are publishing the private key to whomever can access the source
+# code.
+# *******
+
+gcompute_ssl_certificate 'my-site-ssl-certificate' do
+  action :create
+  certificate(
+    <<-CERTIFICATE
+       -----BEGIN CERTIFICATE-----
+       MIICqjCCAk+gAwIBAgIJAIuJ+0352Kq4MAoGCCqGSM49BAMCMIGwMQswCQYDVQQG
+       EwJVUzETMBEGA1UECAwKV2FzaGluZ3RvbjERMA8GA1UEBwwIS2lya2xhbmQxFTAT
+       BgNVBAoMDEdvb2dsZSwgSW5jLjEeMBwGA1UECwwVR29vZ2xlIENsb3VkIFBsYXRm
+       b3JtMR8wHQYDVQQDDBZ3d3cubXktc2VjdXJlLXNpdGUuY29tMSEwHwYJKoZIhvcN
+       AQkBFhJuZWxzb25hQGdvb2dsZS5jb20wHhcNMTcwNjI4MDQ1NjI2WhcNMjcwNjI2
+       MDQ1NjI2WjCBsDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCldhc2hpbmd0b24xETAP
+       BgNVBAcMCEtpcmtsYW5kMRUwEwYDVQQKDAxHb29nbGUsIEluYy4xHjAcBgNVBAsM
+       FUdvb2dsZSBDbG91ZCBQbGF0Zm9ybTEfMB0GA1UEAwwWd3d3Lm15LXNlY3VyZS1z
+       aXRlLmNvbTEhMB8GCSqGSIb3DQEJARYSbmVsc29uYUBnb29nbGUuY29tMFkwEwYH
+       KoZIzj0CAQYIKoZIzj0DAQcDQgAEHGzpcRJ4XzfBJCCPMQeXQpTXwlblimODQCuQ
+       4mzkzTv0dXyB750fOGN02HtkpBOZzzvUARTR10JQoSe2/5PIwaNQME4wHQYDVR0O
+       BBYEFKIQC3A2SDpxcdfn0YLKineDNq/BMB8GA1UdIwQYMBaAFKIQC3A2SDpxcdfn
+       0YLKineDNq/BMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSQAwRgIhALs4vy+O
+       M3jcqgA4fSW/oKw6UJxp+M6a+nGMX+UJR3YgAiEAvvl39QRVAiv84hdoCuyON0lJ
+       zqGNhIPGq2ULqXKK8BY=
+       -----END CERTIFICATE-----
+       CERTIFICATE
+  ).split("\n").map(&:strip).join("\n")
+  private_key(
+    <<-PRIVATE_KEY
+       -----BEGIN EC PRIVATE KEY-----
+       MHcCAQEEIObtRo8tkUqoMjeHhsOh2ouPpXCgBcP+EDxZCB/tws15oAoGCCqGSM49
+       AwEHoUQDQgAEHGzpcRJ4XzfBJCCPMQeXQpTXwlblimODQCuQ4mzkzTv0dXyB750f
+       OGN02HtkpBOZzzvUARTR10JQoSe2/5PIwQ==
+       -----END EC PRIVATE KEY-----
+       PRIVATE_KEY
+  ).split("\n").map(&:strip).join("\n")
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_ssl_certificate` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_ssl_certificate` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `certificate` -
+  The certificate in PEM format.
+  The certificate chain must be no greater than 5 certs long.
+  The chain must include at least one intermediate cert.
+* `creation_timestamp` -
+  Creation timestamp in RFC3339 text format.
+* `description` -
+  An optional description of this resource.
+* `id` -
+  The unique identifier for the resource.
+* `name` -
+  Name of the resource. Provided by the client when the resource is
+  created. The name must be 1-63 characters long, and comply with
+  RFC1035. Specifically, the name must be 1-63 characters long and match
+  the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the
+  first character must be a lowercase letter, and all following
+  characters must be a dash, lowercase letter, or digit, except the last
+  character, which cannot be a dash.
+* `private_key` -
+  The private key in PEM format.
+
+#### Label
+Set the `sc_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"

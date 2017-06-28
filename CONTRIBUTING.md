@@ -112,6 +112,7 @@ chef-codegen:
   * recipes/examples~delete_http_health_check.rb
   * recipes/examples~delete_https_health_check.rb
   * recipes/examples~delete_network.rb
+  * recipes/examples~delete_ssl_certificate.rb
   * recipes/examples~disk_type.rb
   * recipes/examples~firewall.rb
   * recipes/examples~global_address.rb
@@ -123,6 +124,7 @@ chef-codegen:
   * recipes/examples~network~custom.rb
   * recipes/examples~network~legacy.rb
   * recipes/examples~region.rb
+  * recipes/examples~ssl_certificate.rb
   * recipes/tests~gcompute_address~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_address~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_address~create~exist~nochange~title_and_name.rb
@@ -193,6 +195,16 @@ chef-codegen:
   * recipes/tests~gcompute_region~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_region~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_region~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_ssl_certificate~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_ssl_certificate~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_ssl_certificate~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_ssl_certificate~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_ssl_certificate~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_ssl_certificate~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_ssl_certificate~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_ssl_certificate~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_ssl_certificate~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_ssl_certificate~delete~noexist~change~title_eq_name.rb
   * resources/address.rb
   * resources/disk_type.rb
   * resources/global_address.rb
@@ -200,6 +212,7 @@ chef-codegen:
   * resources/https_health_check.rb
   * resources/network.rb
   * resources/region.rb
+  * resources/ssl_certificate.rb
   * spec/address_spec.rb
   * spec/bundle.rb
   * spec/cookbooks/google-gauth/metadata.rb
@@ -263,6 +276,12 @@ chef-codegen:
   * spec/data/network/gcompute_region/success2~title.yaml
   * spec/data/network/gcompute_region/success3~name.yaml
   * spec/data/network/gcompute_region/success3~title.yaml
+  * spec/data/network/gcompute_ssl_certificate/success1~name.yaml
+  * spec/data/network/gcompute_ssl_certificate/success1~title.yaml
+  * spec/data/network/gcompute_ssl_certificate/success2~name.yaml
+  * spec/data/network/gcompute_ssl_certificate/success2~title.yaml
+  * spec/data/network/gcompute_ssl_certificate/success3~name.yaml
+  * spec/data/network/gcompute_ssl_certificate/success3~title.yaml
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
   * spec/fake_cred.rb
@@ -278,6 +297,7 @@ chef-codegen:
   * spec/network_spec.rb
   * spec/region_spec.rb
   * spec/spec_helper.rb
+  * spec/ssl_certificate_spec.rb
 
 The list below contains all the files that were automatically sourced from a
 central location:
