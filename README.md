@@ -106,6 +106,10 @@ For complete details about the credential cookbook please visit ________
 * [`gcompute_https_health_check`](#gcompute_https_health_check) -
     An HttpsHealthCheck resource. This resource defines a template for how
     individual VMs should be checked for health, via HTTPS.
+* [`gcompute_health_check`](#gcompute_health_check) -
+    An HealthCheck resource. This resource defines a template for how
+    individual virtual machines should be checked for health, via one of
+    the supported protocols.
 * [`gcompute_network`](#gcompute_network) -
     Represents a Network resource.
     Your Cloud Platform Console project can contain multiple networks, and
@@ -707,6 +711,76 @@ end
 
 #### Label
 Set the `hhc_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_health_check
+An HealthCheck resource. This resource defines a template for how individual virtual machines should be checked for health, via one of the supported protocols.
+
+#### Example
+
+```ruby
+# TODO(alexstephen): Add example here
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_health_check` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_health_check` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `check_interval_sec` -
+  How often (in seconds) to send a health check. The default value is 5
+  seconds.
+* `creation_timestamp` -
+  Creation timestamp in RFC3339 text format.
+* `description` -
+  An optional description of this resource. Provide this property when
+  you create the resource.
+* `healthy_threshold` -
+  A so-far unhealthy instance will be marked healthy after this many
+  consecutive successes. The default value is 2.
+* `id` -
+  The unique identifier for the resource. This identifier is defined by
+  the server.
+* `name` -
+  Name of the resource. Provided by the client when the resource is
+  created. The name must be 1-63 characters long, and comply with
+  RFC1035.  Specifically, the name must be 1-63 characters long and
+  match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means
+  the first character must be a lowercase letter, and all following
+  characters must be a dash, lowercase letter, or digit, except the
+  last character, which cannot be a dash.
+* `timeout_sec` -
+  How long (in seconds) to wait before claiming failure.
+  The default value is 5 seconds.  It is invalid for timeoutSec to have
+  greater value than checkIntervalSec.
+* `unhealthy_threshold` -
+  A so-far healthy instance will be marked unhealthy after this many
+  consecutive failures. The default value is 2.
+* `type` -
+  Specifies the type of the healthCheck, either TCP, SSL, HTTP or
+  HTTPS. If not specified, the default is TCP. Exactly one of the
+  protocol-specific health check field must be specified, which must
+  match type field.
+* `http_health_check` -
+  A nested object resource
+* `https_health_check` -
+  A nested object resource
+* `tcp_health_check` -
+  A nested object resource
+* `ssl_health_check` -
+  A nested object resource
+
+#### Label
+Set the `hc_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
 
