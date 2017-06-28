@@ -64,6 +64,15 @@ For complete details about the credential cookbook please visit ________
     the instance is assigned a new internal IP address, either by Compute
     Engine or by you. External IP addresses can be either ephemeral or
     static.
+* [`gcompute_backend_bucket`](#gcompute_backend_bucket) -
+    Backend buckets allow you to use Google Cloud Storage buckets with
+    HTTP(S)
+    load balancing.
+    An HTTP(S) load balancing can direct traffic to specified URLs to a
+    backend bucket rather than a backend service. It can send requests for
+    static content to a Cloud Storage bucket and requests for dynamic
+    content
+    a virtual machine instance.
 * [`gcompute_disk_type`](#gcompute_disk_type) -
     Represents a DiskType resource. A DiskType resource represents the type
     of disk to use, such as a pd-ssd or pd-standard. To reference a disk
@@ -205,6 +214,73 @@ end
 
 #### Label
 Set the `a_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_backend_bucket
+Backend buckets allow you to use Google Cloud Storage buckets with HTTP(S)
+load balancing.
+
+An HTTP(S) load balancing can direct traffic to specified URLs to a
+backend bucket rather than a backend service. It can send requests for
+static content to a Cloud Storage bucket and requests for dynamic content
+a virtual machine instance.
+
+
+#### Example
+
+```ruby
+# *** WARNING ***
+# TODO(nelsonjr): http://b/63088154 Google Cloud Platform API is returning
+# access denied if we use a more restricted scope such as
+# https://www.googleapis.com/auth/compute. For the time being use an all mighty
+# scope instead: https://www.googleapis.com/auth/cloud-platform.
+
+gcompute_backend_bucket 'be-bucket-connection' do
+  action :create
+  bucket_name 'backend-bucket-test'
+  description 'A BackendBucket to connect LNB w/ Storage Bucket'
+  enable_cdn true
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_backend_bucket` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_backend_bucket` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `bucket_name` -
+  Cloud Storage bucket name.
+* `creation_timestamp` -
+  Creation timestamp in RFC3339 text format.
+* `description` -
+  An optional textual description of the resource; provided by the
+  client when the resource is created.
+* `enable_cdn` -
+  If true, enable Cloud CDN for this BackendBucket.
+* `id` -
+  Unique identifier for the resource.
+* `name` -
+  Name of the resource. Provided by the client when the resource is
+  created. The name must be 1-63 characters long, and comply with
+  RFC1035.  Specifically, the name must be 1-63 characters long and
+  match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means
+  the first character must be a lowercase letter, and all following
+  characters must be a dash, lowercase letter, or digit, except the
+  last character, which cannot be a dash.
+
+#### Label
+Set the `bb_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
 

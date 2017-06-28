@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~firewall]"
+#       "recipe[gcompute::examples~delete_backend_bucket]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,4 +64,8 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_backend_bucket 'be-bucket-connection' do
+  action :delete
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

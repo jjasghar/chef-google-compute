@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~firewall]"
+#       "recipe[gcompute::examples~backend_bucket]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -60,8 +60,21 @@ gauth_credential 'mycred' do
   action :serviceaccount
   path ENV['CRED_PATH'] # e.g. '/path/to/my_account.json'
   scopes [
-    'https://www.googleapis.com/auth/compute'
+    'https://www.googleapis.com/auth/cloud-platform'
   ]
 end
 
-# TODO(alexstephen): Add example here
+# *** WARNING ***
+# TODO(nelsonjr): http://b/63088154 Google Cloud Platform API is returning
+# access denied if we use a more restricted scope such as
+# https://www.googleapis.com/auth/compute. For the time being use an all mighty
+# scope instead: https://www.googleapis.com/auth/cloud-platform.
+
+gcompute_backend_bucket 'be-bucket-connection' do
+  action :create
+  bucket_name 'backend-bucket-test'
+  description 'A BackendBucket to connect LNB w/ Storage Bucket'
+  enable_cdn true
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

@@ -105,7 +105,9 @@ chef-codegen:
   * metadata.rb
   * README.md
   * recipes/examples~address.rb
+  * recipes/examples~backend_bucket.rb
   * recipes/examples~delete_address.rb
+  * recipes/examples~delete_backend_bucket.rb
   * recipes/examples~delete_firewall.rb
   * recipes/examples~delete_global_address.rb
   * recipes/examples~delete_health_check.rb
@@ -135,6 +137,16 @@ chef-codegen:
   * recipes/tests~gcompute_address~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_address~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_address~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_backend_bucket~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_backend_bucket~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_backend_bucket~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_backend_bucket~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_backend_bucket~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_backend_bucket~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_backend_bucket~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_backend_bucket~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_backend_bucket~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_backend_bucket~delete~noexist~change~title_eq_name.rb
   * recipes/tests~gcompute_disk_type~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_disk_type~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_disk_type~create~exist~nochange~title_and_name.rb
@@ -206,6 +218,7 @@ chef-codegen:
   * recipes/tests~gcompute_ssl_certificate~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_ssl_certificate~delete~noexist~change~title_eq_name.rb
   * resources/address.rb
+  * resources/backend_bucket.rb
   * resources/disk_type.rb
   * resources/global_address.rb
   * resources/http_health_check.rb
@@ -214,6 +227,7 @@ chef-codegen:
   * resources/region.rb
   * resources/ssl_certificate.rb
   * spec/address_spec.rb
+  * spec/backend_bucket_spec.rb
   * spec/bundle.rb
   * spec/cookbooks/google-gauth/metadata.rb
   * spec/data/network/gcompute_address/success1~name.yaml
@@ -222,6 +236,12 @@ chef-codegen:
   * spec/data/network/gcompute_address/success2~title.yaml
   * spec/data/network/gcompute_address/success3~name.yaml
   * spec/data/network/gcompute_address/success3~title.yaml
+  * spec/data/network/gcompute_backend_bucket/success1~name.yaml
+  * spec/data/network/gcompute_backend_bucket/success1~title.yaml
+  * spec/data/network/gcompute_backend_bucket/success2~name.yaml
+  * spec/data/network/gcompute_backend_bucket/success2~title.yaml
+  * spec/data/network/gcompute_backend_bucket/success3~name.yaml
+  * spec/data/network/gcompute_backend_bucket/success3~title.yaml
   * spec/data/network/gcompute_disk/success1~name.yaml
   * spec/data/network/gcompute_disk/success1~title.yaml
   * spec/data/network/gcompute_disk/success2~name.yaml
