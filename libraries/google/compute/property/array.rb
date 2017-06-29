@@ -30,6 +30,10 @@ module Google
     module Property
       # A class to handle serialization of Array items.
       class Array
+        def self.coerce
+          ->(x) { ::Google::Compute::Property::Array.parse(x) }
+        end
+
         def self.parse(value)
           value
         end

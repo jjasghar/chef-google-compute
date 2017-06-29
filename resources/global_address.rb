@@ -44,12 +44,30 @@ module Google
     class GlobalAddress < Chef::Resource
       resource_name :gcompute_global_address
 
-      property :address, String, desired_state: true
-      property :creation_timestamp, Time, desired_state: true
-      property :description, String, desired_state: true
-      property :id, Integer, desired_state: true
-      property :ga_label, String, name_property: true, desired_state: true
-      property :region, String, desired_state: true
+      property :address,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :creation_timestamp,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :description,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :id,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :ga_label,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               name_property: true, desired_state: true
+      property :region,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true

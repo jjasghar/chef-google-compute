@@ -45,13 +45,30 @@ module Google
     class BackendBucket < Chef::Resource
       resource_name :gcompute_backend_bucket
 
-      property :bucket_name, String, desired_state: true
-      property :creation_timestamp, Time, desired_state: true
-      property :description, String, desired_state: true
+      property :bucket_name,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :creation_timestamp,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :description,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
       property :enable_cdn,
-               kind_of: [TrueClass, FalseClass], desired_state: true
-      property :id, Integer, desired_state: true
-      property :bb_label, String, name_property: true, desired_state: true
+               kind_of: [TrueClass, FalseClass],
+               coerce: ::Google::Compute::Property::Boolean.coerce,
+               desired_state: true
+      property :id,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :bb_label,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               name_property: true, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true

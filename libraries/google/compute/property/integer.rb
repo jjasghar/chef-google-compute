@@ -30,6 +30,10 @@ module Google
     module Property
       # A class to handle serialization of Integer items.
       class Integer
+        def self.coerce
+          ->(x) { ::Google::Compute::Property::Integer.parse(x) }
+        end
+
         def self.parse(value)
           value.to_i
         end

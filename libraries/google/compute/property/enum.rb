@@ -30,6 +30,10 @@ module Google
     module Property
       # A class to handle serialization of Enumerated items.
       class Enum
+        def self.coerce
+          ->(x) { ::Google::Compute::Property::Enum.parse(x) }
+        end
+
         def self.parse(value)
           value
         end

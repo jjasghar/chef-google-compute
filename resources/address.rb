@@ -45,12 +45,30 @@ module Google
     class Address < Chef::Resource
       resource_name :gcompute_address
 
-      property :address, String, desired_state: true
-      property :creation_timestamp, Time, desired_state: true
-      property :description, String, desired_state: true
-      property :id, Integer, desired_state: true
-      property :a_label, String, name_property: true, desired_state: true
-      property :users, Array, desired_state: true
+      property :address,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :creation_timestamp,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :description,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :id,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :a_label,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               name_property: true, desired_state: true
+      property :users,
+               Array,
+               coerce: ::Google::Compute::Property::StringArray.coerce,
+               desired_state: true
       property :region, String, desired_state: true
 
       property :credential, String, desired_state: false, required: true

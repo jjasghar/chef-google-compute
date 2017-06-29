@@ -30,6 +30,10 @@ module Google
     module Property
       # A class to handle serialization of Boolean items.
       class Boolean
+        def self.coerce
+          ->(x) { ::Google::Compute::Property::Boolean.parse(x) }
+        end
+
         def self.parse(value)
           value
         end

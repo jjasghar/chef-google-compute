@@ -30,6 +30,10 @@ module Google
     module Property
       # A class to handle serialization of String items.
       class String
+        def self.coerce
+          ->(x) { ::Google::Compute::Property::String.parse(x) }
+        end
+
         def self.parse(value)
           value
         end

@@ -44,17 +44,50 @@ module Google
     class HttpsHealthCheck < Chef::Resource
       resource_name :gcompute_https_health_check
 
-      property :check_interval_sec, Integer, desired_state: true
-      property :creation_timestamp, Time, desired_state: true
-      property :description, String, desired_state: true
-      property :healthy_threshold, Integer, desired_state: true
-      property :host, String, desired_state: true
-      property :id, Integer, desired_state: true
-      property :hhc_label, String, name_property: true, desired_state: true
-      property :port, Integer, desired_state: true
-      property :request_path, String, desired_state: true
-      property :timeout_sec, Integer, desired_state: true
-      property :unhealthy_threshold, Integer, desired_state: true
+      property :check_interval_sec,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :creation_timestamp,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :description,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :healthy_threshold,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :host,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :id,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :hhc_label,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               name_property: true, desired_state: true
+      property :port,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :request_path,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :timeout_sec,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :unhealthy_threshold,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true

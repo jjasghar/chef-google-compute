@@ -45,19 +45,54 @@ module Google
     class DiskType < Chef::Resource
       resource_name :gcompute_disk_type
 
-      property :creation_timestamp, Time, desired_state: true
-      property :default_disk_size_gb, Integer, desired_state: true
-      property :deprecated_deleted, Time, desired_state: true
-      property :deprecated_deprecated, Time, desired_state: true
-      property :deprecated_obsolete, Time, desired_state: true
-      property :deprecated_replacement, String, desired_state: true
+      property :creation_timestamp,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :default_disk_size_gb,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :deprecated_deleted,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :deprecated_deprecated,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :deprecated_obsolete,
+               Time,
+               coerce: ::Google::Compute::Property::Time.coerce,
+               desired_state: true
+      property :deprecated_replacement,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
       property :deprecated_state,
-               equal_to: %w[DEPRECATED OBSOLETE DELETED], desired_state: true
-      property :description, String, desired_state: true
-      property :id, Integer, desired_state: true
-      property :dt_label, String, name_property: true, desired_state: true
-      property :valid_disk_size, String, desired_state: true
-      property :zone, String, desired_state: true
+               equal_to: %w[DEPRECATED OBSOLETE DELETED],
+               coerce: ::Google::Compute::Property::Enum.coerce,
+               desired_state: true
+      property :description,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :id,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :dt_label,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               name_property: true, desired_state: true
+      property :valid_disk_size,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :zone,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true

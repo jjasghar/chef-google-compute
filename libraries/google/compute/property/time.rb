@@ -32,8 +32,13 @@ module Google
     module Property
       # A class to handle serialization of Time items.
       class Time
+        def self.coerce
+          ->(x) { ::Google::Compute::Property::Time.parse(x) }
+        end
+
         def self.parse(value)
           return if value.nil?
+          return value if value.is_a? ::Time
           ::Time.parse(value)
         end
       end
