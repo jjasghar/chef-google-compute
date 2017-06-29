@@ -25,18 +25,4 @@
 #
 # ----------------------------------------------------------------------------
 
----
-kind: compute#network
-id: 4299001743
-creationTimestamp: '2120-10-14T00:16:21+00:00'
-name: 'test name#1 data'
-description: 'test description#1 data'
-IPv4Range: 'test ipv4_range#1 data'
-gatewayIPv4: 'test gateway_ipv4#1 data'
-selfLink: selflink(resource(network,1))
-autoCreateSubnetworks: false
-subnetworks:
-  - ww
-  - xx
-  - yy
-  - zz
+# TODO(alexstephen): create test template

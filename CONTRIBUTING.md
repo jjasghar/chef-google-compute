@@ -115,6 +115,7 @@ chef-codegen:
   * recipes/examples~delete_https_health_check.rb
   * recipes/examples~delete_network.rb
   * recipes/examples~delete_ssl_certificate.rb
+  * recipes/examples~delete_subnetwork.rb
   * recipes/examples~disk_type.rb
   * recipes/examples~firewall.rb
   * recipes/examples~global_address.rb
@@ -127,6 +128,7 @@ chef-codegen:
   * recipes/examples~network~legacy.rb
   * recipes/examples~region.rb
   * recipes/examples~ssl_certificate.rb
+  * recipes/examples~subnetwork.rb
   * recipes/tests~gcompute_address~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_address~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_address~create~exist~nochange~title_and_name.rb
@@ -217,6 +219,16 @@ chef-codegen:
   * recipes/tests~gcompute_ssl_certificate~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_ssl_certificate~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_ssl_certificate~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_subnetwork~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_subnetwork~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_subnetwork~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_subnetwork~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_subnetwork~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_subnetwork~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_subnetwork~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_subnetwork~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_subnetwork~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_subnetwork~delete~noexist~change~title_eq_name.rb
   * resources/address.rb
   * resources/backend_bucket.rb
   * resources/disk_type.rb
@@ -226,6 +238,7 @@ chef-codegen:
   * resources/network.rb
   * resources/region.rb
   * resources/ssl_certificate.rb
+  * resources/subnetwork.rb
   * spec/address_spec.rb
   * spec/backend_bucket_spec.rb
   * spec/bundle.rb
@@ -302,6 +315,12 @@ chef-codegen:
   * spec/data/network/gcompute_ssl_certificate/success2~title.yaml
   * spec/data/network/gcompute_ssl_certificate/success3~name.yaml
   * spec/data/network/gcompute_ssl_certificate/success3~title.yaml
+  * spec/data/network/gcompute_subnetwork/success1~name.yaml
+  * spec/data/network/gcompute_subnetwork/success1~title.yaml
+  * spec/data/network/gcompute_subnetwork/success2~name.yaml
+  * spec/data/network/gcompute_subnetwork/success2~title.yaml
+  * spec/data/network/gcompute_subnetwork/success3~name.yaml
+  * spec/data/network/gcompute_subnetwork/success3~title.yaml
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
   * spec/fake_cred.rb
@@ -318,6 +337,7 @@ chef-codegen:
   * spec/region_spec.rb
   * spec/spec_helper.rb
   * spec/ssl_certificate_spec.rb
+  * spec/subnetwork_spec.rb
 
 The list below contains all the files that were automatically sourced from a
 central location:

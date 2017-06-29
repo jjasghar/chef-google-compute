@@ -32,9 +32,9 @@ require 'chef/resource'
 require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
+require 'google/compute/property/boolean'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
-require 'google/compute/property/string_array'
 require 'google/compute/property/time'
 require 'google/hash_utils'
 
@@ -42,13 +42,9 @@ module Google
   module GCOMPUTE
     # A provider to manage Google Compute Engine resources.
     # rubocop:disable Metrics/ClassLength
-    class Address < Chef::Resource
-      resource_name :gcompute_address
+    class Subnetwork < Chef::Resource
+      resource_name :gcompute_subnetwork
 
-      property :address,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
       property :creation_timestamp,
                Time,
                coerce: ::Google::Compute::Property::Time.coerce,
@@ -57,17 +53,26 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                desired_state: true
+      property :gateway_address,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
       property :id,
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
-      property :a_label,
+      property :ip_cidr_range,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :s_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      property :users,
-               Array,
-               coerce: ::Google::Compute::Property::StringArray.coerce,
+      property :network, String, desired_state: true
+      property :private_ip_google_access,
+               kind_of: [TrueClass, FalseClass],
+               coerce: ::Google::Compute::Property::Boolean.coerce,
                desired_state: true
       property :region, String, desired_state: true
 
@@ -76,9 +81,9 @@ module Google
 
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#address')
+                               'compute#subnetwork')
         if fetch.nil?
-          converge_by "Creating gcompute_address[#{name}]" do
+          converge_by "Creating gcompute_subnetwork[#{name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -91,8 +96,6 @@ module Google
           end
         else
           @current_resource = @new_resource.clone
-          @current_resource.address =
-            ::Google::Compute::Property::String.parse(fetch['address'])
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.parse(
               fetch['creationTimestamp']
@@ -101,20 +104,22 @@ module Google
             ::Google::Compute::Property::String.parse(fetch['description'])
           @current_resource.id =
             ::Google::Compute::Property::Integer.parse(fetch['id'])
-          @current_resource.a_label =
+          @current_resource.s_label =
             ::Google::Compute::Property::String.parse(fetch['name'])
-          @current_resource.users =
-            ::Google::Compute::Property::StringArray.parse(fetch['users'])
+          @current_resource.private_ip_google_access =
+            ::Google::Compute::Property::Boolean.parse(
+              fetch['privateIpGoogleAccess']
+            )
 
-          cannot_change_resource 'Address cannot be edited'
+          cannot_change_resource 'Subnetwork cannot be edited'
         end
       end
 
       action :delete do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#address')
+                               'compute#subnetwork')
         unless fetch.nil?
-          converge_by "Deleting gcompute_address[#{name}]" do
+          converge_by "Deleting gcompute_subnetwork[#{name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -130,10 +135,18 @@ module Google
       action_class do
         def resource_to_request
           {
-            kind: 'compute#address',
-            address: address,
+            kind: 'compute#subnetwork',
             description: description,
-            name: a_label
+            gatewayAddress: gateway_address,
+            ipCidrRange: ip_cidr_range,
+            name: s_label,
+            network: @new_resource.resources(
+              "gcompute_network[#{network}]"
+            ).exports[:self_link],
+            privateIpGoogleAccess: private_ip_google_access,
+            region: @new_resource.resources(
+              "gcompute_region[#{region}]"
+            ).exports[:name]
           }.reject { |_, v| v.nil? }.to_json
         end
 
@@ -156,13 +169,16 @@ module Google
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.a_label,
-            kind: 'compute#address',
-            address: resource.address,
+            name: resource.s_label,
+            kind: 'compute#subnetwork',
             creation_timestamp: resource.creation_timestamp,
             description: resource.description,
+            gateway_address: resource.gateway_address,
             id: resource.id,
-            users: resource.users,
+            ip_cidr_range: resource.ip_cidr_range,
+            network: fetch_export(resource, 'gcompute_network',
+                                  resource.network, :self_link),
+            private_ip_google_access: resource.private_ip_google_access,
             region: fetch_export(resource, 'gcompute_region',
                                  resource.region, :name)
           }.reject { |_, v| v.nil? }
@@ -244,7 +260,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions/{{region}}/addresses',
+              'projects/{{project}}/regions/{{region}}/subnetworks',
               data
             )
           )
@@ -258,7 +274,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions/{{region}}/addresses/{{name}}',
+              'projects/{{project}}/regions/{{region}}/subnetworks/{{name}}',
               data
             )
           )
@@ -332,7 +348,7 @@ module Google
             resource,
             URI.parse(::Google::HashUtils.navigate(wait_done,
                                                    %w[targetLink])),
-            'compute#address'
+            'compute#subnetwork'
           )
         end
 
@@ -343,7 +359,7 @@ module Google
             debug("Waiting for completion of operation #{op_id}")
             raise_if_errors op_result, %w[error errors], 'message'
             sleep 1.0
-            raise "Invalid result '#{status}' on gcompute_address." \
+            raise "Invalid result '#{status}' on gcompute_subnetwork." \
               unless %w[PENDING RUNNING DONE].include?(status)
             op_result = fetch_resource(resource, op_uri, 'compute#operation')
             status = ::Google::HashUtils.navigate(op_result, %w[status])

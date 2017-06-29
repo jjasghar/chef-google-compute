@@ -147,6 +147,32 @@ For complete details about the credential cookbook please visit ________
     upload
     an SSL key and certificate to the load balancer to serve secure
     connections from the user.
+* [`gcompute_subnetwork`](#gcompute_subnetwork) -
+    A VPC network is a virtual version of the traditional physical networks
+    that exist within and between physical data centers. A VPC network
+    provides connectivity for your Compute Engine virtual machine (VM)
+    instances, Container Engine containers, App Engine Flex services, and
+    other network-related resources.
+    Each GCP project contains one or more VPC networks. Each VPC network is
+    a
+    global entity spanning all GCP regions. This global VPC network allows
+    VM
+    instances and other resources to communicate with each other via
+    internal,
+    private IP addresses.
+    Each VPC network is subdivided into subnets, and each subnet is
+    contained
+    within a single region. You can have more than one subnet in a region
+    for
+    a given VPC network. Each subnet has a contiguous private RFC1918 IP
+    space. You create instances, containers, and the like in these subnets.
+    When you create an instance, you must create it in a subnet, and the
+    instance draws its internal IP address from that subnet.
+    Virtual machine (VM) instances in a VPC network can communicate with
+    instances in all other subnets of the same VPC network, regardless of
+    region, using their RFC1918 private IP addresses. You can isolate
+    portions
+    of the network, even entire subnets, using firewall rules.
 
 
 ### gcompute_address
@@ -1099,5 +1125,97 @@ end
 
 #### Label
 Set the `sc_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_subnetwork
+A VPC network is a virtual version of the traditional physical networks
+that exist within and between physical data centers. A VPC network
+provides connectivity for your Compute Engine virtual machine (VM)
+instances, Container Engine containers, App Engine Flex services, and
+other network-related resources.
+
+Each GCP project contains one or more VPC networks. Each VPC network is a
+global entity spanning all GCP regions. This global VPC network allows VM
+instances and other resources to communicate with each other via internal,
+private IP addresses.
+
+Each VPC network is subdivided into subnets, and each subnet is contained
+within a single region. You can have more than one subnet in a region for
+a given VPC network. Each subnet has a contiguous private RFC1918 IP
+space. You create instances, containers, and the like in these subnets.
+When you create an instance, you must create it in a subnet, and the
+instance draws its internal IP address from that subnet.
+
+Virtual machine (VM) instances in a VPC network can communicate with
+instances in all other subnets of the same VPC network, regardless of
+region, using their RFC1918 private IP addresses. You can isolate portions
+of the network, even entire subnets, using firewall rules.
+
+
+#### Example
+
+```ruby
+# Subnetwork requires a network and a region, so define them in your recipe:
+#   - gcompute_network 'my-network' do ... end
+#   - gcompute_region 'some-region' do ... end
+gcompute_subnetwork 'servers' do
+  action :create
+  ip_cidr_range '172.16.0.0/16'
+  network 'my-network'
+  region 'some-region'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_subnetwork` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_subnetwork` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `creation_timestamp` -
+  Creation timestamp in RFC3339 text format.
+* `description` -
+  An optional description of this resource. Provide this property when
+  you create the resource. This field can be set only at resource
+  creation time.
+* `gateway_address` -
+  The gateway address for default routes to reach destination addresses
+  outside this subnetwork. This field can be set only at resource
+  creation time.
+* `id` -
+  The unique identifier for the resource.
+* `ip_cidr_range` -
+  The range of internal addresses that are owned by this subnetwork.
+  Provide this property when you create the subnetwork. For example,
+  10.0.0.0/8 or 192.168.0.0/16. Ranges must be unique and
+  non-overlapping within a network. Only IPv4 is supported.
+* `name` -
+  The name of the resource, provided by the client when initially
+  creating the resource. The name must be 1-63 characters long, and
+  comply with RFC1035. Specifically, the name must be 1-63 characters
+  long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which
+  means the first character must be a lowercase letter, and all
+  following characters must be a dash, lowercase letter, or digit,
+  except the last character, which cannot be a dash.
+* `network` -
+  A reference to Network resource
+* `private_ip_google_access` -
+  Whether the VMs in this subnet can access Google services without
+  assigned external IP addresses.
+* `region` -
+  A reference to Region resource
+
+#### Label
+Set the `s_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"

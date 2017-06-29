@@ -47,8 +47,8 @@ require 'spec_helper'
 # +--------------------------------------------------------+
 # TODO(alexstephen): Add tests for manage
 # TODO(alexstephen): Add tests for modify
-context 'gcompute_address' do
-  A_PROJECT_DATA = %w[
+context 'gcompute_subnetwork' do
+  S_PROJECT_DATA = %w[
     test\ project#0\ data
     test\ project#1\ data
     test\ project#2\ data
@@ -56,7 +56,7 @@ context 'gcompute_address' do
     test\ project#4\ data
   ].freeze
 
-  A_REGION_DATA = %w[
+  S_REGION_DATA = %w[
     test\ name#0\ data
     test\ name#1\ data
     test\ name#2\ data
@@ -64,7 +64,7 @@ context 'gcompute_address' do
     test\ name#4\ data
   ].freeze
 
-  A_NAME_DATA = %w[
+  S_NAME_DATA = %w[
     test\ name#0\ data
     test\ name#1\ data
     test\ name#2\ data
@@ -84,15 +84,24 @@ context 'gcompute_address' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1,
-                                         name: 'title0',
-                                         region: 'test name#0 data'
-              expect_network_get_success 2,
-                                         name: 'title1',
-                                         region: 'test name#1 data'
-              expect_network_get_success 3,
-                                         name: 'title2',
-                                         region: 'test name#2 data'
+              expect_network_get_success \
+                1,
+                name: 'title0',
+                network: 'selflink(resource(network,0))',
+                region: 'test name#0 data'
+              expect_network_get_success \
+                2,
+                name: 'title1',
+                network: 'selflink(resource(network,1))',
+                region: 'test name#1 data'
+              expect_network_get_success \
+                3,
+                name: 'title2',
+                network: 'selflink(resource(network,2))',
+                region: 'test name#2 data'
+              expect_network_get_success_network 1
+              expect_network_get_success_network 2
+              expect_network_get_success_network 3
               expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
@@ -102,7 +111,8 @@ context 'gcompute_address' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_address gcompute_region],
+                step_into: %w[gcompute_subnetwork gcompute_network
+                              gcompute_region],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -110,7 +120,7 @@ context 'gcompute_address' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_address',
+              recipe = ['gcompute::tests', 'gcompute_subnetwork',
                         'create', 'exist', 'nochange',
                         'title_eq_name'].join('~')
               runner.converge(recipe) do
@@ -120,13 +130,9 @@ context 'gcompute_address' do
               end
             end
 
-            context 'gcompute_address[title0]' do
+            context 'gcompute_subnetwork[title0]' do
               subject do
-                chef_run.find_resource(:gcompute_address, 'title0')
-              end
-
-              it do
-                is_expected.to have_attributes(address: 'test address#0 data')
+                chef_run.find_resource(:gcompute_subnetwork, 'title0')
               end
 
               it do
@@ -134,7 +140,30 @@ context 'gcompute_address' do
                   .to have_attributes(description: 'test description#0 data')
               end
 
-              it { is_expected.to have_attributes(a_label: 'title0') }
+              it do
+                is_expected
+                  .to have_attributes(
+                    gateway_address: 'test gateway_address#0 data'
+                  )
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(
+                    ip_cidr_range: 'test ip_cidr_range#0 data'
+                  )
+              end
+
+              it { is_expected.to have_attributes(s_label: 'title0') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'network' do
+              #   # Add test code here
+              # end
+
+              it do
+                is_expected.to have_attributes(private_ip_google_access: true)
+              end
 
               # TODO(alexstephen): Implement resourceref test.
               # it 'region' do
@@ -142,13 +171,9 @@ context 'gcompute_address' do
               # end
             end
 
-            context 'gcompute_address[title1]' do
+            context 'gcompute_subnetwork[title1]' do
               subject do
-                chef_run.find_resource(:gcompute_address, 'title1')
-              end
-
-              it do
-                is_expected.to have_attributes(address: 'test address#1 data')
+                chef_run.find_resource(:gcompute_subnetwork, 'title1')
               end
 
               it do
@@ -156,7 +181,30 @@ context 'gcompute_address' do
                   .to have_attributes(description: 'test description#1 data')
               end
 
-              it { is_expected.to have_attributes(a_label: 'title1') }
+              it do
+                is_expected
+                  .to have_attributes(
+                    gateway_address: 'test gateway_address#1 data'
+                  )
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(
+                    ip_cidr_range: 'test ip_cidr_range#1 data'
+                  )
+              end
+
+              it { is_expected.to have_attributes(s_label: 'title1') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'network' do
+              #   # Add test code here
+              # end
+
+              it do
+                is_expected.to have_attributes(private_ip_google_access: false)
+              end
 
               # TODO(alexstephen): Implement resourceref test.
               # it 'region' do
@@ -164,13 +212,9 @@ context 'gcompute_address' do
               # end
             end
 
-            context 'gcompute_address[title2]' do
+            context 'gcompute_subnetwork[title2]' do
               subject do
-                chef_run.find_resource(:gcompute_address, 'title2')
-              end
-
-              it do
-                is_expected.to have_attributes(address: 'test address#2 data')
+                chef_run.find_resource(:gcompute_subnetwork, 'title2')
               end
 
               it do
@@ -178,7 +222,30 @@ context 'gcompute_address' do
                   .to have_attributes(description: 'test description#2 data')
               end
 
-              it { is_expected.to have_attributes(a_label: 'title2') }
+              it do
+                is_expected
+                  .to have_attributes(
+                    gateway_address: 'test gateway_address#2 data'
+                  )
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(
+                    ip_cidr_range: 'test ip_cidr_range#2 data'
+                  )
+              end
+
+              it { is_expected.to have_attributes(s_label: 'title2') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'network' do
+              #   # Add test code here
+              # end
+
+              it do
+                is_expected.to have_attributes(private_ip_google_access: true)
+              end
 
               # TODO(alexstephen): Implement resourceref test.
               # it 'region' do
@@ -203,9 +270,21 @@ context 'gcompute_address' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1, region: 'test name#0 data'
-              expect_network_get_success 2, region: 'test name#1 data'
-              expect_network_get_success 3, region: 'test name#2 data'
+              expect_network_get_success \
+                1,
+                network: 'selflink(resource(network,0))',
+                region: 'test name#0 data'
+              expect_network_get_success \
+                2,
+                network: 'selflink(resource(network,1))',
+                region: 'test name#1 data'
+              expect_network_get_success \
+                3,
+                network: 'selflink(resource(network,2))',
+                region: 'test name#2 data'
+              expect_network_get_success_network 1
+              expect_network_get_success_network 2
+              expect_network_get_success_network 3
               expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
@@ -215,7 +294,8 @@ context 'gcompute_address' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_address gcompute_region],
+                step_into: %w[gcompute_subnetwork gcompute_network
+                              gcompute_region],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -223,7 +303,7 @@ context 'gcompute_address' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_address',
+              recipe = ['gcompute::tests', 'gcompute_subnetwork',
                         'create', 'exist', 'nochange',
                         'title_and_name'].join('~')
               runner.converge(recipe) do
@@ -233,13 +313,9 @@ context 'gcompute_address' do
               end
             end
 
-            context 'gcompute_address[title0]' do
+            context 'gcompute_subnetwork[title0]' do
               subject do
-                chef_run.find_resource(:gcompute_address, 'title0')
-              end
-
-              it do
-                is_expected.to have_attributes(address: 'test address#0 data')
+                chef_run.find_resource(:gcompute_subnetwork, 'title0')
               end
 
               it do
@@ -247,7 +323,30 @@ context 'gcompute_address' do
                   .to have_attributes(description: 'test description#0 data')
               end
 
-              it { is_expected.to have_attributes(a_label: 'test name#0 data') }
+              it do
+                is_expected
+                  .to have_attributes(
+                    gateway_address: 'test gateway_address#0 data'
+                  )
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(
+                    ip_cidr_range: 'test ip_cidr_range#0 data'
+                  )
+              end
+
+              it { is_expected.to have_attributes(s_label: 'test name#0 data') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'network' do
+              #   # Add test code here
+              # end
+
+              it do
+                is_expected.to have_attributes(private_ip_google_access: true)
+              end
 
               # TODO(alexstephen): Implement resourceref test.
               # it 'region' do
@@ -255,13 +354,9 @@ context 'gcompute_address' do
               # end
             end
 
-            context 'gcompute_address[title1]' do
+            context 'gcompute_subnetwork[title1]' do
               subject do
-                chef_run.find_resource(:gcompute_address, 'title1')
-              end
-
-              it do
-                is_expected.to have_attributes(address: 'test address#1 data')
+                chef_run.find_resource(:gcompute_subnetwork, 'title1')
               end
 
               it do
@@ -269,7 +364,30 @@ context 'gcompute_address' do
                   .to have_attributes(description: 'test description#1 data')
               end
 
-              it { is_expected.to have_attributes(a_label: 'test name#1 data') }
+              it do
+                is_expected
+                  .to have_attributes(
+                    gateway_address: 'test gateway_address#1 data'
+                  )
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(
+                    ip_cidr_range: 'test ip_cidr_range#1 data'
+                  )
+              end
+
+              it { is_expected.to have_attributes(s_label: 'test name#1 data') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'network' do
+              #   # Add test code here
+              # end
+
+              it do
+                is_expected.to have_attributes(private_ip_google_access: false)
+              end
 
               # TODO(alexstephen): Implement resourceref test.
               # it 'region' do
@@ -277,13 +395,9 @@ context 'gcompute_address' do
               # end
             end
 
-            context 'gcompute_address[title2]' do
+            context 'gcompute_subnetwork[title2]' do
               subject do
-                chef_run.find_resource(:gcompute_address, 'title2')
-              end
-
-              it do
-                is_expected.to have_attributes(address: 'test address#2 data')
+                chef_run.find_resource(:gcompute_subnetwork, 'title2')
               end
 
               it do
@@ -291,7 +405,30 @@ context 'gcompute_address' do
                   .to have_attributes(description: 'test description#2 data')
               end
 
-              it { is_expected.to have_attributes(a_label: 'test name#2 data') }
+              it do
+                is_expected
+                  .to have_attributes(
+                    gateway_address: 'test gateway_address#2 data'
+                  )
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(
+                    ip_cidr_range: 'test ip_cidr_range#2 data'
+                  )
+              end
+
+              it { is_expected.to have_attributes(s_label: 'test name#2 data') }
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'network' do
+              #   # Add test code here
+              # end
+
+              it do
+                is_expected.to have_attributes(private_ip_google_access: true)
+              end
 
               # TODO(alexstephen): Implement resourceref test.
               # it 'region' do
@@ -351,28 +488,43 @@ context 'gcompute_address' do
           before do
             expect_network_get_failed 1,
                                       name: 'title0',
+                                      network: 'selflink(resource(network,0))',
                                       region: 'test name#0 data'
             expect_network_create \
               1,
               {
-                'kind' => 'compute#address',
-                'address' => 'test address#0 data',
+                'kind' => 'compute#subnetwork',
                 'description' => 'test description#0 data',
-                'name' => 'title0'
+                'gatewayAddress' => 'test gateway_address#0 data',
+                'ipCidrRange' => 'test ip_cidr_range#0 data',
+                'name' => 'title0',
+                'network' => 'selflink(resource(network,0))',
+                'privateIpGoogleAccess' => true,
+                'region' => 'test name#0 data'
               },
               name: 'title0',
+              network: 'selflink(resource(network,0))',
               region: 'test name#0 data'
             expect_network_get_async 1,
                                      name: 'title0',
+                                     network: 'selflink(resource(network,0))',
                                      region: 'test name#0 data'
-            expect_network_get_success_region 1, region: 'test name#0 data'
+            expect_network_get_success_network \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
+            expect_network_get_success_region \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_address gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_network
+                            gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -380,8 +532,8 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_address~create~noexist~change',
-                      'title_eq_name'].join('~')
+            recipe = ['gcompute::tests', 'gcompute_subnetwork',
+                      'create', 'noexist', 'change', 'title_eq_name'].join('~')
             runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -390,21 +542,38 @@ context 'gcompute_address' do
           end
 
           subject do
-            chef_run.find_resource(:gcompute_address, 'title0')
+            chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
 
           it 'should run test correctly' do
-            expect(chef_run).to create(:gcompute_address,
+            expect(chef_run).to create(:gcompute_subnetwork,
                                        'title0')
           end
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
 
-          it { is_expected.to have_attributes(a_label: 'title0') }
+          it do
+            is_expected
+              .to have_attributes(
+                gateway_address: 'test gateway_address#0 data'
+              )
+          end
+
+          it do
+            is_expected
+              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
+          end
+
+          it { is_expected.to have_attributes(s_label: 'title0') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'network' do
+          #   # Add test code here
+          # end
+
+          it { is_expected.to have_attributes(private_ip_google_access: true) }
 
           # TODO(alexstephen): Implement resourceref test.
           # it 'region' do
@@ -425,25 +594,42 @@ context 'gcompute_address' do
         # Ensure present: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1, region: 'test name#0 data'
+            expect_network_get_failed 1,
+                                      network: 'selflink(resource(network,0))',
+                                      region: 'test name#0 data'
             expect_network_create \
               1,
               {
-                'kind' => 'compute#address',
-                'address' => 'test address#0 data',
+                'kind' => 'compute#subnetwork',
                 'description' => 'test description#0 data',
-                'name' => 'test name#0 data'
+                'gatewayAddress' => 'test gateway_address#0 data',
+                'ipCidrRange' => 'test ip_cidr_range#0 data',
+                'name' => 'test name#0 data',
+                'network' => 'selflink(resource(network,0))',
+                'privateIpGoogleAccess' => true,
+                'region' => 'test name#0 data'
               },
+              network: 'selflink(resource(network,0))',
               region: 'test name#0 data'
-            expect_network_get_async 1, region: 'test name#0 data'
-            expect_network_get_success_region 1, region: 'test name#0 data'
+            expect_network_get_async 1,
+                                     network: 'selflink(resource(network,0))',
+                                     region: 'test name#0 data'
+            expect_network_get_success_network \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
+            expect_network_get_success_region \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_address gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_network
+                            gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -451,8 +637,8 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_address~create~noexist~change',
-                      'title_and_name'].join('~')
+            recipe = ['gcompute::tests', 'gcompute_subnetwork',
+                      'create', 'noexist', 'change', 'title_and_name'].join('~')
             runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -461,21 +647,38 @@ context 'gcompute_address' do
           end
 
           subject do
-            chef_run.find_resource(:gcompute_address, 'title0')
+            chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
 
           it 'should run test correctly' do
-            expect(chef_run).to create(:gcompute_address,
+            expect(chef_run).to create(:gcompute_subnetwork,
                                        'title0')
           end
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
 
-          it { is_expected.to have_attributes(a_label: 'test name#0 data') }
+          it do
+            is_expected
+              .to have_attributes(
+                gateway_address: 'test gateway_address#0 data'
+              )
+          end
+
+          it do
+            is_expected
+              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
+          end
+
+          it { is_expected.to have_attributes(s_label: 'test name#0 data') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'network' do
+          #   # Add test code here
+          # end
+
+          it { is_expected.to have_attributes(private_ip_google_access: true) }
 
           # TODO(alexstephen): Implement resourceref test.
           # it 'region' do
@@ -502,8 +705,16 @@ context 'gcompute_address' do
           before do
             expect_network_get_failed 1,
                                       name: 'title0',
+                                      network: 'selflink(resource(network,0))',
                                       region: 'test name#0 data'
-            expect_network_get_success_region 1, region: 'test name#0 data'
+            expect_network_get_success_network \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
+            expect_network_get_success_region \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
           end
 
           let(:runner) do
@@ -512,7 +723,8 @@ context 'gcompute_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_address gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_network
+                            gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -520,8 +732,8 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_address~delete~noexist~change',
-                      'title_eq_name'].join('~')
+            recipe = ['gcompute::tests', 'gcompute_subnetwork',
+                      'delete', 'noexist', 'change', 'title_eq_name'].join('~')
             runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -530,17 +742,34 @@ context 'gcompute_address' do
           end
 
           subject do
-            chef_run.find_resource(:gcompute_address, 'title0')
+            chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
-
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
 
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
 
-          it { is_expected.to have_attributes(a_label: 'title0') }
+          it do
+            is_expected
+              .to have_attributes(
+                gateway_address: 'test gateway_address#0 data'
+              )
+          end
+
+          it do
+            is_expected
+              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
+          end
+
+          it { is_expected.to have_attributes(s_label: 'title0') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'network' do
+          #   # Add test code here
+          # end
+
+          it { is_expected.to have_attributes(private_ip_google_access: true) }
 
           # TODO(alexstephen): Implement resourceref test.
           # it 'region' do
@@ -561,8 +790,17 @@ context 'gcompute_address' do
         # Ensure absent: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1, region: 'test name#0 data'
-            expect_network_get_success_region 1, region: 'test name#0 data'
+            expect_network_get_failed 1,
+                                      network: 'selflink(resource(network,0))',
+                                      region: 'test name#0 data'
+            expect_network_get_success_network \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
+            expect_network_get_success_region \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
           end
 
           let(:runner) do
@@ -571,7 +809,8 @@ context 'gcompute_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_address gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_network
+                            gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -579,8 +818,8 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_address~delete~noexist~change',
-                      'title_and_name'].join('~')
+            recipe = ['gcompute::tests', 'gcompute_subnetwork',
+                      'delete', 'noexist', 'change', 'title_and_name'].join('~')
             runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
                                                         runner.run_context)
@@ -589,17 +828,34 @@ context 'gcompute_address' do
           end
 
           subject do
-            chef_run.find_resource(:gcompute_address, 'title0')
+            chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
-
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
 
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
 
-          it { is_expected.to have_attributes(a_label: 'test name#0 data') }
+          it do
+            is_expected
+              .to have_attributes(
+                gateway_address: 'test gateway_address#0 data'
+              )
+          end
+
+          it do
+            is_expected
+              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
+          end
+
+          it { is_expected.to have_attributes(s_label: 'test name#0 data') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'network' do
+          #   # Add test code here
+          # end
+
+          it { is_expected.to have_attributes(private_ip_google_access: true) }
 
           # TODO(alexstephen): Implement resourceref test.
           # it 'region' do
@@ -624,19 +880,32 @@ context 'gcompute_address' do
           before do
             expect_network_get_success 1,
                                        name: 'title0',
+                                       network: 'selflink(resource(network,0))',
                                        region: 'test name#0 data'
-            expect_network_delete 1, 'title0', region: 'test name#0 data'
+            expect_network_delete 1,
+                                  'title0',
+                                  network: 'selflink(resource(network,0))',
+                                  region: 'test name#0 data'
             expect_network_get_async 1,
                                      name: 'title0',
+                                     network: 'selflink(resource(network,0))',
                                      region: 'test name#0 data'
-            expect_network_get_success_region 1, region: 'test name#0 data'
+            expect_network_get_success_network \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
+            expect_network_get_success_region \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_address gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_network
+                            gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -644,7 +913,7 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_address~delete~exist~change',
+            recipe = ['gcompute::tests~gcompute_subnetwork~delete~exist~change',
                       'title_eq_name'].join('~')
             runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
@@ -654,21 +923,38 @@ context 'gcompute_address' do
           end
 
           subject do
-            chef_run.find_resource(:gcompute_address, 'title0')
+            chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
 
           it 'should run test correctly' do
-            expect(chef_run).to delete(:gcompute_address,
+            expect(chef_run).to delete(:gcompute_subnetwork,
                                        'title0')
           end
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
 
-          it { is_expected.to have_attributes(a_label: 'title0') }
+          it do
+            is_expected
+              .to have_attributes(
+                gateway_address: 'test gateway_address#0 data'
+              )
+          end
+
+          it do
+            is_expected
+              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
+          end
+
+          it { is_expected.to have_attributes(s_label: 'title0') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'network' do
+          #   # Add test code here
+          # end
+
+          it { is_expected.to have_attributes(private_ip_google_access: true) }
 
           # TODO(alexstephen): Implement resourceref test.
           # it 'region' do
@@ -688,17 +974,32 @@ context 'gcompute_address' do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_success 1, region: 'test name#0 data'
-            expect_network_delete 1, nil, region: 'test name#0 data'
-            expect_network_get_async 1, region: 'test name#0 data'
-            expect_network_get_success_region 1, region: 'test name#0 data'
+            expect_network_get_success 1,
+                                       network: 'selflink(resource(network,0))',
+                                       region: 'test name#0 data'
+            expect_network_delete 1,
+                                  nil,
+                                  network: 'selflink(resource(network,0))',
+                                  region: 'test name#0 data'
+            expect_network_get_async 1,
+                                     network: 'selflink(resource(network,0))',
+                                     region: 'test name#0 data'
+            expect_network_get_success_network \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
+            expect_network_get_success_region \
+              1,
+              network: 'selflink(resource(network,0))',
+              region: 'test name#0 data'
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_address gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_network
+                            gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -706,7 +1007,7 @@ context 'gcompute_address' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_address~delete~exist~change',
+            recipe = ['gcompute::tests~gcompute_subnetwork~delete~exist~change',
                       'title_and_name'].join('~')
             runner.converge(recipe) do
               cred = Google::CredentialResourceMock.new('mycred',
@@ -716,21 +1017,38 @@ context 'gcompute_address' do
           end
 
           subject do
-            chef_run.find_resource(:gcompute_address, 'title0')
+            chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
 
           it 'should run test correctly' do
-            expect(chef_run).to delete(:gcompute_address,
+            expect(chef_run).to delete(:gcompute_subnetwork,
                                        'title0')
           end
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
           end
 
-          it { is_expected.to have_attributes(a_label: 'test name#0 data') }
+          it do
+            is_expected
+              .to have_attributes(
+                gateway_address: 'test gateway_address#0 data'
+              )
+          end
+
+          it do
+            is_expected
+              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
+          end
+
+          it { is_expected.to have_attributes(s_label: 'test name#0 data') }
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'network' do
+          #   # Add test code here
+          # end
+
+          it { is_expected.to have_attributes(private_ip_google_access: true) }
 
           # TODO(alexstephen): Implement resourceref test.
           # it 'region' do
@@ -749,7 +1067,7 @@ context 'gcompute_address' do
   end
 
   def expand_variables(template, data, extra_data = {})
-    Google::GCOMPUTE::Address
+    Google::GCOMPUTE::Subnetwork
       .action_class.expand_variables(template, data, extra_data)
   end
 
@@ -776,7 +1094,7 @@ context 'gcompute_address' do
   end
 
   def expect_network_get_async(id, data = {})
-    body = { kind: 'compute#address' }.to_json
+    body = { kind: 'compute#subnetwork' }.to_json
 
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
@@ -847,12 +1165,48 @@ context 'gcompute_address' do
 
   def load_network_result(file)
     results = File.join(File.dirname(__FILE__), 'data', 'network',
-                        'gcompute_address', file)
+                        'gcompute_subnetwork', file)
     debug("Loading result file: #{results}")
     raise "Network result data file #{results}" unless File.exist?(results)
     data = YAML.safe_load(File.read(results))
     raise "Invalid network results #{results}" unless data.class <= Hash
     data
+  end
+
+  def expect_network_get_success_network(id, data = {})
+    id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
+    body = load_network_result_network("success#{id}~" \
+                                                           "#{id_data}.yaml")
+           .to_json
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    expect(Google::Compute::Network::Get).to receive(:new)
+      .with(self_link_network(uri_data(id).merge(data)),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug ">> GET #{args}"
+      request
+    end
+  end
+
+  def load_network_result_network(file)
+    results = File.join(File.dirname(__FILE__), 'data', 'network',
+                        'gcompute_network', file)
+    raise "Network result data file #{results}" unless File.exist?(results)
+    data = YAML.safe_load(File.read(results))
+    raise "Invalid network results #{results}" unless data.class <= Hash
+    data
+  end
+
+  def self_link_network(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables_network(
+        'projects/{{project}}/global/networks/{{name}}',
+        data
+      )
+    )
   end
 
   def expect_network_get_success_region(id, data = {})
@@ -895,6 +1249,11 @@ context 'gcompute_address' do
     puts(message) if ENV['RSPEC_DEBUG']
   end
 
+  def expand_variables_network(template, data, ext_dat = {})
+    Google::GCOMPUTE::Network
+      .action_class.expand_variables(template, data, ext_dat)
+  end
+
   def expand_variables_region(template, data, ext_dat = {})
     Google::GCOMPUTE::Region
       .action_class.expand_variables(template, data, ext_dat)
@@ -904,7 +1263,7 @@ context 'gcompute_address' do
     URI.join(
       'https://www.googleapis.com/compute/v1/',
       expand_variables(
-        'projects/{{project}}/regions/{{region}}/addresses',
+        'projects/{{project}}/regions/{{region}}/subnetworks',
         data
       )
     )
@@ -914,7 +1273,7 @@ context 'gcompute_address' do
     URI.join(
       'https://www.googleapis.com/compute/v1/',
       expand_variables(
-        'projects/{{project}}/regions/{{region}}/addresses/{{name}}',
+        'projects/{{project}}/regions/{{region}}/subnetworks/{{name}}',
         data
       )
     )
@@ -923,9 +1282,9 @@ context 'gcompute_address' do
   # Creates variable test data to comply with self_link URI parameters
   def uri_data(id)
     {
-      project: A_PROJECT_DATA[(id - 1) % A_PROJECT_DATA.size],
-      region: A_REGION_DATA[(id - 1) % A_REGION_DATA.size],
-      name: A_NAME_DATA[(id - 1) % A_NAME_DATA.size]
+      project: S_PROJECT_DATA[(id - 1) % S_PROJECT_DATA.size],
+      region: S_REGION_DATA[(id - 1) % S_REGION_DATA.size],
+      name: S_NAME_DATA[(id - 1) % S_NAME_DATA.size]
     }
   end
 end

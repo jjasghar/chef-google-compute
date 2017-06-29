@@ -25,18 +25,40 @@
 #
 # ----------------------------------------------------------------------------
 
----
-kind: compute#network
-id: 4299001743
-creationTimestamp: '2120-10-14T00:16:21+00:00'
-name: 'test name#1 data'
-description: 'test description#1 data'
-IPv4Range: 'test ipv4_range#1 data'
-gatewayIPv4: 'test gateway_ipv4#1 data'
-selfLink: selflink(resource(network,1))
-autoCreateSubnetworks: false
-subnetworks:
-  - ww
-  - xx
-  - yy
-  - zz
+gauth_credential 'mycred' do
+  action :serviceaccount
+  path '/home/nelsonjr/my_account.json'
+  scopes [
+    'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+  ]
+end
+
+gcompute_network 'resource(network,0)' do
+  action :create
+  project 'test project#0 data'
+  credential 'mycred'
+  description 'test description#0 data'
+  gateway_ipv4 'test gateway_ipv4#0 data'
+  ipv4_range 'test ipv4_range#0 data'
+  n_label 'test name#0 data'
+  auto_create_subnetworks true
+end
+gcompute_region 'resource(region,0)' do
+  action :create
+  project 'test project#0 data'
+  credential 'mycred'
+  r_label 'test name#0 data'
+end
+
+gcompute_subnetwork 'title0' do
+  action :create
+  project 'test project#0 data'
+  credential 'mycred'
+  description 'test description#0 data'
+  gateway_address 'test gateway_address#0 data'
+  ip_cidr_range 'test ip_cidr_range#0 data'
+  s_label 'test name#0 data'
+  network 'resource(network,0)'
+  private_ip_google_access true
+  region 'resource(region,0)'
+end
