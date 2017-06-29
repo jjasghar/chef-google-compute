@@ -114,6 +114,7 @@ chef-codegen:
   * recipes/examples~delete_http_health_check.rb
   * recipes/examples~delete_https_health_check.rb
   * recipes/examples~delete_network.rb
+  * recipes/examples~delete_route.rb
   * recipes/examples~delete_ssl_certificate.rb
   * recipes/examples~delete_subnetwork.rb
   * recipes/examples~disk_type.rb
@@ -127,6 +128,7 @@ chef-codegen:
   * recipes/examples~network~custom.rb
   * recipes/examples~network~legacy.rb
   * recipes/examples~region.rb
+  * recipes/examples~route.rb
   * recipes/examples~ssl_certificate.rb
   * recipes/examples~subnetwork.rb
   * recipes/tests~gcompute_address~create~exist~change~title_and_name.rb
@@ -209,6 +211,16 @@ chef-codegen:
   * recipes/tests~gcompute_region~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_region~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_region~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_route~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_route~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_route~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_route~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_route~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_route~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_route~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_route~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_route~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_route~delete~noexist~change~title_eq_name.rb
   * recipes/tests~gcompute_ssl_certificate~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_ssl_certificate~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_ssl_certificate~create~exist~nochange~title_and_name.rb
@@ -237,6 +249,7 @@ chef-codegen:
   * resources/https_health_check.rb
   * resources/network.rb
   * resources/region.rb
+  * resources/route.rb
   * resources/ssl_certificate.rb
   * resources/subnetwork.rb
   * spec/address_spec.rb
@@ -309,6 +322,12 @@ chef-codegen:
   * spec/data/network/gcompute_region/success2~title.yaml
   * spec/data/network/gcompute_region/success3~name.yaml
   * spec/data/network/gcompute_region/success3~title.yaml
+  * spec/data/network/gcompute_route/success1~name.yaml
+  * spec/data/network/gcompute_route/success1~title.yaml
+  * spec/data/network/gcompute_route/success2~name.yaml
+  * spec/data/network/gcompute_route/success2~title.yaml
+  * spec/data/network/gcompute_route/success3~name.yaml
+  * spec/data/network/gcompute_route/success3~title.yaml
   * spec/data/network/gcompute_ssl_certificate/success1~name.yaml
   * spec/data/network/gcompute_ssl_certificate/success1~title.yaml
   * spec/data/network/gcompute_ssl_certificate/success2~name.yaml
@@ -335,6 +354,7 @@ chef-codegen:
   * spec/network_post_spec.rb
   * spec/network_spec.rb
   * spec/region_spec.rb
+  * spec/route_spec.rb
   * spec/spec_helper.rb
   * spec/ssl_certificate_spec.rb
   * spec/subnetwork_spec.rb

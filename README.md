@@ -142,6 +142,29 @@ For complete details about the credential cookbook please visit ________
     Represents a Region resource. A region is a specific geographical
     location where you can run your resources. Each region has one or more
     zones
+* [`gcompute_route`](#gcompute_route) -
+    Represents a Route resource.
+    A route is a rule that specifies how certain packets should be handled
+    by
+    the virtual network. Routes are associated with virtual machines by
+    tag,
+    and the set of routes for a particular virtual machine is called its
+    routing table. For each packet leaving a virtual machine, the system
+    searches that virtual machine's routing table for a single best
+    matching
+    route.
+    Routes match packets by destination IP address, preferring smaller or
+    more
+    specific ranges over larger ones. If there is a tie, the system selects
+    the route with the smallest priority value. If there is still a tie, it
+    uses the layer three and four packet headers to select just one of the
+    remaining matching routes. The packet is then forwarded as specified by
+    the next_hop field of the winning route -- either to another virtual
+    machine destination, a virtual machine gateway or a Compute
+    Engine-operated gateway. Packets that do not match any route in the
+    sending virtual machine's routing table will be dropped.
+    A Routes resources must have exactly one specification of either
+    nextHopGateway, nextHopInstance, nextHopIp, or nextHopVpnTunnel.
 * [`gcompute_ssl_certificate`](#gcompute_ssl_certificate) -
     An SslCertificate resource. This resource provides a mechanism to
     upload
@@ -1030,6 +1053,106 @@ end
   Name of the resource.
 * `zones` -
   List of zones within the region
+
+#### Label
+Set the `r_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_route
+Represents a Route resource.
+
+A route is a rule that specifies how certain packets should be handled by
+the virtual network. Routes are associated with virtual machines by tag,
+and the set of routes for a particular virtual machine is called its
+routing table. For each packet leaving a virtual machine, the system
+searches that virtual machine's routing table for a single best matching
+route.
+
+Routes match packets by destination IP address, preferring smaller or more
+specific ranges over larger ones. If there is a tie, the system selects
+the route with the smallest priority value. If there is still a tie, it
+uses the layer three and four packet headers to select just one of the
+remaining matching routes. The packet is then forwarded as specified by
+the next_hop field of the winning route -- either to another virtual
+machine destination, a virtual machine gateway or a Compute
+Engine-operated gateway. Packets that do not match any route in the
+sending virtual machine's routing table will be dropped.
+
+A Routes resources must have exactly one specification of either
+nextHopGateway, nextHopInstance, nextHopIp, or nextHopVpnTunnel.
+
+
+#### Example
+
+```ruby
+# Subnetwork requires a network and a region, so define them in your recipe:
+#   - gcompute_network 'my-network' do ... end
+#   - gcompute_region 'some-region' do ... end
+gcompute_route 'corp-route' do
+  action :create
+  dest_range '192.168.6.0/24'
+  next_hop_gateway 'global/gateways/default-internet-gateway'
+  tags %w[backends databases] # %w[] best for single words. use ['.'] w/ spaces
+  network 'my-network'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_route` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_route` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `dest_range` -
+  The destination range of outgoing packets that this route applies to.
+  Only IPv4 is supported.
+* `name` -
+  Name of the resource. Provided by the client when the resource is
+  created. The name must be 1-63 characters long, and comply with
+  RFC1035.  Specifically, the name must be 1-63 characters long and
+  match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means
+  the first character must be a lowercase letter, and all following
+  characters must be a dash, lowercase letter, or digit, except the
+  last character, which cannot be a dash.
+* `network` -
+  A reference to Network resource
+* `priority` -
+  The priority of this route. Priority is used to break ties in cases
+  where there is more than one matching route of equal prefix length.
+  In the case of two routes with equal prefix length, the one with the
+  lowest-numbered priority value wins.
+  Default value is 1000. Valid range is 0 through 65535.
+* `tags` -
+  A list of instance tags to which this route applies.
+* `next_hop_gateway` -
+  URL to a gateway that should handle matching packets.
+  Currently, you can only specify the internet gateway, using a full or
+  partial valid URL:
+  * https://www.googleapis.com/compute/v1/projects/project/
+  global/gateways/default-internet-gateway
+  * projects/project/global/gateways/default-internet-gateway
+  * global/gateways/default-internet-gateway
+* `next_hop_instance` -
+  URL to an instance that should handle matching packets.
+  You can specify this as a full or partial URL. For example:
+  * https://www.googleapis.com/compute/v1/projects/project/zones/zone/
+  instances/instance
+  * projects/project/zones/zone/instances/instance
+  * zones/zone/instances/instance
+* `next_hop_ip` -
+  Network IP address of an instance that should handle matching packets.
+* `next_hop_vpn_tunnel` -
+  URL to a VpnTunnel that should handle matching packets.
 
 #### Label
 Set the `r_label` property when attempting to set primary key
