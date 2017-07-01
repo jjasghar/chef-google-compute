@@ -119,6 +119,11 @@ For complete details about the credential cookbook please visit ________
     An HealthCheck resource. This resource defines a template for how
     individual virtual machines should be checked for health, via one of
     the supported protocols.
+* [`gcompute_license`](#gcompute_license) -
+    A License resource represents a software license. Licenses are used to
+    track software usage in images, persistent disks, snapshots, and
+    virtual
+    machine instances.
 * [`gcompute_network`](#gcompute_network) -
     Represents a Network resource.
     Your Cloud Platform Console project can contain multiple networks, and
@@ -911,6 +916,46 @@ An HealthCheck resource. This resource defines a template for how individual vir
 
 #### Label
 Set the `hc_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_license
+A License resource represents a software license. Licenses are used to
+track software usage in images, persistent disks, snapshots, and virtual
+machine instances.
+
+
+#### Example
+
+```ruby
+gcompute_license 'test-license' do
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_license` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_license` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `name` -
+  Name of the resource. The name is 1-63 characters long
+  and complies with RFC1035.
+* `charges_use_fee` -
+  If true, the customer will be charged license fee for
+  running software that contains this license on an instance.
+
+#### Label
+Set the `l_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
 

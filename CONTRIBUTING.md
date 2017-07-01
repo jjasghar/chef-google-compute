@@ -123,6 +123,7 @@ chef-codegen:
   * recipes/examples~health_check.rb
   * recipes/examples~http_health_check.rb
   * recipes/examples~https_health_check.rb
+  * recipes/examples~license.rb
   * recipes/examples~network~auto.rb
   * recipes/examples~network~convert_to_custom.rb
   * recipes/examples~network~custom.rb
@@ -191,6 +192,16 @@ chef-codegen:
   * recipes/tests~gcompute_https_health_check~delete~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_https_health_check~delete~noexist~change~title_and_name.rb
   * recipes/tests~gcompute_https_health_check~delete~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_license~create~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_license~create~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_license~create~exist~nochange~title_and_name.rb
+  * recipes/tests~gcompute_license~create~exist~nochange~title_eq_name.rb
+  * recipes/tests~gcompute_license~create~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_license~create~noexist~change~title_eq_name.rb
+  * recipes/tests~gcompute_license~delete~exist~change~title_and_name.rb
+  * recipes/tests~gcompute_license~delete~exist~change~title_eq_name.rb
+  * recipes/tests~gcompute_license~delete~noexist~change~title_and_name.rb
+  * recipes/tests~gcompute_license~delete~noexist~change~title_eq_name.rb
   * recipes/tests~gcompute_network~create~exist~change~title_and_name.rb
   * recipes/tests~gcompute_network~create~exist~change~title_eq_name.rb
   * recipes/tests~gcompute_network~create~exist~nochange~title_and_name.rb
@@ -247,6 +258,7 @@ chef-codegen:
   * resources/global_address.rb
   * resources/http_health_check.rb
   * resources/https_health_check.rb
+  * resources/license.rb
   * resources/network.rb
   * resources/region.rb
   * resources/route.rb
@@ -347,6 +359,7 @@ chef-codegen:
   * spec/global_address_spec.rb
   * spec/http_health_check_spec.rb
   * spec/https_health_check_spec.rb
+  * spec/license_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb
   * spec/network_delete_spec.rb
