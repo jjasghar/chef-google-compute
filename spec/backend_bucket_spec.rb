@@ -742,10 +742,11 @@ context 'gcompute_backend_bucket' do
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
 
+    debug_network "!! GET #{self_link(uri_data(id).merge(data))}"
     expect(Google::Compute::Network::Get).to receive(:new)
       .with(self_link(uri_data(id).merge(data)),
             instance_of(Google::FakeAuthorization)) do |args|
-      debug ">> GET #{args}"
+      debug_network ">> GET #{args}"
       request
     end
   end
@@ -763,10 +764,11 @@ context 'gcompute_backend_bucket' do
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
 
+    debug_network "!! #{self_link(uri_data(id).merge(data))}"
     expect(Google::Compute::Network::Get).to receive(:new)
       .with(self_link(uri_data(id).merge(data)),
             instance_of(Google::FakeAuthorization)) do |args|
-      debug ">> GET <async> #{args}"
+      debug_network ">> GET <async> #{args}"
       request
     end
   end
@@ -775,10 +777,11 @@ context 'gcompute_backend_bucket' do
     request = double('request')
     allow(request).to receive(:send).and_return(http_failed_object_missing)
 
+    debug_network "!! #{self_link(uri_data(id).merge(data))}"
     expect(Google::Compute::Network::Get).to receive(:new)
       .with(self_link(uri_data(id).merge(data)),
             instance_of(Google::FakeAuthorization)) do |args|
-      debug ">> GET [failed] #{args}"
+      debug_network ">> GET [failed] #{args}"
       request
     end
   end
@@ -788,18 +791,18 @@ context 'gcompute_backend_bucket' do
   end
 
   def expect_network_create(id, expected_body, data = {})
+    merged_uri = uri_data(id).merge(data)
     body = { kind: 'compute#operation',
-             status: 'DONE',
-             targetLink: self_link(uri_data(id).merge(data)) }.to_json
+             status: 'DONE', targetLink: self_link(merged_uri) }.to_json
 
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
 
+    debug_network "!! POST #{collection(merged_uri)}"
     expect(Google::Compute::Network::Post).to receive(:new)
-      .with(collection(uri_data(id).merge(data)),
-            instance_of(Google::FakeAuthorization),
+      .with(collection(merged_uri), instance_of(Google::FakeAuthorization),
             'application/json', expected_body.to_json) do |args|
-      debug ">> POST #{args} = body(#{body})"
+      debug_network ">> POST #{args} = body(#{body})"
       request
     end
   end
@@ -814,10 +817,11 @@ context 'gcompute_backend_bucket' do
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
 
+    debug_network "!! DELETE #{self_link(delete_data)}"
     expect(Google::Compute::Network::Delete).to receive(:new)
       .with(self_link(delete_data),
             instance_of(Google::FakeAuthorization)) do |args|
-      debug ">> DELETE #{args}"
+      debug_network ">> DELETE #{args}"
       request
     end
   end
@@ -834,6 +838,11 @@ context 'gcompute_backend_bucket' do
 
   def debug(message)
     puts(message) if ENV['RSPEC_DEBUG']
+  end
+
+  def debug_network(message)
+    puts("Network #{message}") \
+      if ENV['RSPEC_DEBUG'] || ENV['RSPEC_HTTP_VERBOSE']
   end
 
   def collection(data)
