@@ -26,6 +26,7 @@
 # ----------------------------------------------------------------------------
 
 require 'spec_helper'
+
 # TODO(alexstephen): Reformat tests to use nested describe blocks
 # TODO(alexstephen): Add title == name tests
 # Test Matrix:
@@ -48,30 +49,6 @@ require 'spec_helper'
 # TODO(alexstephen): Add tests for manage
 # TODO(alexstephen): Add tests for modify
 context 'gcompute_address' do
-  A_PROJECT_DATA = %w[
-    test\ project#0\ data
-    test\ project#1\ data
-    test\ project#2\ data
-    test\ project#3\ data
-    test\ project#4\ data
-  ].freeze
-
-  A_REGION_DATA = %w[
-    test\ name#0\ data
-    test\ name#1\ data
-    test\ name#2\ data
-    test\ name#3\ data
-    test\ name#4\ data
-  ].freeze
-
-  A_NAME_DATA = %w[
-    test\ name#0\ data
-    test\ name#1\ data
-    test\ name#2\ data
-    test\ name#3\ data
-    test\ name#4\ data
-  ].freeze
-
   context 'ensure == present' do
     context 'resource exists' do
       # Ensure present: resource exists, no change
@@ -881,8 +858,10 @@ context 'gcompute_address' do
   # Only used for gcompute_region objects
   def uri_data_region(id)
     {
-      project: R_PROJECT_DATA[(id - 1) % R_PROJECT_DATA.size],
-      name: R_NAME_DATA[(id - 1) % R_NAME_DATA.size]
+      project: GoogleTests::Constants::R_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::R_PROJECT_DATA.size],
+      name: GoogleTests::Constants::R_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::R_NAME_DATA.size]
     }
   end
 
@@ -933,9 +912,12 @@ context 'gcompute_address' do
   # Creates variable test data to comply with self_link URI parameters
   def uri_data(id)
     {
-      project: A_PROJECT_DATA[(id - 1) % A_PROJECT_DATA.size],
-      region: A_REGION_DATA[(id - 1) % A_REGION_DATA.size],
-      name: A_NAME_DATA[(id - 1) % A_NAME_DATA.size]
+      project: GoogleTests::Constants::A_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::A_PROJECT_DATA.size],
+      region: GoogleTests::Constants::A_REGION_DATA[(id - 1) \
+        % GoogleTests::Constants::A_REGION_DATA.size],
+      name: GoogleTests::Constants::A_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::A_NAME_DATA.size]
     }
   end
 end

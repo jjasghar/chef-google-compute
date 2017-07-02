@@ -26,6 +26,7 @@
 # ----------------------------------------------------------------------------
 
 require 'spec_helper'
+
 # TODO(alexstephen): Reformat tests to use nested describe blocks
 # TODO(alexstephen): Add title == name tests
 # Test Matrix:
@@ -48,22 +49,6 @@ require 'spec_helper'
 # TODO(alexstephen): Add tests for manage
 # TODO(alexstephen): Add tests for modify
 context 'gcompute_global_address' do
-  GA_PROJECT_DATA = %w[
-    test\ project#0\ data
-    test\ project#1\ data
-    test\ project#2\ data
-    test\ project#3\ data
-    test\ project#4\ data
-  ].freeze
-
-  GA_NAME_DATA = %w[
-    test\ name#0\ data
-    test\ name#1\ data
-    test\ name#2\ data
-    test\ name#3\ data
-    test\ name#4\ data
-  ].freeze
-
   context 'ensure == present' do
     context 'resource exists' do
       # Ensure present: resource exists, no change
@@ -754,8 +739,10 @@ context 'gcompute_global_address' do
   # Creates variable test data to comply with self_link URI parameters
   def uri_data(id)
     {
-      project: GA_PROJECT_DATA[(id - 1) % GA_PROJECT_DATA.size],
-      name: GA_NAME_DATA[(id - 1) % GA_NAME_DATA.size]
+      project: GoogleTests::Constants::GA_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::GA_PROJECT_DATA.size],
+      name: GoogleTests::Constants::GA_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::GA_NAME_DATA.size]
     }
   end
 end

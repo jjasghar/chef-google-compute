@@ -26,6 +26,7 @@
 # ----------------------------------------------------------------------------
 
 require 'spec_helper'
+
 # TODO(alexstephen): Reformat tests to use nested describe blocks
 # TODO(alexstephen): Add title == name tests
 # Test Matrix:
@@ -48,22 +49,6 @@ require 'spec_helper'
 # TODO(alexstephen): Add tests for manage
 # TODO(alexstephen): Add tests for modify
 context 'gcompute_route' do
-  R_PROJECT_DATA = %w[
-    test\ project#0\ data
-    test\ project#1\ data
-    test\ project#2\ data
-    test\ project#3\ data
-    test\ project#4\ data
-  ].freeze
-
-  R_NAME_DATA = %w[
-    test\ name#0\ data
-    test\ name#1\ data
-    test\ name#2\ data
-    test\ name#3\ data
-    test\ name#4\ data
-  ].freeze
-
   context 'ensure == present' do
     context 'resource exists' do
       # Ensure present: resource exists, no change
@@ -1206,8 +1191,10 @@ context 'gcompute_route' do
   # Only used for gcompute_network objects
   def uri_data_network(id)
     {
-      project: N_PROJECT_DATA[(id - 1) % N_PROJECT_DATA.size],
-      name: N_NAME_DATA[(id - 1) % N_NAME_DATA.size]
+      project: GoogleTests::Constants::N_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::N_PROJECT_DATA.size],
+      name: GoogleTests::Constants::N_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::N_NAME_DATA.size]
     }
   end
 
@@ -1258,8 +1245,10 @@ context 'gcompute_route' do
   # Creates variable test data to comply with self_link URI parameters
   def uri_data(id)
     {
-      project: R_PROJECT_DATA[(id - 1) % R_PROJECT_DATA.size],
-      name: R_NAME_DATA[(id - 1) % R_NAME_DATA.size]
+      project: GoogleTests::Constants::R_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::R_PROJECT_DATA.size],
+      name: GoogleTests::Constants::R_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::R_NAME_DATA.size]
     }
   end
 end

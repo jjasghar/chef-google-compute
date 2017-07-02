@@ -55,6 +55,7 @@ files << 'spec/bundle.rb'
 files << 'spec/copyright.rb'
 files << 'spec/fake_auth.rb'
 files << 'spec/fake_cred.rb'
+files << 'spec/test_constants.rb'
 files << File.join('libraries', '**', '*.rb')
 files << File.join('resources', '**', '*.rb')
 

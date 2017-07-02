@@ -379,6 +379,7 @@ chef-codegen:
   * spec/spec_helper.rb
   * spec/ssl_certificate_spec.rb
   * spec/subnetwork_spec.rb
+  * spec/test_constants.rb
 
 The list below contains all the files that were automatically sourced from a
 central location:
