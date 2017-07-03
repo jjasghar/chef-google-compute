@@ -127,6 +127,13 @@ For complete details about the credential cookbook please visit ________
 * [`gcompute_instance`](#gcompute_instance) -
     An instance is a virtual machine (VM) hosted on Google's
     infrastructure.
+* [`gcompute_instance_group`](#gcompute_instance_group) -
+    Represents an Instance Group resource. Instance groups are self-managed
+    and can contain identical or different instances. Instance groups do
+    not
+    use an instance template. Unlike managed instance groups, you must
+    create
+    and add instances to an instance group manually.
 * [`gcompute_network`](#gcompute_network) -
     Represents a Network resource.
     Your Cloud Platform Console project can contain multiple networks, and
@@ -1077,6 +1084,78 @@ end
 
 #### Label
 Set the `i_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_instance_group
+Represents an Instance Group resource. Instance groups are self-managed
+and can contain identical or different instances. Instance groups do not
+use an instance template. Unlike managed instance groups, you must create
+and add instances to an instance group manually.
+
+
+#### Example
+
+```ruby
+# Instance group requires a network and a region, so define them in your recipe:
+#   - gcompute_network 'my-network' do ... end
+gcompute_instance_group 'my-puppet-masters' do
+  action :create
+  named_ports [
+    {
+      name: 'puppet',
+      port: 8140
+    }
+  ]
+  network 'my-network'
+  zone 'us-central1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_instance_group` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_instance_group` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `creation_timestamp` -
+  Creation timestamp in RFC3339 text format.
+* `description` -
+  An optional description of this resource. Provide this property when
+  you create the resource.
+* `id` -
+  A unique identifier for this instance group.
+* `name` -
+  The name of the instance group.
+  The name must be 1-63 characters long, and comply with RFC1035.
+* `named_ports` -
+  Assigns a name to a port number.
+  For example: {name: "http", port: 80}.
+  This allows the system to reference ports by the assigned name
+  instead of a port number. Named ports can also contain multiple
+  ports.
+  For example: [{name: "http", port: 80},{name: "http", port: 8080}]
+  Named ports apply to all instances in this instance group.
+* `network` -
+  A reference to Network resource
+* `region` -
+  A reference to Region resource
+* `subnetwork` -
+  A reference to Subnetwork resource
+* `zone` -
+  URL of the zone where the autoscaler resides.
+
+#### Label
+Set the `ig_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
 

@@ -90,6 +90,10 @@ module Google
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
 
+      # TODO(alexstephen): Check w/ Chef how to not expose this property yet
+      # allow the resource to store the @fetched API results for exports usage.
+      property :__fetched, Hash, desired_state: false, required: false
+
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#region')
@@ -103,7 +107,8 @@ module Google
               collection(@new_resource), fetch_auth(@new_resource),
               'application/json', resource_to_request
             )
-            return_if_object create_req.send, 'compute#region'
+            @new_resource.__fetched =
+              return_if_object create_req.send, 'compute#region'
           end
         else
           @current_resource = @new_resource.clone
@@ -139,6 +144,7 @@ module Google
             ::Google::Compute::Property::String.parse(fetch['name'])
           @current_resource.zones =
             ::Google::Compute::Property::StringArray.parse(fetch['zones'])
+          @new_resource.__fetched = fetch
 
           cannot_change_resource 'Region cannot be edited'
         end
@@ -161,7 +167,8 @@ module Google
 
       def exports
         {
-          name: r_label
+          name: r_label,
+          self_link: __fetched['selfLink']
         }
       end
 
