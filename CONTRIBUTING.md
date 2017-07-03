@@ -106,8 +106,10 @@ chef-codegen:
   * README.md
   * recipes/examples~address.rb
   * recipes/examples~backend_bucket.rb
+  * recipes/examples~backend_service.rb
   * recipes/examples~delete_address.rb
   * recipes/examples~delete_backend_bucket.rb
+  * recipes/examples~delete_backend_service.rb
   * recipes/examples~delete_firewall.rb
   * recipes/examples~delete_global_address.rb
   * recipes/examples~delete_health_check.rb
@@ -284,6 +286,12 @@ chef-codegen:
   * spec/data/network/gcompute_backend_bucket/success2~title.yaml
   * spec/data/network/gcompute_backend_bucket/success3~name.yaml
   * spec/data/network/gcompute_backend_bucket/success3~title.yaml
+  * spec/data/network/gcompute_backend_service/success1~name.yaml
+  * spec/data/network/gcompute_backend_service/success1~title.yaml
+  * spec/data/network/gcompute_backend_service/success2~name.yaml
+  * spec/data/network/gcompute_backend_service/success2~title.yaml
+  * spec/data/network/gcompute_backend_service/success3~name.yaml
+  * spec/data/network/gcompute_backend_service/success3~title.yaml
   * spec/data/network/gcompute_disk/success1~name.yaml
   * spec/data/network/gcompute_disk/success1~title.yaml
   * spec/data/network/gcompute_disk/success2~name.yaml
