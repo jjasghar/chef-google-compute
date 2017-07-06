@@ -54,116 +54,12 @@ context 'gcompute_disk_type' do
     context 'no changes == no action' do
       # Ensure ignore: resource exists, no change, no name, pass
       context 'title == name (pass)' do
-        before do
-          allow(Time).to receive(:now).and_return(
-            Time.new(2017, 1, 2, 3, 4, 5)
-          )
-          expect_network_get_success 1, name: 'title0'
-          expect_network_get_success 2, name: 'title1'
-          expect_network_get_success 3, name: 'title2'
-        end
-
-        let(:runner) do
-          cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                            File.join(File.dirname(__FILE__), 'cookbooks')]
-          ChefSpec::SoloRunner.new(
-            step_into: 'gcompute_disk_type',
-            cookbook_path: cookbook_paths,
-            platform: 'ubuntu',
-            version: '16.04'
-          )
-        end
-
-        let(:chef_run) do
-          recipe = ['gcompute::tests~gcompute_disk_type~create~exist~nochange',
-                    'title_eq_name'].join('~')
-          runner.converge(recipe) do
-            cred = Google::CredentialResourceMock.new('mycred',
-                                                      runner.run_context)
-            runner.resource_collection.insert(cred)
-          end
-        end
-
-        context 'gcompute_disk_type[title0]' do
-          subject do
-            chef_run.find_resource(:gcompute_disk_type, 'title0')
-          end
-
-          it { is_expected.to have_attributes(zone: 'test zone#0 data') }
-        end
-
-        context 'gcompute_disk_type[title1]' do
-          subject do
-            chef_run.find_resource(:gcompute_disk_type, 'title1')
-          end
-
-          it { is_expected.to have_attributes(zone: 'test zone#1 data') }
-        end
-
-        context 'gcompute_disk_type[title2]' do
-          subject do
-            chef_run.find_resource(:gcompute_disk_type, 'title2')
-          end
-
-          it { is_expected.to have_attributes(zone: 'test zone#2 data') }
-        end
+        # TODO(alexstephen): Implement new test format.
       end
 
       # Ensure ignore: resource exists, no change, has name, pass
       context 'title != name (pass)' do
-        before do
-          allow(Time).to receive(:now).and_return(
-            Time.new(2017, 1, 2, 3, 4, 5)
-          )
-          expect_network_get_success 1
-          expect_network_get_success 2
-          expect_network_get_success 3
-        end
-
-        let(:runner) do
-          cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                            File.join(File.dirname(__FILE__), 'cookbooks')]
-          ChefSpec::SoloRunner.new(
-            step_into: 'gcompute_disk_type',
-            cookbook_path: cookbook_paths,
-            platform: 'ubuntu',
-            version: '16.04'
-          )
-        end
-
-        let(:chef_run) do
-          recipe = ['gcompute::tests~gcompute_disk_type~create~exist~nochange',
-                    'title_and_name'].join('~')
-          runner.converge(recipe) do
-            cred = Google::CredentialResourceMock.new('mycred',
-                                                      runner.run_context)
-            runner.resource_collection.insert(cred)
-          end
-        end
-
-        context 'gcompute_disk_type[title0]' do
-          subject do
-            chef_run.find_resource(:gcompute_disk_type, 'title0')
-          end
-
-          it { is_expected.to have_attributes(zone: 'test zone#0 data') }
-        end
-
-        context 'gcompute_disk_type[title1]' do
-          subject do
-            chef_run.find_resource(:gcompute_disk_type, 'title1')
-          end
-
-          it { is_expected.to have_attributes(zone: 'test zone#1 data') }
-        end
-
-        context 'gcompute_disk_type[title2]' do
-          subject do
-            chef_run.find_resource(:gcompute_disk_type, 'title2')
-          end
-
-          it { is_expected.to have_attributes(zone: 'test zone#2 data') }
-        end
+        # TODO(alexstephen): Implement new test format.
       end
     end
 
@@ -295,5 +191,35 @@ context 'gcompute_disk_type' do
       name: GoogleTests::Constants::DT_NAME_DATA[(id - 1) \
         % GoogleTests::Constants::DT_NAME_DATA.size]
     }
+  end
+
+  def build_cred
+    <<-CRED
+    gauth_credential 'mycred' do
+      action :serviceaccount
+      path '/home'
+      scopes [
+        'test_path'
+      ]
+    end
+    CRED
+  end
+
+  # Creates a test recipe file and runs a block before destroying the file
+  def apply_recipe(recipe)
+    # Creates a random string name
+    recipe_name = "recipe~test~#{(0...8).map { (65 + rand(26)).chr }.join}"
+    recipe_loc = File.join(File.dirname(__FILE__), '..', 'recipes',
+                           "#{recipe_name}.rb")
+
+    File.open(recipe_loc, 'w') do |file|
+      file.write([build_cred, recipe].join("\n"))
+    end
+    recipe_path = "gcompute::#{recipe_name}"
+    begin
+      yield recipe_path
+    ensure
+      File.delete(recipe_loc)
+    end
   end
 end

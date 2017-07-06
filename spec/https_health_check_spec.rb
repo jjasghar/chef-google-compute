@@ -78,13 +78,56 @@ context 'gcompute_https_health_check' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                        'create', 'exist', 'nochange',
-                        'title_eq_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_https_health_check 'title0' do
+                    action :create
+                    check_interval_sec 242040324
+                    description 'test description#0 data'
+                    healthy_threshold 295703256
+                    host 'test host#0 data'
+                    port 759512136
+                    request_path 'test request_path#0 data'
+                    timeout_sec 2704031721
+                    unhealthy_threshold 1604513019
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_https_health_check 'title1' do
+                    action :create
+                    check_interval_sec 484080649
+                    description 'test description#1 data'
+                    healthy_threshold 591406512
+                    host 'test host#1 data'
+                    port 1519024273
+                    request_path 'test request_path#1 data'
+                    timeout_sec 5408063442
+                    unhealthy_threshold 3209026038
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_https_health_check 'title2' do
+                    action :create
+                    check_interval_sec 726120974
+                    description 'test description#2 data'
+                    healthy_threshold 887109769
+                    host 'test host#2 data'
+                    port 2278536410
+                    request_path 'test request_path#2 data'
+                    timeout_sec 8112095164
+                    unhealthy_threshold 4813539057
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -233,13 +276,59 @@ context 'gcompute_https_health_check' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                        'create', 'exist', 'nochange',
-                        'title_and_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_https_health_check 'title0' do
+                    action :create
+                    check_interval_sec 242040324
+                    description 'test description#0 data'
+                    healthy_threshold 295703256
+                    hhc_label 'test name#0 data'
+                    host 'test host#0 data'
+                    port 759512136
+                    request_path 'test request_path#0 data'
+                    timeout_sec 2704031721
+                    unhealthy_threshold 1604513019
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_https_health_check 'title1' do
+                    action :create
+                    check_interval_sec 484080649
+                    description 'test description#1 data'
+                    healthy_threshold 591406512
+                    hhc_label 'test name#1 data'
+                    host 'test host#1 data'
+                    port 1519024273
+                    request_path 'test request_path#1 data'
+                    timeout_sec 5408063442
+                    unhealthy_threshold 3209026038
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_https_health_check 'title2' do
+                    action :create
+                    check_interval_sec 726120974
+                    description 'test description#2 data'
+                    healthy_threshold 887109769
+                    hhc_label 'test name#2 data'
+                    host 'test host#2 data'
+                    port 2278536410
+                    request_path 'test request_path#2 data'
+                    timeout_sec 8112095164
+                    unhealthy_threshold 4813539057
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -441,12 +530,28 @@ context 'gcompute_https_health_check' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                      'create', 'noexist', 'change', 'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_https_health_check 'title0' do
+                  action :create
+                  check_interval_sec 242040324
+                  description 'test description#0 data'
+                  healthy_threshold 295703256
+                  host 'test host#0 data'
+                  port 759512136
+                  request_path 'test request_path#0 data'
+                  timeout_sec 2704031721
+                  unhealthy_threshold 1604513019
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -526,12 +631,29 @@ context 'gcompute_https_health_check' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                      'create', 'noexist', 'change', 'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_https_health_check 'title0' do
+                  action :create
+                  check_interval_sec 242040324
+                  description 'test description#0 data'
+                  healthy_threshold 295703256
+                  hhc_label 'test name#0 data'
+                  host 'test host#0 data'
+                  port 759512136
+                  request_path 'test request_path#0 data'
+                  timeout_sec 2704031721
+                  unhealthy_threshold 1604513019
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -604,12 +726,28 @@ context 'gcompute_https_health_check' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                      'delete', 'noexist', 'change', 'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_https_health_check 'title0' do
+                  action :delete
+                  check_interval_sec 242040324
+                  description 'test description#0 data'
+                  healthy_threshold 295703256
+                  host 'test host#0 data'
+                  port 759512136
+                  request_path 'test request_path#0 data'
+                  timeout_sec 2704031721
+                  unhealthy_threshold 1604513019
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -674,12 +812,29 @@ context 'gcompute_https_health_check' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                      'delete', 'noexist', 'change', 'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_https_health_check 'title0' do
+                  action :delete
+                  check_interval_sec 242040324
+                  description 'test description#0 data'
+                  healthy_threshold 295703256
+                  hhc_label 'test name#0 data'
+                  host 'test host#0 data'
+                  port 759512136
+                  request_path 'test request_path#0 data'
+                  timeout_sec 2704031721
+                  unhealthy_threshold 1604513019
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -746,12 +901,28 @@ context 'gcompute_https_health_check' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                      'delete', 'exist', 'change', 'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_https_health_check 'title0' do
+                  action :delete
+                  check_interval_sec 242040324
+                  description 'test description#0 data'
+                  healthy_threshold 295703256
+                  host 'test host#0 data'
+                  port 759512136
+                  request_path 'test request_path#0 data'
+                  timeout_sec 2704031721
+                  unhealthy_threshold 1604513019
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -819,12 +990,29 @@ context 'gcompute_https_health_check' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_https_health_check',
-                      'delete', 'exist', 'change', 'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_https_health_check 'title0' do
+                  action :delete
+                  check_interval_sec 242040324
+                  description 'test description#0 data'
+                  healthy_threshold 295703256
+                  hhc_label 'test name#0 data'
+                  host 'test host#0 data'
+                  port 759512136
+                  request_path 'test request_path#0 data'
+                  timeout_sec 2704031721
+                  unhealthy_threshold 1604513019
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -1016,5 +1204,35 @@ context 'gcompute_https_health_check' do
       name: GoogleTests::Constants::HHC_NAME_DATA[(id - 1) \
         % GoogleTests::Constants::HHC_NAME_DATA.size]
     }
+  end
+
+  def build_cred
+    <<-CRED
+    gauth_credential 'mycred' do
+      action :serviceaccount
+      path '/home'
+      scopes [
+        'test_path'
+      ]
+    end
+    CRED
+  end
+
+  # Creates a test recipe file and runs a block before destroying the file
+  def apply_recipe(recipe)
+    # Creates a random string name
+    recipe_name = "recipe~test~#{(0...8).map { (65 + rand(26)).chr }.join}"
+    recipe_loc = File.join(File.dirname(__FILE__), '..', 'recipes',
+                           "#{recipe_name}.rb")
+
+    File.open(recipe_loc, 'w') do |file|
+      file.write([build_cred, recipe].join("\n"))
+    end
+    recipe_path = "gcompute::#{recipe_name}"
+    begin
+      yield recipe_path
+    ensure
+      File.delete(recipe_loc)
+    end
   end
 end

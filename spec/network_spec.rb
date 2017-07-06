@@ -78,13 +78,44 @@ context 'gcompute_network' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_network',
-                        'create', 'exist', 'nochange',
-                        'title_eq_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_network 'title0' do
+                    action :create
+                    auto_create_subnetworks true
+                    description 'test description#0 data'
+                    gateway_ipv4 'test gateway_ipv4#0 data'
+                    ipv4_range 'test ipv4_range#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'title1' do
+                    action :create
+                    auto_create_subnetworks false
+                    description 'test description#1 data'
+                    gateway_ipv4 'test gateway_ipv4#1 data'
+                    ipv4_range 'test ipv4_range#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'title2' do
+                    action :create
+                    auto_create_subnetworks true
+                    description 'test description#2 data'
+                    gateway_ipv4 'test gateway_ipv4#2 data'
+                    ipv4_range 'test ipv4_range#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -203,13 +234,47 @@ context 'gcompute_network' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_network',
-                        'create', 'exist', 'nochange',
-                        'title_and_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_network 'title0' do
+                    action :create
+                    auto_create_subnetworks true
+                    description 'test description#0 data'
+                    gateway_ipv4 'test gateway_ipv4#0 data'
+                    ipv4_range 'test ipv4_range#0 data'
+                    n_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'title1' do
+                    action :create
+                    auto_create_subnetworks false
+                    description 'test description#1 data'
+                    gateway_ipv4 'test gateway_ipv4#1 data'
+                    ipv4_range 'test ipv4_range#1 data'
+                    n_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'title2' do
+                    action :create
+                    auto_create_subnetworks true
+                    description 'test description#2 data'
+                    gateway_ipv4 'test gateway_ipv4#2 data'
+                    ipv4_range 'test ipv4_range#2 data'
+                    n_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -371,12 +436,24 @@ context 'gcompute_network' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_network~create~noexist~change',
-                      'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'title0' do
+                  action :create
+                  auto_create_subnetworks true
+                  description 'test description#0 data'
+                  gateway_ipv4 'test gateway_ipv4#0 data'
+                  ipv4_range 'test ipv4_range#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -444,12 +521,25 @@ context 'gcompute_network' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_network~create~noexist~change',
-                      'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'title0' do
+                  action :create
+                  auto_create_subnetworks true
+                  description 'test description#0 data'
+                  gateway_ipv4 'test gateway_ipv4#0 data'
+                  ipv4_range 'test ipv4_range#0 data'
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -514,12 +604,24 @@ context 'gcompute_network' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_network~delete~noexist~change',
-                      'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'title0' do
+                  action :delete
+                  auto_create_subnetworks true
+                  description 'test description#0 data'
+                  gateway_ipv4 'test gateway_ipv4#0 data'
+                  ipv4_range 'test ipv4_range#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -576,12 +678,25 @@ context 'gcompute_network' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_network~delete~noexist~change',
-                      'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'title0' do
+                  action :delete
+                  auto_create_subnetworks true
+                  description 'test description#0 data'
+                  gateway_ipv4 'test gateway_ipv4#0 data'
+                  ipv4_range 'test ipv4_range#0 data'
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -640,12 +755,24 @@ context 'gcompute_network' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_network~delete~exist~change',
-                      'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'title0' do
+                  action :delete
+                  auto_create_subnetworks true
+                  description 'test description#0 data'
+                  gateway_ipv4 'test gateway_ipv4#0 data'
+                  ipv4_range 'test ipv4_range#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -705,12 +832,25 @@ context 'gcompute_network' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_network~delete~exist~change',
-                      'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'title0' do
+                  action :delete
+                  auto_create_subnetworks true
+                  description 'test description#0 data'
+                  gateway_ipv4 'test gateway_ipv4#0 data'
+                  ipv4_range 'test ipv4_range#0 data'
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -894,5 +1034,35 @@ context 'gcompute_network' do
       name: GoogleTests::Constants::N_NAME_DATA[(id - 1) \
         % GoogleTests::Constants::N_NAME_DATA.size]
     }
+  end
+
+  def build_cred
+    <<-CRED
+    gauth_credential 'mycred' do
+      action :serviceaccount
+      path '/home'
+      scopes [
+        'test_path'
+      ]
+    end
+    CRED
+  end
+
+  # Creates a test recipe file and runs a block before destroying the file
+  def apply_recipe(recipe)
+    # Creates a random string name
+    recipe_name = "recipe~test~#{(0...8).map { (65 + rand(26)).chr }.join}"
+    recipe_loc = File.join(File.dirname(__FILE__), '..', 'recipes',
+                           "#{recipe_name}.rb")
+
+    File.open(recipe_loc, 'w') do |file|
+      file.write([build_cred, recipe].join("\n"))
+    end
+    recipe_path = "gcompute::#{recipe_name}"
+    begin
+      yield recipe_path
+    ensure
+      File.delete(recipe_loc)
+    end
   end
 end

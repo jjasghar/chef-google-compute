@@ -61,9 +61,18 @@ context 'gcompute_route' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1, name: 'title0'
-              expect_network_get_success 2, name: 'title1'
-              expect_network_get_success 3, name: 'title2'
+              expect_network_get_success \
+                1,
+                name: 'title0',
+                network: 'selflink(resource(network,0))'
+              expect_network_get_success \
+                2,
+                name: 'title1',
+                network: 'selflink(resource(network,1))'
+              expect_network_get_success \
+                3,
+                name: 'title2',
+                network: 'selflink(resource(network,2))'
               expect_network_get_success_network 1
               expect_network_get_success_network 2
               expect_network_get_success_network 3
@@ -81,12 +90,77 @@ context 'gcompute_route' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests~gcompute_route~create~exist~nochange',
-                        'title_eq_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_network 'resource(network,0)' do
+                    action :create
+                    n_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'resource(network,1)' do
+                    action :create
+                    n_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'resource(network,2)' do
+                    action :create
+                    n_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_route 'title0' do
+                    action :create
+                    dest_range 'test dest_range#0 data'
+                    network 'resource(network,0)'
+                    next_hop_gateway 'test next_hop_gateway#0 data'
+                    next_hop_instance 'test next_hop_instance#0 data'
+                    next_hop_ip 'test next_hop_ip#0 data'
+                    next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                    priority 1108918677
+                    tags ['mm', 'nn', 'oo', 'pp']
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_route 'title1' do
+                    action :create
+                    dest_range 'test dest_range#1 data'
+                    network 'resource(network,1)'
+                    next_hop_gateway 'test next_hop_gateway#1 data'
+                    next_hop_instance 'test next_hop_instance#1 data'
+                    next_hop_ip 'test next_hop_ip#1 data'
+                    next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#1 data'
+                    priority 2217837354
+                    tags ['bb', 'cc', 'dd']
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_route 'title2' do
+                    action :create
+                    dest_range 'test dest_range#2 data'
+                    network 'resource(network,2)'
+                    next_hop_gateway 'test next_hop_gateway#2 data'
+                    next_hop_instance 'test next_hop_instance#2 data'
+                    next_hop_ip 'test next_hop_ip#2 data'
+                    next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#2 data'
+                    priority 3326756031
+                    tags ['qq', 'rr']
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -251,9 +325,15 @@ context 'gcompute_route' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1
-              expect_network_get_success 2
-              expect_network_get_success 3
+              expect_network_get_success \
+                1,
+                network: 'selflink(resource(network,0))'
+              expect_network_get_success \
+                2,
+                network: 'selflink(resource(network,1))'
+              expect_network_get_success \
+                3,
+                network: 'selflink(resource(network,2))'
               expect_network_get_success_network 1
               expect_network_get_success_network 2
               expect_network_get_success_network 3
@@ -271,12 +351,80 @@ context 'gcompute_route' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests~gcompute_route~create~exist~nochange',
-                        'title_and_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_network 'resource(network,0)' do
+                    action :create
+                    n_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'resource(network,1)' do
+                    action :create
+                    n_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_network 'resource(network,2)' do
+                    action :create
+                    n_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_route 'title0' do
+                    action :create
+                    dest_range 'test dest_range#0 data'
+                    network 'resource(network,0)'
+                    next_hop_gateway 'test next_hop_gateway#0 data'
+                    next_hop_instance 'test next_hop_instance#0 data'
+                    next_hop_ip 'test next_hop_ip#0 data'
+                    next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                    priority 1108918677
+                    r_label 'test name#0 data'
+                    tags ['mm', 'nn', 'oo', 'pp']
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_route 'title1' do
+                    action :create
+                    dest_range 'test dest_range#1 data'
+                    network 'resource(network,1)'
+                    next_hop_gateway 'test next_hop_gateway#1 data'
+                    next_hop_instance 'test next_hop_instance#1 data'
+                    next_hop_ip 'test next_hop_ip#1 data'
+                    next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#1 data'
+                    priority 2217837354
+                    r_label 'test name#1 data'
+                    tags ['bb', 'cc', 'dd']
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_route 'title2' do
+                    action :create
+                    dest_range 'test dest_range#2 data'
+                    network 'resource(network,2)'
+                    next_hop_gateway 'test next_hop_gateway#2 data'
+                    next_hop_instance 'test next_hop_instance#2 data'
+                    next_hop_ip 'test next_hop_ip#2 data'
+                    next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#2 data'
+                    priority 3326756031
+                    r_label 'test name#2 data'
+                    tags ['qq', 'rr']
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -511,12 +659,35 @@ context 'gcompute_route' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_route~create~noexist~change',
-                      'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_route 'title0' do
+                  action :create
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
+                  next_hop_gateway 'test next_hop_gateway#0 data'
+                  next_hop_instance 'test next_hop_instance#0 data'
+                  next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                  priority 1108918677
+                  tags ['mm', 'nn', 'oo', 'pp']
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -616,12 +787,36 @@ context 'gcompute_route' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_route~create~noexist~change',
-                      'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_route 'title0' do
+                  action :create
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
+                  next_hop_gateway 'test next_hop_gateway#0 data'
+                  next_hop_instance 'test next_hop_instance#0 data'
+                  next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                  priority 1108918677
+                  r_label 'test name#0 data'
+                  tags ['mm', 'nn', 'oo', 'pp']
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -710,12 +905,35 @@ context 'gcompute_route' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_route~delete~noexist~change',
-                      'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_route 'title0' do
+                  action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
+                  next_hop_gateway 'test next_hop_gateway#0 data'
+                  next_hop_instance 'test next_hop_instance#0 data'
+                  next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                  priority 1108918677
+                  tags ['mm', 'nn', 'oo', 'pp']
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -796,12 +1014,36 @@ context 'gcompute_route' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_route~delete~noexist~change',
-                      'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_route 'title0' do
+                  action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
+                  next_hop_gateway 'test next_hop_gateway#0 data'
+                  next_hop_instance 'test next_hop_instance#0 data'
+                  next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                  priority 1108918677
+                  r_label 'test name#0 data'
+                  tags ['mm', 'nn', 'oo', 'pp']
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -888,12 +1130,35 @@ context 'gcompute_route' do
           end
 
           let(:chef_run) do
-            recipe =
-              'gcompute::tests~gcompute_route~delete~exist~change~title_eq_name'
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_route 'title0' do
+                  action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
+                  next_hop_gateway 'test next_hop_gateway#0 data'
+                  next_hop_instance 'test next_hop_instance#0 data'
+                  next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                  priority 1108918677
+                  tags ['mm', 'nn', 'oo', 'pp']
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -979,12 +1244,36 @@ context 'gcompute_route' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests~gcompute_route~delete~exist~change',
-                      'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_route 'title0' do
+                  action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
+                  next_hop_gateway 'test next_hop_gateway#0 data'
+                  next_hop_instance 'test next_hop_instance#0 data'
+                  next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
+                  priority 1108918677
+                  r_label 'test name#0 data'
+                  tags ['mm', 'nn', 'oo', 'pp']
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -1250,5 +1539,35 @@ context 'gcompute_route' do
       name: GoogleTests::Constants::R_NAME_DATA[(id - 1) \
         % GoogleTests::Constants::R_NAME_DATA.size]
     }
+  end
+
+  def build_cred
+    <<-CRED
+    gauth_credential 'mycred' do
+      action :serviceaccount
+      path '/home'
+      scopes [
+        'test_path'
+      ]
+    end
+    CRED
+  end
+
+  # Creates a test recipe file and runs a block before destroying the file
+  def apply_recipe(recipe)
+    # Creates a random string name
+    recipe_name = "recipe~test~#{(0...8).map { (65 + rand(26)).chr }.join}"
+    recipe_loc = File.join(File.dirname(__FILE__), '..', 'recipes',
+                           "#{recipe_name}.rb")
+
+    File.open(recipe_loc, 'w') do |file|
+      file.write([build_cred, recipe].join("\n"))
+    end
+    recipe_path = "gcompute::#{recipe_name}"
+    begin
+      yield recipe_path
+    ensure
+      File.delete(recipe_loc)
+    end
   end
 end

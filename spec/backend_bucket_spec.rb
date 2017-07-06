@@ -78,13 +78,44 @@ context 'gcompute_backend_bucket' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                        'create', 'exist', 'nochange',
-                        'title_eq_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_backend_bucket 'title0' do
+                    action :create
+                    bucket_name 'test bucket_name#0 data'
+                    description 'test description#0 data'
+                    enable_cdn true
+                    id 2149500871
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_backend_bucket 'title1' do
+                    action :create
+                    bucket_name 'test bucket_name#1 data'
+                    description 'test description#1 data'
+                    enable_cdn false
+                    id 4299001743
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_backend_bucket 'title2' do
+                    action :create
+                    bucket_name 'test bucket_name#2 data'
+                    description 'test description#2 data'
+                    enable_cdn true
+                    id 6448502614
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -188,13 +219,47 @@ context 'gcompute_backend_bucket' do
             end
 
             let(:chef_run) do
-              recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                        'create', 'exist', 'nochange',
-                        'title_and_name'].join('~')
-              runner.converge(recipe) do
-                cred = Google::CredentialResourceMock.new('mycred',
-                                                          runner.run_context)
-                runner.resource_collection.insert(cred)
+              apply_recipe(
+                <<-MANIFEST
+                  gcompute_backend_bucket 'title0' do
+                    action :create
+                    bb_label 'test name#0 data'
+                    bucket_name 'test bucket_name#0 data'
+                    description 'test description#0 data'
+                    enable_cdn true
+                    id 2149500871
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_backend_bucket 'title1' do
+                    action :create
+                    bb_label 'test name#1 data'
+                    bucket_name 'test bucket_name#1 data'
+                    description 'test description#1 data'
+                    enable_cdn false
+                    id 4299001743
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_backend_bucket 'title2' do
+                    action :create
+                    bb_label 'test name#2 data'
+                    bucket_name 'test bucket_name#2 data'
+                    description 'test description#2 data'
+                    enable_cdn true
+                    id 6448502614
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+                MANIFEST
+              ) do |recipe_name|
+                runner.converge(recipe_name) do
+                  cred = Google::CredentialResourceMock.new('mycred',
+                                                            runner.run_context)
+                  runner.resource_collection.insert(cred)
+                end
               end
             end
 
@@ -347,12 +412,24 @@ context 'gcompute_backend_bucket' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                      'create', 'noexist', 'change', 'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_backend_bucket 'title0' do
+                  action :create
+                  bucket_name 'test bucket_name#0 data'
+                  description 'test description#0 data'
+                  enable_cdn true
+                  id 2149500871
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -418,12 +495,25 @@ context 'gcompute_backend_bucket' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                      'create', 'noexist', 'change', 'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_backend_bucket 'title0' do
+                  action :create
+                  bb_label 'test name#0 data'
+                  bucket_name 'test bucket_name#0 data'
+                  description 'test description#0 data'
+                  enable_cdn true
+                  id 2149500871
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -486,12 +576,24 @@ context 'gcompute_backend_bucket' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                      'delete', 'noexist', 'change', 'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_backend_bucket 'title0' do
+                  action :delete
+                  bucket_name 'test bucket_name#0 data'
+                  description 'test description#0 data'
+                  enable_cdn true
+                  id 2149500871
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -546,12 +648,25 @@ context 'gcompute_backend_bucket' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                      'delete', 'noexist', 'change', 'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_backend_bucket 'title0' do
+                  action :delete
+                  bb_label 'test name#0 data'
+                  bucket_name 'test bucket_name#0 data'
+                  description 'test description#0 data'
+                  enable_cdn true
+                  id 2149500871
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -608,12 +723,24 @@ context 'gcompute_backend_bucket' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                      'delete', 'exist', 'change', 'title_eq_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_backend_bucket 'title0' do
+                  action :delete
+                  bucket_name 'test bucket_name#0 data'
+                  description 'test description#0 data'
+                  enable_cdn true
+                  id 2149500871
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -671,12 +798,25 @@ context 'gcompute_backend_bucket' do
           end
 
           let(:chef_run) do
-            recipe = ['gcompute::tests', 'gcompute_backend_bucket',
-                      'delete', 'exist', 'change', 'title_and_name'].join('~')
-            runner.converge(recipe) do
-              cred = Google::CredentialResourceMock.new('mycred',
-                                                        runner.run_context)
-              runner.resource_collection.insert(cred)
+            apply_recipe(
+              <<-MANIFEST
+                gcompute_backend_bucket 'title0' do
+                  action :delete
+                  bb_label 'test name#0 data'
+                  bucket_name 'test bucket_name#0 data'
+                  description 'test description#0 data'
+                  enable_cdn true
+                  id 2149500871
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+              MANIFEST
+            ) do |recipe_name|
+              runner.converge(recipe_name) do
+                cred = Google::CredentialResourceMock.new('mycred',
+                                                          runner.run_context)
+                runner.resource_collection.insert(cred)
+              end
             end
           end
 
@@ -858,5 +998,35 @@ context 'gcompute_backend_bucket' do
       name: GoogleTests::Constants::BB_NAME_DATA[(id - 1) \
         % GoogleTests::Constants::BB_NAME_DATA.size]
     }
+  end
+
+  def build_cred
+    <<-CRED
+    gauth_credential 'mycred' do
+      action :serviceaccount
+      path '/home'
+      scopes [
+        'test_path'
+      ]
+    end
+    CRED
+  end
+
+  # Creates a test recipe file and runs a block before destroying the file
+  def apply_recipe(recipe)
+    # Creates a random string name
+    recipe_name = "recipe~test~#{(0...8).map { (65 + rand(26)).chr }.join}"
+    recipe_loc = File.join(File.dirname(__FILE__), '..', 'recipes',
+                           "#{recipe_name}.rb")
+
+    File.open(recipe_loc, 'w') do |file|
+      file.write([build_cred, recipe].join("\n"))
+    end
+    recipe_path = "gcompute::#{recipe_name}"
+    begin
+      yield recipe_path
+    ensure
+      File.delete(recipe_loc)
+    end
   end
 end
