@@ -73,9 +73,11 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.l_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.charges_use_fee =
-            ::Google::Compute::Property::Boolean.parse(fetch['chargesUseFee'])
+            ::Google::Compute::Property::Boolean.api_parse(
+              fetch['chargesUseFee']
+            )
 
           cannot_change_resource 'License cannot be edited'
         end

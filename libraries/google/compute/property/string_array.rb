@@ -33,10 +33,14 @@ module Google
       # A class to handle serialization of Array items.
       class StringArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::StringArray.parse(x) }
+          ->(x) { ::Google::Compute::Property::StringArray.catalog_parse(x) }
         end
 
-        def self.parse(value)
+        def self.api_parse(value)
+          value
+        end
+
+        def self.catalog_parse(value)
           value
         end
 

@@ -113,37 +113,39 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.creation_timestamp =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
             )
           @current_resource.deprecated_deleted =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               ::Google::HashUtils.navigate(fetch, %w[deprecated deleted])
             )
           @current_resource.deprecated_deprecated =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               ::Google::HashUtils.navigate(fetch, %w[deprecated deprecated])
             )
           @current_resource.deprecated_obsolete =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               ::Google::HashUtils.navigate(fetch, %w[deprecated obsolete])
             )
           @current_resource.deprecated_replacement =
-            ::Google::Compute::Property::String.parse(
+            ::Google::Compute::Property::String.api_parse(
               ::Google::HashUtils.navigate(fetch, %w[deprecated replacement])
             )
           @current_resource.deprecated_state =
-            ::Google::Compute::Property::Enum.parse(
+            ::Google::Compute::Property::Enum.api_parse(
               ::Google::HashUtils.navigate(fetch, %w[deprecated state])
             )
           @current_resource.description =
-            ::Google::Compute::Property::String.parse(fetch['description'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['description']
+            )
           @current_resource.id =
-            ::Google::Compute::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.r_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.zones =
-            ::Google::Compute::Property::StringArray.parse(fetch['zones'])
+            ::Google::Compute::Property::StringArray.api_parse(fetch['zones'])
           @new_resource.__fetched = fetch
 
           cannot_change_resource 'Region cannot be edited'

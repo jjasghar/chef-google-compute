@@ -102,17 +102,19 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.creation_timestamp =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
             )
           @current_resource.description =
-            ::Google::Compute::Property::String.parse(fetch['description'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['description']
+            )
           @current_resource.id =
-            ::Google::Compute::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.s_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.private_ip_google_access =
-            ::Google::Compute::Property::Boolean.parse(
+            ::Google::Compute::Property::Boolean.api_parse(
               fetch['privateIpGoogleAccess']
             )
           @new_resource.__fetched = fetch

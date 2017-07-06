@@ -31,10 +31,14 @@ module Google
       # A class to handle serialization of String items.
       class String
         def self.coerce
-          ->(x) { ::Google::Compute::Property::String.parse(x) }
+          ->(x) { ::Google::Compute::Property::String.catalog_parse(x) }
         end
 
-        def self.parse(value)
+        def self.api_parse(value)
+          value
+        end
+
+        def self.catalog_parse(value)
           value
         end
       end

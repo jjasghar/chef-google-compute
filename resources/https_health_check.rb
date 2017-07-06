@@ -110,33 +110,39 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.check_interval_sec =
-            ::Google::Compute::Property::Integer.parse(
+            ::Google::Compute::Property::Integer.api_parse(
               fetch['checkIntervalSec']
             )
           @current_resource.creation_timestamp =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
             )
           @current_resource.description =
-            ::Google::Compute::Property::String.parse(fetch['description'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['description']
+            )
           @current_resource.healthy_threshold =
-            ::Google::Compute::Property::Integer.parse(
+            ::Google::Compute::Property::Integer.api_parse(
               fetch['healthyThreshold']
             )
           @current_resource.host =
-            ::Google::Compute::Property::String.parse(fetch['host'])
+            ::Google::Compute::Property::String.api_parse(fetch['host'])
           @current_resource.id =
-            ::Google::Compute::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.hhc_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.port =
-            ::Google::Compute::Property::Integer.parse(fetch['port'])
+            ::Google::Compute::Property::Integer.api_parse(fetch['port'])
           @current_resource.request_path =
-            ::Google::Compute::Property::String.parse(fetch['requestPath'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['requestPath']
+            )
           @current_resource.timeout_sec =
-            ::Google::Compute::Property::Integer.parse(fetch['timeoutSec'])
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['timeoutSec']
+            )
           @current_resource.unhealthy_threshold =
-            ::Google::Compute::Property::Integer.parse(
+            ::Google::Compute::Property::Integer.api_parse(
               fetch['unhealthyThreshold']
             )
 

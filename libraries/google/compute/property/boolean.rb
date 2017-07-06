@@ -31,10 +31,14 @@ module Google
       # A class to handle serialization of Boolean items.
       class Boolean
         def self.coerce
-          ->(x) { ::Google::Compute::Property::Boolean.parse(x) }
+          ->(x) { ::Google::Compute::Property::Boolean.catalog_parse(x) }
         end
 
-        def self.parse(value)
+        def self.api_parse(value)
+          value
+        end
+
+        def self.catalog_parse(value)
           value
         end
       end

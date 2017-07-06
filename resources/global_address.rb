@@ -90,19 +90,21 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.address =
-            ::Google::Compute::Property::String.parse(fetch['address'])
+            ::Google::Compute::Property::String.api_parse(fetch['address'])
           @current_resource.creation_timestamp =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
             )
           @current_resource.description =
-            ::Google::Compute::Property::String.parse(fetch['description'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['description']
+            )
           @current_resource.id =
-            ::Google::Compute::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.ga_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.region =
-            ::Google::Compute::Property::String.parse(fetch['region'])
+            ::Google::Compute::Property::String.api_parse(fetch['region'])
 
           cannot_change_resource 'GlobalAddress cannot be edited'
         end

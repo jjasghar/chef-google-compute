@@ -105,25 +105,29 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.description =
-            ::Google::Compute::Property::String.parse(fetch['description'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['description']
+            )
           @current_resource.gateway_ipv4 =
-            ::Google::Compute::Property::String.parse(fetch['gatewayIPv4'])
+            ::Google::Compute::Property::String.api_parse(
+              fetch['gatewayIPv4']
+            )
           @current_resource.id =
-            ::Google::Compute::Property::Integer.parse(fetch['id'])
+            ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.ipv4_range =
-            ::Google::Compute::Property::String.parse(fetch['IPv4Range'])
+            ::Google::Compute::Property::String.api_parse(fetch['IPv4Range'])
           @current_resource.n_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.subnetworks =
-            ::Google::Compute::Property::StringArray.parse(
+            ::Google::Compute::Property::StringArray.api_parse(
               fetch['subnetworks']
             )
           @current_resource.auto_create_subnetworks =
-            ::Google::Compute::Property::Boolean.parse(
+            ::Google::Compute::Property::Boolean.api_parse(
               fetch['autoCreateSubnetworks']
             )
           @current_resource.creation_timestamp =
-            ::Google::Compute::Property::Time.parse(
+            ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
             )
           @new_resource.__fetched = fetch

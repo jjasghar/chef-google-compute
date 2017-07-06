@@ -31,10 +31,14 @@ module Google
       # A class to handle serialization of Enumerated items.
       class Enum
         def self.coerce
-          ->(x) { ::Google::Compute::Property::Enum.parse(x) }
+          ->(x) { ::Google::Compute::Property::Enum.catalog_parse(x) }
         end
 
-        def self.parse(value)
+        def self.api_parse(value)
+          value
+        end
+
+        def self.catalog_parse(value)
           value
         end
       end

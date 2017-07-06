@@ -31,10 +31,14 @@ module Google
       # A class to handle serialization of Integer items.
       class Integer
         def self.coerce
-          ->(x) { ::Google::Compute::Property::Integer.parse(x) }
+          ->(x) { ::Google::Compute::Property::Integer.catalog_parse(x) }
         end
 
-        def self.parse(value)
+        def self.api_parse(value)
+          value.to_i
+        end
+
+        def self.catalog_parse(value)
           value.to_i
         end
       end

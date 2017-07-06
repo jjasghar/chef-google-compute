@@ -99,9 +99,9 @@ module Google
         else
           @current_resource = @new_resource.clone
           @current_resource.dest_range =
-            ::Google::Compute::Property::String.parse(fetch['destRange'])
+            ::Google::Compute::Property::String.api_parse(fetch['destRange'])
           @current_resource.r_label =
-            ::Google::Compute::Property::String.parse(fetch['name'])
+            ::Google::Compute::Property::String.api_parse(fetch['name'])
 
           cannot_change_resource 'Route cannot be edited'
         end
