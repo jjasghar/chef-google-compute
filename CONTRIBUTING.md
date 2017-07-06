@@ -115,6 +115,7 @@ chef-codegen:
   * recipes/examples~delete_health_check.rb
   * recipes/examples~delete_http_health_check.rb
   * recipes/examples~delete_https_health_check.rb
+  * recipes/examples~delete_image.rb
   * recipes/examples~delete_instance.rb
   * recipes/examples~delete_instance_group.rb
   * recipes/examples~delete_network.rb
@@ -127,6 +128,7 @@ chef-codegen:
   * recipes/examples~health_check.rb
   * recipes/examples~http_health_check.rb
   * recipes/examples~https_health_check.rb
+  * recipes/examples~image.rb
   * recipes/examples~instance.rb
   * recipes/examples~instance_group.rb
   * recipes/examples~license.rb
@@ -334,6 +336,12 @@ chef-codegen:
   * spec/data/network/gcompute_https_health_check/success2~title.yaml
   * spec/data/network/gcompute_https_health_check/success3~name.yaml
   * spec/data/network/gcompute_https_health_check/success3~title.yaml
+  * spec/data/network/gcompute_image/success1~name.yaml
+  * spec/data/network/gcompute_image/success1~title.yaml
+  * spec/data/network/gcompute_image/success2~name.yaml
+  * spec/data/network/gcompute_image/success2~title.yaml
+  * spec/data/network/gcompute_image/success3~name.yaml
+  * spec/data/network/gcompute_image/success3~title.yaml
   * spec/data/network/gcompute_instance/success1~name.yaml
   * spec/data/network/gcompute_instance/success1~title.yaml
   * spec/data/network/gcompute_instance/success2~name.yaml
