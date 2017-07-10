@@ -69,7 +69,10 @@ module Google
                Array,
                coerce: ::Google::Compute::Property::StringArray.coerce,
                desired_state: true
-      property :region, String, desired_state: true
+      property :region,
+               [String, ::Google::Compute::Data::RegionNameRef],
+               coerce: ::Google::Compute::Property::RegionNameRef.coerce,
+               desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -165,8 +168,7 @@ module Google
             description: resource.description,
             id: resource.id,
             users: resource.users,
-            region: fetch_export(resource, 'gcompute_region',
-                                 resource.region, :name)
+            region: resource.region
           }.reject { |_, v| v.nil? }
         end
 

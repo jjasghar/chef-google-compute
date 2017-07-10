@@ -34,6 +34,8 @@ require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/property/boolean'
 require 'google/compute/property/integer'
+require 'google/compute/property/network_selflink'
+require 'google/compute/property/region_name'
 require 'google/compute/property/string'
 require 'google/compute/property/time'
 require 'google/hash_utils'
@@ -69,12 +71,18 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      property :network, String, desired_state: true
+      property :network,
+               [String, ::Google::Compute::Data::NetwoSelfLinkRef],
+               coerce: ::Google::Compute::Property::NetwoSelfLinkRef.coerce,
+               desired_state: true
       property :private_ip_google_access,
                kind_of: [TrueClass, FalseClass],
                coerce: ::Google::Compute::Property::Boolean.coerce,
                desired_state: true
-      property :region, String, desired_state: true
+      property :region,
+               [String, ::Google::Compute::Data::RegionNameRef],
+               coerce: ::Google::Compute::Property::RegionNameRef.coerce,
+               desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -154,13 +162,9 @@ module Google
             gatewayAddress: gateway_address,
             ipCidrRange: ip_cidr_range,
             name: s_label,
-            network: @new_resource.resources(
-              "gcompute_network[#{network}]"
-            ).exports[:self_link],
+            network: network,
             privateIpGoogleAccess: private_ip_google_access,
-            region: @new_resource.resources(
-              "gcompute_region[#{region}]"
-            ).exports[:name]
+            region: region
           }.reject { |_, v| v.nil? }.to_json
         end
 
@@ -190,11 +194,9 @@ module Google
             gateway_address: resource.gateway_address,
             id: resource.id,
             ip_cidr_range: resource.ip_cidr_range,
-            network: fetch_export(resource, 'gcompute_network',
-                                  resource.network, :self_link),
+            network: resource.network,
             private_ip_google_access: resource.private_ip_google_access,
-            region: fetch_export(resource, 'gcompute_region',
-                                 resource.region, :name)
+            region: resource.region
           }.reject { |_, v| v.nil? }
         end
 

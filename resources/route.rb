@@ -33,6 +33,7 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/property/integer'
+require 'google/compute/property/network_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
 require 'google/hash_utils'
@@ -52,7 +53,10 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      property :network, String, desired_state: true
+      property :network,
+               [String, ::Google::Compute::Data::NetwoSelfLinkRef],
+               coerce: ::Google::Compute::Property::NetwoSelfLinkRef.coerce,
+               desired_state: true
       property :priority,
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
@@ -130,9 +134,7 @@ module Google
             kind: 'compute#route',
             destRange: dest_range,
             name: r_label,
-            network: @new_resource.resources(
-              "gcompute_network[#{network}]"
-            ).exports[:self_link],
+            network: network,
             priority: priority,
             tags: tags,
             nextHopGateway: next_hop_gateway,
@@ -164,8 +166,7 @@ module Google
             name: resource.r_label,
             kind: 'compute#route',
             dest_range: resource.dest_range,
-            network: fetch_export(resource, 'gcompute_network',
-                                  resource.network, :self_link),
+            network: resource.network,
             priority: resource.priority,
             tags: resource.tags,
             next_hop_gateway: resource.next_hop_gateway,

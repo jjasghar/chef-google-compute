@@ -98,6 +98,8 @@ chef-codegen:
   * libraries/google/compute/property/boolean.rb
   * libraries/google/compute/property/enum.rb
   * libraries/google/compute/property/integer.rb
+  * libraries/google/compute/property/network_selflink.rb
+  * libraries/google/compute/property/region_name.rb
   * libraries/google/compute/property/string.rb
   * libraries/google/compute/property/string_array.rb
   * libraries/google/compute/property/time.rb
