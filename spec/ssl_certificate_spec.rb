@@ -597,23 +597,6 @@ context 'gcompute_ssl_certificate' do
           subject do
             chef_run.find_resource(:gcompute_ssl_certificate, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(certificate: 'test certificate#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(sc_label: 'title0') }
-
-          it do
-            is_expected
-              .to have_attributes(private_key: 'test private_key#0 data')
-          end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -669,23 +652,6 @@ context 'gcompute_ssl_certificate' do
 
           subject do
             chef_run.find_resource(:gcompute_ssl_certificate, 'title0')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(certificate: 'test certificate#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(sc_label: 'test name#0 data') }
-
-          it do
-            is_expected
-              .to have_attributes(private_key: 'test private_key#0 data')
           end
         end
 
@@ -749,22 +715,6 @@ context 'gcompute_ssl_certificate' do
             expect(chef_run).to delete(:gcompute_ssl_certificate,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(certificate: 'test certificate#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(sc_label: 'title0') }
-
-          it do
-            is_expected
-              .to have_attributes(private_key: 'test private_key#0 data')
-          end
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -824,22 +774,6 @@ context 'gcompute_ssl_certificate' do
           it 'should run test correctly' do
             expect(chef_run).to delete(:gcompute_ssl_certificate,
                                        'title0')
-          end
-          it do
-            is_expected
-              .to have_attributes(certificate: 'test certificate#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(sc_label: 'test name#0 data') }
-
-          it do
-            is_expected
-              .to have_attributes(private_key: 'test private_key#0 data')
           end
         end
 

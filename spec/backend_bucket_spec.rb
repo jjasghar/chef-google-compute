@@ -600,22 +600,6 @@ context 'gcompute_backend_bucket' do
           subject do
             chef_run.find_resource(:gcompute_backend_bucket, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(bucket_name: 'test bucket_name#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(enable_cdn: true) }
-
-          it { is_expected.to have_attributes(id: 2_149_500_871) }
-
-          it { is_expected.to have_attributes(bb_label: 'title0') }
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -673,22 +657,6 @@ context 'gcompute_backend_bucket' do
           subject do
             chef_run.find_resource(:gcompute_backend_bucket, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(bucket_name: 'test bucket_name#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(enable_cdn: true) }
-
-          it { is_expected.to have_attributes(id: 2_149_500_871) }
-
-          it { is_expected.to have_attributes(bb_label: 'test name#0 data') }
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -752,21 +720,6 @@ context 'gcompute_backend_bucket' do
             expect(chef_run).to delete(:gcompute_backend_bucket,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(bucket_name: 'test bucket_name#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(enable_cdn: true) }
-
-          it { is_expected.to have_attributes(id: 2_149_500_871) }
-
-          it { is_expected.to have_attributes(bb_label: 'title0') }
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -828,21 +781,6 @@ context 'gcompute_backend_bucket' do
             expect(chef_run).to delete(:gcompute_backend_bucket,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(bucket_name: 'test bucket_name#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(enable_cdn: true) }
-
-          it { is_expected.to have_attributes(id: 2_149_500_871) }
-
-          it { is_expected.to have_attributes(bb_label: 'test name#0 data') }
         end
 
         # Ensure absent: resource exists, ignore, has name, fail

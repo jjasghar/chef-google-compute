@@ -105,19 +105,21 @@ module Google
           ->(x) { ::Google::Compute::Property::RegionNameRef.catalog_parse(x) }
         end
 
-        # Used for catalog values
         def catalog_parse(value)
+          return if value.nil?
           self.class.catalog_parse(value)
         end
 
         def self.catalog_parse(value)
           return if value.nil?
+          return value if value.is_a? Data::RegionNameRef
           Data::RegionNameRefCatalog.new(value)
         end
 
         # Used for fetched JSON values
         def self.api_parse(value)
           return if value.nil?
+          return value if value.is_a? Data::RegionNameRef
           Data::RegionNameRefApi.new(value)
         end
       end

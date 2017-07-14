@@ -754,32 +754,6 @@ context 'gcompute_http_health_check' do
           subject do
             chef_run.find_resource(:gcompute_http_health_check, 'title0')
           end
-
-          it { is_expected.to have_attributes(check_interval_sec: 242_040_324) }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(healthy_threshold: 295_703_256) }
-
-          it { is_expected.to have_attributes(host: 'test host#0 data') }
-
-          it { is_expected.to have_attributes(hhc_label: 'title0') }
-
-          it { is_expected.to have_attributes(port: 759_512_136) }
-
-          it do
-            is_expected
-              .to have_attributes(request_path: 'test request_path#0 data')
-          end
-
-          it { is_expected.to have_attributes(timeout_sec: 2_704_031_721) }
-
-          it do
-            is_expected.to have_attributes(unhealthy_threshold: 1_604_513_019)
-          end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -840,32 +814,6 @@ context 'gcompute_http_health_check' do
 
           subject do
             chef_run.find_resource(:gcompute_http_health_check, 'title0')
-          end
-
-          it { is_expected.to have_attributes(check_interval_sec: 242_040_324) }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(healthy_threshold: 295_703_256) }
-
-          it { is_expected.to have_attributes(host: 'test host#0 data') }
-
-          it { is_expected.to have_attributes(hhc_label: 'test name#0 data') }
-
-          it { is_expected.to have_attributes(port: 759_512_136) }
-
-          it do
-            is_expected
-              .to have_attributes(request_path: 'test request_path#0 data')
-          end
-
-          it { is_expected.to have_attributes(timeout_sec: 2_704_031_721) }
-
-          it do
-            is_expected.to have_attributes(unhealthy_threshold: 1_604_513_019)
           end
         end
 
@@ -934,31 +882,6 @@ context 'gcompute_http_health_check' do
             expect(chef_run).to delete(:gcompute_http_health_check,
                                        'title0')
           end
-          it { is_expected.to have_attributes(check_interval_sec: 242_040_324) }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(healthy_threshold: 295_703_256) }
-
-          it { is_expected.to have_attributes(host: 'test host#0 data') }
-
-          it { is_expected.to have_attributes(hhc_label: 'title0') }
-
-          it { is_expected.to have_attributes(port: 759_512_136) }
-
-          it do
-            is_expected
-              .to have_attributes(request_path: 'test request_path#0 data')
-          end
-
-          it { is_expected.to have_attributes(timeout_sec: 2_704_031_721) }
-
-          it do
-            is_expected.to have_attributes(unhealthy_threshold: 1_604_513_019)
-          end
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -1023,31 +946,6 @@ context 'gcompute_http_health_check' do
           it 'should run test correctly' do
             expect(chef_run).to delete(:gcompute_http_health_check,
                                        'title0')
-          end
-          it { is_expected.to have_attributes(check_interval_sec: 242_040_324) }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(healthy_threshold: 295_703_256) }
-
-          it { is_expected.to have_attributes(host: 'test host#0 data') }
-
-          it { is_expected.to have_attributes(hhc_label: 'test name#0 data') }
-
-          it { is_expected.to have_attributes(port: 759_512_136) }
-
-          it do
-            is_expected
-              .to have_attributes(request_path: 'test request_path#0 data')
-          end
-
-          it { is_expected.to have_attributes(timeout_sec: 2_704_031_721) }
-
-          it do
-            is_expected.to have_attributes(unhealthy_threshold: 1_604_513_019)
           end
         end
 

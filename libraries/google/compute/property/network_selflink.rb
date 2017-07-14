@@ -107,19 +107,21 @@ module Google
           end
         end
 
-        # Used for catalog values
         def catalog_parse(value)
+          return if value.nil?
           self.class.catalog_parse(value)
         end
 
         def self.catalog_parse(value)
           return if value.nil?
+          return value if value.is_a? Data::NetwoSelfLinkRef
           Data::NetwoSelfLinkRefCatalog.new(value)
         end
 
         # Used for fetched JSON values
         def self.api_parse(value)
           return if value.nil?
+          return value if value.is_a? Data::NetwoSelfLinkRef
           Data::NetwoSelfLinkRefApi.new(value)
         end
       end

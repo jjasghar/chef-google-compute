@@ -940,47 +940,6 @@ context 'gcompute_route' do
           subject do
             chef_run.find_resource(:gcompute_route, 'title0')
           end
-
-          it do
-            is_expected.to have_attributes(dest_range: 'test dest_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(r_label: 'title0') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(priority: 1_108_918_677) }
-
-          it { is_expected.to have_attributes(tags: %w[mm nn oo pp]) }
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_gateway: 'test next_hop_gateway#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_instance: 'test next_hop_instance#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(next_hop_ip: 'test next_hop_ip#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
-              )
-          end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -1049,47 +1008,6 @@ context 'gcompute_route' do
 
           subject do
             chef_run.find_resource(:gcompute_route, 'title0')
-          end
-
-          it do
-            is_expected.to have_attributes(dest_range: 'test dest_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(r_label: 'test name#0 data') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(priority: 1_108_918_677) }
-
-          it { is_expected.to have_attributes(tags: %w[mm nn oo pp]) }
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_gateway: 'test next_hop_gateway#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_instance: 'test next_hop_instance#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(next_hop_ip: 'test next_hop_ip#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
-              )
           end
         end
 
@@ -1170,46 +1088,6 @@ context 'gcompute_route' do
             expect(chef_run).to delete(:gcompute_route,
                                        'title0')
           end
-          it do
-            is_expected.to have_attributes(dest_range: 'test dest_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(r_label: 'title0') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(priority: 1_108_918_677) }
-
-          it { is_expected.to have_attributes(tags: %w[mm nn oo pp]) }
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_gateway: 'test next_hop_gateway#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_instance: 'test next_hop_instance#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(next_hop_ip: 'test next_hop_ip#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
-              )
-          end
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -1284,46 +1162,6 @@ context 'gcompute_route' do
           it 'should run test correctly' do
             expect(chef_run).to delete(:gcompute_route,
                                        'title0')
-          end
-          it do
-            is_expected.to have_attributes(dest_range: 'test dest_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(r_label: 'test name#0 data') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(priority: 1_108_918_677) }
-
-          it { is_expected.to have_attributes(tags: %w[mm nn oo pp]) }
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_gateway: 'test next_hop_gateway#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_instance: 'test next_hop_instance#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(next_hop_ip: 'test next_hop_ip#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
-              )
           end
         end
 

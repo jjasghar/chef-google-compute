@@ -946,37 +946,6 @@ context 'gcompute_subnetwork' do
           subject do
             chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                gateway_address: 'test gateway_address#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(s_label: 'title0') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(private_ip_google_access: true) }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -1053,37 +1022,6 @@ context 'gcompute_subnetwork' do
           subject do
             chef_run.find_resource(:gcompute_subnetwork, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                gateway_address: 'test gateway_address#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(s_label: 'test name#0 data') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(private_ip_google_access: true) }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -1172,36 +1110,6 @@ context 'gcompute_subnetwork' do
             expect(chef_run).to delete(:gcompute_subnetwork,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                gateway_address: 'test gateway_address#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(s_label: 'title0') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(private_ip_google_access: true) }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -1287,36 +1195,6 @@ context 'gcompute_subnetwork' do
             expect(chef_run).to delete(:gcompute_subnetwork,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                gateway_address: 'test gateway_address#0 data'
-              )
-          end
-
-          it do
-            is_expected
-              .to have_attributes(ip_cidr_range: 'test ip_cidr_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(s_label: 'test name#0 data') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'network' do
-          #   # Add test code here
-          # end
-
-          it { is_expected.to have_attributes(private_ip_google_access: true) }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource exists, ignore, has name, fail

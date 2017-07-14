@@ -628,24 +628,6 @@ context 'gcompute_network' do
           subject do
             chef_run.find_resource(:gcompute_network, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(gateway_ipv4: 'test gateway_ipv4#0 data')
-          end
-
-          it do
-            is_expected.to have_attributes(ipv4_range: 'test ipv4_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(n_label: 'title0') }
-
-          it { is_expected.to have_attributes(auto_create_subnetworks: true) }
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -703,24 +685,6 @@ context 'gcompute_network' do
           subject do
             chef_run.find_resource(:gcompute_network, 'title0')
           end
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(gateway_ipv4: 'test gateway_ipv4#0 data')
-          end
-
-          it do
-            is_expected.to have_attributes(ipv4_range: 'test ipv4_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(n_label: 'test name#0 data') }
-
-          it { is_expected.to have_attributes(auto_create_subnetworks: true) }
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -784,23 +748,6 @@ context 'gcompute_network' do
             expect(chef_run).to delete(:gcompute_network,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(gateway_ipv4: 'test gateway_ipv4#0 data')
-          end
-
-          it do
-            is_expected.to have_attributes(ipv4_range: 'test ipv4_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(n_label: 'title0') }
-
-          it { is_expected.to have_attributes(auto_create_subnetworks: true) }
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -862,23 +809,6 @@ context 'gcompute_network' do
             expect(chef_run).to delete(:gcompute_network,
                                        'title0')
           end
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(gateway_ipv4: 'test gateway_ipv4#0 data')
-          end
-
-          it do
-            is_expected.to have_attributes(ipv4_range: 'test ipv4_range#0 data')
-          end
-
-          it { is_expected.to have_attributes(n_label: 'test name#0 data') }
-
-          it { is_expected.to have_attributes(auto_create_subnetworks: true) }
         end
 
         # Ensure absent: resource exists, ignore, has name, fail

@@ -663,20 +663,6 @@ context 'gcompute_address' do
           subject do
             chef_run.find_resource(:gcompute_address, 'title0')
           end
-
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(a_label: 'title0') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -741,20 +727,6 @@ context 'gcompute_address' do
           subject do
             chef_run.find_resource(:gcompute_address, 'title0')
           end
-
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -827,19 +799,6 @@ context 'gcompute_address' do
             expect(chef_run).to delete(:gcompute_address,
                                        'title0')
           end
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(a_label: 'title0') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -908,19 +867,6 @@ context 'gcompute_address' do
             expect(chef_run).to delete(:gcompute_address,
                                        'title0')
           end
-          it { is_expected.to have_attributes(address: 'test address#0 data') }
-
-          it do
-            is_expected
-              .to have_attributes(description: 'test description#0 data')
-          end
-
-          it { is_expected.to have_attributes(a_label: 'test name#0 data') }
-
-          # TODO(alexstephen): Implement resourceref test.
-          # it 'region' do
-          #   # Add test code here
-          # end
         end
 
         # Ensure absent: resource exists, ignore, has name, fail

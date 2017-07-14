@@ -436,8 +436,6 @@ context 'gcompute_region' do
           subject do
             chef_run.find_resource(:gcompute_region, 'title0')
           end
-
-          it { is_expected.to have_attributes(r_label: 'title0') }
         end
 
         # Ensure absent: resource missing, ignore, no name, fail
@@ -491,8 +489,6 @@ context 'gcompute_region' do
           subject do
             chef_run.find_resource(:gcompute_region, 'title0')
           end
-
-          it { is_expected.to have_attributes(r_label: 'test name#0 data') }
         end
 
         # Ensure absent: resource missing, ignore, has name, fail
@@ -551,7 +547,6 @@ context 'gcompute_region' do
             expect(chef_run).to delete(:gcompute_region,
                                        'title0')
           end
-          it { is_expected.to have_attributes(r_label: 'title0') }
         end
 
         # Ensure absent: resource exists, ignore, no name, fail
@@ -608,7 +603,6 @@ context 'gcompute_region' do
             expect(chef_run).to delete(:gcompute_region,
                                        'title0')
           end
-          it { is_expected.to have_attributes(r_label: 'test name#0 data') }
         end
 
         # Ensure absent: resource exists, ignore, has name, fail
