@@ -170,42 +170,18 @@ chef-codegen:
   * spec/data/network/gcompute_backend_bucket/success2~title.yaml
   * spec/data/network/gcompute_backend_bucket/success3~name.yaml
   * spec/data/network/gcompute_backend_bucket/success3~title.yaml
-  * spec/data/network/gcompute_backend_service/success1~name.yaml
-  * spec/data/network/gcompute_backend_service/success1~title.yaml
-  * spec/data/network/gcompute_backend_service/success2~name.yaml
-  * spec/data/network/gcompute_backend_service/success2~title.yaml
-  * spec/data/network/gcompute_backend_service/success3~name.yaml
-  * spec/data/network/gcompute_backend_service/success3~title.yaml
-  * spec/data/network/gcompute_disk/success1~name.yaml
-  * spec/data/network/gcompute_disk/success1~title.yaml
-  * spec/data/network/gcompute_disk/success2~name.yaml
-  * spec/data/network/gcompute_disk/success2~title.yaml
-  * spec/data/network/gcompute_disk/success3~name.yaml
-  * spec/data/network/gcompute_disk/success3~title.yaml
   * spec/data/network/gcompute_disk_type/success1~name.yaml
   * spec/data/network/gcompute_disk_type/success1~title.yaml
   * spec/data/network/gcompute_disk_type/success2~name.yaml
   * spec/data/network/gcompute_disk_type/success2~title.yaml
   * spec/data/network/gcompute_disk_type/success3~name.yaml
   * spec/data/network/gcompute_disk_type/success3~title.yaml
-  * spec/data/network/gcompute_firewall/success1~name.yaml
-  * spec/data/network/gcompute_firewall/success1~title.yaml
-  * spec/data/network/gcompute_firewall/success2~name.yaml
-  * spec/data/network/gcompute_firewall/success2~title.yaml
-  * spec/data/network/gcompute_firewall/success3~name.yaml
-  * spec/data/network/gcompute_firewall/success3~title.yaml
   * spec/data/network/gcompute_global_address/success1~name.yaml
   * spec/data/network/gcompute_global_address/success1~title.yaml
   * spec/data/network/gcompute_global_address/success2~name.yaml
   * spec/data/network/gcompute_global_address/success2~title.yaml
   * spec/data/network/gcompute_global_address/success3~name.yaml
   * spec/data/network/gcompute_global_address/success3~title.yaml
-  * spec/data/network/gcompute_health_check/success1~name.yaml
-  * spec/data/network/gcompute_health_check/success1~title.yaml
-  * spec/data/network/gcompute_health_check/success2~name.yaml
-  * spec/data/network/gcompute_health_check/success2~title.yaml
-  * spec/data/network/gcompute_health_check/success3~name.yaml
-  * spec/data/network/gcompute_health_check/success3~title.yaml
   * spec/data/network/gcompute_http_health_check/success1~name.yaml
   * spec/data/network/gcompute_http_health_check/success1~title.yaml
   * spec/data/network/gcompute_http_health_check/success2~name.yaml
@@ -218,24 +194,12 @@ chef-codegen:
   * spec/data/network/gcompute_https_health_check/success2~title.yaml
   * spec/data/network/gcompute_https_health_check/success3~name.yaml
   * spec/data/network/gcompute_https_health_check/success3~title.yaml
-  * spec/data/network/gcompute_image/success1~name.yaml
-  * spec/data/network/gcompute_image/success1~title.yaml
-  * spec/data/network/gcompute_image/success2~name.yaml
-  * spec/data/network/gcompute_image/success2~title.yaml
-  * spec/data/network/gcompute_image/success3~name.yaml
-  * spec/data/network/gcompute_image/success3~title.yaml
-  * spec/data/network/gcompute_instance/success1~name.yaml
-  * spec/data/network/gcompute_instance/success1~title.yaml
-  * spec/data/network/gcompute_instance/success2~name.yaml
-  * spec/data/network/gcompute_instance/success2~title.yaml
-  * spec/data/network/gcompute_instance/success3~name.yaml
-  * spec/data/network/gcompute_instance/success3~title.yaml
-  * spec/data/network/gcompute_instance_group/success1~name.yaml
-  * spec/data/network/gcompute_instance_group/success1~title.yaml
-  * spec/data/network/gcompute_instance_group/success2~name.yaml
-  * spec/data/network/gcompute_instance_group/success2~title.yaml
-  * spec/data/network/gcompute_instance_group/success3~name.yaml
-  * spec/data/network/gcompute_instance_group/success3~title.yaml
+  * spec/data/network/gcompute_license/success1~name.yaml
+  * spec/data/network/gcompute_license/success1~title.yaml
+  * spec/data/network/gcompute_license/success2~name.yaml
+  * spec/data/network/gcompute_license/success2~title.yaml
+  * spec/data/network/gcompute_license/success3~name.yaml
+  * spec/data/network/gcompute_license/success3~title.yaml
   * spec/data/network/gcompute_network/success1~name.yaml
   * spec/data/network/gcompute_network/success1~title.yaml
   * spec/data/network/gcompute_network/success2~name.yaml

@@ -26,23 +26,8 @@
 # ----------------------------------------------------------------------------
 
 ---
-kind: 'compute#disk'
-id: 4299001743
-name: 'test name#1 data'
-description: 'test description#1 data'
-lastAttachTimestamp: '2134-07-22T20:53:35+00:00'
-lastDetachTimestamp: '2003-04-28T21:49:42+00:00'
-licenses:
-  - uu
-  - vv
-selfLink: 'selflink(resource(disk,1))'
-sizeGb: 5716998797
-sourceImage: 'test source_image#1 data'
-sourceImageId: 'test source_image_id#1 data'
-sourceSnapshot: 'test source_snapshot#1 data'
-sourceSnapshotId: 'test source_snapshot_id#1 data'
-type: 'test type#1 data'
-users:
-  - uu
-  - vv
-creationTimestamp: '2120-10-14T00:16:21+00:00'
+kind: compute#license
+name: title1
+chargesUseFee: false
+project: "'test project#1 data'"
+selfLink: selflink(resource(license,1))
