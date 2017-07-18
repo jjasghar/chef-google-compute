@@ -580,10 +580,6 @@ context 'gcompute_backend_bucket' do
               <<-MANIFEST
                 gcompute_backend_bucket 'title0' do
                   action :delete
-                  bucket_name 'test bucket_name#0 data'
-                  description 'test description#0 data'
-                  enable_cdn true
-                  id 2149500871
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -637,10 +633,6 @@ context 'gcompute_backend_bucket' do
                 gcompute_backend_bucket 'title0' do
                   action :delete
                   bb_label 'test name#0 data'
-                  bucket_name 'test bucket_name#0 data'
-                  description 'test description#0 data'
-                  enable_cdn true
-                  id 2149500871
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -695,10 +687,6 @@ context 'gcompute_backend_bucket' do
               <<-MANIFEST
                 gcompute_backend_bucket 'title0' do
                   action :delete
-                  bucket_name 'test bucket_name#0 data'
-                  description 'test description#0 data'
-                  enable_cdn true
-                  id 2149500871
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -756,10 +744,6 @@ context 'gcompute_backend_bucket' do
                 gcompute_backend_bucket 'title0' do
                   action :delete
                   bb_label 'test name#0 data'
-                  bucket_name 'test bucket_name#0 data'
-                  description 'test description#0 data'
-                  enable_cdn true
-                  id 2149500871
                   project 'test project#0 data'
                   credential 'mycred'
                 end

@@ -578,9 +578,6 @@ context 'gcompute_ssl_certificate' do
               <<-MANIFEST
                 gcompute_ssl_certificate 'title0' do
                   action :delete
-                  certificate 'test certificate#0 data'
-                  description 'test description#0 data'
-                  private_key 'test private_key#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -633,9 +630,6 @@ context 'gcompute_ssl_certificate' do
               <<-MANIFEST
                 gcompute_ssl_certificate 'title0' do
                   action :delete
-                  certificate 'test certificate#0 data'
-                  description 'test description#0 data'
-                  private_key 'test private_key#0 data'
                   sc_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -691,9 +685,6 @@ context 'gcompute_ssl_certificate' do
               <<-MANIFEST
                 gcompute_ssl_certificate 'title0' do
                   action :delete
-                  certificate 'test certificate#0 data'
-                  description 'test description#0 data'
-                  private_key 'test private_key#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -750,9 +741,6 @@ context 'gcompute_ssl_certificate' do
               <<-MANIFEST
                 gcompute_ssl_certificate 'title0' do
                   action :delete
-                  certificate 'test certificate#0 data'
-                  description 'test description#0 data'
-                  private_key 'test private_key#0 data'
                   sc_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'

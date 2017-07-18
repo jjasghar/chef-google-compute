@@ -608,10 +608,6 @@ context 'gcompute_network' do
               <<-MANIFEST
                 gcompute_network 'title0' do
                   action :delete
-                  auto_create_subnetworks true
-                  description 'test description#0 data'
-                  gateway_ipv4 'test gateway_ipv4#0 data'
-                  ipv4_range 'test ipv4_range#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -664,10 +660,6 @@ context 'gcompute_network' do
               <<-MANIFEST
                 gcompute_network 'title0' do
                   action :delete
-                  auto_create_subnetworks true
-                  description 'test description#0 data'
-                  gateway_ipv4 'test gateway_ipv4#0 data'
-                  ipv4_range 'test ipv4_range#0 data'
                   n_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -723,10 +715,6 @@ context 'gcompute_network' do
               <<-MANIFEST
                 gcompute_network 'title0' do
                   action :delete
-                  auto_create_subnetworks true
-                  description 'test description#0 data'
-                  gateway_ipv4 'test gateway_ipv4#0 data'
-                  ipv4_range 'test ipv4_range#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -783,10 +771,6 @@ context 'gcompute_network' do
               <<-MANIFEST
                 gcompute_network 'title0' do
                   action :delete
-                  auto_create_subnetworks true
-                  description 'test description#0 data'
-                  gateway_ipv4 'test gateway_ipv4#0 data'
-                  ipv4_range 'test ipv4_range#0 data'
                   n_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'

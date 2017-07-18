@@ -31,7 +31,8 @@
 # Current rubocop upstream will not check Chef files because of AllCops/Exclude
 AllCops:
   Exclude:
-    - 'recipes/tests~*.rb'
+    # Foodcritic and Rubocop give conflicting information.
+    - 'recipes/*'
 
 Metrics/AbcSize:
   Max: 25

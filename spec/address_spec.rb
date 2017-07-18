@@ -644,8 +644,6 @@ context 'gcompute_address' do
 
                 gcompute_address 'title0' do
                   action :delete
-                  address 'test address#0 data'
-                  description 'test description#0 data'
                   region 'resource(region,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -708,8 +706,6 @@ context 'gcompute_address' do
                 gcompute_address 'title0' do
                   action :delete
                   a_label 'test name#0 data'
-                  address 'test address#0 data'
-                  description 'test description#0 data'
                   region 'resource(region,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -775,8 +771,6 @@ context 'gcompute_address' do
 
                 gcompute_address 'title0' do
                   action :delete
-                  address 'test address#0 data'
-                  description 'test description#0 data'
                   region 'resource(region,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -843,8 +837,6 @@ context 'gcompute_address' do
                 gcompute_address 'title0' do
                   action :delete
                   a_label 'test name#0 data'
-                  address 'test address#0 data'
-                  description 'test description#0 data'
                   region 'resource(region,0)'
                   project 'test project#0 data'
                   credential 'mycred'

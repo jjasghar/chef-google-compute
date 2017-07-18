@@ -730,14 +730,6 @@ context 'gcompute_http_health_check' do
               <<-MANIFEST
                 gcompute_http_health_check 'title0' do
                   action :delete
-                  check_interval_sec 242040324
-                  description 'test description#0 data'
-                  healthy_threshold 295703256
-                  host 'test host#0 data'
-                  port 759512136
-                  request_path 'test request_path#0 data'
-                  timeout_sec 2704031721
-                  unhealthy_threshold 1604513019
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -790,15 +782,7 @@ context 'gcompute_http_health_check' do
               <<-MANIFEST
                 gcompute_http_health_check 'title0' do
                   action :delete
-                  check_interval_sec 242040324
-                  description 'test description#0 data'
-                  healthy_threshold 295703256
                   hhc_label 'test name#0 data'
-                  host 'test host#0 data'
-                  port 759512136
-                  request_path 'test request_path#0 data'
-                  timeout_sec 2704031721
-                  unhealthy_threshold 1604513019
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -853,14 +837,6 @@ context 'gcompute_http_health_check' do
               <<-MANIFEST
                 gcompute_http_health_check 'title0' do
                   action :delete
-                  check_interval_sec 242040324
-                  description 'test description#0 data'
-                  healthy_threshold 295703256
-                  host 'test host#0 data'
-                  port 759512136
-                  request_path 'test request_path#0 data'
-                  timeout_sec 2704031721
-                  unhealthy_threshold 1604513019
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -917,15 +893,7 @@ context 'gcompute_http_health_check' do
               <<-MANIFEST
                 gcompute_http_health_check 'title0' do
                   action :delete
-                  check_interval_sec 242040324
-                  description 'test description#0 data'
-                  healthy_threshold 295703256
                   hhc_label 'test name#0 data'
-                  host 'test host#0 data'
-                  port 759512136
-                  request_path 'test request_path#0 data'
-                  timeout_sec 2704031721
-                  unhealthy_threshold 1604513019
                   project 'test project#0 data'
                   credential 'mycred'
                 end

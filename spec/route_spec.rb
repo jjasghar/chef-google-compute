@@ -888,7 +888,6 @@ context 'gcompute_route' do
         context 'title == name (pass)' do
           before do
             expect_network_get_failed 1, name: 'title0'
-            expect_network_get_success_network 1
           end
 
           let(:runner) do
@@ -907,23 +906,8 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
-                gcompute_network 'resource(network,0)' do
-                  action :create
-                  n_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
                 gcompute_route 'title0' do
                   action :delete
-                  dest_range 'test dest_range#0 data'
-                  network 'resource(network,0)'
-                  next_hop_gateway 'test next_hop_gateway#0 data'
-                  next_hop_instance 'test next_hop_instance#0 data'
-                  next_hop_ip 'test next_hop_ip#0 data'
-                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
-                  priority 1108918677
-                  tags ['mm', 'nn', 'oo', 'pp']
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -956,7 +940,6 @@ context 'gcompute_route' do
         context 'title != name (pass)' do
           before do
             expect_network_get_failed 1
-            expect_network_get_success_network 1
           end
 
           let(:runner) do
@@ -975,24 +958,9 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
-                gcompute_network 'resource(network,0)' do
-                  action :create
-                  n_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
                 gcompute_route 'title0' do
                   action :delete
-                  dest_range 'test dest_range#0 data'
-                  network 'resource(network,0)'
-                  next_hop_gateway 'test next_hop_gateway#0 data'
-                  next_hop_instance 'test next_hop_instance#0 data'
-                  next_hop_ip 'test next_hop_ip#0 data'
-                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
-                  priority 1108918677
                   r_label 'test name#0 data'
-                  tags ['mm', 'nn', 'oo', 'pp']
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -1027,13 +995,8 @@ context 'gcompute_route' do
         context 'title == name (pass)' do
           before do
             expect_network_get_success 1, name: 'title0'
-            expect_network_delete 1,
-                                  'title0',
-                                  network: 'selflink(resource(network,0))'
-            expect_network_get_async 1,
-                                     name: 'title0',
-                                     network: 'selflink(resource(network,0))'
-            expect_network_get_success_network 1
+            expect_network_delete 1, 'title0'
+            expect_network_get_async 1, name: 'title0'
           end
 
           let(:runner) do
@@ -1050,23 +1013,8 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
-                gcompute_network 'resource(network,0)' do
-                  action :create
-                  n_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
                 gcompute_route 'title0' do
                   action :delete
-                  dest_range 'test dest_range#0 data'
-                  network 'resource(network,0)'
-                  next_hop_gateway 'test next_hop_gateway#0 data'
-                  next_hop_instance 'test next_hop_instance#0 data'
-                  next_hop_ip 'test next_hop_ip#0 data'
-                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
-                  priority 1108918677
-                  tags ['mm', 'nn', 'oo', 'pp']
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -1103,11 +1051,8 @@ context 'gcompute_route' do
         context 'title != name (pass)' do
           before do
             expect_network_get_success 1
-            expect_network_delete 1,
-                                  nil,
-                                  network: 'selflink(resource(network,0))'
-            expect_network_get_async 1, network: 'selflink(resource(network,0))'
-            expect_network_get_success_network 1
+            expect_network_delete 1
+            expect_network_get_async 1
           end
 
           let(:runner) do
@@ -1124,24 +1069,9 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
-                gcompute_network 'resource(network,0)' do
-                  action :create
-                  n_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
                 gcompute_route 'title0' do
                   action :delete
-                  dest_range 'test dest_range#0 data'
-                  network 'resource(network,0)'
-                  next_hop_gateway 'test next_hop_gateway#0 data'
-                  next_hop_instance 'test next_hop_instance#0 data'
-                  next_hop_ip 'test next_hop_ip#0 data'
-                  next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
-                  priority 1108918677
                   r_label 'test name#0 data'
-                  tags ['mm', 'nn', 'oo', 'pp']
                   project 'test project#0 data'
                   credential 'mycred'
                 end

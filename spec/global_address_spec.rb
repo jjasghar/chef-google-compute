@@ -478,7 +478,6 @@ context 'gcompute_global_address' do
               <<-MANIFEST
                 gcompute_global_address 'title0' do
                   action :delete
-                  description 'test description#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -531,7 +530,6 @@ context 'gcompute_global_address' do
               <<-MANIFEST
                 gcompute_global_address 'title0' do
                   action :delete
-                  description 'test description#0 data'
                   ga_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -587,7 +585,6 @@ context 'gcompute_global_address' do
               <<-MANIFEST
                 gcompute_global_address 'title0' do
                   action :delete
-                  description 'test description#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -644,7 +641,6 @@ context 'gcompute_global_address' do
               <<-MANIFEST
                 gcompute_global_address 'title0' do
                   action :delete
-                  description 'test description#0 data'
                   ga_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
