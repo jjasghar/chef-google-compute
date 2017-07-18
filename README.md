@@ -569,7 +569,16 @@ affordable storage with consistent performance characteristics.
 #### Example
 
 ```ruby
-# TODO(alexstephen): Add example here
+gcompute_disk 'data-disk-1' do
+  action :create
+  size_gb 50
+  disk_encryption_key({
+    'raw_key' => 'SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0='
+  })
+  zone 'us-central1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
 
 ```
 
@@ -701,7 +710,21 @@ you need.
 #### Example
 
 ```ruby
-# TODO(alexstephen): Add example here
+gcompute_firewall 'test-firewall-allow-ssh' do
+  action :create
+  allowed [
+    {
+      'ip_protocol' => 'tcp',
+      'ports' => ['22']
+    }
+  ]
+  target_tags [
+    'test-ssh-server',
+    'staging-ssh-server'
+  ]
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
 
 ```
 
@@ -1225,13 +1248,13 @@ gcompute_instance 'instance-test' do
                 'machineTypes/n1-standard-1'].join
   disks [
     {
-      boot   => true,
-      source => 'data-disk-1'
+      'boot'   => true,
+      'source' => 'data-disk-1'
     }
   ]
   network_interfaces [
     {
-      network => 'mynetwork-test'
+      'network' => 'mynetwork-test'
     }
   ]
   zone 'us-central1-a'

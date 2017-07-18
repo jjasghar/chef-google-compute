@@ -32,8 +32,16 @@ require 'chef/resource'
 require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
+require 'google/compute/property/backendservice_backends'
+require 'google/compute/property/backendservice_cache_key_policy'
+require 'google/compute/property/backendservice_cdn_policy'
+require 'google/compute/property/backendservice_connection_draining'
+require 'google/compute/property/boolean'
+require 'google/compute/property/double'
 require 'google/compute/property/enum'
+require 'google/compute/property/instancegroup_selflink'
 require 'google/compute/property/integer'
+require 'google/compute/property/region_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
 require 'google/compute/property/time'
@@ -43,63 +51,83 @@ module Google
   module GCOMPUTE
     # A provider to manage Google Compute Engine resources.
     # rubocop:disable Metrics/ClassLength
-    class Region < Chef::Resource
-      resource_name :gcompute_region
+    class BackendService < Chef::Resource
+      resource_name :gcompute_backend_service
 
+      property :affinity_cookie_ttl_sec,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      # backends is Array of
+      # Google::Compute::Property::BackendServiceBackendArray
+      property :backends,
+               Array,
+               coerce: \
+                 ::Google::Compute::Property::BackendServiceBackendArray.coerce,
+               desired_state: true
+      property :cdn_policy,
+               [Hash, ::Google::Compute::Data::BackeServiCdnPolic],
+               coerce: ::Google::Compute::Property::BackeServiCdnPolic.coerce,
+               desired_state: true
+      property :connection_draining,
+               [Hash, ::Google::Compute::Data::BackeServiConneDrain],
+               coerce: ::Google::Compute::Property::BackeServiConneDrain.coerce,
+               desired_state: true
       property :creation_timestamp,
                Time,
                coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_deleted,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_deprecated,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_obsolete,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_replacement,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      property :deprecated_state,
-               equal_to: %w[DEPRECATED OBSOLETE DELETED],
-               coerce: ::Google::Compute::Property::Enum.coerce,
                desired_state: true
       property :description,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                desired_state: true
+      property :enable_cdn,
+               kind_of: [TrueClass, FalseClass],
+               coerce: ::Google::Compute::Property::Boolean.coerce,
+               desired_state: true
+      # health_checks is Array of Google::Compute::Property::StringArray
+      property :health_checks,
+               Array,
+               coerce: ::Google::Compute::Property::StringArray.coerce,
+               desired_state: true
       property :id,
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
-      property :r_label,
+      property :bs_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      # zones is Array of Google::Compute::Property::StringArray
-      property :zones,
-               Array,
-               coerce: ::Google::Compute::Property::StringArray.coerce,
+      property :port_name,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :protocol,
+               equal_to: %w[HTTP HTTPS TCP SSL],
+               coerce: ::Google::Compute::Property::Enum.coerce,
+               desired_state: true
+      property :region,
+               [String, ::Google::Compute::Data::RegioSelfLinkRef],
+               coerce: ::Google::Compute::Property::RegioSelfLinkRef.coerce,
+               desired_state: true
+      property :session_affinity,
+               equal_to: %w[NONE CLIENT_IP GENERATED_COOKIE
+                            CLIENT_IP_PROTO CLIENT_IP_PORT_PROTO],
+               coerce: ::Google::Compute::Property::Enum.coerce,
+               desired_state: true
+      property :timeout_sec,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
 
-      # TODO(alexstephen): Check w/ Chef how to not expose this property yet
-      # allow the resource to store the @fetched API results for exports usage.
-      property :__fetched, Hash, desired_state: false, required: false
-
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#region')
+                               'compute#backendService')
         if fetch.nil?
-          converge_by "Creating gcompute_region[#{name}]" do
+          converge_by "Creating gcompute_backend_service[#{name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -108,82 +136,103 @@ module Google
               collection(@new_resource), fetch_auth(@new_resource),
               'application/json', resource_to_request
             )
-            @new_resource.__fetched =
-              return_if_object create_req.send, 'compute#region'
+            wait_for_operation create_req.send, @new_resource
           end
         else
           @current_resource = @new_resource.clone
+          @current_resource.affinity_cookie_ttl_sec =
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['affinityCookieTtlSec']
+            )
+          @current_resource.backends =
+            ::Google::Compute::Property::BackendServiceBackendArray.api_parse(
+              fetch['backends']
+            )
+          @current_resource.cdn_policy =
+            ::Google::Compute::Property::BackeServiCdnPolic.api_parse(
+              fetch['cdnPolicy']
+            )
+          @current_resource.connection_draining =
+            ::Google::Compute::Property::BackeServiConneDrain.api_parse(
+              fetch['connectionDraining']
+            )
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
-            )
-          @current_resource.deprecated_deleted =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated deleted])
-            )
-          @current_resource.deprecated_deprecated =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated deprecated])
-            )
-          @current_resource.deprecated_obsolete =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated obsolete])
-            )
-          @current_resource.deprecated_replacement =
-            ::Google::Compute::Property::String.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated replacement])
-            )
-          @current_resource.deprecated_state =
-            ::Google::Compute::Property::Enum.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated state])
             )
           @current_resource.description =
             ::Google::Compute::Property::String.api_parse(
               fetch['description']
             )
+          @current_resource.enable_cdn =
+            ::Google::Compute::Property::Boolean.api_parse(fetch['enableCDN'])
+          @current_resource.health_checks =
+            ::Google::Compute::Property::StringArray.api_parse(
+              fetch['healthChecks']
+            )
           @current_resource.id =
             ::Google::Compute::Property::Integer.api_parse(fetch['id'])
-          @current_resource.r_label =
+          @current_resource.bs_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
-          @current_resource.zones =
-            ::Google::Compute::Property::StringArray.api_parse(fetch['zones'])
-          @new_resource.__fetched = fetch
+          @current_resource.port_name =
+            ::Google::Compute::Property::String.api_parse(fetch['portName'])
+          @current_resource.protocol =
+            ::Google::Compute::Property::Enum.api_parse(fetch['protocol'])
+          @current_resource.region =
+            ::Google::Compute::Property::RegioSelfLinkRef.api_parse(
+              fetch['region']
+            )
+          @current_resource.session_affinity =
+            ::Google::Compute::Property::Enum.api_parse(
+              fetch['sessionAffinity']
+            )
+          @current_resource.timeout_sec =
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['timeoutSec']
+            )
 
-          cannot_change_resource 'Region cannot be edited'
+          cannot_change_resource 'BackendService cannot be edited'
         end
       end
 
       action :delete do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#region')
+                               'compute#backendService')
         unless fetch.nil?
-          converge_by "Deleting gcompute_region[#{name}]" do
+          converge_by "Deleting gcompute_backend_service[#{name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
-            return_if_object delete_req.send, 'compute#region'
+            wait_for_operation delete_req.send, @new_resource
           end
         end
       end
 
       # TODO(nelsonjr): Add actions :manage and :modify
 
-      def exports
-        {
-          name: r_label,
-          self_link: __fetched['selfLink']
-        }
-      end
-
       private
 
       action_class do
+        # rubocop:disable Metrics/MethodLength
         def resource_to_request
           {
-            kind: 'compute#region',
-            name: r_label
+            kind: 'compute#backendService',
+            affinityCookieTtlSec: affinity_cookie_ttl_sec,
+            backends: backends,
+            cdnPolicy: cdn_policy,
+            connectionDraining: connection_draining,
+            description: description,
+            enableCDN: enable_cdn,
+            healthChecks: health_checks,
+            name: bs_label,
+            portName: port_name,
+            protocol: protocol,
+            region: region,
+            sessionAffinity: session_affinity,
+            timeoutSec: timeout_sec
           }.reject { |_, v| v.nil? }.to_json
         end
+        # rubocop:enable Metrics/MethodLength
 
         def cannot_change_resource(message)
           converge_if_changed do |_vars|
@@ -196,22 +245,34 @@ module Google
           end
         end
 
+        def self.fetch_export(resource, type, id, property)
+          return if id.nil?
+          resource.resources("#{type}[#{id}]").exports[property]
+        end
+
+        # rubocop:disable Metrics/MethodLength
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.r_label,
-            kind: 'compute#region',
+            name: resource.bs_label,
+            kind: 'compute#backendService',
+            affinity_cookie_ttl_sec: resource.affinity_cookie_ttl_sec,
+            backends: resource.backends,
+            cdn_policy: resource.cdn_policy,
+            connection_draining: resource.connection_draining,
             creation_timestamp: resource.creation_timestamp,
-            deprecated_deleted: resource.deprecated_deleted,
-            deprecated_deprecated: resource.deprecated_deprecated,
-            deprecated_obsolete: resource.deprecated_obsolete,
-            deprecated_replacement: resource.deprecated_replacement,
-            deprecated_state: resource.deprecated_state,
             description: resource.description,
+            enable_cdn: resource.enable_cdn,
+            health_checks: resource.health_checks,
             id: resource.id,
-            zones: resource.zones
+            port_name: resource.port_name,
+            protocol: resource.protocol,
+            region: resource.region,
+            session_affinity: resource.session_affinity,
+            timeout_sec: resource.timeout_sec
           }.reject { |_, v| v.nil? }
         end
+        # rubocop:enable Metrics/MethodLength
 
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
@@ -289,7 +350,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions',
+              'projects/{{project}}/global/backendServices',
               data
             )
           )
@@ -303,7 +364,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions/{{name}}',
+              'projects/{{project}}/global/backendServices/{{name}}',
               data
             )
           )
@@ -348,6 +409,56 @@ module Google
             template.gsub!(/{{#{v}}}/, CGI.escape(data[v].to_s))
           end
           template
+        end
+
+        def expand_variables(template, var_data, extra_data = {})
+          self.class.expand_variables(template, var_data, extra_data)
+        end
+
+        def fetch_resource(resource, self_link, kind)
+          self.class.fetch_resource(resource, self_link, kind)
+        end
+
+        def async_op_url(data, extra_data = {})
+          URI.join(
+            'https://www.googleapis.com/compute/v1/',
+            expand_variables(
+              'projects/{{project}}/global/operations/{{op_id}}',
+              data, extra_data
+            )
+          )
+        end
+
+        def wait_for_operation(response, resource)
+          op_result = return_if_object(response, 'compute#operation')
+          return if op_result.nil?
+          status = ::Google::HashUtils.navigate(op_result, %w[status])
+          wait_done = wait_for_completion(status, op_result, resource)
+          fetch_resource(
+            resource,
+            URI.parse(::Google::HashUtils.navigate(wait_done,
+                                                   %w[targetLink])),
+            'compute#backendService'
+          )
+        end
+
+        def wait_for_completion(status, op_result, resource)
+          op_id = ::Google::HashUtils.navigate(op_result, %w[name])
+          op_uri = async_op_url(resource, op_id: op_id)
+          while status != 'DONE'
+            debug("Waiting for completion of operation #{op_id}")
+            raise_if_errors op_result, %w[error errors], 'message'
+            sleep 1.0
+            raise "Invalid result '#{status}' on gcompute_backend_service." \
+              unless %w[PENDING RUNNING DONE].include?(status)
+            op_result = fetch_resource(resource, op_uri, 'compute#operation')
+            status = ::Google::HashUtils.navigate(op_result, %w[status])
+          end
+          op_result
+        end
+
+        def raise_if_errors(response, err_path, msg_field)
+          self.class.raise_if_errors(response, err_path, msg_field)
         end
 
         def self.fetch_resource(resource, self_link, kind)

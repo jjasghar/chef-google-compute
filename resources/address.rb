@@ -66,6 +66,7 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
+      # users is Array of Google::Compute::Property::StringArray
       property :users,
                Array,
                coerce: ::Google::Compute::Property::StringArray.coerce,

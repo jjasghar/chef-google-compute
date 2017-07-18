@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~instance]"
+#       "recipe[gcompute::examples~disk]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -66,33 +66,10 @@ end
 
 gcompute_disk 'data-disk-1' do
   action :create
-  zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-gcompute_network 'mynetwork-test' do
-  action :create
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-gcompute_instance 'instance-test' do
-  action :create
-  machine_type ['https://www.googleapis.com/compute/v1/projects/',
-                'google.com:graphite-playground/zones/us-central1-a/',
-                'machineTypes/n1-standard-1'].join
-  disks [
-    {
-      'boot'   => true,
-      'source' => 'data-disk-1'
-    }
-  ]
-  network_interfaces [
-    {
-      'network' => 'mynetwork-test'
-    }
-  ]
+  size_gb 50
+  disk_encryption_key({
+    'raw_key' => 'SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0='
+  })
   zone 'us-central1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'

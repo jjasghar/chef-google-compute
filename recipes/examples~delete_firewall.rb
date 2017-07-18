@@ -36,14 +36,36 @@
 # For more information on the gauth_credential parameters and providers please
 # refer to its detailed documentation at:
 #
+# For the sake of this example we set the parameter 'path' to point to the file
+# that contains your credential in JSON format. And for convenience this example
+# allows a variable named $cred_path to be provided to it. If running from the
+# command line you can pass it via the command line:
+#
+#   CRED_PATH=/path/to/my/cred.json \
+#     chef-client -z --runlist \
+#       "recipe[gcompute::examples~delete_firewall]"
+#
+# For convenience you optionally can add it to your ~/.bash_profile (or the
+# respective .profile settings) environment:
+#
+#   export CRED_PATH=/path/to/my/cred.json
+#
 # TODO(nelsonjr): Add link to documentation on Supermarket / Github
 # ________________________
+
+raise "Missing parameter 'CRED_PATH'. Please read docs at #{__FILE__}" \
+  unless ENV.key?('CRED_PATH')
+
 gauth_credential 'mycred' do
   action :serviceaccount
-  path '/home/nelsonjr/my_account.json'
+  path ENV['CRED_PATH'] # e.g. '/path/to/my_account.json'
   scopes [
-    'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+    'https://www.googleapis.com/auth/compute'
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_firewall 'test-firewall-allow-ssh' do
+  action :delete
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

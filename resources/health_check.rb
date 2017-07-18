@@ -33,9 +33,12 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/property/enum'
+require 'google/compute/property/healthcheck_http_health_check'
+require 'google/compute/property/healthcheck_https_health_check'
+require 'google/compute/property/healthcheck_ssl_health_check'
+require 'google/compute/property/healthcheck_tcp_health_check'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
-require 'google/compute/property/string_array'
 require 'google/compute/property/time'
 require 'google/hash_utils'
 
@@ -43,63 +46,70 @@ module Google
   module GCOMPUTE
     # A provider to manage Google Compute Engine resources.
     # rubocop:disable Metrics/ClassLength
-    class Region < Chef::Resource
-      resource_name :gcompute_region
+    class HealthCheck < Chef::Resource
+      resource_name :gcompute_health_check
 
+      property :check_interval_sec,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
       property :creation_timestamp,
                Time,
                coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_deleted,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_deprecated,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_obsolete,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_replacement,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      property :deprecated_state,
-               equal_to: %w[DEPRECATED OBSOLETE DELETED],
-               coerce: ::Google::Compute::Property::Enum.coerce,
                desired_state: true
       property :description,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                desired_state: true
+      property :healthy_threshold,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
       property :id,
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
-      property :r_label,
+      property :hc_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      # zones is Array of Google::Compute::Property::StringArray
-      property :zones,
-               Array,
-               coerce: ::Google::Compute::Property::StringArray.coerce,
+      property :timeout_sec,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :unhealthy_threshold,
+               Integer,
+               coerce: ::Google::Compute::Property::Integer.coerce,
+               desired_state: true
+      property :type,
+               equal_to: %w[TCP SSL HTTP],
+               coerce: ::Google::Compute::Property::Enum.coerce,
+               desired_state: true
+      property :http_health_check,
+               [Hash, ::Google::Compute::Data::HealChecHttpHealChec],
+               coerce: ::Google::Compute::Property::HealChecHttpHealChec.coerce,
+               desired_state: true
+      property :https_health_check,
+               [Hash, ::Google::Compute::Data::HealChecHttpHealChec],
+               coerce: ::Google::Compute::Property::HealChecHttpHealChec.coerce,
+               desired_state: true
+      property :tcp_health_check,
+               [Hash, ::Google::Compute::Data::HealChecTcpHealChec],
+               coerce: ::Google::Compute::Property::HealChecTcpHealChec.coerce,
+               desired_state: true
+      property :ssl_health_check,
+               [Hash, ::Google::Compute::Data::HealChecSslHealChec],
+               coerce: ::Google::Compute::Property::HealChecSslHealChec.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
 
-      # TODO(alexstephen): Check w/ Chef how to not expose this property yet
-      # allow the resource to store the @fetched API results for exports usage.
-      property :__fetched, Hash, desired_state: false, required: false
-
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#region')
+                               'compute#healthCheck')
         if fetch.nil?
-          converge_by "Creating gcompute_region[#{name}]" do
+          converge_by "Creating gcompute_health_check[#{name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -108,80 +118,93 @@ module Google
               collection(@new_resource), fetch_auth(@new_resource),
               'application/json', resource_to_request
             )
-            @new_resource.__fetched =
-              return_if_object create_req.send, 'compute#region'
+            wait_for_operation create_req.send, @new_resource
           end
         else
           @current_resource = @new_resource.clone
+          @current_resource.check_interval_sec =
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['checkIntervalSec']
+            )
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
-            )
-          @current_resource.deprecated_deleted =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated deleted])
-            )
-          @current_resource.deprecated_deprecated =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated deprecated])
-            )
-          @current_resource.deprecated_obsolete =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated obsolete])
-            )
-          @current_resource.deprecated_replacement =
-            ::Google::Compute::Property::String.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated replacement])
-            )
-          @current_resource.deprecated_state =
-            ::Google::Compute::Property::Enum.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated state])
             )
           @current_resource.description =
             ::Google::Compute::Property::String.api_parse(
               fetch['description']
             )
+          @current_resource.healthy_threshold =
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['healthyThreshold']
+            )
           @current_resource.id =
             ::Google::Compute::Property::Integer.api_parse(fetch['id'])
-          @current_resource.r_label =
+          @current_resource.hc_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
-          @current_resource.zones =
-            ::Google::Compute::Property::StringArray.api_parse(fetch['zones'])
-          @new_resource.__fetched = fetch
+          @current_resource.timeout_sec =
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['timeoutSec']
+            )
+          @current_resource.unhealthy_threshold =
+            ::Google::Compute::Property::Integer.api_parse(
+              fetch['unhealthyThreshold']
+            )
+          @current_resource.type =
+            ::Google::Compute::Property::Enum.api_parse(fetch['type'])
+          @current_resource.http_health_check =
+            ::Google::Compute::Property::HealChecHttpHealChec.api_parse(
+              fetch['httpHealthCheck']
+            )
+          @current_resource.https_health_check =
+            ::Google::Compute::Property::HealChecHttpHealChec.api_parse(
+              fetch['httpsHealthCheck']
+            )
+          @current_resource.tcp_health_check =
+            ::Google::Compute::Property::HealChecTcpHealChec.api_parse(
+              fetch['tcpHealthCheck']
+            )
+          @current_resource.ssl_health_check =
+            ::Google::Compute::Property::HealChecSslHealChec.api_parse(
+              fetch['sslHealthCheck']
+            )
 
-          cannot_change_resource 'Region cannot be edited'
+          cannot_change_resource 'HealthCheck cannot be edited'
         end
       end
 
       action :delete do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#region')
+                               'compute#healthCheck')
         unless fetch.nil?
-          converge_by "Deleting gcompute_region[#{name}]" do
+          converge_by "Deleting gcompute_health_check[#{name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
-            return_if_object delete_req.send, 'compute#region'
+            wait_for_operation delete_req.send, @new_resource
           end
         end
       end
 
       # TODO(nelsonjr): Add actions :manage and :modify
 
-      def exports
-        {
-          name: r_label,
-          self_link: __fetched['selfLink']
-        }
-      end
-
       private
 
       action_class do
         def resource_to_request
           {
-            kind: 'compute#region',
-            name: r_label
+            kind: 'compute#healthCheck',
+            checkIntervalSec: check_interval_sec,
+            description: description,
+            healthyThreshold: healthy_threshold,
+            name: hc_label,
+            timeoutSec: timeout_sec,
+            unhealthyThreshold: unhealthy_threshold,
+            type: type,
+            httpHealthCheck: http_health_check,
+            httpsHealthCheck: https_health_check,
+            tcpHealthCheck: tcp_health_check,
+            sslHealthCheck: ssl_health_check
           }.reject { |_, v| v.nil? }.to_json
         end
 
@@ -196,22 +219,27 @@ module Google
           end
         end
 
+        # rubocop:disable Metrics/MethodLength
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.r_label,
-            kind: 'compute#region',
+            name: resource.hc_label,
+            kind: 'compute#healthCheck',
+            check_interval_sec: resource.check_interval_sec,
             creation_timestamp: resource.creation_timestamp,
-            deprecated_deleted: resource.deprecated_deleted,
-            deprecated_deprecated: resource.deprecated_deprecated,
-            deprecated_obsolete: resource.deprecated_obsolete,
-            deprecated_replacement: resource.deprecated_replacement,
-            deprecated_state: resource.deprecated_state,
             description: resource.description,
+            healthy_threshold: resource.healthy_threshold,
             id: resource.id,
-            zones: resource.zones
+            timeout_sec: resource.timeout_sec,
+            unhealthy_threshold: resource.unhealthy_threshold,
+            type: resource.type,
+            http_health_check: resource.http_health_check,
+            https_health_check: resource.https_health_check,
+            tcp_health_check: resource.tcp_health_check,
+            ssl_health_check: resource.ssl_health_check
           }.reject { |_, v| v.nil? }
         end
+        # rubocop:enable Metrics/MethodLength
 
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
@@ -289,7 +317,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions',
+              'projects/{{project}}/global/healthChecks',
               data
             )
           )
@@ -303,7 +331,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions/{{name}}',
+              'projects/{{project}}/global/healthChecks/{{name}}',
               data
             )
           )
@@ -348,6 +376,56 @@ module Google
             template.gsub!(/{{#{v}}}/, CGI.escape(data[v].to_s))
           end
           template
+        end
+
+        def expand_variables(template, var_data, extra_data = {})
+          self.class.expand_variables(template, var_data, extra_data)
+        end
+
+        def fetch_resource(resource, self_link, kind)
+          self.class.fetch_resource(resource, self_link, kind)
+        end
+
+        def async_op_url(data, extra_data = {})
+          URI.join(
+            'https://www.googleapis.com/compute/v1/',
+            expand_variables(
+              'projects/{{project}}/global/operations/{{op_id}}',
+              data, extra_data
+            )
+          )
+        end
+
+        def wait_for_operation(response, resource)
+          op_result = return_if_object(response, 'compute#operation')
+          return if op_result.nil?
+          status = ::Google::HashUtils.navigate(op_result, %w[status])
+          wait_done = wait_for_completion(status, op_result, resource)
+          fetch_resource(
+            resource,
+            URI.parse(::Google::HashUtils.navigate(wait_done,
+                                                   %w[targetLink])),
+            'compute#healthCheck'
+          )
+        end
+
+        def wait_for_completion(status, op_result, resource)
+          op_id = ::Google::HashUtils.navigate(op_result, %w[name])
+          op_uri = async_op_url(resource, op_id: op_id)
+          while status != 'DONE'
+            debug("Waiting for completion of operation #{op_id}")
+            raise_if_errors op_result, %w[error errors], 'message'
+            sleep 1.0
+            raise "Invalid result '#{status}' on gcompute_health_check." \
+              unless %w[PENDING RUNNING DONE].include?(status)
+            op_result = fetch_resource(resource, op_uri, 'compute#operation')
+            status = ::Google::HashUtils.navigate(op_result, %w[status])
+          end
+          op_result
+        end
+
+        def raise_if_errors(response, err_path, msg_field)
+          self.class.raise_if_errors(response, err_path, msg_field)
         end
 
         def self.fetch_resource(resource, self_link, kind)

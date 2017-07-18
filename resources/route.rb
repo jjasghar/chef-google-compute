@@ -61,6 +61,7 @@ module Google
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
+      # tags is Array of Google::Compute::Property::StringArray
       property :tags,
                Array,
                coerce: ::Google::Compute::Property::StringArray.coerce,

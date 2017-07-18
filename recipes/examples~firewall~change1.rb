@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~instance]"
+#       "recipe[gcompute::examples~firewall~change1]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,36 +64,18 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_disk 'data-disk-1' do
+gcompute_firewall 'test-firewall-allow-ssh' do
   action :create
-  zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-gcompute_network 'mynetwork-test' do
-  action :create
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-gcompute_instance 'instance-test' do
-  action :create
-  machine_type ['https://www.googleapis.com/compute/v1/projects/',
-                'google.com:graphite-playground/zones/us-central1-a/',
-                'machineTypes/n1-standard-1'].join
-  disks [
+  allowed [
     {
-      'boot'   => true,
-      'source' => 'data-disk-1'
+      'ip_protocol' => 'tcp',
+      'ports' => ['22']
+    },
+    {
+      'ip_protocol' => 'tcp',
+      'ports' => ['2222']
     }
   ]
-  network_interfaces [
-    {
-      'network' => 'mynetwork-test'
-    }
-  ]
-  zone 'us-central1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

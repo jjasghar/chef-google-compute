@@ -32,7 +32,7 @@ require 'chef/resource'
 require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
-require 'google/compute/property/enum'
+require 'google/compute/property/firewall_allowed'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
@@ -43,32 +43,17 @@ module Google
   module GCOMPUTE
     # A provider to manage Google Compute Engine resources.
     # rubocop:disable Metrics/ClassLength
-    class Region < Chef::Resource
-      resource_name :gcompute_region
+    class Firewall < Chef::Resource
+      resource_name :gcompute_firewall
 
+      # allowed is Array of Google::Compute::Property::FirewallAllowedArray
+      property :allowed,
+               Array,
+               coerce: ::Google::Compute::Property::FirewallAllowedArray.coerce,
+               desired_state: true
       property :creation_timestamp,
                Time,
                coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_deleted,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_deprecated,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_obsolete,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :deprecated_replacement,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      property :deprecated_state,
-               equal_to: %w[DEPRECATED OBSOLETE DELETED],
-               coerce: ::Google::Compute::Property::Enum.coerce,
                desired_state: true
       property :description,
                String,
@@ -78,12 +63,26 @@ module Google
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
-      property :r_label,
+      property :f_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      # zones is Array of Google::Compute::Property::StringArray
-      property :zones,
+      property :network,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      # source_ranges is Array of Google::Compute::Property::StringArray
+      property :source_ranges,
+               Array,
+               coerce: ::Google::Compute::Property::StringArray.coerce,
+               desired_state: true
+      # source_tags is Array of Google::Compute::Property::StringArray
+      property :source_tags,
+               Array,
+               coerce: ::Google::Compute::Property::StringArray.coerce,
+               desired_state: true
+      # target_tags is Array of Google::Compute::Property::StringArray
+      property :target_tags,
                Array,
                coerce: ::Google::Compute::Property::StringArray.coerce,
                desired_state: true
@@ -91,15 +90,11 @@ module Google
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
 
-      # TODO(alexstephen): Check w/ Chef how to not expose this property yet
-      # allow the resource to store the @fetched API results for exports usage.
-      property :__fetched, Hash, desired_state: false, required: false
-
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#region')
+                               'compute#firewall')
         if fetch.nil?
-          converge_by "Creating gcompute_region[#{name}]" do
+          converge_by "Creating gcompute_firewall[#{name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -108,34 +103,17 @@ module Google
               collection(@new_resource), fetch_auth(@new_resource),
               'application/json', resource_to_request
             )
-            @new_resource.__fetched =
-              return_if_object create_req.send, 'compute#region'
+            wait_for_operation create_req.send, @new_resource
           end
         else
           @current_resource = @new_resource.clone
+          @current_resource.allowed =
+            ::Google::Compute::Property::FirewallAllowedArray.api_parse(
+              fetch['allowed']
+            )
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(
               fetch['creationTimestamp']
-            )
-          @current_resource.deprecated_deleted =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated deleted])
-            )
-          @current_resource.deprecated_deprecated =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated deprecated])
-            )
-          @current_resource.deprecated_obsolete =
-            ::Google::Compute::Property::Time.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated obsolete])
-            )
-          @current_resource.deprecated_replacement =
-            ::Google::Compute::Property::String.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated replacement])
-            )
-          @current_resource.deprecated_state =
-            ::Google::Compute::Property::Enum.api_parse(
-              ::Google::HashUtils.navigate(fetch, %w[deprecated state])
             )
           @current_resource.description =
             ::Google::Compute::Property::String.api_parse(
@@ -143,45 +121,55 @@ module Google
             )
           @current_resource.id =
             ::Google::Compute::Property::Integer.api_parse(fetch['id'])
-          @current_resource.r_label =
+          @current_resource.f_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
-          @current_resource.zones =
-            ::Google::Compute::Property::StringArray.api_parse(fetch['zones'])
-          @new_resource.__fetched = fetch
+          @current_resource.network =
+            ::Google::Compute::Property::String.api_parse(fetch['network'])
+          @current_resource.source_ranges =
+            ::Google::Compute::Property::StringArray.api_parse(
+              fetch['sourceRanges']
+            )
+          @current_resource.source_tags =
+            ::Google::Compute::Property::StringArray.api_parse(
+              fetch['sourceTags']
+            )
+          @current_resource.target_tags =
+            ::Google::Compute::Property::StringArray.api_parse(
+              fetch['targetTags']
+            )
 
-          cannot_change_resource 'Region cannot be edited'
+          cannot_change_resource 'Firewall cannot be edited'
         end
       end
 
       action :delete do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#region')
+                               'compute#firewall')
         unless fetch.nil?
-          converge_by "Deleting gcompute_region[#{name}]" do
+          converge_by "Deleting gcompute_firewall[#{name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
-            return_if_object delete_req.send, 'compute#region'
+            wait_for_operation delete_req.send, @new_resource
           end
         end
       end
 
       # TODO(nelsonjr): Add actions :manage and :modify
 
-      def exports
-        {
-          name: r_label,
-          self_link: __fetched['selfLink']
-        }
-      end
-
       private
 
       action_class do
         def resource_to_request
           {
-            kind: 'compute#region',
-            name: r_label
+            kind: 'compute#firewall',
+            allowed: allowed,
+            description: description,
+            name: f_label,
+            network: network,
+            sourceRanges: source_ranges,
+            sourceTags: source_tags,
+            targetTags: target_tags
           }.reject { |_, v| v.nil? }.to_json
         end
 
@@ -199,17 +187,16 @@ module Google
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.r_label,
-            kind: 'compute#region',
+            name: resource.f_label,
+            kind: 'compute#firewall',
+            allowed: resource.allowed,
             creation_timestamp: resource.creation_timestamp,
-            deprecated_deleted: resource.deprecated_deleted,
-            deprecated_deprecated: resource.deprecated_deprecated,
-            deprecated_obsolete: resource.deprecated_obsolete,
-            deprecated_replacement: resource.deprecated_replacement,
-            deprecated_state: resource.deprecated_state,
             description: resource.description,
             id: resource.id,
-            zones: resource.zones
+            network: resource.network,
+            source_ranges: resource.source_ranges,
+            source_tags: resource.source_tags,
+            target_tags: resource.target_tags
           }.reject { |_, v| v.nil? }
         end
 
@@ -289,7 +276,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions',
+              'projects/{{project}}/global/firewalls',
               data
             )
           )
@@ -303,7 +290,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/regions/{{name}}',
+              'projects/{{project}}/global/firewalls/{{name}}',
               data
             )
           )
@@ -348,6 +335,56 @@ module Google
             template.gsub!(/{{#{v}}}/, CGI.escape(data[v].to_s))
           end
           template
+        end
+
+        def expand_variables(template, var_data, extra_data = {})
+          self.class.expand_variables(template, var_data, extra_data)
+        end
+
+        def fetch_resource(resource, self_link, kind)
+          self.class.fetch_resource(resource, self_link, kind)
+        end
+
+        def async_op_url(data, extra_data = {})
+          URI.join(
+            'https://www.googleapis.com/compute/v1/',
+            expand_variables(
+              'projects/{{project}}/global/operations/{{op_id}}',
+              data, extra_data
+            )
+          )
+        end
+
+        def wait_for_operation(response, resource)
+          op_result = return_if_object(response, 'compute#operation')
+          return if op_result.nil?
+          status = ::Google::HashUtils.navigate(op_result, %w[status])
+          wait_done = wait_for_completion(status, op_result, resource)
+          fetch_resource(
+            resource,
+            URI.parse(::Google::HashUtils.navigate(wait_done,
+                                                   %w[targetLink])),
+            'compute#firewall'
+          )
+        end
+
+        def wait_for_completion(status, op_result, resource)
+          op_id = ::Google::HashUtils.navigate(op_result, %w[name])
+          op_uri = async_op_url(resource, op_id: op_id)
+          while status != 'DONE'
+            debug("Waiting for completion of operation #{op_id}")
+            raise_if_errors op_result, %w[error errors], 'message'
+            sleep 1.0
+            raise "Invalid result '#{status}' on gcompute_firewall." \
+              unless %w[PENDING RUNNING DONE].include?(status)
+            op_result = fetch_resource(resource, op_uri, 'compute#operation')
+            status = ::Google::HashUtils.navigate(op_result, %w[status])
+          end
+          op_result
+        end
+
+        def raise_if_errors(response, err_path, msg_field)
+          self.class.raise_if_errors(response, err_path, msg_field)
         end
 
         def self.fetch_resource(resource, self_link, kind)

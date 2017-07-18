@@ -64,4 +64,18 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_firewall 'test-firewall-allow-ssh' do
+  action :create
+  allowed [
+    {
+      'ip_protocol' => 'tcp',
+      'ports' => ['22']
+    }
+  ]
+  target_tags [
+    'test-ssh-server',
+    'staging-ssh-server'
+  ]
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end

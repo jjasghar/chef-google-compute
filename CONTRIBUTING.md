@@ -95,13 +95,44 @@ chef-codegen:
   * libraries/google/compute/network/get.rb
   * libraries/google/compute/network/post.rb
   * libraries/google/compute/property/array.rb
+  * libraries/google/compute/property/backendservice_backends.rb
+  * libraries/google/compute/property/backendservice_cache_key_policy.rb
+  * libraries/google/compute/property/backendservice_cdn_policy.rb
+  * libraries/google/compute/property/backendservice_connection_draining.rb
   * libraries/google/compute/property/boolean.rb
+  * libraries/google/compute/property/disk_disk_encryption_key.rb
+  * libraries/google/compute/property/disk_selflink.rb
+  * libraries/google/compute/property/disk_source_image_encryption_key.rb
+  * libraries/google/compute/property/disk_source_snapshot_encryption_key.rb
+  * libraries/google/compute/property/double.rb
   * libraries/google/compute/property/enum.rb
+  * libraries/google/compute/property/firewall_allowed.rb
+  * libraries/google/compute/property/healthcheck_http_health_check.rb
+  * libraries/google/compute/property/healthcheck_https_health_check.rb
+  * libraries/google/compute/property/healthcheck_ssl_health_check.rb
+  * libraries/google/compute/property/healthcheck_tcp_health_check.rb
+  * libraries/google/compute/property/image_deprecated.rb
+  * libraries/google/compute/property/image_guest_os_features.rb
+  * libraries/google/compute/property/image_image_encryption_key.rb
+  * libraries/google/compute/property/image_raw_disk.rb
+  * libraries/google/compute/property/image_source_disk_encryption_key.rb
+  * libraries/google/compute/property/instance_disk_encryption_key.rb
+  * libraries/google/compute/property/instance_disks.rb
+  * libraries/google/compute/property/instance_guest_accelerators.rb
+  * libraries/google/compute/property/instance_initialize_params.rb
+  * libraries/google/compute/property/instance_network_interfaces.rb
+  * libraries/google/compute/property/instance_scheduling.rb
+  * libraries/google/compute/property/instance_service_accounts.rb
+  * libraries/google/compute/property/instance_tags.rb
+  * libraries/google/compute/property/instancegroup_named_ports.rb
+  * libraries/google/compute/property/instancegroup_selflink.rb
   * libraries/google/compute/property/integer.rb
   * libraries/google/compute/property/network_selflink.rb
   * libraries/google/compute/property/region_name.rb
+  * libraries/google/compute/property/region_selflink.rb
   * libraries/google/compute/property/string.rb
   * libraries/google/compute/property/string_array.rb
+  * libraries/google/compute/property/subnetwork_selflink.rb
   * libraries/google/compute/property/time.rb
   * LICENSE
   * metadata.rb
@@ -112,6 +143,7 @@ chef-codegen:
   * recipes/examples~delete_address.rb
   * recipes/examples~delete_backend_bucket.rb
   * recipes/examples~delete_backend_service.rb
+  * recipes/examples~delete_disk.rb
   * recipes/examples~delete_firewall.rb
   * recipes/examples~delete_global_address.rb
   * recipes/examples~delete_health_check.rb
@@ -124,8 +156,10 @@ chef-codegen:
   * recipes/examples~delete_route.rb
   * recipes/examples~delete_ssl_certificate.rb
   * recipes/examples~delete_subnetwork.rb
+  * recipes/examples~disk.rb
   * recipes/examples~disk_type.rb
   * recipes/examples~firewall.rb
+  * recipes/examples~firewall~change1.rb
   * recipes/examples~global_address.rb
   * recipes/examples~health_check.rb
   * recipes/examples~http_health_check.rb
@@ -144,10 +178,17 @@ chef-codegen:
   * recipes/examples~subnetwork.rb
   * resources/address.rb
   * resources/backend_bucket.rb
+  * resources/backend_service.rb
+  * resources/disk.rb
   * resources/disk_type.rb
+  * resources/firewall.rb
   * resources/global_address.rb
+  * resources/health_check.rb
   * resources/http_health_check.rb
   * resources/https_health_check.rb
+  * resources/image.rb
+  * resources/instance.rb
+  * resources/instance_group.rb
   * resources/license.rb
   * resources/network.rb
   * resources/region.rb
@@ -156,6 +197,7 @@ chef-codegen:
   * resources/subnetwork.rb
   * spec/address_spec.rb
   * spec/backend_bucket_spec.rb
+  * spec/backend_service_spec.rb
   * spec/bundle.rb
   * spec/cookbooks/google-gauth/metadata.rb
   * spec/data/network/gcompute_address/success1~name.yaml
@@ -170,18 +212,42 @@ chef-codegen:
   * spec/data/network/gcompute_backend_bucket/success2~title.yaml
   * spec/data/network/gcompute_backend_bucket/success3~name.yaml
   * spec/data/network/gcompute_backend_bucket/success3~title.yaml
+  * spec/data/network/gcompute_backend_service/success1~name.yaml
+  * spec/data/network/gcompute_backend_service/success1~title.yaml
+  * spec/data/network/gcompute_backend_service/success2~name.yaml
+  * spec/data/network/gcompute_backend_service/success2~title.yaml
+  * spec/data/network/gcompute_backend_service/success3~name.yaml
+  * spec/data/network/gcompute_backend_service/success3~title.yaml
+  * spec/data/network/gcompute_disk/success1~name.yaml
+  * spec/data/network/gcompute_disk/success1~title.yaml
+  * spec/data/network/gcompute_disk/success2~name.yaml
+  * spec/data/network/gcompute_disk/success2~title.yaml
+  * spec/data/network/gcompute_disk/success3~name.yaml
+  * spec/data/network/gcompute_disk/success3~title.yaml
   * spec/data/network/gcompute_disk_type/success1~name.yaml
   * spec/data/network/gcompute_disk_type/success1~title.yaml
   * spec/data/network/gcompute_disk_type/success2~name.yaml
   * spec/data/network/gcompute_disk_type/success2~title.yaml
   * spec/data/network/gcompute_disk_type/success3~name.yaml
   * spec/data/network/gcompute_disk_type/success3~title.yaml
+  * spec/data/network/gcompute_firewall/success1~name.yaml
+  * spec/data/network/gcompute_firewall/success1~title.yaml
+  * spec/data/network/gcompute_firewall/success2~name.yaml
+  * spec/data/network/gcompute_firewall/success2~title.yaml
+  * spec/data/network/gcompute_firewall/success3~name.yaml
+  * spec/data/network/gcompute_firewall/success3~title.yaml
   * spec/data/network/gcompute_global_address/success1~name.yaml
   * spec/data/network/gcompute_global_address/success1~title.yaml
   * spec/data/network/gcompute_global_address/success2~name.yaml
   * spec/data/network/gcompute_global_address/success2~title.yaml
   * spec/data/network/gcompute_global_address/success3~name.yaml
   * spec/data/network/gcompute_global_address/success3~title.yaml
+  * spec/data/network/gcompute_health_check/success1~name.yaml
+  * spec/data/network/gcompute_health_check/success1~title.yaml
+  * spec/data/network/gcompute_health_check/success2~name.yaml
+  * spec/data/network/gcompute_health_check/success2~title.yaml
+  * spec/data/network/gcompute_health_check/success3~name.yaml
+  * spec/data/network/gcompute_health_check/success3~title.yaml
   * spec/data/network/gcompute_http_health_check/success1~name.yaml
   * spec/data/network/gcompute_http_health_check/success1~title.yaml
   * spec/data/network/gcompute_http_health_check/success2~name.yaml
@@ -194,6 +260,24 @@ chef-codegen:
   * spec/data/network/gcompute_https_health_check/success2~title.yaml
   * spec/data/network/gcompute_https_health_check/success3~name.yaml
   * spec/data/network/gcompute_https_health_check/success3~title.yaml
+  * spec/data/network/gcompute_image/success1~name.yaml
+  * spec/data/network/gcompute_image/success1~title.yaml
+  * spec/data/network/gcompute_image/success2~name.yaml
+  * spec/data/network/gcompute_image/success2~title.yaml
+  * spec/data/network/gcompute_image/success3~name.yaml
+  * spec/data/network/gcompute_image/success3~title.yaml
+  * spec/data/network/gcompute_instance/success1~name.yaml
+  * spec/data/network/gcompute_instance/success1~title.yaml
+  * spec/data/network/gcompute_instance/success2~name.yaml
+  * spec/data/network/gcompute_instance/success2~title.yaml
+  * spec/data/network/gcompute_instance/success3~name.yaml
+  * spec/data/network/gcompute_instance/success3~title.yaml
+  * spec/data/network/gcompute_instance_group/success1~name.yaml
+  * spec/data/network/gcompute_instance_group/success1~title.yaml
+  * spec/data/network/gcompute_instance_group/success2~name.yaml
+  * spec/data/network/gcompute_instance_group/success2~title.yaml
+  * spec/data/network/gcompute_instance_group/success3~name.yaml
+  * spec/data/network/gcompute_instance_group/success3~title.yaml
   * spec/data/network/gcompute_license/success1~name.yaml
   * spec/data/network/gcompute_license/success1~title.yaml
   * spec/data/network/gcompute_license/success2~name.yaml
@@ -230,13 +314,19 @@ chef-codegen:
   * spec/data/network/gcompute_subnetwork/success2~title.yaml
   * spec/data/network/gcompute_subnetwork/success3~name.yaml
   * spec/data/network/gcompute_subnetwork/success3~title.yaml
+  * spec/disk_spec.rb
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
   * spec/fake_cred.rb
+  * spec/firewall_spec.rb
   * spec/foodcritic_spec.rb
   * spec/global_address_spec.rb
+  * spec/health_check_spec.rb
   * spec/http_health_check_spec.rb
   * spec/https_health_check_spec.rb
+  * spec/image_spec.rb
+  * spec/instance_group_spec.rb
+  * spec/instance_spec.rb
   * spec/license_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb

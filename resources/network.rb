@@ -66,6 +66,7 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
+      # subnetworks is Array of Google::Compute::Property::StringArray
       property :subnetworks,
                Array,
                coerce: ::Google::Compute::Property::StringArray.coerce,
