@@ -82,3 +82,7 @@ end
 def delete(res_type, res_name)
   ChefSpec::Matchers::ResourceMatcher.new(res_type, :delete, res_name)
 end
+
+RSpec.configure do |c|
+  c.filter_run_excluding broken: true
+end
