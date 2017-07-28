@@ -32,6 +32,7 @@ require 'chef/resource'
 require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
+require 'google/compute/network/put'
 require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
@@ -149,7 +150,7 @@ module Google
             ::Google::Compute::Property::StringArray.api_parse(fetch['zones'])
           @new_resource.__fetched = fetch
 
-          cannot_change_resource 'Region cannot be edited'
+          update
         end
       end
 
@@ -185,12 +186,13 @@ module Google
           }.reject { |_, v| v.nil? }.to_json
         end
 
-        def cannot_change_resource(message)
+        def update
           converge_if_changed do |_vars|
             # TODO(nelsonjr): Determine how to print indented like upd converge
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
+            message = 'InstanceGroup cannot be edited'
             Chef::Log.fatal message
             raise message
           end

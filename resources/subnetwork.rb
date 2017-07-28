@@ -32,6 +32,7 @@ require 'chef/resource'
 require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
+require 'google/compute/network/put'
 require 'google/compute/property/boolean'
 require 'google/compute/property/integer'
 require 'google/compute/property/network_selflink'
@@ -127,7 +128,7 @@ module Google
             )
           @new_resource.__fetched = fetch
 
-          cannot_change_resource 'Subnetwork cannot be edited'
+          update
         end
       end
 
@@ -168,14 +169,18 @@ module Google
           }.reject { |_, v| v.nil? }.to_json
         end
 
-        def cannot_change_resource(message)
+        def update
           converge_if_changed do |_vars|
             # TODO(nelsonjr): Determine how to print indented like upd converge
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
-            Chef::Log.fatal message
-            raise message
+            update_req =
+              ::Google::Compute::Network::Put.new(self_link(@new_resource),
+                                                  fetch_auth(@new_resource),
+                                                  'application/json',
+                                                  resource_to_request)
+            wait_for_operation update_req.send, @new_resource
           end
         end
 

@@ -94,6 +94,7 @@ chef-codegen:
   * libraries/google/compute/network/delete.rb
   * libraries/google/compute/network/get.rb
   * libraries/google/compute/network/post.rb
+  * libraries/google/compute/network/put.rb
   * libraries/google/compute/property/array.rb
   * libraries/google/compute/property/backendservice_backends.rb
   * libraries/google/compute/property/backendservice_cache_key_policy.rb
@@ -333,6 +334,7 @@ chef-codegen:
   * spec/network_delete_spec.rb
   * spec/network_get_spec.rb
   * spec/network_post_spec.rb
+  * spec/network_put_spec.rb
   * spec/network_spec.rb
   * spec/region_spec.rb
   * spec/route_spec.rb
