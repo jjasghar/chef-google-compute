@@ -170,7 +170,7 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#httpHealthCheck',
             checkIntervalSec: check_interval_sec,
             description: description,
@@ -181,7 +181,8 @@ module Google
             requestPath: request_path,
             timeoutSec: timeout_sec,
             unhealthyThreshold: unhealthy_threshold
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update

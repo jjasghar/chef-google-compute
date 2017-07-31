@@ -216,7 +216,7 @@ module Google
       action_class do
         # rubocop:disable Metrics/MethodLength
         def resource_to_request
-          {
+          request = {
             kind: 'compute#backendService',
             affinityCookieTtlSec: affinity_cookie_ttl_sec,
             backends: backends,
@@ -231,7 +231,8 @@ module Google
             region: region,
             sessionAffinity: session_affinity,
             timeoutSec: timeout_sec
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
         # rubocop:enable Metrics/MethodLength
 

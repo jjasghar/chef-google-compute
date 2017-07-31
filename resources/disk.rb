@@ -214,7 +214,7 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#disk',
             description: description,
             licenses: licenses,
@@ -224,7 +224,8 @@ module Google
             diskEncryptionKey: disk_encryption_key,
             sourceImageEncryptionKey: source_image_encryption_key,
             sourceSnapshotEncryptionKey: source_snapshot_encryption_key
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update

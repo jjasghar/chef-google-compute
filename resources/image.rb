@@ -221,8 +221,9 @@ module Google
       private
 
       action_class do
+        # rubocop:disable Metrics/MethodLength
         def resource_to_request
-          {
+          request = {
             kind: 'compute#image',
             description: description,
             diskSizeGb: disk_size_gb,
@@ -236,8 +237,10 @@ module Google
             sourceDiskEncryptionKey: source_disk_encryption_key,
             sourceDiskId: source_disk_id,
             sourceType: source_type
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
+        # rubocop:enable Metrics/MethodLength
 
         def update
           converge_if_changed do |_vars|

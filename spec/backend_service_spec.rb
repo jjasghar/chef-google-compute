@@ -171,7 +171,7 @@ context 'gcompute_backend_service' do
                         'max_utilization' => 21920426.93
                       }
                     ]
-                    cdn_policy(
+                    cdn_policy({
                       'cache_key_policy' => {
                         'include_host' => true,
                         'include_protocol' => true,
@@ -179,10 +179,10 @@ context 'gcompute_backend_service' do
                         'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
                         'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
                       }
-                    )
-                    connection_draining(
+                    })
+                    connection_draining({
                       'draining_timeout_sec' => 2005106437
-                    )
+                    })
                     description 'test description#0 data'
                     enable_cdn true
                     health_checks ['rr', 'ss', 'tt', 'uu', 'vv']
@@ -222,7 +222,7 @@ context 'gcompute_backend_service' do
                         'max_utilization' => 32880640.39
                       }
                     ]
-                    cdn_policy(
+                    cdn_policy({
                       'cache_key_policy' => {
                         'include_host' => false,
                         'include_protocol' => false,
@@ -230,10 +230,10 @@ context 'gcompute_backend_service' do
                         'query_string_blacklist' => ['gg', 'hh', 'ii', 'jj'],
                         'query_string_whitelist' => ['jj', 'kk', 'll', 'mm', 'nn']
                       }
-                    )
-                    connection_draining(
+                    })
+                    connection_draining({
                       'draining_timeout_sec' => 4010212875
-                    )
+                    })
                     description 'test description#1 data'
                     enable_cdn false
                     health_checks ['kk', 'll', 'mm', 'nn']
@@ -273,7 +273,7 @@ context 'gcompute_backend_service' do
                         'max_utilization' => 43840853.86
                       }
                     ]
-                    cdn_policy(
+                    cdn_policy({
                       'cache_key_policy' => {
                         'include_host' => true,
                         'include_protocol' => true,
@@ -281,10 +281,10 @@ context 'gcompute_backend_service' do
                         'query_string_blacklist' => ['xx', 'yy', 'zz'],
                         'query_string_whitelist' => ['oo', 'pp', 'qq', 'rr']
                       }
-                    )
-                    connection_draining(
+                    })
+                    connection_draining({
                       'draining_timeout_sec' => 6015319313
-                    )
+                    })
                     description 'test description#2 data'
                     enable_cdn true
                     health_checks ['ee', 'ff', 'gg', 'hh']
@@ -602,7 +602,7 @@ context 'gcompute_backend_service' do
                       }
                     ]
                     bs_label 'test name#0 data'
-                    cdn_policy(
+                    cdn_policy({
                       'cache_key_policy' => {
                         'include_host' => true,
                         'include_protocol' => true,
@@ -610,10 +610,10 @@ context 'gcompute_backend_service' do
                         'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
                         'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
                       }
-                    )
-                    connection_draining(
+                    })
+                    connection_draining({
                       'draining_timeout_sec' => 2005106437
-                    )
+                    })
                     description 'test description#0 data'
                     enable_cdn true
                     health_checks ['rr', 'ss', 'tt', 'uu', 'vv']
@@ -654,7 +654,7 @@ context 'gcompute_backend_service' do
                       }
                     ]
                     bs_label 'test name#1 data'
-                    cdn_policy(
+                    cdn_policy({
                       'cache_key_policy' => {
                         'include_host' => false,
                         'include_protocol' => false,
@@ -662,10 +662,10 @@ context 'gcompute_backend_service' do
                         'query_string_blacklist' => ['gg', 'hh', 'ii', 'jj'],
                         'query_string_whitelist' => ['jj', 'kk', 'll', 'mm', 'nn']
                       }
-                    )
-                    connection_draining(
+                    })
+                    connection_draining({
                       'draining_timeout_sec' => 4010212875
-                    )
+                    })
                     description 'test description#1 data'
                     enable_cdn false
                     health_checks ['kk', 'll', 'mm', 'nn']
@@ -706,7 +706,7 @@ context 'gcompute_backend_service' do
                       }
                     ]
                     bs_label 'test name#2 data'
-                    cdn_policy(
+                    cdn_policy({
                       'cache_key_policy' => {
                         'include_host' => true,
                         'include_protocol' => true,
@@ -714,10 +714,10 @@ context 'gcompute_backend_service' do
                         'query_string_blacklist' => ['xx', 'yy', 'zz'],
                         'query_string_whitelist' => ['oo', 'pp', 'qq', 'rr']
                       }
-                    )
-                    connection_draining(
+                    })
+                    connection_draining({
                       'draining_timeout_sec' => 6015319313
-                    )
+                    })
                     description 'test description#2 data'
                     enable_cdn true
                     health_checks ['ee', 'ff', 'gg', 'hh']
@@ -1100,7 +1100,7 @@ context 'gcompute_backend_service' do
                       'max_utilization' => 21920426.93
                     }
                   ]
-                  cdn_policy(
+                  cdn_policy({
                     'cache_key_policy' => {
                       'include_host' => true,
                       'include_protocol' => true,
@@ -1108,10 +1108,10 @@ context 'gcompute_backend_service' do
                       'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
                       'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
                     }
-                  )
-                  connection_draining(
+                  })
+                  connection_draining({
                     'draining_timeout_sec' => 2005106437
-                  )
+                  })
                   description 'test description#0 data'
                   enable_cdn true
                   health_checks ['rr', 'ss', 'tt', 'uu', 'vv']
@@ -1335,7 +1335,7 @@ context 'gcompute_backend_service' do
                     }
                   ]
                   bs_label 'test name#0 data'
-                  cdn_policy(
+                  cdn_policy({
                     'cache_key_policy' => {
                       'include_host' => true,
                       'include_protocol' => true,
@@ -1343,10 +1343,10 @@ context 'gcompute_backend_service' do
                       'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
                       'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
                     }
-                  )
-                  connection_draining(
+                  })
+                  connection_draining({
                     'draining_timeout_sec' => 2005106437
-                  )
+                  })
                   description 'test description#0 data'
                   enable_cdn true
                   health_checks ['rr', 'ss', 'tt', 'uu', 'vv']

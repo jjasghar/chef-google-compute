@@ -162,7 +162,7 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#firewall',
             allowed: allowed,
             description: description,
@@ -171,7 +171,8 @@ module Google
             sourceRanges: source_ranges,
             sourceTags: source_tags,
             targetTags: target_tags
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update

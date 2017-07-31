@@ -179,9 +179,10 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#diskType'
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update

@@ -83,22 +83,22 @@ context 'gcompute_disk' do
                   gcompute_disk 'title0' do
                     action :create
                     description 'test description#0 data'
-                    disk_encryption_key(
+                    disk_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     licenses ['ww', 'xx']
                     size_gb 2858499398
                     source_image 'test source_image#0 data'
-                    source_image_encryption_key(
+                    source_image_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     source_snapshot 'test source_snapshot#0 data'
-                    source_snapshot_encryption_key(
+                    source_snapshot_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     zone 'test zone#0 data'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -107,22 +107,22 @@ context 'gcompute_disk' do
                   gcompute_disk 'title1' do
                     action :create
                     description 'test description#1 data'
-                    disk_encryption_key(
+                    disk_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     licenses ['uu', 'vv']
                     size_gb 5716998797
                     source_image 'test source_image#1 data'
-                    source_image_encryption_key(
+                    source_image_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     source_snapshot 'test source_snapshot#1 data'
-                    source_snapshot_encryption_key(
+                    source_snapshot_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     zone 'test zone#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -131,22 +131,22 @@ context 'gcompute_disk' do
                   gcompute_disk 'title2' do
                     action :create
                     description 'test description#2 data'
-                    disk_encryption_key(
+                    disk_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     licenses ['tt', 'uu', 'vv']
                     size_gb 8575498196
                     source_image 'test source_image#2 data'
-                    source_image_encryption_key(
+                    source_image_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     source_snapshot 'test source_snapshot#2 data'
-                    source_snapshot_encryption_key(
+                    source_snapshot_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     zone 'test zone#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -339,22 +339,22 @@ context 'gcompute_disk' do
                     action :create
                     d_label 'test name#0 data'
                     description 'test description#0 data'
-                    disk_encryption_key(
+                    disk_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     licenses ['ww', 'xx']
                     size_gb 2858499398
                     source_image 'test source_image#0 data'
-                    source_image_encryption_key(
+                    source_image_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     source_snapshot 'test source_snapshot#0 data'
-                    source_snapshot_encryption_key(
+                    source_snapshot_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     zone 'test zone#0 data'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -364,22 +364,22 @@ context 'gcompute_disk' do
                     action :create
                     d_label 'test name#1 data'
                     description 'test description#1 data'
-                    disk_encryption_key(
+                    disk_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     licenses ['uu', 'vv']
                     size_gb 5716998797
                     source_image 'test source_image#1 data'
-                    source_image_encryption_key(
+                    source_image_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     source_snapshot 'test source_snapshot#1 data'
-                    source_snapshot_encryption_key(
+                    source_snapshot_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     zone 'test zone#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -389,22 +389,22 @@ context 'gcompute_disk' do
                     action :create
                     d_label 'test name#2 data'
                     description 'test description#2 data'
-                    disk_encryption_key(
+                    disk_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     licenses ['tt', 'uu', 'vv']
                     size_gb 8575498196
                     source_image 'test source_image#2 data'
-                    source_image_encryption_key(
+                    source_image_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     source_snapshot 'test source_snapshot#2 data'
-                    source_snapshot_encryption_key(
+                    source_snapshot_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     zone 'test zone#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -651,22 +651,22 @@ context 'gcompute_disk' do
                 gcompute_disk 'title0' do
                   action :create
                   description 'test description#0 data'
-                  disk_encryption_key(
+                  disk_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   licenses ['ww', 'xx']
                   size_gb 2858499398
                   source_image 'test source_image#0 data'
-                  source_image_encryption_key(
+                  source_image_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   source_snapshot 'test source_snapshot#0 data'
-                  source_snapshot_encryption_key(
+                  source_snapshot_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   zone 'test zone#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -785,22 +785,22 @@ context 'gcompute_disk' do
                   action :create
                   d_label 'test name#0 data'
                   description 'test description#0 data'
-                  disk_encryption_key(
+                  disk_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   licenses ['ww', 'xx']
                   size_gb 2858499398
                   source_image 'test source_image#0 data'
-                  source_image_encryption_key(
+                  source_image_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   source_snapshot 'test source_snapshot#0 data'
-                  source_snapshot_encryption_key(
+                  source_snapshot_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   zone 'test zone#0 data'
                   project 'test project#0 data'
                   credential 'mycred'

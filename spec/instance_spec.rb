@@ -255,11 +255,11 @@ context 'gcompute_instance' do
                         'subnetwork' => 'test subnetwork#1 data'
                       }
                     ]
-                    scheduling(
+                    scheduling({
                       'automatic_restart' => true,
                       'on_host_maintenance' => 'test on_host_maintenance#0 data',
                       'preemptible' => true
-                    )
+                    })
                     service_accounts [
                       {
                         'email' => true,
@@ -274,10 +274,10 @@ context 'gcompute_instance' do
                         'scopes' => ['ee', 'ff', 'gg', 'hh']
                       }
                     ]
-                    tags(
+                    tags({
                       'fingerprint' => 'test fingerprint#0 data',
                       'items' => ['hh', 'ii', 'jj']
-                    )
+                    })
                     zone 'test zone#0 data'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -375,11 +375,11 @@ context 'gcompute_instance' do
                         'subnetwork' => 'test subnetwork#3 data'
                       }
                     ]
-                    scheduling(
+                    scheduling({
                       'automatic_restart' => false,
                       'on_host_maintenance' => 'test on_host_maintenance#1 data',
                       'preemptible' => false
-                    )
+                    })
                     service_accounts [
                       {
                         'email' => false,
@@ -402,10 +402,10 @@ context 'gcompute_instance' do
                         'scopes' => ['ll', 'mm', 'nn']
                       }
                     ]
-                    tags(
+                    tags({
                       'fingerprint' => 'test fingerprint#1 data',
                       'items' => ['qq', 'rr', 'ss', 'tt']
-                    )
+                    })
                     zone 'test zone#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -499,11 +499,11 @@ context 'gcompute_instance' do
                         'subnetwork' => 'test subnetwork#5 data'
                       }
                     ]
-                    scheduling(
+                    scheduling({
                       'automatic_restart' => true,
                       'on_host_maintenance' => 'test on_host_maintenance#2 data',
                       'preemptible' => true
-                    )
+                    })
                     service_accounts [
                       {
                         'email' => true,
@@ -518,10 +518,10 @@ context 'gcompute_instance' do
                         'scopes' => ['rr', 'ss', 'tt']
                       }
                     ]
-                    tags(
+                    tags({
                       'fingerprint' => 'test fingerprint#2 data',
                       'items' => ['yy', 'zz']
-                    )
+                    })
                     zone 'test zone#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -928,11 +928,11 @@ context 'gcompute_instance' do
                         'subnetwork' => 'test subnetwork#1 data'
                       }
                     ]
-                    scheduling(
+                    scheduling({
                       'automatic_restart' => true,
                       'on_host_maintenance' => 'test on_host_maintenance#0 data',
                       'preemptible' => true
-                    )
+                    })
                     service_accounts [
                       {
                         'email' => true,
@@ -947,10 +947,10 @@ context 'gcompute_instance' do
                         'scopes' => ['ee', 'ff', 'gg', 'hh']
                       }
                     ]
-                    tags(
+                    tags({
                       'fingerprint' => 'test fingerprint#0 data',
                       'items' => ['hh', 'ii', 'jj']
-                    )
+                    })
                     zone 'test zone#0 data'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -1049,11 +1049,11 @@ context 'gcompute_instance' do
                         'subnetwork' => 'test subnetwork#3 data'
                       }
                     ]
-                    scheduling(
+                    scheduling({
                       'automatic_restart' => false,
                       'on_host_maintenance' => 'test on_host_maintenance#1 data',
                       'preemptible' => false
-                    )
+                    })
                     service_accounts [
                       {
                         'email' => false,
@@ -1076,10 +1076,10 @@ context 'gcompute_instance' do
                         'scopes' => ['ll', 'mm', 'nn']
                       }
                     ]
-                    tags(
+                    tags({
                       'fingerprint' => 'test fingerprint#1 data',
                       'items' => ['qq', 'rr', 'ss', 'tt']
-                    )
+                    })
                     zone 'test zone#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -1174,11 +1174,11 @@ context 'gcompute_instance' do
                         'subnetwork' => 'test subnetwork#5 data'
                       }
                     ]
-                    scheduling(
+                    scheduling({
                       'automatic_restart' => true,
                       'on_host_maintenance' => 'test on_host_maintenance#2 data',
                       'preemptible' => true
-                    )
+                    })
                     service_accounts [
                       {
                         'email' => true,
@@ -1193,10 +1193,10 @@ context 'gcompute_instance' do
                         'scopes' => ['rr', 'ss', 'tt']
                       }
                     ]
-                    tags(
+                    tags({
                       'fingerprint' => 'test fingerprint#2 data',
                       'items' => ['yy', 'zz']
-                    )
+                    })
                     zone 'test zone#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -1765,11 +1765,11 @@ context 'gcompute_instance' do
                       'subnetwork' => 'test subnetwork#1 data'
                     }
                   ]
-                  scheduling(
+                  scheduling({
                     'automatic_restart' => true,
                     'on_host_maintenance' => 'test on_host_maintenance#0 data',
                     'preemptible' => true
-                  )
+                  })
                   service_accounts [
                     {
                       'email' => true,
@@ -1784,10 +1784,10 @@ context 'gcompute_instance' do
                       'scopes' => ['ee', 'ff', 'gg', 'hh']
                     }
                   ]
-                  tags(
+                  tags({
                     'fingerprint' => 'test fingerprint#0 data',
                     'items' => ['hh', 'ii', 'jj']
-                  )
+                  })
                   zone 'test zone#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -2198,11 +2198,11 @@ context 'gcompute_instance' do
                       'subnetwork' => 'test subnetwork#1 data'
                     }
                   ]
-                  scheduling(
+                  scheduling({
                     'automatic_restart' => true,
                     'on_host_maintenance' => 'test on_host_maintenance#0 data',
                     'preemptible' => true
-                  )
+                  })
                   service_accounts [
                     {
                       'email' => true,
@@ -2217,10 +2217,10 @@ context 'gcompute_instance' do
                       'scopes' => ['ee', 'ff', 'gg', 'hh']
                     }
                   ]
-                  tags(
+                  tags({
                     'fingerprint' => 'test fingerprint#0 data',
                     'items' => ['hh', 'ii', 'jj']
-                  )
+                  })
                   zone 'test zone#0 data'
                   project 'test project#0 data'
                   credential 'mycred'

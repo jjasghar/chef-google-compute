@@ -193,7 +193,7 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#healthCheck',
             checkIntervalSec: check_interval_sec,
             description: description,
@@ -206,7 +206,8 @@ module Google
             httpsHealthCheck: https_health_check,
             tcpHealthCheck: tcp_health_check,
             sslHealthCheck: ssl_health_check
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update

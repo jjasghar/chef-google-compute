@@ -163,14 +163,15 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#network',
             description: description,
             gatewayIPv4: gateway_ipv4,
             IPv4Range: ipv4_range,
             name: n_label,
             autoCreateSubnetworks: auto_create_subnetworks
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update

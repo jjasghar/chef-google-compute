@@ -126,21 +126,21 @@ context 'gcompute_image' do
                         'type' => 'VIRTIO_SCSI_MULTIQUEUE'
                       }
                     ]
-                    image_encryption_key(
+                    image_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     licenses ['ww', 'xx']
-                    raw_disk(
+                    raw_disk({
                       'container_type' => 'TAR',
                       'sha1_checksum' => 'test sha1_checksum#0 data',
                       'source' => 'test source#0 data'
-                    )
+                    })
                     source_disk 'resource(disk,0)'
-                    source_disk_encryption_key(
+                    source_disk_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     source_disk_id 'test source_disk_id#0 data'
                     source_type 'RAW'
                     project 'test project#0 data'
@@ -163,21 +163,21 @@ context 'gcompute_image' do
                         'type' => 'VIRTIO_SCSI_MULTIQUEUE'
                       }
                     ]
-                    image_encryption_key(
+                    image_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     licenses ['uu', 'vv']
-                    raw_disk(
+                    raw_disk({
                       'container_type' => 'TAR',
                       'sha1_checksum' => 'test sha1_checksum#1 data',
                       'source' => 'test source#1 data'
-                    )
+                    })
                     source_disk 'resource(disk,1)'
-                    source_disk_encryption_key(
+                    source_disk_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     source_disk_id 'test source_disk_id#1 data'
                     source_type 'RAW'
                     project 'test project#1 data'
@@ -203,21 +203,21 @@ context 'gcompute_image' do
                         'type' => 'VIRTIO_SCSI_MULTIQUEUE'
                       }
                     ]
-                    image_encryption_key(
+                    image_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     licenses ['tt', 'uu', 'vv']
-                    raw_disk(
+                    raw_disk({
                       'container_type' => 'TAR',
                       'sha1_checksum' => 'test sha1_checksum#2 data',
                       'source' => 'test source#2 data'
-                    )
+                    })
                     source_disk 'resource(disk,2)'
-                    source_disk_encryption_key(
+                    source_disk_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     source_disk_id 'test source_disk_id#2 data'
                     source_type 'RAW'
                     project 'test project#2 data'
@@ -475,21 +475,21 @@ context 'gcompute_image' do
                       }
                     ]
                     i_label 'test name#0 data'
-                    image_encryption_key(
+                    image_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     licenses ['ww', 'xx']
-                    raw_disk(
+                    raw_disk({
                       'container_type' => 'TAR',
                       'sha1_checksum' => 'test sha1_checksum#0 data',
                       'source' => 'test source#0 data'
-                    )
+                    })
                     source_disk 'resource(disk,0)'
-                    source_disk_encryption_key(
+                    source_disk_encryption_key({
                       'raw_key' => 'test raw_key#0 data',
                       'sha256' => 'test sha256#0 data'
-                    )
+                    })
                     source_disk_id 'test source_disk_id#0 data'
                     source_type 'RAW'
                     project 'test project#0 data'
@@ -513,21 +513,21 @@ context 'gcompute_image' do
                       }
                     ]
                     i_label 'test name#1 data'
-                    image_encryption_key(
+                    image_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     licenses ['uu', 'vv']
-                    raw_disk(
+                    raw_disk({
                       'container_type' => 'TAR',
                       'sha1_checksum' => 'test sha1_checksum#1 data',
                       'source' => 'test source#1 data'
-                    )
+                    })
                     source_disk 'resource(disk,1)'
-                    source_disk_encryption_key(
+                    source_disk_encryption_key({
                       'raw_key' => 'test raw_key#1 data',
                       'sha256' => 'test sha256#1 data'
-                    )
+                    })
                     source_disk_id 'test source_disk_id#1 data'
                     source_type 'RAW'
                     project 'test project#1 data'
@@ -554,21 +554,21 @@ context 'gcompute_image' do
                       }
                     ]
                     i_label 'test name#2 data'
-                    image_encryption_key(
+                    image_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     licenses ['tt', 'uu', 'vv']
-                    raw_disk(
+                    raw_disk({
                       'container_type' => 'TAR',
                       'sha1_checksum' => 'test sha1_checksum#2 data',
                       'source' => 'test source#2 data'
-                    )
+                    })
                     source_disk 'resource(disk,2)'
-                    source_disk_encryption_key(
+                    source_disk_encryption_key({
                       'raw_key' => 'test raw_key#2 data',
                       'sha256' => 'test sha256#2 data'
-                    )
+                    })
                     source_disk_id 'test source_disk_id#2 data'
                     source_type 'RAW'
                     project 'test project#2 data'
@@ -879,21 +879,21 @@ context 'gcompute_image' do
                       'type' => 'VIRTIO_SCSI_MULTIQUEUE'
                     }
                   ]
-                  image_encryption_key(
+                  image_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   licenses ['ww', 'xx']
-                  raw_disk(
+                  raw_disk({
                     'container_type' => 'TAR',
                     'sha1_checksum' => 'test sha1_checksum#0 data',
                     'source' => 'test source#0 data'
-                  )
+                  })
                   source_disk 'resource(disk,0)'
-                  source_disk_encryption_key(
+                  source_disk_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   source_disk_id 'test source_disk_id#0 data'
                   source_type 'RAW'
                   project 'test project#0 data'
@@ -1052,21 +1052,21 @@ context 'gcompute_image' do
                     }
                   ]
                   i_label 'test name#0 data'
-                  image_encryption_key(
+                  image_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   licenses ['ww', 'xx']
-                  raw_disk(
+                  raw_disk({
                     'container_type' => 'TAR',
                     'sha1_checksum' => 'test sha1_checksum#0 data',
                     'source' => 'test source#0 data'
-                  )
+                  })
                   source_disk 'resource(disk,0)'
-                  source_disk_encryption_key(
+                  source_disk_encryption_key({
                     'raw_key' => 'test raw_key#0 data',
                     'sha256' => 'test sha256#0 data'
-                  )
+                  })
                   source_disk_id 'test source_disk_id#0 data'
                   source_type 'RAW'
                   project 'test project#0 data'

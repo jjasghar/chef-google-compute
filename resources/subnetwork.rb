@@ -157,7 +157,7 @@ module Google
 
       action_class do
         def resource_to_request
-          {
+          request = {
             kind: 'compute#subnetwork',
             description: description,
             gatewayAddress: gateway_address,
@@ -166,7 +166,8 @@ module Google
             network: network,
             privateIpGoogleAccess: private_ip_google_access,
             region: region
-          }.reject { |_, v| v.nil? }.to_json
+          }.reject { |_, v| v.nil? }
+          request.to_json
         end
 
         def update
