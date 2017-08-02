@@ -110,14 +110,14 @@ module Google
       # Data is coming from the Chef catalog
       class InstancNetworkInterfaCatalog < InstancNetworkInterfa
         def initialize(args)
-          @name = Google::Compute::Property::String.catalog_parse(args['name'])
+          @name = Google::Compute::Property::String.catalog_parse(args[:name])
           @network = Google::Compute::Property::NetwoSelfLinkRef.catalog_parse(
-            args['network']
+            args[:network]
           )
           @network_ip =
-            Google::Compute::Property::String.catalog_parse(args['network_ip'])
+            Google::Compute::Property::String.catalog_parse(args[:network_ip])
           @subnetwork =
-            Google::Compute::Property::String.catalog_parse(args['subnetwork'])
+            Google::Compute::Property::String.catalog_parse(args[:subnetwork])
         end
       end
     end

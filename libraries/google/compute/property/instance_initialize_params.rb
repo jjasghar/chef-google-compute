@@ -110,14 +110,14 @@ module Google
       class InstancInitialParamsCatalog < InstancInitialParams
         def initialize(args)
           @disk_name =
-            Google::Compute::Property::String.catalog_parse(args['disk_name'])
+            Google::Compute::Property::String.catalog_parse(args[:disk_name])
           @disk_size_gb = Google::Compute::Property::Integer.catalog_parse(
-            args['disk_size_gb']
+            args[:disk_size_gb]
           )
           @disk_type =
-            Google::Compute::Property::Integer.catalog_parse(args['disk_type'])
+            Google::Compute::Property::Integer.catalog_parse(args[:disk_type])
           @source_image = Google::Compute::Property::Integer.catalog_parse(
-            args['source_image']
+            args[:source_image]
           )
         end
       end

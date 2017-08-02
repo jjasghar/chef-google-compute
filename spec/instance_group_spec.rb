@@ -179,24 +179,24 @@ context 'gcompute_instance_group' do
                     description 'test description#0 data'
                     named_ports [
                       {
-                        'name' => 'test name#0 data',
-                        'port' => 759512136
+                        name: 'test name#0 data',
+                        port: 759512136
                       },
                       {
-                        'name' => 'test name#1 data',
-                        'port' => 1519024273
+                        name: 'test name#1 data',
+                        port: 1519024273
                       },
                       {
-                        'name' => 'test name#2 data',
-                        'port' => 2278536410
+                        name: 'test name#2 data',
+                        port: 2278536410
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'port' => 3038048546
+                        name: 'test name#3 data',
+                        port: 3038048546
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'port' => 3797560683
+                        name: 'test name#4 data',
+                        port: 3797560683
                       }
                     ]
                     network 'resource(network,0)'
@@ -212,24 +212,24 @@ context 'gcompute_instance_group' do
                     description 'test description#1 data'
                     named_ports [
                       {
-                        'name' => 'test name#1 data',
-                        'port' => 1519024273
+                        name: 'test name#1 data',
+                        port: 1519024273
                       },
                       {
-                        'name' => 'test name#2 data',
-                        'port' => 2278536410
+                        name: 'test name#2 data',
+                        port: 2278536410
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'port' => 3038048546
+                        name: 'test name#3 data',
+                        port: 3038048546
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'port' => 3797560683
+                        name: 'test name#4 data',
+                        port: 3797560683
                       },
                       {
-                        'name' => 'test name#5 data',
-                        'port' => 4557072820
+                        name: 'test name#5 data',
+                        port: 4557072820
                       }
                     ]
                     network 'resource(network,1)'
@@ -245,24 +245,24 @@ context 'gcompute_instance_group' do
                     description 'test description#2 data'
                     named_ports [
                       {
-                        'name' => 'test name#2 data',
-                        'port' => 2278536410
+                        name: 'test name#2 data',
+                        port: 2278536410
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'port' => 3038048546
+                        name: 'test name#3 data',
+                        port: 3038048546
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'port' => 3797560683
+                        name: 'test name#4 data',
+                        port: 3797560683
                       },
                       {
-                        'name' => 'test name#5 data',
-                        'port' => 4557072820
+                        name: 'test name#5 data',
+                        port: 4557072820
                       },
                       {
-                        'name' => 'test name#6 data',
-                        'port' => 5316584956
+                        name: 'test name#6 data',
+                        port: 5316584956
                       }
                     ]
                     network 'resource(network,2)'
@@ -520,24 +520,24 @@ context 'gcompute_instance_group' do
                     ig_label 'test name#0 data'
                     named_ports [
                       {
-                        'name' => 'test name#0 data',
-                        'port' => 759512136
+                        name: 'test name#0 data',
+                        port: 759512136
                       },
                       {
-                        'name' => 'test name#1 data',
-                        'port' => 1519024273
+                        name: 'test name#1 data',
+                        port: 1519024273
                       },
                       {
-                        'name' => 'test name#2 data',
-                        'port' => 2278536410
+                        name: 'test name#2 data',
+                        port: 2278536410
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'port' => 3038048546
+                        name: 'test name#3 data',
+                        port: 3038048546
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'port' => 3797560683
+                        name: 'test name#4 data',
+                        port: 3797560683
                       }
                     ]
                     network 'resource(network,0)'
@@ -554,24 +554,24 @@ context 'gcompute_instance_group' do
                     ig_label 'test name#1 data'
                     named_ports [
                       {
-                        'name' => 'test name#1 data',
-                        'port' => 1519024273
+                        name: 'test name#1 data',
+                        port: 1519024273
                       },
                       {
-                        'name' => 'test name#2 data',
-                        'port' => 2278536410
+                        name: 'test name#2 data',
+                        port: 2278536410
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'port' => 3038048546
+                        name: 'test name#3 data',
+                        port: 3038048546
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'port' => 3797560683
+                        name: 'test name#4 data',
+                        port: 3797560683
                       },
                       {
-                        'name' => 'test name#5 data',
-                        'port' => 4557072820
+                        name: 'test name#5 data',
+                        port: 4557072820
                       }
                     ]
                     network 'resource(network,1)'
@@ -588,24 +588,24 @@ context 'gcompute_instance_group' do
                     ig_label 'test name#2 data'
                     named_ports [
                       {
-                        'name' => 'test name#2 data',
-                        'port' => 2278536410
+                        name: 'test name#2 data',
+                        port: 2278536410
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'port' => 3038048546
+                        name: 'test name#3 data',
+                        port: 3038048546
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'port' => 3797560683
+                        name: 'test name#4 data',
+                        port: 3797560683
                       },
                       {
-                        'name' => 'test name#5 data',
-                        'port' => 4557072820
+                        name: 'test name#5 data',
+                        port: 4557072820
                       },
                       {
-                        'name' => 'test name#6 data',
-                        'port' => 5316584956
+                        name: 'test name#6 data',
+                        port: 5316584956
                       }
                     ]
                     network 'resource(network,2)'
@@ -881,24 +881,24 @@ context 'gcompute_instance_group' do
                   description 'test description#0 data'
                   named_ports [
                     {
-                      'name' => 'test name#0 data',
-                      'port' => 759512136
+                      name: 'test name#0 data',
+                      port: 759512136
                     },
                     {
-                      'name' => 'test name#1 data',
-                      'port' => 1519024273
+                      name: 'test name#1 data',
+                      port: 1519024273
                     },
                     {
-                      'name' => 'test name#2 data',
-                      'port' => 2278536410
+                      name: 'test name#2 data',
+                      port: 2278536410
                     },
                     {
-                      'name' => 'test name#3 data',
-                      'port' => 3038048546
+                      name: 'test name#3 data',
+                      port: 3038048546
                     },
                     {
-                      'name' => 'test name#4 data',
-                      'port' => 3797560683
+                      name: 'test name#4 data',
+                      port: 3797560683
                     }
                   ]
                   network 'resource(network,0)'
@@ -1062,24 +1062,24 @@ context 'gcompute_instance_group' do
                   ig_label 'test name#0 data'
                   named_ports [
                     {
-                      'name' => 'test name#0 data',
-                      'port' => 759512136
+                      name: 'test name#0 data',
+                      port: 759512136
                     },
                     {
-                      'name' => 'test name#1 data',
-                      'port' => 1519024273
+                      name: 'test name#1 data',
+                      port: 1519024273
                     },
                     {
-                      'name' => 'test name#2 data',
-                      'port' => 2278536410
+                      name: 'test name#2 data',
+                      port: 2278536410
                     },
                     {
-                      'name' => 'test name#3 data',
-                      'port' => 3038048546
+                      name: 'test name#3 data',
+                      port: 3038048546
                     },
                     {
-                      'name' => 'test name#4 data',
-                      'port' => 3797560683
+                      name: 'test name#4 data',
+                      port: 3797560683
                     }
                   ]
                   network 'resource(network,0)'

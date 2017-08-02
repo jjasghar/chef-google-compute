@@ -106,15 +106,14 @@ module Google
       class InstanceSchedulingCatalog < InstanceScheduling
         def initialize(args)
           @automatic_restart = Google::Compute::Property::Boolean.catalog_parse(
-            args['automatic_restart']
+            args[:automatic_restart]
           )
           @on_host_maintenance =
             Google::Compute::Property::String.catalog_parse(
-              args['on_host_maintenance']
+              args[:on_host_maintenance]
             )
-          @preemptible = Google::Compute::Property::Boolean.catalog_parse(
-            args['preemptible']
-          )
+          @preemptible =
+            Google::Compute::Property::Boolean.catalog_parse(args[:preemptible])
         end
       end
     end

@@ -84,16 +84,16 @@ context 'gcompute_firewall' do
                     action :create
                     allowed [
                       {
-                        'ip_protocol' => 'test ip_protocol#0 data',
-                        'ports' => ['uu', 'vv']
+                        ip_protocol: 'test ip_protocol#0 data',
+                        ports: ['uu', 'vv']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#1 data',
-                        'ports' => ['qq', 'rr']
+                        ip_protocol: 'test ip_protocol#1 data',
+                        ports: ['qq', 'rr']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#2 data',
-                        'ports' => ['mm', 'nn']
+                        ip_protocol: 'test ip_protocol#2 data',
+                        ports: ['mm', 'nn']
                       }
                     ]
                     description 'test description#0 data'
@@ -109,24 +109,24 @@ context 'gcompute_firewall' do
                     action :create
                     allowed [
                       {
-                        'ip_protocol' => 'test ip_protocol#1 data',
-                        'ports' => ['qq', 'rr']
+                        ip_protocol: 'test ip_protocol#1 data',
+                        ports: ['qq', 'rr']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#2 data',
-                        'ports' => ['mm', 'nn']
+                        ip_protocol: 'test ip_protocol#2 data',
+                        ports: ['mm', 'nn']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#3 data',
-                        'ports' => ['ii', 'jj']
+                        ip_protocol: 'test ip_protocol#3 data',
+                        ports: ['ii', 'jj']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#4 data',
-                        'ports' => ['ff', 'gg', 'hh']
+                        ip_protocol: 'test ip_protocol#4 data',
+                        ports: ['ff', 'gg', 'hh']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#5 data',
-                        'ports' => ['bb', 'cc', 'dd']
+                        ip_protocol: 'test ip_protocol#5 data',
+                        ports: ['bb', 'cc', 'dd']
                       }
                     ]
                     description 'test description#1 data'
@@ -142,16 +142,16 @@ context 'gcompute_firewall' do
                     action :create
                     allowed [
                       {
-                        'ip_protocol' => 'test ip_protocol#2 data',
-                        'ports' => ['mm', 'nn']
+                        ip_protocol: 'test ip_protocol#2 data',
+                        ports: ['mm', 'nn']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#3 data',
-                        'ports' => ['ii', 'jj']
+                        ip_protocol: 'test ip_protocol#3 data',
+                        ports: ['ii', 'jj']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#4 data',
-                        'ports' => ['ff', 'gg', 'hh']
+                        ip_protocol: 'test ip_protocol#4 data',
+                        ports: ['ff', 'gg', 'hh']
                       }
                     ]
                     description 'test description#2 data'
@@ -311,16 +311,16 @@ context 'gcompute_firewall' do
                     action :create
                     allowed [
                       {
-                        'ip_protocol' => 'test ip_protocol#0 data',
-                        'ports' => ['uu', 'vv']
+                        ip_protocol: 'test ip_protocol#0 data',
+                        ports: ['uu', 'vv']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#1 data',
-                        'ports' => ['qq', 'rr']
+                        ip_protocol: 'test ip_protocol#1 data',
+                        ports: ['qq', 'rr']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#2 data',
-                        'ports' => ['mm', 'nn']
+                        ip_protocol: 'test ip_protocol#2 data',
+                        ports: ['mm', 'nn']
                       }
                     ]
                     description 'test description#0 data'
@@ -337,24 +337,24 @@ context 'gcompute_firewall' do
                     action :create
                     allowed [
                       {
-                        'ip_protocol' => 'test ip_protocol#1 data',
-                        'ports' => ['qq', 'rr']
+                        ip_protocol: 'test ip_protocol#1 data',
+                        ports: ['qq', 'rr']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#2 data',
-                        'ports' => ['mm', 'nn']
+                        ip_protocol: 'test ip_protocol#2 data',
+                        ports: ['mm', 'nn']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#3 data',
-                        'ports' => ['ii', 'jj']
+                        ip_protocol: 'test ip_protocol#3 data',
+                        ports: ['ii', 'jj']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#4 data',
-                        'ports' => ['ff', 'gg', 'hh']
+                        ip_protocol: 'test ip_protocol#4 data',
+                        ports: ['ff', 'gg', 'hh']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#5 data',
-                        'ports' => ['bb', 'cc', 'dd']
+                        ip_protocol: 'test ip_protocol#5 data',
+                        ports: ['bb', 'cc', 'dd']
                       }
                     ]
                     description 'test description#1 data'
@@ -371,16 +371,16 @@ context 'gcompute_firewall' do
                     action :create
                     allowed [
                       {
-                        'ip_protocol' => 'test ip_protocol#2 data',
-                        'ports' => ['mm', 'nn']
+                        ip_protocol: 'test ip_protocol#2 data',
+                        ports: ['mm', 'nn']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#3 data',
-                        'ports' => ['ii', 'jj']
+                        ip_protocol: 'test ip_protocol#3 data',
+                        ports: ['ii', 'jj']
                       },
                       {
-                        'ip_protocol' => 'test ip_protocol#4 data',
-                        'ports' => ['ff', 'gg', 'hh']
+                        ip_protocol: 'test ip_protocol#4 data',
+                        ports: ['ff', 'gg', 'hh']
                       }
                     ]
                     description 'test description#2 data'
@@ -599,16 +599,16 @@ context 'gcompute_firewall' do
                   action :create
                   allowed [
                     {
-                      'ip_protocol' => 'test ip_protocol#0 data',
-                      'ports' => ['uu', 'vv']
+                      ip_protocol: 'test ip_protocol#0 data',
+                      ports: ['uu', 'vv']
                     },
                     {
-                      'ip_protocol' => 'test ip_protocol#1 data',
-                      'ports' => ['qq', 'rr']
+                      ip_protocol: 'test ip_protocol#1 data',
+                      ports: ['qq', 'rr']
                     },
                     {
-                      'ip_protocol' => 'test ip_protocol#2 data',
-                      'ports' => ['mm', 'nn']
+                      ip_protocol: 'test ip_protocol#2 data',
+                      ports: ['mm', 'nn']
                     }
                   ]
                   description 'test description#0 data'
@@ -718,16 +718,16 @@ context 'gcompute_firewall' do
                   action :create
                   allowed [
                     {
-                      'ip_protocol' => 'test ip_protocol#0 data',
-                      'ports' => ['uu', 'vv']
+                      ip_protocol: 'test ip_protocol#0 data',
+                      ports: ['uu', 'vv']
                     },
                     {
-                      'ip_protocol' => 'test ip_protocol#1 data',
-                      'ports' => ['qq', 'rr']
+                      ip_protocol: 'test ip_protocol#1 data',
+                      ports: ['qq', 'rr']
                     },
                     {
-                      'ip_protocol' => 'test ip_protocol#2 data',
-                      'ports' => ['mm', 'nn']
+                      ip_protocol: 'test ip_protocol#2 data',
+                      ports: ['mm', 'nn']
                     }
                   ]
                   description 'test description#0 data'

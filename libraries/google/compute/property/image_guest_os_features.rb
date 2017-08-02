@@ -91,7 +91,7 @@ module Google
       # Data is coming from the Chef catalog
       class ImageGuestOsFeatuCatalog < ImageGuestOsFeatu
         def initialize(args)
-          @type = Google::Compute::Property::Enum.catalog_parse(args['type'])
+          @type = Google::Compute::Property::Enum.catalog_parse(args[:type])
         end
       end
     end

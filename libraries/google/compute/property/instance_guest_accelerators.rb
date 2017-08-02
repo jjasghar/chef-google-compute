@@ -100,10 +100,10 @@ module Google
       class InstancGuestAccelerCatalog < InstancGuestAcceler
         def initialize(args)
           @accelerator_count = Google::Compute::Property::Integer.catalog_parse(
-            args['accelerator_count']
+            args[:accelerator_count]
           )
           @accelerator_type = Google::Compute::Property::String.catalog_parse(
-            args['accelerator_type']
+            args[:accelerator_type]
           )
         end
       end

@@ -96,9 +96,9 @@ module Google
       class ImageImageEncryKeyCatalog < ImageImageEncryKey
         def initialize(args)
           @raw_key =
-            Google::Compute::Property::String.catalog_parse(args['raw_key'])
+            Google::Compute::Property::String.catalog_parse(args[:raw_key])
           @sha256 =
-            Google::Compute::Property::String.catalog_parse(args['sha256'])
+            Google::Compute::Property::String.catalog_parse(args[:sha256])
         end
       end
     end

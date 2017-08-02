@@ -69,7 +69,7 @@ end
 #  action :create
 #  size_gb 50
 #  disk_encryption_key({
-#    raw_key => 'SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0='
+#    raw_key: 'SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0='
 #  })
 #  zone 'us-central1-a'
 #  project 'google.com:graphite-playground'

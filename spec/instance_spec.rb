@@ -148,94 +148,94 @@ context 'gcompute_instance' do
                     can_ip_forward true
                     disks [
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#0 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#0 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#0 data',
-                          'sha256' => 'test sha256#0 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#0 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#0 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#0 data',
+                          sha256: 'test sha256#0 data'
                         },
-                        'index' => 1443881260,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#0 data',
-                          'disk_size_gb' => 450092159,
-                          'disk_type' => 734221916,
-                          'source_image' => 992867234
+                        index: 1443881260,
+                        initialize_params: {
+                          disk_name: 'test disk_name#0 data',
+                          disk_size_gb: 450092159,
+                          disk_type: 734221916,
+                          source_image: 992867234
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#1 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#1 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#1 data',
-                          'sha256' => 'test sha256#1 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#1 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#1 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#1 data',
+                          sha256: 'test sha256#1 data'
                         },
-                        'index' => 2887762520,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#1 data',
-                          'disk_size_gb' => 900184319,
-                          'disk_type' => 1468443832,
-                          'source_image' => 1985734469
+                        index: 2887762520,
+                        initialize_params: {
+                          disk_name: 'test disk_name#1 data',
+                          disk_size_gb: 900184319,
+                          disk_type: 1468443832,
+                          source_image: 1985734469
                         },
-                        'source' => 'resource(disk,1)'
+                        source: 'resource(disk,1)'
                       },
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#2 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#2 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                          'sha256' => 'test sha256#2 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#2 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#2 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                          sha256: 'test sha256#2 data'
                         },
-                        'index' => 4331643780,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#2 data',
-                          'disk_size_gb' => 1350276479,
-                          'disk_type' => 2202665748,
-                          'source_image' => 2978601703
+                        index: 4331643780,
+                        initialize_params: {
+                          disk_name: 'test disk_name#2 data',
+                          disk_size_gb: 1350276479,
+                          disk_type: 2202665748,
+                          source_image: 2978601703
                         },
-                        'source' => 'resource(disk,2)'
+                        source: 'resource(disk,2)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#3 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#3 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                          'sha256' => 'test sha256#3 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#3 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#3 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                          sha256: 'test sha256#3 data'
                         },
-                        'index' => 5775525040,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#3 data',
-                          'disk_size_gb' => 1800368639,
-                          'disk_type' => 2936887664,
-                          'source_image' => 3971468938
+                        index: 5775525040,
+                        initialize_params: {
+                          disk_name: 'test disk_name#3 data',
+                          disk_size_gb: 1800368639,
+                          disk_type: 2936887664,
+                          source_image: 3971468938
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       }
                     ]
                     guest_accelerators [
                       {
-                        'accelerator_count' => 2697554557,
-                        'accelerator_type' => 'test accelerator_type#0 data'
+                        accelerator_count: 2697554557,
+                        accelerator_type: 'test accelerator_type#0 data'
                       },
                       {
-                        'accelerator_count' => 5395109114,
-                        'accelerator_type' => 'test accelerator_type#1 data'
+                        accelerator_count: 5395109114,
+                        accelerator_type: 'test accelerator_type#1 data'
                       },
                       {
-                        'accelerator_count' => 8092663672,
-                        'accelerator_type' => 'test accelerator_type#2 data'
+                        accelerator_count: 8092663672,
+                        accelerator_type: 'test accelerator_type#2 data'
                       },
                       {
-                        'accelerator_count' => 10790218229,
-                        'accelerator_type' => 'test accelerator_type#3 data'
+                        accelerator_count: 10790218229,
+                        accelerator_type: 'test accelerator_type#3 data'
                       }
                     ]
                     label_fingerprint 'test label_fingerprint#0 data'
@@ -243,40 +243,40 @@ context 'gcompute_instance' do
                     min_cpu_platform 'test min_cpu_platform#0 data'
                     network_interfaces [
                       {
-                        'name' => 'test name#0 data',
-                        'network' => 'resource(network,0)',
-                        'network_ip' => 'test network_ip#0 data',
-                        'subnetwork' => 'test subnetwork#0 data'
+                        name: 'test name#0 data',
+                        network: 'resource(network,0)',
+                        network_ip: 'test network_ip#0 data',
+                        subnetwork: 'test subnetwork#0 data'
                       },
                       {
-                        'name' => 'test name#1 data',
-                        'network' => 'resource(network,1)',
-                        'network_ip' => 'test network_ip#1 data',
-                        'subnetwork' => 'test subnetwork#1 data'
+                        name: 'test name#1 data',
+                        network: 'resource(network,1)',
+                        network_ip: 'test network_ip#1 data',
+                        subnetwork: 'test subnetwork#1 data'
                       }
                     ]
                     scheduling({
-                      'automatic_restart' => true,
-                      'on_host_maintenance' => 'test on_host_maintenance#0 data',
-                      'preemptible' => true
+                      automatic_restart: true,
+                      on_host_maintenance: 'test on_host_maintenance#0 data',
+                      preemptible: true
                     })
                     service_accounts [
                       {
-                        'email' => true,
-                        'scopes' => ['rr', 'ss', 'tt', 'uu', 'vv']
+                        email: true,
+                        scopes: ['rr', 'ss', 'tt', 'uu', 'vv']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ll', 'mm', 'nn', 'oo', 'pp']
+                        email: false,
+                        scopes: ['ll', 'mm', 'nn', 'oo', 'pp']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['ee', 'ff', 'gg', 'hh']
+                        email: true,
+                        scopes: ['ee', 'ff', 'gg', 'hh']
                       }
                     ]
                     tags({
-                      'fingerprint' => 'test fingerprint#0 data',
-                      'items' => ['hh', 'ii', 'jj']
+                      fingerprint: 'test fingerprint#0 data',
+                      items: ['hh', 'ii', 'jj']
                     })
                     zone 'test zone#0 data'
                     project 'test project#0 data'
@@ -288,68 +288,68 @@ context 'gcompute_instance' do
                     can_ip_forward false
                     disks [
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#1 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#1 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#1 data',
-                          'sha256' => 'test sha256#1 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#1 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#1 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#1 data',
+                          sha256: 'test sha256#1 data'
                         },
-                        'index' => 2887762520,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#1 data',
-                          'disk_size_gb' => 900184319,
-                          'disk_type' => 1468443832,
-                          'source_image' => 1985734469
+                        index: 2887762520,
+                        initialize_params: {
+                          disk_name: 'test disk_name#1 data',
+                          disk_size_gb: 900184319,
+                          disk_type: 1468443832,
+                          source_image: 1985734469
                         },
-                        'source' => 'resource(disk,1)'
+                        source: 'resource(disk,1)'
                       },
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#2 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#2 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                          'sha256' => 'test sha256#2 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#2 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#2 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                          sha256: 'test sha256#2 data'
                         },
-                        'index' => 4331643780,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#2 data',
-                          'disk_size_gb' => 1350276479,
-                          'disk_type' => 2202665748,
-                          'source_image' => 2978601703
+                        index: 4331643780,
+                        initialize_params: {
+                          disk_name: 'test disk_name#2 data',
+                          disk_size_gb: 1350276479,
+                          disk_type: 2202665748,
+                          source_image: 2978601703
                         },
-                        'source' => 'resource(disk,2)'
+                        source: 'resource(disk,2)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#3 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#3 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                          'sha256' => 'test sha256#3 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#3 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#3 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                          sha256: 'test sha256#3 data'
                         },
-                        'index' => 5775525040,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#3 data',
-                          'disk_size_gb' => 1800368639,
-                          'disk_type' => 2936887664,
-                          'source_image' => 3971468938
+                        index: 5775525040,
+                        initialize_params: {
+                          disk_name: 'test disk_name#3 data',
+                          disk_size_gb: 1800368639,
+                          disk_type: 2936887664,
+                          source_image: 3971468938
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       }
                     ]
                     guest_accelerators [
                       {
-                        'accelerator_count' => 5395109114,
-                        'accelerator_type' => 'test accelerator_type#1 data'
+                        accelerator_count: 5395109114,
+                        accelerator_type: 'test accelerator_type#1 data'
                       },
                       {
-                        'accelerator_count' => 8092663672,
-                        'accelerator_type' => 'test accelerator_type#2 data'
+                        accelerator_count: 8092663672,
+                        accelerator_type: 'test accelerator_type#2 data'
                       }
                     ]
                     label_fingerprint 'test label_fingerprint#1 data'
@@ -357,54 +357,54 @@ context 'gcompute_instance' do
                     min_cpu_platform 'test min_cpu_platform#1 data'
                     network_interfaces [
                       {
-                        'name' => 'test name#1 data',
-                        'network' => 'resource(network,1)',
-                        'network_ip' => 'test network_ip#1 data',
-                        'subnetwork' => 'test subnetwork#1 data'
+                        name: 'test name#1 data',
+                        network: 'resource(network,1)',
+                        network_ip: 'test network_ip#1 data',
+                        subnetwork: 'test subnetwork#1 data'
                       },
                       {
-                        'name' => 'test name#2 data',
-                        'network' => 'resource(network,2)',
-                        'network_ip' => 'test network_ip#2 data',
-                        'subnetwork' => 'test subnetwork#2 data'
+                        name: 'test name#2 data',
+                        network: 'resource(network,2)',
+                        network_ip: 'test network_ip#2 data',
+                        subnetwork: 'test subnetwork#2 data'
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'network' => 'resource(network,0)',
-                        'network_ip' => 'test network_ip#3 data',
-                        'subnetwork' => 'test subnetwork#3 data'
+                        name: 'test name#3 data',
+                        network: 'resource(network,0)',
+                        network_ip: 'test network_ip#3 data',
+                        subnetwork: 'test subnetwork#3 data'
                       }
                     ]
                     scheduling({
-                      'automatic_restart' => false,
-                      'on_host_maintenance' => 'test on_host_maintenance#1 data',
-                      'preemptible' => false
+                      automatic_restart: false,
+                      on_host_maintenance: 'test on_host_maintenance#1 data',
+                      preemptible: false
                     })
                     service_accounts [
                       {
-                        'email' => false,
-                        'scopes' => ['ll', 'mm', 'nn', 'oo', 'pp']
+                        email: false,
+                        scopes: ['ll', 'mm', 'nn', 'oo', 'pp']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['ee', 'ff', 'gg', 'hh']
+                        email: true,
+                        scopes: ['ee', 'ff', 'gg', 'hh']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ww', 'xx', 'yy', 'zz']
+                        email: false,
+                        scopes: ['ww', 'xx', 'yy', 'zz']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['rr', 'ss', 'tt']
+                        email: true,
+                        scopes: ['rr', 'ss', 'tt']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ll', 'mm', 'nn']
+                        email: false,
+                        scopes: ['ll', 'mm', 'nn']
                       }
                     ]
                     tags({
-                      'fingerprint' => 'test fingerprint#1 data',
-                      'items' => ['qq', 'rr', 'ss', 'tt']
+                      fingerprint: 'test fingerprint#1 data',
+                      items: ['qq', 'rr', 'ss', 'tt']
                     })
                     zone 'test zone#1 data'
                     project 'test project#1 data'
@@ -416,58 +416,58 @@ context 'gcompute_instance' do
                     can_ip_forward true
                     disks [
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#2 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#2 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                          'sha256' => 'test sha256#2 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#2 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#2 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                          sha256: 'test sha256#2 data'
                         },
-                        'index' => 4331643780,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#2 data',
-                          'disk_size_gb' => 1350276479,
-                          'disk_type' => 2202665748,
-                          'source_image' => 2978601703
+                        index: 4331643780,
+                        initialize_params: {
+                          disk_name: 'test disk_name#2 data',
+                          disk_size_gb: 1350276479,
+                          disk_type: 2202665748,
+                          source_image: 2978601703
                         },
-                        'source' => 'resource(disk,2)'
+                        source: 'resource(disk,2)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#3 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#3 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                          'sha256' => 'test sha256#3 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#3 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#3 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                          sha256: 'test sha256#3 data'
                         },
-                        'index' => 5775525040,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#3 data',
-                          'disk_size_gb' => 1800368639,
-                          'disk_type' => 2936887664,
-                          'source_image' => 3971468938
+                        index: 5775525040,
+                        initialize_params: {
+                          disk_name: 'test disk_name#3 data',
+                          disk_size_gb: 1800368639,
+                          disk_type: 2936887664,
+                          source_image: 3971468938
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       }
                     ]
                     guest_accelerators [
                       {
-                        'accelerator_count' => 8092663672,
-                        'accelerator_type' => 'test accelerator_type#2 data'
+                        accelerator_count: 8092663672,
+                        accelerator_type: 'test accelerator_type#2 data'
                       },
                       {
-                        'accelerator_count' => 10790218229,
-                        'accelerator_type' => 'test accelerator_type#3 data'
+                        accelerator_count: 10790218229,
+                        accelerator_type: 'test accelerator_type#3 data'
                       },
                       {
-                        'accelerator_count' => 13487772787,
-                        'accelerator_type' => 'test accelerator_type#4 data'
+                        accelerator_count: 13487772787,
+                        accelerator_type: 'test accelerator_type#4 data'
                       },
                       {
-                        'accelerator_count' => 16185327344,
-                        'accelerator_type' => 'test accelerator_type#5 data'
+                        accelerator_count: 16185327344,
+                        accelerator_type: 'test accelerator_type#5 data'
                       }
                     ]
                     label_fingerprint 'test label_fingerprint#2 data'
@@ -475,52 +475,52 @@ context 'gcompute_instance' do
                     min_cpu_platform 'test min_cpu_platform#2 data'
                     network_interfaces [
                       {
-                        'name' => 'test name#2 data',
-                        'network' => 'resource(network,2)',
-                        'network_ip' => 'test network_ip#2 data',
-                        'subnetwork' => 'test subnetwork#2 data'
+                        name: 'test name#2 data',
+                        network: 'resource(network,2)',
+                        network_ip: 'test network_ip#2 data',
+                        subnetwork: 'test subnetwork#2 data'
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'network' => 'resource(network,0)',
-                        'network_ip' => 'test network_ip#3 data',
-                        'subnetwork' => 'test subnetwork#3 data'
+                        name: 'test name#3 data',
+                        network: 'resource(network,0)',
+                        network_ip: 'test network_ip#3 data',
+                        subnetwork: 'test subnetwork#3 data'
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'network' => 'resource(network,1)',
-                        'network_ip' => 'test network_ip#4 data',
-                        'subnetwork' => 'test subnetwork#4 data'
+                        name: 'test name#4 data',
+                        network: 'resource(network,1)',
+                        network_ip: 'test network_ip#4 data',
+                        subnetwork: 'test subnetwork#4 data'
                       },
                       {
-                        'name' => 'test name#5 data',
-                        'network' => 'resource(network,2)',
-                        'network_ip' => 'test network_ip#5 data',
-                        'subnetwork' => 'test subnetwork#5 data'
+                        name: 'test name#5 data',
+                        network: 'resource(network,2)',
+                        network_ip: 'test network_ip#5 data',
+                        subnetwork: 'test subnetwork#5 data'
                       }
                     ]
                     scheduling({
-                      'automatic_restart' => true,
-                      'on_host_maintenance' => 'test on_host_maintenance#2 data',
-                      'preemptible' => true
+                      automatic_restart: true,
+                      on_host_maintenance: 'test on_host_maintenance#2 data',
+                      preemptible: true
                     })
                     service_accounts [
                       {
-                        'email' => true,
-                        'scopes' => ['ee', 'ff', 'gg', 'hh']
+                        email: true,
+                        scopes: ['ee', 'ff', 'gg', 'hh']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ww', 'xx', 'yy', 'zz']
+                        email: false,
+                        scopes: ['ww', 'xx', 'yy', 'zz']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['rr', 'ss', 'tt']
+                        email: true,
+                        scopes: ['rr', 'ss', 'tt']
                       }
                     ]
                     tags({
-                      'fingerprint' => 'test fingerprint#2 data',
-                      'items' => ['yy', 'zz']
+                      fingerprint: 'test fingerprint#2 data',
+                      items: ['yy', 'zz']
                     })
                     zone 'test zone#2 data'
                     project 'test project#2 data'
@@ -820,94 +820,94 @@ context 'gcompute_instance' do
                     can_ip_forward true
                     disks [
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#0 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#0 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#0 data',
-                          'sha256' => 'test sha256#0 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#0 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#0 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#0 data',
+                          sha256: 'test sha256#0 data'
                         },
-                        'index' => 1443881260,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#0 data',
-                          'disk_size_gb' => 450092159,
-                          'disk_type' => 734221916,
-                          'source_image' => 992867234
+                        index: 1443881260,
+                        initialize_params: {
+                          disk_name: 'test disk_name#0 data',
+                          disk_size_gb: 450092159,
+                          disk_type: 734221916,
+                          source_image: 992867234
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#1 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#1 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#1 data',
-                          'sha256' => 'test sha256#1 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#1 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#1 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#1 data',
+                          sha256: 'test sha256#1 data'
                         },
-                        'index' => 2887762520,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#1 data',
-                          'disk_size_gb' => 900184319,
-                          'disk_type' => 1468443832,
-                          'source_image' => 1985734469
+                        index: 2887762520,
+                        initialize_params: {
+                          disk_name: 'test disk_name#1 data',
+                          disk_size_gb: 900184319,
+                          disk_type: 1468443832,
+                          source_image: 1985734469
                         },
-                        'source' => 'resource(disk,1)'
+                        source: 'resource(disk,1)'
                       },
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#2 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#2 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                          'sha256' => 'test sha256#2 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#2 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#2 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                          sha256: 'test sha256#2 data'
                         },
-                        'index' => 4331643780,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#2 data',
-                          'disk_size_gb' => 1350276479,
-                          'disk_type' => 2202665748,
-                          'source_image' => 2978601703
+                        index: 4331643780,
+                        initialize_params: {
+                          disk_name: 'test disk_name#2 data',
+                          disk_size_gb: 1350276479,
+                          disk_type: 2202665748,
+                          source_image: 2978601703
                         },
-                        'source' => 'resource(disk,2)'
+                        source: 'resource(disk,2)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#3 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#3 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                          'sha256' => 'test sha256#3 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#3 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#3 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                          sha256: 'test sha256#3 data'
                         },
-                        'index' => 5775525040,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#3 data',
-                          'disk_size_gb' => 1800368639,
-                          'disk_type' => 2936887664,
-                          'source_image' => 3971468938
+                        index: 5775525040,
+                        initialize_params: {
+                          disk_name: 'test disk_name#3 data',
+                          disk_size_gb: 1800368639,
+                          disk_type: 2936887664,
+                          source_image: 3971468938
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       }
                     ]
                     guest_accelerators [
                       {
-                        'accelerator_count' => 2697554557,
-                        'accelerator_type' => 'test accelerator_type#0 data'
+                        accelerator_count: 2697554557,
+                        accelerator_type: 'test accelerator_type#0 data'
                       },
                       {
-                        'accelerator_count' => 5395109114,
-                        'accelerator_type' => 'test accelerator_type#1 data'
+                        accelerator_count: 5395109114,
+                        accelerator_type: 'test accelerator_type#1 data'
                       },
                       {
-                        'accelerator_count' => 8092663672,
-                        'accelerator_type' => 'test accelerator_type#2 data'
+                        accelerator_count: 8092663672,
+                        accelerator_type: 'test accelerator_type#2 data'
                       },
                       {
-                        'accelerator_count' => 10790218229,
-                        'accelerator_type' => 'test accelerator_type#3 data'
+                        accelerator_count: 10790218229,
+                        accelerator_type: 'test accelerator_type#3 data'
                       }
                     ]
                     i_label 'test name#0 data'
@@ -916,40 +916,40 @@ context 'gcompute_instance' do
                     min_cpu_platform 'test min_cpu_platform#0 data'
                     network_interfaces [
                       {
-                        'name' => 'test name#0 data',
-                        'network' => 'resource(network,0)',
-                        'network_ip' => 'test network_ip#0 data',
-                        'subnetwork' => 'test subnetwork#0 data'
+                        name: 'test name#0 data',
+                        network: 'resource(network,0)',
+                        network_ip: 'test network_ip#0 data',
+                        subnetwork: 'test subnetwork#0 data'
                       },
                       {
-                        'name' => 'test name#1 data',
-                        'network' => 'resource(network,1)',
-                        'network_ip' => 'test network_ip#1 data',
-                        'subnetwork' => 'test subnetwork#1 data'
+                        name: 'test name#1 data',
+                        network: 'resource(network,1)',
+                        network_ip: 'test network_ip#1 data',
+                        subnetwork: 'test subnetwork#1 data'
                       }
                     ]
                     scheduling({
-                      'automatic_restart' => true,
-                      'on_host_maintenance' => 'test on_host_maintenance#0 data',
-                      'preemptible' => true
+                      automatic_restart: true,
+                      on_host_maintenance: 'test on_host_maintenance#0 data',
+                      preemptible: true
                     })
                     service_accounts [
                       {
-                        'email' => true,
-                        'scopes' => ['rr', 'ss', 'tt', 'uu', 'vv']
+                        email: true,
+                        scopes: ['rr', 'ss', 'tt', 'uu', 'vv']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ll', 'mm', 'nn', 'oo', 'pp']
+                        email: false,
+                        scopes: ['ll', 'mm', 'nn', 'oo', 'pp']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['ee', 'ff', 'gg', 'hh']
+                        email: true,
+                        scopes: ['ee', 'ff', 'gg', 'hh']
                       }
                     ]
                     tags({
-                      'fingerprint' => 'test fingerprint#0 data',
-                      'items' => ['hh', 'ii', 'jj']
+                      fingerprint: 'test fingerprint#0 data',
+                      items: ['hh', 'ii', 'jj']
                     })
                     zone 'test zone#0 data'
                     project 'test project#0 data'
@@ -961,68 +961,68 @@ context 'gcompute_instance' do
                     can_ip_forward false
                     disks [
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#1 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#1 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#1 data',
-                          'sha256' => 'test sha256#1 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#1 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#1 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#1 data',
+                          sha256: 'test sha256#1 data'
                         },
-                        'index' => 2887762520,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#1 data',
-                          'disk_size_gb' => 900184319,
-                          'disk_type' => 1468443832,
-                          'source_image' => 1985734469
+                        index: 2887762520,
+                        initialize_params: {
+                          disk_name: 'test disk_name#1 data',
+                          disk_size_gb: 900184319,
+                          disk_type: 1468443832,
+                          source_image: 1985734469
                         },
-                        'source' => 'resource(disk,1)'
+                        source: 'resource(disk,1)'
                       },
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#2 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#2 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                          'sha256' => 'test sha256#2 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#2 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#2 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                          sha256: 'test sha256#2 data'
                         },
-                        'index' => 4331643780,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#2 data',
-                          'disk_size_gb' => 1350276479,
-                          'disk_type' => 2202665748,
-                          'source_image' => 2978601703
+                        index: 4331643780,
+                        initialize_params: {
+                          disk_name: 'test disk_name#2 data',
+                          disk_size_gb: 1350276479,
+                          disk_type: 2202665748,
+                          source_image: 2978601703
                         },
-                        'source' => 'resource(disk,2)'
+                        source: 'resource(disk,2)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#3 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#3 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                          'sha256' => 'test sha256#3 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#3 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#3 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                          sha256: 'test sha256#3 data'
                         },
-                        'index' => 5775525040,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#3 data',
-                          'disk_size_gb' => 1800368639,
-                          'disk_type' => 2936887664,
-                          'source_image' => 3971468938
+                        index: 5775525040,
+                        initialize_params: {
+                          disk_name: 'test disk_name#3 data',
+                          disk_size_gb: 1800368639,
+                          disk_type: 2936887664,
+                          source_image: 3971468938
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       }
                     ]
                     guest_accelerators [
                       {
-                        'accelerator_count' => 5395109114,
-                        'accelerator_type' => 'test accelerator_type#1 data'
+                        accelerator_count: 5395109114,
+                        accelerator_type: 'test accelerator_type#1 data'
                       },
                       {
-                        'accelerator_count' => 8092663672,
-                        'accelerator_type' => 'test accelerator_type#2 data'
+                        accelerator_count: 8092663672,
+                        accelerator_type: 'test accelerator_type#2 data'
                       }
                     ]
                     i_label 'test name#1 data'
@@ -1031,54 +1031,54 @@ context 'gcompute_instance' do
                     min_cpu_platform 'test min_cpu_platform#1 data'
                     network_interfaces [
                       {
-                        'name' => 'test name#1 data',
-                        'network' => 'resource(network,1)',
-                        'network_ip' => 'test network_ip#1 data',
-                        'subnetwork' => 'test subnetwork#1 data'
+                        name: 'test name#1 data',
+                        network: 'resource(network,1)',
+                        network_ip: 'test network_ip#1 data',
+                        subnetwork: 'test subnetwork#1 data'
                       },
                       {
-                        'name' => 'test name#2 data',
-                        'network' => 'resource(network,2)',
-                        'network_ip' => 'test network_ip#2 data',
-                        'subnetwork' => 'test subnetwork#2 data'
+                        name: 'test name#2 data',
+                        network: 'resource(network,2)',
+                        network_ip: 'test network_ip#2 data',
+                        subnetwork: 'test subnetwork#2 data'
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'network' => 'resource(network,0)',
-                        'network_ip' => 'test network_ip#3 data',
-                        'subnetwork' => 'test subnetwork#3 data'
+                        name: 'test name#3 data',
+                        network: 'resource(network,0)',
+                        network_ip: 'test network_ip#3 data',
+                        subnetwork: 'test subnetwork#3 data'
                       }
                     ]
                     scheduling({
-                      'automatic_restart' => false,
-                      'on_host_maintenance' => 'test on_host_maintenance#1 data',
-                      'preemptible' => false
+                      automatic_restart: false,
+                      on_host_maintenance: 'test on_host_maintenance#1 data',
+                      preemptible: false
                     })
                     service_accounts [
                       {
-                        'email' => false,
-                        'scopes' => ['ll', 'mm', 'nn', 'oo', 'pp']
+                        email: false,
+                        scopes: ['ll', 'mm', 'nn', 'oo', 'pp']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['ee', 'ff', 'gg', 'hh']
+                        email: true,
+                        scopes: ['ee', 'ff', 'gg', 'hh']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ww', 'xx', 'yy', 'zz']
+                        email: false,
+                        scopes: ['ww', 'xx', 'yy', 'zz']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['rr', 'ss', 'tt']
+                        email: true,
+                        scopes: ['rr', 'ss', 'tt']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ll', 'mm', 'nn']
+                        email: false,
+                        scopes: ['ll', 'mm', 'nn']
                       }
                     ]
                     tags({
-                      'fingerprint' => 'test fingerprint#1 data',
-                      'items' => ['qq', 'rr', 'ss', 'tt']
+                      fingerprint: 'test fingerprint#1 data',
+                      items: ['qq', 'rr', 'ss', 'tt']
                     })
                     zone 'test zone#1 data'
                     project 'test project#1 data'
@@ -1090,58 +1090,58 @@ context 'gcompute_instance' do
                     can_ip_forward true
                     disks [
                       {
-                        'auto_delete' => true,
-                        'boot' => true,
-                        'device_name' => 'test device_name#2 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#2 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                          'sha256' => 'test sha256#2 data'
+                        auto_delete: true,
+                        boot: true,
+                        device_name: 'test device_name#2 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#2 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                          sha256: 'test sha256#2 data'
                         },
-                        'index' => 4331643780,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#2 data',
-                          'disk_size_gb' => 1350276479,
-                          'disk_type' => 2202665748,
-                          'source_image' => 2978601703
+                        index: 4331643780,
+                        initialize_params: {
+                          disk_name: 'test disk_name#2 data',
+                          disk_size_gb: 1350276479,
+                          disk_type: 2202665748,
+                          source_image: 2978601703
                         },
-                        'source' => 'resource(disk,2)'
+                        source: 'resource(disk,2)'
                       },
                       {
-                        'auto_delete' => false,
-                        'boot' => false,
-                        'device_name' => 'test device_name#3 data',
-                        'disk_encryption_key' => {
-                          'raw_key' => 'test raw_key#3 data',
-                          'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                          'sha256' => 'test sha256#3 data'
+                        auto_delete: false,
+                        boot: false,
+                        device_name: 'test device_name#3 data',
+                        disk_encryption_key: {
+                          raw_key: 'test raw_key#3 data',
+                          rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                          sha256: 'test sha256#3 data'
                         },
-                        'index' => 5775525040,
-                        'initialize_params' => {
-                          'disk_name' => 'test disk_name#3 data',
-                          'disk_size_gb' => 1800368639,
-                          'disk_type' => 2936887664,
-                          'source_image' => 3971468938
+                        index: 5775525040,
+                        initialize_params: {
+                          disk_name: 'test disk_name#3 data',
+                          disk_size_gb: 1800368639,
+                          disk_type: 2936887664,
+                          source_image: 3971468938
                         },
-                        'source' => 'resource(disk,0)'
+                        source: 'resource(disk,0)'
                       }
                     ]
                     guest_accelerators [
                       {
-                        'accelerator_count' => 8092663672,
-                        'accelerator_type' => 'test accelerator_type#2 data'
+                        accelerator_count: 8092663672,
+                        accelerator_type: 'test accelerator_type#2 data'
                       },
                       {
-                        'accelerator_count' => 10790218229,
-                        'accelerator_type' => 'test accelerator_type#3 data'
+                        accelerator_count: 10790218229,
+                        accelerator_type: 'test accelerator_type#3 data'
                       },
                       {
-                        'accelerator_count' => 13487772787,
-                        'accelerator_type' => 'test accelerator_type#4 data'
+                        accelerator_count: 13487772787,
+                        accelerator_type: 'test accelerator_type#4 data'
                       },
                       {
-                        'accelerator_count' => 16185327344,
-                        'accelerator_type' => 'test accelerator_type#5 data'
+                        accelerator_count: 16185327344,
+                        accelerator_type: 'test accelerator_type#5 data'
                       }
                     ]
                     i_label 'test name#2 data'
@@ -1150,52 +1150,52 @@ context 'gcompute_instance' do
                     min_cpu_platform 'test min_cpu_platform#2 data'
                     network_interfaces [
                       {
-                        'name' => 'test name#2 data',
-                        'network' => 'resource(network,2)',
-                        'network_ip' => 'test network_ip#2 data',
-                        'subnetwork' => 'test subnetwork#2 data'
+                        name: 'test name#2 data',
+                        network: 'resource(network,2)',
+                        network_ip: 'test network_ip#2 data',
+                        subnetwork: 'test subnetwork#2 data'
                       },
                       {
-                        'name' => 'test name#3 data',
-                        'network' => 'resource(network,0)',
-                        'network_ip' => 'test network_ip#3 data',
-                        'subnetwork' => 'test subnetwork#3 data'
+                        name: 'test name#3 data',
+                        network: 'resource(network,0)',
+                        network_ip: 'test network_ip#3 data',
+                        subnetwork: 'test subnetwork#3 data'
                       },
                       {
-                        'name' => 'test name#4 data',
-                        'network' => 'resource(network,1)',
-                        'network_ip' => 'test network_ip#4 data',
-                        'subnetwork' => 'test subnetwork#4 data'
+                        name: 'test name#4 data',
+                        network: 'resource(network,1)',
+                        network_ip: 'test network_ip#4 data',
+                        subnetwork: 'test subnetwork#4 data'
                       },
                       {
-                        'name' => 'test name#5 data',
-                        'network' => 'resource(network,2)',
-                        'network_ip' => 'test network_ip#5 data',
-                        'subnetwork' => 'test subnetwork#5 data'
+                        name: 'test name#5 data',
+                        network: 'resource(network,2)',
+                        network_ip: 'test network_ip#5 data',
+                        subnetwork: 'test subnetwork#5 data'
                       }
                     ]
                     scheduling({
-                      'automatic_restart' => true,
-                      'on_host_maintenance' => 'test on_host_maintenance#2 data',
-                      'preemptible' => true
+                      automatic_restart: true,
+                      on_host_maintenance: 'test on_host_maintenance#2 data',
+                      preemptible: true
                     })
                     service_accounts [
                       {
-                        'email' => true,
-                        'scopes' => ['ee', 'ff', 'gg', 'hh']
+                        email: true,
+                        scopes: ['ee', 'ff', 'gg', 'hh']
                       },
                       {
-                        'email' => false,
-                        'scopes' => ['ww', 'xx', 'yy', 'zz']
+                        email: false,
+                        scopes: ['ww', 'xx', 'yy', 'zz']
                       },
                       {
-                        'email' => true,
-                        'scopes' => ['rr', 'ss', 'tt']
+                        email: true,
+                        scopes: ['rr', 'ss', 'tt']
                       }
                     ]
                     tags({
-                      'fingerprint' => 'test fingerprint#2 data',
-                      'items' => ['yy', 'zz']
+                      fingerprint: 'test fingerprint#2 data',
+                      items: ['yy', 'zz']
                     })
                     zone 'test zone#2 data'
                     project 'test project#2 data'
@@ -1658,94 +1658,94 @@ context 'gcompute_instance' do
                   can_ip_forward true
                   disks [
                     {
-                      'auto_delete' => true,
-                      'boot' => true,
-                      'device_name' => 'test device_name#0 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#0 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#0 data',
-                        'sha256' => 'test sha256#0 data'
+                      auto_delete: true,
+                      boot: true,
+                      device_name: 'test device_name#0 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#0 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#0 data',
+                        sha256: 'test sha256#0 data'
                       },
-                      'index' => 1443881260,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#0 data',
-                        'disk_size_gb' => 450092159,
-                        'disk_type' => 734221916,
-                        'source_image' => 992867234
+                      index: 1443881260,
+                      initialize_params: {
+                        disk_name: 'test disk_name#0 data',
+                        disk_size_gb: 450092159,
+                        disk_type: 734221916,
+                        source_image: 992867234
                       },
-                      'source' => 'resource(disk,0)'
+                      source: 'resource(disk,0)'
                     },
                     {
-                      'auto_delete' => false,
-                      'boot' => false,
-                      'device_name' => 'test device_name#1 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#1 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#1 data',
-                        'sha256' => 'test sha256#1 data'
+                      auto_delete: false,
+                      boot: false,
+                      device_name: 'test device_name#1 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#1 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#1 data',
+                        sha256: 'test sha256#1 data'
                       },
-                      'index' => 2887762520,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#1 data',
-                        'disk_size_gb' => 900184319,
-                        'disk_type' => 1468443832,
-                        'source_image' => 1985734469
+                      index: 2887762520,
+                      initialize_params: {
+                        disk_name: 'test disk_name#1 data',
+                        disk_size_gb: 900184319,
+                        disk_type: 1468443832,
+                        source_image: 1985734469
                       },
-                      'source' => 'resource(disk,1)'
+                      source: 'resource(disk,1)'
                     },
                     {
-                      'auto_delete' => true,
-                      'boot' => true,
-                      'device_name' => 'test device_name#2 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#2 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                        'sha256' => 'test sha256#2 data'
+                      auto_delete: true,
+                      boot: true,
+                      device_name: 'test device_name#2 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#2 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                        sha256: 'test sha256#2 data'
                       },
-                      'index' => 4331643780,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#2 data',
-                        'disk_size_gb' => 1350276479,
-                        'disk_type' => 2202665748,
-                        'source_image' => 2978601703
+                      index: 4331643780,
+                      initialize_params: {
+                        disk_name: 'test disk_name#2 data',
+                        disk_size_gb: 1350276479,
+                        disk_type: 2202665748,
+                        source_image: 2978601703
                       },
-                      'source' => 'resource(disk,2)'
+                      source: 'resource(disk,2)'
                     },
                     {
-                      'auto_delete' => false,
-                      'boot' => false,
-                      'device_name' => 'test device_name#3 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#3 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                        'sha256' => 'test sha256#3 data'
+                      auto_delete: false,
+                      boot: false,
+                      device_name: 'test device_name#3 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#3 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                        sha256: 'test sha256#3 data'
                       },
-                      'index' => 5775525040,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#3 data',
-                        'disk_size_gb' => 1800368639,
-                        'disk_type' => 2936887664,
-                        'source_image' => 3971468938
+                      index: 5775525040,
+                      initialize_params: {
+                        disk_name: 'test disk_name#3 data',
+                        disk_size_gb: 1800368639,
+                        disk_type: 2936887664,
+                        source_image: 3971468938
                       },
-                      'source' => 'resource(disk,0)'
+                      source: 'resource(disk,0)'
                     }
                   ]
                   guest_accelerators [
                     {
-                      'accelerator_count' => 2697554557,
-                      'accelerator_type' => 'test accelerator_type#0 data'
+                      accelerator_count: 2697554557,
+                      accelerator_type: 'test accelerator_type#0 data'
                     },
                     {
-                      'accelerator_count' => 5395109114,
-                      'accelerator_type' => 'test accelerator_type#1 data'
+                      accelerator_count: 5395109114,
+                      accelerator_type: 'test accelerator_type#1 data'
                     },
                     {
-                      'accelerator_count' => 8092663672,
-                      'accelerator_type' => 'test accelerator_type#2 data'
+                      accelerator_count: 8092663672,
+                      accelerator_type: 'test accelerator_type#2 data'
                     },
                     {
-                      'accelerator_count' => 10790218229,
-                      'accelerator_type' => 'test accelerator_type#3 data'
+                      accelerator_count: 10790218229,
+                      accelerator_type: 'test accelerator_type#3 data'
                     }
                   ]
                   label_fingerprint 'test label_fingerprint#0 data'
@@ -1753,40 +1753,40 @@ context 'gcompute_instance' do
                   min_cpu_platform 'test min_cpu_platform#0 data'
                   network_interfaces [
                     {
-                      'name' => 'test name#0 data',
-                      'network' => 'resource(network,0)',
-                      'network_ip' => 'test network_ip#0 data',
-                      'subnetwork' => 'test subnetwork#0 data'
+                      name: 'test name#0 data',
+                      network: 'resource(network,0)',
+                      network_ip: 'test network_ip#0 data',
+                      subnetwork: 'test subnetwork#0 data'
                     },
                     {
-                      'name' => 'test name#1 data',
-                      'network' => 'resource(network,1)',
-                      'network_ip' => 'test network_ip#1 data',
-                      'subnetwork' => 'test subnetwork#1 data'
+                      name: 'test name#1 data',
+                      network: 'resource(network,1)',
+                      network_ip: 'test network_ip#1 data',
+                      subnetwork: 'test subnetwork#1 data'
                     }
                   ]
                   scheduling({
-                    'automatic_restart' => true,
-                    'on_host_maintenance' => 'test on_host_maintenance#0 data',
-                    'preemptible' => true
+                    automatic_restart: true,
+                    on_host_maintenance: 'test on_host_maintenance#0 data',
+                    preemptible: true
                   })
                   service_accounts [
                     {
-                      'email' => true,
-                      'scopes' => ['rr', 'ss', 'tt', 'uu', 'vv']
+                      email: true,
+                      scopes: ['rr', 'ss', 'tt', 'uu', 'vv']
                     },
                     {
-                      'email' => false,
-                      'scopes' => ['ll', 'mm', 'nn', 'oo', 'pp']
+                      email: false,
+                      scopes: ['ll', 'mm', 'nn', 'oo', 'pp']
                     },
                     {
-                      'email' => true,
-                      'scopes' => ['ee', 'ff', 'gg', 'hh']
+                      email: true,
+                      scopes: ['ee', 'ff', 'gg', 'hh']
                     }
                   ]
                   tags({
-                    'fingerprint' => 'test fingerprint#0 data',
-                    'items' => ['hh', 'ii', 'jj']
+                    fingerprint: 'test fingerprint#0 data',
+                    items: ['hh', 'ii', 'jj']
                   })
                   zone 'test zone#0 data'
                   project 'test project#0 data'
@@ -2090,94 +2090,94 @@ context 'gcompute_instance' do
                   can_ip_forward true
                   disks [
                     {
-                      'auto_delete' => true,
-                      'boot' => true,
-                      'device_name' => 'test device_name#0 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#0 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#0 data',
-                        'sha256' => 'test sha256#0 data'
+                      auto_delete: true,
+                      boot: true,
+                      device_name: 'test device_name#0 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#0 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#0 data',
+                        sha256: 'test sha256#0 data'
                       },
-                      'index' => 1443881260,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#0 data',
-                        'disk_size_gb' => 450092159,
-                        'disk_type' => 734221916,
-                        'source_image' => 992867234
+                      index: 1443881260,
+                      initialize_params: {
+                        disk_name: 'test disk_name#0 data',
+                        disk_size_gb: 450092159,
+                        disk_type: 734221916,
+                        source_image: 992867234
                       },
-                      'source' => 'resource(disk,0)'
+                      source: 'resource(disk,0)'
                     },
                     {
-                      'auto_delete' => false,
-                      'boot' => false,
-                      'device_name' => 'test device_name#1 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#1 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#1 data',
-                        'sha256' => 'test sha256#1 data'
+                      auto_delete: false,
+                      boot: false,
+                      device_name: 'test device_name#1 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#1 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#1 data',
+                        sha256: 'test sha256#1 data'
                       },
-                      'index' => 2887762520,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#1 data',
-                        'disk_size_gb' => 900184319,
-                        'disk_type' => 1468443832,
-                        'source_image' => 1985734469
+                      index: 2887762520,
+                      initialize_params: {
+                        disk_name: 'test disk_name#1 data',
+                        disk_size_gb: 900184319,
+                        disk_type: 1468443832,
+                        source_image: 1985734469
                       },
-                      'source' => 'resource(disk,1)'
+                      source: 'resource(disk,1)'
                     },
                     {
-                      'auto_delete' => true,
-                      'boot' => true,
-                      'device_name' => 'test device_name#2 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#2 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#2 data',
-                        'sha256' => 'test sha256#2 data'
+                      auto_delete: true,
+                      boot: true,
+                      device_name: 'test device_name#2 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#2 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#2 data',
+                        sha256: 'test sha256#2 data'
                       },
-                      'index' => 4331643780,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#2 data',
-                        'disk_size_gb' => 1350276479,
-                        'disk_type' => 2202665748,
-                        'source_image' => 2978601703
+                      index: 4331643780,
+                      initialize_params: {
+                        disk_name: 'test disk_name#2 data',
+                        disk_size_gb: 1350276479,
+                        disk_type: 2202665748,
+                        source_image: 2978601703
                       },
-                      'source' => 'resource(disk,2)'
+                      source: 'resource(disk,2)'
                     },
                     {
-                      'auto_delete' => false,
-                      'boot' => false,
-                      'device_name' => 'test device_name#3 data',
-                      'disk_encryption_key' => {
-                        'raw_key' => 'test raw_key#3 data',
-                        'rsa_encrypted_key' => 'test rsa_encrypted_key#3 data',
-                        'sha256' => 'test sha256#3 data'
+                      auto_delete: false,
+                      boot: false,
+                      device_name: 'test device_name#3 data',
+                      disk_encryption_key: {
+                        raw_key: 'test raw_key#3 data',
+                        rsa_encrypted_key: 'test rsa_encrypted_key#3 data',
+                        sha256: 'test sha256#3 data'
                       },
-                      'index' => 5775525040,
-                      'initialize_params' => {
-                        'disk_name' => 'test disk_name#3 data',
-                        'disk_size_gb' => 1800368639,
-                        'disk_type' => 2936887664,
-                        'source_image' => 3971468938
+                      index: 5775525040,
+                      initialize_params: {
+                        disk_name: 'test disk_name#3 data',
+                        disk_size_gb: 1800368639,
+                        disk_type: 2936887664,
+                        source_image: 3971468938
                       },
-                      'source' => 'resource(disk,0)'
+                      source: 'resource(disk,0)'
                     }
                   ]
                   guest_accelerators [
                     {
-                      'accelerator_count' => 2697554557,
-                      'accelerator_type' => 'test accelerator_type#0 data'
+                      accelerator_count: 2697554557,
+                      accelerator_type: 'test accelerator_type#0 data'
                     },
                     {
-                      'accelerator_count' => 5395109114,
-                      'accelerator_type' => 'test accelerator_type#1 data'
+                      accelerator_count: 5395109114,
+                      accelerator_type: 'test accelerator_type#1 data'
                     },
                     {
-                      'accelerator_count' => 8092663672,
-                      'accelerator_type' => 'test accelerator_type#2 data'
+                      accelerator_count: 8092663672,
+                      accelerator_type: 'test accelerator_type#2 data'
                     },
                     {
-                      'accelerator_count' => 10790218229,
-                      'accelerator_type' => 'test accelerator_type#3 data'
+                      accelerator_count: 10790218229,
+                      accelerator_type: 'test accelerator_type#3 data'
                     }
                   ]
                   i_label 'test name#0 data'
@@ -2186,40 +2186,40 @@ context 'gcompute_instance' do
                   min_cpu_platform 'test min_cpu_platform#0 data'
                   network_interfaces [
                     {
-                      'name' => 'test name#0 data',
-                      'network' => 'resource(network,0)',
-                      'network_ip' => 'test network_ip#0 data',
-                      'subnetwork' => 'test subnetwork#0 data'
+                      name: 'test name#0 data',
+                      network: 'resource(network,0)',
+                      network_ip: 'test network_ip#0 data',
+                      subnetwork: 'test subnetwork#0 data'
                     },
                     {
-                      'name' => 'test name#1 data',
-                      'network' => 'resource(network,1)',
-                      'network_ip' => 'test network_ip#1 data',
-                      'subnetwork' => 'test subnetwork#1 data'
+                      name: 'test name#1 data',
+                      network: 'resource(network,1)',
+                      network_ip: 'test network_ip#1 data',
+                      subnetwork: 'test subnetwork#1 data'
                     }
                   ]
                   scheduling({
-                    'automatic_restart' => true,
-                    'on_host_maintenance' => 'test on_host_maintenance#0 data',
-                    'preemptible' => true
+                    automatic_restart: true,
+                    on_host_maintenance: 'test on_host_maintenance#0 data',
+                    preemptible: true
                   })
                   service_accounts [
                     {
-                      'email' => true,
-                      'scopes' => ['rr', 'ss', 'tt', 'uu', 'vv']
+                      email: true,
+                      scopes: ['rr', 'ss', 'tt', 'uu', 'vv']
                     },
                     {
-                      'email' => false,
-                      'scopes' => ['ll', 'mm', 'nn', 'oo', 'pp']
+                      email: false,
+                      scopes: ['ll', 'mm', 'nn', 'oo', 'pp']
                     },
                     {
-                      'email' => true,
-                      'scopes' => ['ee', 'ff', 'gg', 'hh']
+                      email: true,
+                      scopes: ['ee', 'ff', 'gg', 'hh']
                     }
                   ]
                   tags({
-                    'fingerprint' => 'test fingerprint#0 data',
-                    'items' => ['hh', 'ii', 'jj']
+                    fingerprint: 'test fingerprint#0 data',
+                    items: ['hh', 'ii', 'jj']
                   })
                   zone 'test zone#0 data'
                   project 'test project#0 data'

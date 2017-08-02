@@ -94,7 +94,7 @@ module Google
         def initialize(args)
           @draining_timeout_sec =
             Google::Compute::Property::Integer.catalog_parse(
-              args['draining_timeout_sec']
+              args[:draining_timeout_sec]
             )
         end
       end

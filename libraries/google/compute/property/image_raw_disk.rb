@@ -102,14 +102,13 @@ module Google
       # Data is coming from the Chef catalog
       class ImageRawDiskCatalog < ImageRawDisk
         def initialize(args)
-          @container_type = Google::Compute::Property::Enum.catalog_parse(
-            args['container_type']
-          )
+          @container_type =
+            Google::Compute::Property::Enum.catalog_parse(args[:container_type])
           @sha1_checksum = Google::Compute::Property::String.catalog_parse(
-            args['sha1_checksum']
+            args[:sha1_checksum]
           )
           @source =
-            Google::Compute::Property::String.catalog_parse(args['source'])
+            Google::Compute::Property::String.catalog_parse(args[:source])
         end
       end
     end

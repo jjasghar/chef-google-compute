@@ -131,22 +131,22 @@ module Google
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @include_host = Google::Compute::Property::Boolean.catalog_parse(
-            args['include_host']
+            args[:include_host]
           )
           @include_protocol = Google::Compute::Property::Boolean.catalog_parse(
-            args['include_protocol']
+            args[:include_protocol]
           )
           @include_query_string =
             Google::Compute::Property::Boolean.catalog_parse(
-              args['include_query_string']
+              args[:include_query_string]
             )
           @query_string_blacklist =
             Google::Compute::Property::StringArray.catalog_parse(
-              args['query_string_blacklist']
+              args[:query_string_blacklist]
             )
           @query_string_whitelist =
             Google::Compute::Property::StringArray.catalog_parse(
-              args['query_string_whitelist']
+              args[:query_string_whitelist]
             )
         end
         # rubocop:enable Metrics/MethodLength

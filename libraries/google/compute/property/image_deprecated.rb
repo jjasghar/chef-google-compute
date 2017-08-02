@@ -114,14 +114,14 @@ module Google
       class ImageDeprecatedCatalog < ImageDeprecated
         def initialize(args)
           @deleted =
-            Google::Compute::Property::Time.catalog_parse(args['deleted'])
+            Google::Compute::Property::Time.catalog_parse(args[:deleted])
           @deprecated =
-            Google::Compute::Property::Time.catalog_parse(args['deprecated'])
+            Google::Compute::Property::Time.catalog_parse(args[:deprecated])
           @obsolete =
-            Google::Compute::Property::Time.catalog_parse(args['obsolete'])
+            Google::Compute::Property::Time.catalog_parse(args[:obsolete])
           @replacement =
-            Google::Compute::Property::String.catalog_parse(args['replacement'])
-          @state = Google::Compute::Property::Enum.catalog_parse(args['state'])
+            Google::Compute::Property::String.catalog_parse(args[:replacement])
+          @state = Google::Compute::Property::Enum.catalog_parse(args[:state])
         end
       end
     end

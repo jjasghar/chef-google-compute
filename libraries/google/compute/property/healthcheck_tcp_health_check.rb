@@ -115,14 +115,14 @@ module Google
       class HealChecTcpHealChecCatalog < HealChecTcpHealChec
         def initialize(args)
           @request =
-            Google::Compute::Property::String.catalog_parse(args['request'])
+            Google::Compute::Property::String.catalog_parse(args[:request])
           @response =
-            Google::Compute::Property::String.catalog_parse(args['response'])
-          @port = Google::Compute::Property::Integer.catalog_parse(args['port'])
+            Google::Compute::Property::String.catalog_parse(args[:response])
+          @port = Google::Compute::Property::Integer.catalog_parse(args[:port])
           @port_name =
-            Google::Compute::Property::String.catalog_parse(args['port_name'])
+            Google::Compute::Property::String.catalog_parse(args[:port_name])
           @proxy_header =
-            Google::Compute::Property::Enum.catalog_parse(args['proxy_header'])
+            Google::Compute::Property::Enum.catalog_parse(args[:proxy_header])
         end
       end
     end

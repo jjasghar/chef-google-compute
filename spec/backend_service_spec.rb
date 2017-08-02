@@ -149,39 +149,39 @@ context 'gcompute_backend_service' do
                     affinity_cookie_ttl_sec 1612732832
                     backends [
                       {
-                        'balancing_mode' => 'UTILIZATION',
-                        'capacity_scaler' => 26622430.32,
-                        'description' => 'test description#0 data',
-                        'group' => 'resource(instance_group,0)',
-                        'max_connections' => 824204419,
-                        'max_connections_per_instance' => 2749819302,
-                        'max_rate' => 400354212,
-                        'max_rate_per_instance' => 17253532.50,
-                        'max_utilization' => 10960213.46
+                        balancing_mode: 'UTILIZATION',
+                        capacity_scaler: 26622430.32,
+                        description: 'test description#0 data',
+                        group: 'resource(instance_group,0)',
+                        max_connections: 824204419,
+                        max_connections_per_instance: 2749819302,
+                        max_rate: 400354212,
+                        max_rate_per_instance: 17253532.50,
+                        max_utilization: 10960213.46
                       },
                       {
-                        'balancing_mode' => 'RATE',
-                        'capacity_scaler' => 53244860.65,
-                        'description' => 'test description#1 data',
-                        'group' => 'resource(instance_group,1)',
-                        'max_connections' => 1648408839,
-                        'max_connections_per_instance' => 5499638604,
-                        'max_rate' => 800708425,
-                        'max_rate_per_instance' => 34507065.0,
-                        'max_utilization' => 21920426.93
+                        balancing_mode: 'RATE',
+                        capacity_scaler: 53244860.65,
+                        description: 'test description#1 data',
+                        group: 'resource(instance_group,1)',
+                        max_connections: 1648408839,
+                        max_connections_per_instance: 5499638604,
+                        max_rate: 800708425,
+                        max_rate_per_instance: 34507065.0,
+                        max_utilization: 21920426.93
                       }
                     ]
                     cdn_policy({
-                      'cache_key_policy' => {
-                        'include_host' => true,
-                        'include_protocol' => true,
-                        'include_query_string' => true,
-                        'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
-                        'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
+                      cache_key_policy: {
+                        include_host: true,
+                        include_protocol: true,
+                        include_query_string: true,
+                        query_string_blacklist: ['pp', 'qq', 'rr', 'ss', 'tt'],
+                        query_string_whitelist: ['dd', 'ee', 'ff', 'gg', 'hh']
                       }
                     })
                     connection_draining({
-                      'draining_timeout_sec' => 2005106437
+                      draining_timeout_sec: 2005106437
                     })
                     description 'test description#0 data'
                     enable_cdn true
@@ -200,39 +200,39 @@ context 'gcompute_backend_service' do
                     affinity_cookie_ttl_sec 3225465664
                     backends [
                       {
-                        'balancing_mode' => 'RATE',
-                        'capacity_scaler' => 53244860.65,
-                        'description' => 'test description#1 data',
-                        'group' => 'resource(instance_group,1)',
-                        'max_connections' => 1648408839,
-                        'max_connections_per_instance' => 5499638604,
-                        'max_rate' => 800708425,
-                        'max_rate_per_instance' => 34507065.0,
-                        'max_utilization' => 21920426.93
+                        balancing_mode: 'RATE',
+                        capacity_scaler: 53244860.65,
+                        description: 'test description#1 data',
+                        group: 'resource(instance_group,1)',
+                        max_connections: 1648408839,
+                        max_connections_per_instance: 5499638604,
+                        max_rate: 800708425,
+                        max_rate_per_instance: 34507065.0,
+                        max_utilization: 21920426.93
                       },
                       {
-                        'balancing_mode' => 'CONNECTION',
-                        'capacity_scaler' => 79867290.98,
-                        'description' => 'test description#2 data',
-                        'group' => 'resource(instance_group,2)',
-                        'max_connections' => 2472613258,
-                        'max_connections_per_instance' => 8249457907,
-                        'max_rate' => 1201062638,
-                        'max_rate_per_instance' => 51760597.51,
-                        'max_utilization' => 32880640.39
+                        balancing_mode: 'CONNECTION',
+                        capacity_scaler: 79867290.98,
+                        description: 'test description#2 data',
+                        group: 'resource(instance_group,2)',
+                        max_connections: 2472613258,
+                        max_connections_per_instance: 8249457907,
+                        max_rate: 1201062638,
+                        max_rate_per_instance: 51760597.51,
+                        max_utilization: 32880640.39
                       }
                     ]
                     cdn_policy({
-                      'cache_key_policy' => {
-                        'include_host' => false,
-                        'include_protocol' => false,
-                        'include_query_string' => false,
-                        'query_string_blacklist' => ['gg', 'hh', 'ii', 'jj'],
-                        'query_string_whitelist' => ['jj', 'kk', 'll', 'mm', 'nn']
+                      cache_key_policy: {
+                        include_host: false,
+                        include_protocol: false,
+                        include_query_string: false,
+                        query_string_blacklist: ['gg', 'hh', 'ii', 'jj'],
+                        query_string_whitelist: ['jj', 'kk', 'll', 'mm', 'nn']
                       }
                     })
                     connection_draining({
-                      'draining_timeout_sec' => 4010212875
+                      draining_timeout_sec: 4010212875
                     })
                     description 'test description#1 data'
                     enable_cdn false
@@ -251,39 +251,39 @@ context 'gcompute_backend_service' do
                     affinity_cookie_ttl_sec 4838198497
                     backends [
                       {
-                        'balancing_mode' => 'CONNECTION',
-                        'capacity_scaler' => 79867290.98,
-                        'description' => 'test description#2 data',
-                        'group' => 'resource(instance_group,2)',
-                        'max_connections' => 2472613258,
-                        'max_connections_per_instance' => 8249457907,
-                        'max_rate' => 1201062638,
-                        'max_rate_per_instance' => 51760597.51,
-                        'max_utilization' => 32880640.39
+                        balancing_mode: 'CONNECTION',
+                        capacity_scaler: 79867290.98,
+                        description: 'test description#2 data',
+                        group: 'resource(instance_group,2)',
+                        max_connections: 2472613258,
+                        max_connections_per_instance: 8249457907,
+                        max_rate: 1201062638,
+                        max_rate_per_instance: 51760597.51,
+                        max_utilization: 32880640.39
                       },
                       {
-                        'balancing_mode' => 'UTILIZATION',
-                        'capacity_scaler' => 106489721.31,
-                        'description' => 'test description#3 data',
-                        'group' => 'resource(instance_group,0)',
-                        'max_connections' => 3296817678,
-                        'max_connections_per_instance' => 10999277209,
-                        'max_rate' => 1601416850,
-                        'max_rate_per_instance' => 69014130.1,
-                        'max_utilization' => 43840853.86
+                        balancing_mode: 'UTILIZATION',
+                        capacity_scaler: 106489721.31,
+                        description: 'test description#3 data',
+                        group: 'resource(instance_group,0)',
+                        max_connections: 3296817678,
+                        max_connections_per_instance: 10999277209,
+                        max_rate: 1601416850,
+                        max_rate_per_instance: 69014130.1,
+                        max_utilization: 43840853.86
                       }
                     ]
                     cdn_policy({
-                      'cache_key_policy' => {
-                        'include_host' => true,
-                        'include_protocol' => true,
-                        'include_query_string' => true,
-                        'query_string_blacklist' => ['xx', 'yy', 'zz'],
-                        'query_string_whitelist' => ['oo', 'pp', 'qq', 'rr']
+                      cache_key_policy: {
+                        include_host: true,
+                        include_protocol: true,
+                        include_query_string: true,
+                        query_string_blacklist: ['xx', 'yy', 'zz'],
+                        query_string_whitelist: ['oo', 'pp', 'qq', 'rr']
                       }
                     })
                     connection_draining({
-                      'draining_timeout_sec' => 6015319313
+                      draining_timeout_sec: 6015319313
                     })
                     description 'test description#2 data'
                     enable_cdn true
@@ -579,40 +579,40 @@ context 'gcompute_backend_service' do
                     affinity_cookie_ttl_sec 1612732832
                     backends [
                       {
-                        'balancing_mode' => 'UTILIZATION',
-                        'capacity_scaler' => 26622430.32,
-                        'description' => 'test description#0 data',
-                        'group' => 'resource(instance_group,0)',
-                        'max_connections' => 824204419,
-                        'max_connections_per_instance' => 2749819302,
-                        'max_rate' => 400354212,
-                        'max_rate_per_instance' => 17253532.50,
-                        'max_utilization' => 10960213.46
+                        balancing_mode: 'UTILIZATION',
+                        capacity_scaler: 26622430.32,
+                        description: 'test description#0 data',
+                        group: 'resource(instance_group,0)',
+                        max_connections: 824204419,
+                        max_connections_per_instance: 2749819302,
+                        max_rate: 400354212,
+                        max_rate_per_instance: 17253532.50,
+                        max_utilization: 10960213.46
                       },
                       {
-                        'balancing_mode' => 'RATE',
-                        'capacity_scaler' => 53244860.65,
-                        'description' => 'test description#1 data',
-                        'group' => 'resource(instance_group,1)',
-                        'max_connections' => 1648408839,
-                        'max_connections_per_instance' => 5499638604,
-                        'max_rate' => 800708425,
-                        'max_rate_per_instance' => 34507065.0,
-                        'max_utilization' => 21920426.93
+                        balancing_mode: 'RATE',
+                        capacity_scaler: 53244860.65,
+                        description: 'test description#1 data',
+                        group: 'resource(instance_group,1)',
+                        max_connections: 1648408839,
+                        max_connections_per_instance: 5499638604,
+                        max_rate: 800708425,
+                        max_rate_per_instance: 34507065.0,
+                        max_utilization: 21920426.93
                       }
                     ]
                     bs_label 'test name#0 data'
                     cdn_policy({
-                      'cache_key_policy' => {
-                        'include_host' => true,
-                        'include_protocol' => true,
-                        'include_query_string' => true,
-                        'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
-                        'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
+                      cache_key_policy: {
+                        include_host: true,
+                        include_protocol: true,
+                        include_query_string: true,
+                        query_string_blacklist: ['pp', 'qq', 'rr', 'ss', 'tt'],
+                        query_string_whitelist: ['dd', 'ee', 'ff', 'gg', 'hh']
                       }
                     })
                     connection_draining({
-                      'draining_timeout_sec' => 2005106437
+                      draining_timeout_sec: 2005106437
                     })
                     description 'test description#0 data'
                     enable_cdn true
@@ -631,40 +631,40 @@ context 'gcompute_backend_service' do
                     affinity_cookie_ttl_sec 3225465664
                     backends [
                       {
-                        'balancing_mode' => 'RATE',
-                        'capacity_scaler' => 53244860.65,
-                        'description' => 'test description#1 data',
-                        'group' => 'resource(instance_group,1)',
-                        'max_connections' => 1648408839,
-                        'max_connections_per_instance' => 5499638604,
-                        'max_rate' => 800708425,
-                        'max_rate_per_instance' => 34507065.0,
-                        'max_utilization' => 21920426.93
+                        balancing_mode: 'RATE',
+                        capacity_scaler: 53244860.65,
+                        description: 'test description#1 data',
+                        group: 'resource(instance_group,1)',
+                        max_connections: 1648408839,
+                        max_connections_per_instance: 5499638604,
+                        max_rate: 800708425,
+                        max_rate_per_instance: 34507065.0,
+                        max_utilization: 21920426.93
                       },
                       {
-                        'balancing_mode' => 'CONNECTION',
-                        'capacity_scaler' => 79867290.98,
-                        'description' => 'test description#2 data',
-                        'group' => 'resource(instance_group,2)',
-                        'max_connections' => 2472613258,
-                        'max_connections_per_instance' => 8249457907,
-                        'max_rate' => 1201062638,
-                        'max_rate_per_instance' => 51760597.51,
-                        'max_utilization' => 32880640.39
+                        balancing_mode: 'CONNECTION',
+                        capacity_scaler: 79867290.98,
+                        description: 'test description#2 data',
+                        group: 'resource(instance_group,2)',
+                        max_connections: 2472613258,
+                        max_connections_per_instance: 8249457907,
+                        max_rate: 1201062638,
+                        max_rate_per_instance: 51760597.51,
+                        max_utilization: 32880640.39
                       }
                     ]
                     bs_label 'test name#1 data'
                     cdn_policy({
-                      'cache_key_policy' => {
-                        'include_host' => false,
-                        'include_protocol' => false,
-                        'include_query_string' => false,
-                        'query_string_blacklist' => ['gg', 'hh', 'ii', 'jj'],
-                        'query_string_whitelist' => ['jj', 'kk', 'll', 'mm', 'nn']
+                      cache_key_policy: {
+                        include_host: false,
+                        include_protocol: false,
+                        include_query_string: false,
+                        query_string_blacklist: ['gg', 'hh', 'ii', 'jj'],
+                        query_string_whitelist: ['jj', 'kk', 'll', 'mm', 'nn']
                       }
                     })
                     connection_draining({
-                      'draining_timeout_sec' => 4010212875
+                      draining_timeout_sec: 4010212875
                     })
                     description 'test description#1 data'
                     enable_cdn false
@@ -683,40 +683,40 @@ context 'gcompute_backend_service' do
                     affinity_cookie_ttl_sec 4838198497
                     backends [
                       {
-                        'balancing_mode' => 'CONNECTION',
-                        'capacity_scaler' => 79867290.98,
-                        'description' => 'test description#2 data',
-                        'group' => 'resource(instance_group,2)',
-                        'max_connections' => 2472613258,
-                        'max_connections_per_instance' => 8249457907,
-                        'max_rate' => 1201062638,
-                        'max_rate_per_instance' => 51760597.51,
-                        'max_utilization' => 32880640.39
+                        balancing_mode: 'CONNECTION',
+                        capacity_scaler: 79867290.98,
+                        description: 'test description#2 data',
+                        group: 'resource(instance_group,2)',
+                        max_connections: 2472613258,
+                        max_connections_per_instance: 8249457907,
+                        max_rate: 1201062638,
+                        max_rate_per_instance: 51760597.51,
+                        max_utilization: 32880640.39
                       },
                       {
-                        'balancing_mode' => 'UTILIZATION',
-                        'capacity_scaler' => 106489721.31,
-                        'description' => 'test description#3 data',
-                        'group' => 'resource(instance_group,0)',
-                        'max_connections' => 3296817678,
-                        'max_connections_per_instance' => 10999277209,
-                        'max_rate' => 1601416850,
-                        'max_rate_per_instance' => 69014130.1,
-                        'max_utilization' => 43840853.86
+                        balancing_mode: 'UTILIZATION',
+                        capacity_scaler: 106489721.31,
+                        description: 'test description#3 data',
+                        group: 'resource(instance_group,0)',
+                        max_connections: 3296817678,
+                        max_connections_per_instance: 10999277209,
+                        max_rate: 1601416850,
+                        max_rate_per_instance: 69014130.1,
+                        max_utilization: 43840853.86
                       }
                     ]
                     bs_label 'test name#2 data'
                     cdn_policy({
-                      'cache_key_policy' => {
-                        'include_host' => true,
-                        'include_protocol' => true,
-                        'include_query_string' => true,
-                        'query_string_blacklist' => ['xx', 'yy', 'zz'],
-                        'query_string_whitelist' => ['oo', 'pp', 'qq', 'rr']
+                      cache_key_policy: {
+                        include_host: true,
+                        include_protocol: true,
+                        include_query_string: true,
+                        query_string_blacklist: ['xx', 'yy', 'zz'],
+                        query_string_whitelist: ['oo', 'pp', 'qq', 'rr']
                       }
                     })
                     connection_draining({
-                      'draining_timeout_sec' => 6015319313
+                      draining_timeout_sec: 6015319313
                     })
                     description 'test description#2 data'
                     enable_cdn true
@@ -1078,39 +1078,39 @@ context 'gcompute_backend_service' do
                   affinity_cookie_ttl_sec 1612732832
                   backends [
                     {
-                      'balancing_mode' => 'UTILIZATION',
-                      'capacity_scaler' => 26622430.32,
-                      'description' => 'test description#0 data',
-                      'group' => 'resource(instance_group,0)',
-                      'max_connections' => 824204419,
-                      'max_connections_per_instance' => 2749819302,
-                      'max_rate' => 400354212,
-                      'max_rate_per_instance' => 17253532.50,
-                      'max_utilization' => 10960213.46
+                      balancing_mode: 'UTILIZATION',
+                      capacity_scaler: 26622430.32,
+                      description: 'test description#0 data',
+                      group: 'resource(instance_group,0)',
+                      max_connections: 824204419,
+                      max_connections_per_instance: 2749819302,
+                      max_rate: 400354212,
+                      max_rate_per_instance: 17253532.50,
+                      max_utilization: 10960213.46
                     },
                     {
-                      'balancing_mode' => 'RATE',
-                      'capacity_scaler' => 53244860.65,
-                      'description' => 'test description#1 data',
-                      'group' => 'resource(instance_group,1)',
-                      'max_connections' => 1648408839,
-                      'max_connections_per_instance' => 5499638604,
-                      'max_rate' => 800708425,
-                      'max_rate_per_instance' => 34507065.0,
-                      'max_utilization' => 21920426.93
+                      balancing_mode: 'RATE',
+                      capacity_scaler: 53244860.65,
+                      description: 'test description#1 data',
+                      group: 'resource(instance_group,1)',
+                      max_connections: 1648408839,
+                      max_connections_per_instance: 5499638604,
+                      max_rate: 800708425,
+                      max_rate_per_instance: 34507065.0,
+                      max_utilization: 21920426.93
                     }
                   ]
                   cdn_policy({
-                    'cache_key_policy' => {
-                      'include_host' => true,
-                      'include_protocol' => true,
-                      'include_query_string' => true,
-                      'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
-                      'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
+                    cache_key_policy: {
+                      include_host: true,
+                      include_protocol: true,
+                      include_query_string: true,
+                      query_string_blacklist: ['pp', 'qq', 'rr', 'ss', 'tt'],
+                      query_string_whitelist: ['dd', 'ee', 'ff', 'gg', 'hh']
                     }
                   })
                   connection_draining({
-                    'draining_timeout_sec' => 2005106437
+                    draining_timeout_sec: 2005106437
                   })
                   description 'test description#0 data'
                   enable_cdn true
@@ -1312,40 +1312,40 @@ context 'gcompute_backend_service' do
                   affinity_cookie_ttl_sec 1612732832
                   backends [
                     {
-                      'balancing_mode' => 'UTILIZATION',
-                      'capacity_scaler' => 26622430.32,
-                      'description' => 'test description#0 data',
-                      'group' => 'resource(instance_group,0)',
-                      'max_connections' => 824204419,
-                      'max_connections_per_instance' => 2749819302,
-                      'max_rate' => 400354212,
-                      'max_rate_per_instance' => 17253532.50,
-                      'max_utilization' => 10960213.46
+                      balancing_mode: 'UTILIZATION',
+                      capacity_scaler: 26622430.32,
+                      description: 'test description#0 data',
+                      group: 'resource(instance_group,0)',
+                      max_connections: 824204419,
+                      max_connections_per_instance: 2749819302,
+                      max_rate: 400354212,
+                      max_rate_per_instance: 17253532.50,
+                      max_utilization: 10960213.46
                     },
                     {
-                      'balancing_mode' => 'RATE',
-                      'capacity_scaler' => 53244860.65,
-                      'description' => 'test description#1 data',
-                      'group' => 'resource(instance_group,1)',
-                      'max_connections' => 1648408839,
-                      'max_connections_per_instance' => 5499638604,
-                      'max_rate' => 800708425,
-                      'max_rate_per_instance' => 34507065.0,
-                      'max_utilization' => 21920426.93
+                      balancing_mode: 'RATE',
+                      capacity_scaler: 53244860.65,
+                      description: 'test description#1 data',
+                      group: 'resource(instance_group,1)',
+                      max_connections: 1648408839,
+                      max_connections_per_instance: 5499638604,
+                      max_rate: 800708425,
+                      max_rate_per_instance: 34507065.0,
+                      max_utilization: 21920426.93
                     }
                   ]
                   bs_label 'test name#0 data'
                   cdn_policy({
-                    'cache_key_policy' => {
-                      'include_host' => true,
-                      'include_protocol' => true,
-                      'include_query_string' => true,
-                      'query_string_blacklist' => ['pp', 'qq', 'rr', 'ss', 'tt'],
-                      'query_string_whitelist' => ['dd', 'ee', 'ff', 'gg', 'hh']
+                    cache_key_policy: {
+                      include_host: true,
+                      include_protocol: true,
+                      include_query_string: true,
+                      query_string_blacklist: ['pp', 'qq', 'rr', 'ss', 'tt'],
+                      query_string_whitelist: ['dd', 'ee', 'ff', 'gg', 'hh']
                     }
                   })
                   connection_draining({
-                    'draining_timeout_sec' => 2005106437
+                    draining_timeout_sec: 2005106437
                   })
                   description 'test description#0 data'
                   enable_cdn true

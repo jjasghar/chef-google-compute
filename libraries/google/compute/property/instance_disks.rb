@@ -133,24 +133,23 @@ module Google
       class InstanceDisksCatalog < InstanceDisks
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @auto_delete = Google::Compute::Property::Boolean.catalog_parse(
-            args['auto_delete']
-          )
-          @boot = Google::Compute::Property::Boolean.catalog_parse(args['boot'])
+          @auto_delete =
+            Google::Compute::Property::Boolean.catalog_parse(args[:auto_delete])
+          @boot = Google::Compute::Property::Boolean.catalog_parse(args[:boot])
           @device_name =
-            Google::Compute::Property::String.catalog_parse(args['device_name'])
+            Google::Compute::Property::String.catalog_parse(args[:device_name])
           @disk_encryption_key =
             Google::Compute::Property::InstaDiskEncryKey.catalog_parse(
-              args['disk_encryption_key']
+              args[:disk_encryption_key]
             )
           @index =
-            Google::Compute::Property::Integer.catalog_parse(args['index'])
+            Google::Compute::Property::Integer.catalog_parse(args[:index])
           @source = Google::Compute::Property::DiskSelfLinkRef.catalog_parse(
-            args['source']
+            args[:source]
           )
           @initialize_params =
             Google::Compute::Property::InstancInitialParams.catalog_parse(
-              args['initialize_params']
+              args[:initialize_params]
             )
         end
         # rubocop:enable Metrics/MethodLength

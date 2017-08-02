@@ -96,8 +96,8 @@ module Google
       # Data is coming from the Chef catalog
       class InstaGroupNamedPortsCatalog < InstaGroupNamedPorts
         def initialize(args)
-          @name = Google::Compute::Property::String.catalog_parse(args['name'])
-          @port = Google::Compute::Property::Integer.catalog_parse(args['port'])
+          @name = Google::Compute::Property::String.catalog_parse(args[:name])
+          @port = Google::Compute::Property::Integer.catalog_parse(args[:port])
         end
       end
     end

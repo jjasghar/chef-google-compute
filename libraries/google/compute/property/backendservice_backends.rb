@@ -150,32 +150,31 @@ module Google
       class BackendServiceBackendCatalog < BackendServiceBackend
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @balancing_mode = Google::Compute::Property::Enum.catalog_parse(
-            args['balancing_mode']
-          )
+          @balancing_mode =
+            Google::Compute::Property::Enum.catalog_parse(args[:balancing_mode])
           @capacity_scaler = Google::Compute::Property::Double.catalog_parse(
-            args['capacity_scaler']
+            args[:capacity_scaler]
           )
           @description =
-            Google::Compute::Property::String.catalog_parse(args['description'])
+            Google::Compute::Property::String.catalog_parse(args[:description])
           @group = Google::Compute::Property::InstGrouSelfLinkRef.catalog_parse(
-            args['group']
+            args[:group]
           )
           @max_connections = Google::Compute::Property::Integer.catalog_parse(
-            args['max_connections']
+            args[:max_connections]
           )
           @max_connections_per_instance =
             Google::Compute::Property::Integer.catalog_parse(
-              args['max_connections_per_instance']
+              args[:max_connections_per_instance]
             )
           @max_rate =
-            Google::Compute::Property::Integer.catalog_parse(args['max_rate'])
+            Google::Compute::Property::Integer.catalog_parse(args[:max_rate])
           @max_rate_per_instance =
             Google::Compute::Property::Double.catalog_parse(
-              args['max_rate_per_instance']
+              args[:max_rate_per_instance]
             )
           @max_utilization = Google::Compute::Property::Double.catalog_parse(
-            args['max_utilization']
+            args[:max_utilization]
           )
         end
         # rubocop:enable Metrics/MethodLength

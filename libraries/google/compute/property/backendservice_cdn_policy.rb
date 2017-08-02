@@ -95,7 +95,7 @@ module Google
         def initialize(args)
           @cache_key_policy =
             Google::Compute::Property::BackServCachKeyPoli.catalog_parse(
-              args['cache_key_policy']
+              args[:cache_key_policy]
             )
         end
       end

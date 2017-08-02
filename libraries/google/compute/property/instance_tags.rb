@@ -98,9 +98,9 @@ module Google
       class InstanceTagsCatalog < InstanceTags
         def initialize(args)
           @fingerprint =
-            Google::Compute::Property::String.catalog_parse(args['fingerprint'])
+            Google::Compute::Property::String.catalog_parse(args[:fingerprint])
           @items =
-            Google::Compute::Property::StringArray.catalog_parse(args['items'])
+            Google::Compute::Property::StringArray.catalog_parse(args[:items])
         end
       end
     end

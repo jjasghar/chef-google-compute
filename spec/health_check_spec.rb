@@ -86,32 +86,32 @@ context 'gcompute_health_check' do
                     description 'test description#0 data'
                     healthy_threshold 295703256
                     http_health_check({
-                      'host' => 'test host#0 data',
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#0 data'
+                      host: 'test host#0 data',
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#0 data'
                     })
                     https_health_check({
-                      'host' => 'test host#0 data',
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#0 data'
+                      host: 'test host#0 data',
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#0 data'
                     })
                     ssl_health_check({
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#0 data',
-                      'response' => 'test response#0 data'
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#0 data',
+                      response: 'test response#0 data'
                     })
                     tcp_health_check({
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#0 data',
-                      'response' => 'test response#0 data'
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#0 data',
+                      response: 'test response#0 data'
                     })
                     timeout_sec 2704031721
                     type 'TCP'
@@ -126,32 +126,32 @@ context 'gcompute_health_check' do
                     description 'test description#1 data'
                     healthy_threshold 591406512
                     http_health_check({
-                      'host' => 'test host#1 data',
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request_path' => 'test request_path#1 data'
+                      host: 'test host#1 data',
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request_path: 'test request_path#1 data'
                     })
                     https_health_check({
-                      'host' => 'test host#1 data',
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request_path' => 'test request_path#1 data'
+                      host: 'test host#1 data',
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request_path: 'test request_path#1 data'
                     })
                     ssl_health_check({
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request' => 'test request#1 data',
-                      'response' => 'test response#1 data'
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request: 'test request#1 data',
+                      response: 'test response#1 data'
                     })
                     tcp_health_check({
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request' => 'test request#1 data',
-                      'response' => 'test response#1 data'
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request: 'test request#1 data',
+                      response: 'test response#1 data'
                     })
                     timeout_sec 5408063442
                     type 'SSL'
@@ -166,32 +166,32 @@ context 'gcompute_health_check' do
                     description 'test description#2 data'
                     healthy_threshold 887109769
                     http_health_check({
-                      'host' => 'test host#2 data',
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#2 data'
+                      host: 'test host#2 data',
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#2 data'
                     })
                     https_health_check({
-                      'host' => 'test host#2 data',
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#2 data'
+                      host: 'test host#2 data',
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#2 data'
                     })
                     ssl_health_check({
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#2 data',
-                      'response' => 'test response#2 data'
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#2 data',
+                      response: 'test response#2 data'
                     })
                     tcp_health_check({
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#2 data',
-                      'response' => 'test response#2 data'
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#2 data',
+                      response: 'test response#2 data'
                     })
                     timeout_sec 8112095164
                     type 'HTTP'
@@ -402,32 +402,32 @@ context 'gcompute_health_check' do
                     hc_label 'test name#0 data'
                     healthy_threshold 295703256
                     http_health_check({
-                      'host' => 'test host#0 data',
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#0 data'
+                      host: 'test host#0 data',
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#0 data'
                     })
                     https_health_check({
-                      'host' => 'test host#0 data',
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#0 data'
+                      host: 'test host#0 data',
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#0 data'
                     })
                     ssl_health_check({
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#0 data',
-                      'response' => 'test response#0 data'
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#0 data',
+                      response: 'test response#0 data'
                     })
                     tcp_health_check({
-                      'port' => 759512136,
-                      'port_name' => 'test port_name#0 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#0 data',
-                      'response' => 'test response#0 data'
+                      port: 759512136,
+                      port_name: 'test port_name#0 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#0 data',
+                      response: 'test response#0 data'
                     })
                     timeout_sec 2704031721
                     type 'TCP'
@@ -443,32 +443,32 @@ context 'gcompute_health_check' do
                     hc_label 'test name#1 data'
                     healthy_threshold 591406512
                     http_health_check({
-                      'host' => 'test host#1 data',
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request_path' => 'test request_path#1 data'
+                      host: 'test host#1 data',
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request_path: 'test request_path#1 data'
                     })
                     https_health_check({
-                      'host' => 'test host#1 data',
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request_path' => 'test request_path#1 data'
+                      host: 'test host#1 data',
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request_path: 'test request_path#1 data'
                     })
                     ssl_health_check({
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request' => 'test request#1 data',
-                      'response' => 'test response#1 data'
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request: 'test request#1 data',
+                      response: 'test response#1 data'
                     })
                     tcp_health_check({
-                      'port' => 1519024273,
-                      'port_name' => 'test port_name#1 data',
-                      'proxy_header' => 'PROXY_V1',
-                      'request' => 'test request#1 data',
-                      'response' => 'test response#1 data'
+                      port: 1519024273,
+                      port_name: 'test port_name#1 data',
+                      proxy_header: 'PROXY_V1',
+                      request: 'test request#1 data',
+                      response: 'test response#1 data'
                     })
                     timeout_sec 5408063442
                     type 'SSL'
@@ -484,32 +484,32 @@ context 'gcompute_health_check' do
                     hc_label 'test name#2 data'
                     healthy_threshold 887109769
                     http_health_check({
-                      'host' => 'test host#2 data',
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#2 data'
+                      host: 'test host#2 data',
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#2 data'
                     })
                     https_health_check({
-                      'host' => 'test host#2 data',
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request_path' => 'test request_path#2 data'
+                      host: 'test host#2 data',
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request_path: 'test request_path#2 data'
                     })
                     ssl_health_check({
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#2 data',
-                      'response' => 'test response#2 data'
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#2 data',
+                      response: 'test response#2 data'
                     })
                     tcp_health_check({
-                      'port' => 2278536410,
-                      'port_name' => 'test port_name#2 data',
-                      'proxy_header' => 'NONE',
-                      'request' => 'test request#2 data',
-                      'response' => 'test response#2 data'
+                      port: 2278536410,
+                      port_name: 'test port_name#2 data',
+                      proxy_header: 'NONE',
+                      request: 'test request#2 data',
+                      response: 'test response#2 data'
                     })
                     timeout_sec 8112095164
                     type 'HTTP'
@@ -798,32 +798,32 @@ context 'gcompute_health_check' do
                   description 'test description#0 data'
                   healthy_threshold 295703256
                   http_health_check({
-                    'host' => 'test host#0 data',
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request_path' => 'test request_path#0 data'
+                    host: 'test host#0 data',
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request_path: 'test request_path#0 data'
                   })
                   https_health_check({
-                    'host' => 'test host#0 data',
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request_path' => 'test request_path#0 data'
+                    host: 'test host#0 data',
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request_path: 'test request_path#0 data'
                   })
                   ssl_health_check({
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request' => 'test request#0 data',
-                    'response' => 'test response#0 data'
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request: 'test request#0 data',
+                    response: 'test response#0 data'
                   })
                   tcp_health_check({
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request' => 'test request#0 data',
-                    'response' => 'test response#0 data'
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request: 'test request#0 data',
+                    response: 'test response#0 data'
                   })
                   timeout_sec 2704031721
                   type 'TCP'
@@ -965,32 +965,32 @@ context 'gcompute_health_check' do
                   hc_label 'test name#0 data'
                   healthy_threshold 295703256
                   http_health_check({
-                    'host' => 'test host#0 data',
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request_path' => 'test request_path#0 data'
+                    host: 'test host#0 data',
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request_path: 'test request_path#0 data'
                   })
                   https_health_check({
-                    'host' => 'test host#0 data',
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request_path' => 'test request_path#0 data'
+                    host: 'test host#0 data',
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request_path: 'test request_path#0 data'
                   })
                   ssl_health_check({
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request' => 'test request#0 data',
-                    'response' => 'test response#0 data'
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request: 'test request#0 data',
+                    response: 'test response#0 data'
                   })
                   tcp_health_check({
-                    'port' => 759512136,
-                    'port_name' => 'test port_name#0 data',
-                    'proxy_header' => 'NONE',
-                    'request' => 'test request#0 data',
-                    'response' => 'test response#0 data'
+                    port: 759512136,
+                    port_name: 'test port_name#0 data',
+                    proxy_header: 'NONE',
+                    request: 'test request#0 data',
+                    response: 'test response#0 data'
                   })
                   timeout_sec 2704031721
                   type 'TCP'

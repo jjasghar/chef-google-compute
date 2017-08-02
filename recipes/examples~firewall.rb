@@ -68,8 +68,8 @@ gcompute_firewall 'test-firewall-allow-ssh' do
   action :create
   allowed [
     {
-      'ip_protocol' => 'tcp',
-      'ports' => ['22']
+      ip_protocol: 'tcp',
+      ports: ['22']
     }
   ]
   target_tags [

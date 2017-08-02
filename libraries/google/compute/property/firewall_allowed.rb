@@ -99,9 +99,9 @@ module Google
       class FirewallAllowedCatalog < FirewallAllowed
         def initialize(args)
           @ip_protocol =
-            Google::Compute::Property::String.catalog_parse(args['ip_protocol'])
+            Google::Compute::Property::String.catalog_parse(args[:ip_protocol])
           @ports =
-            Google::Compute::Property::StringArray.catalog_parse(args['ports'])
+            Google::Compute::Property::StringArray.catalog_parse(args[:ports])
         end
       end
     end

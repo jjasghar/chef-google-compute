@@ -113,15 +113,14 @@ module Google
       # Data is coming from the Chef catalog
       class HealChecHttpHealChecCatalog < HealChecHttpHealChec
         def initialize(args)
-          @host = Google::Compute::Property::String.catalog_parse(args['host'])
-          @request_path = Google::Compute::Property::String.catalog_parse(
-            args['request_path']
-          )
-          @port = Google::Compute::Property::Integer.catalog_parse(args['port'])
+          @host = Google::Compute::Property::String.catalog_parse(args[:host])
+          @request_path =
+            Google::Compute::Property::String.catalog_parse(args[:request_path])
+          @port = Google::Compute::Property::Integer.catalog_parse(args[:port])
           @port_name =
-            Google::Compute::Property::String.catalog_parse(args['port_name'])
+            Google::Compute::Property::String.catalog_parse(args[:port_name])
           @proxy_header =
-            Google::Compute::Property::Enum.catalog_parse(args['proxy_header'])
+            Google::Compute::Property::Enum.catalog_parse(args[:proxy_header])
         end
       end
     end

@@ -98,9 +98,9 @@ module Google
       class InstancServiceAccountCatalog < InstancServiceAccount
         def initialize(args)
           @email =
-            Google::Compute::Property::Boolean.catalog_parse(args['email'])
+            Google::Compute::Property::Boolean.catalog_parse(args[:email])
           @scopes =
-            Google::Compute::Property::StringArray.catalog_parse(args['scopes'])
+            Google::Compute::Property::StringArray.catalog_parse(args[:scopes])
         end
       end
     end

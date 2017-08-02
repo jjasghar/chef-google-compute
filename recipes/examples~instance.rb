@@ -84,13 +84,13 @@ gcompute_instance 'instance-test' do
                 'machineTypes/n1-standard-1'].join
   disks [
     {
-      'boot'   => true,
-      'source' => 'data-disk-1'
+      boot: true,
+      source: 'data-disk-1'
     }
   ]
   network_interfaces [
     {
-      'network' => 'mynetwork-test'
+      network: 'mynetwork-test'
     }
   ]
   zone 'us-central1-a'

@@ -102,12 +102,12 @@ module Google
       class InstaDiskEncryKeyCatalog < InstaDiskEncryKey
         def initialize(args)
           @raw_key =
-            Google::Compute::Property::String.catalog_parse(args['raw_key'])
+            Google::Compute::Property::String.catalog_parse(args[:raw_key])
           @rsa_encrypted_key = Google::Compute::Property::String.catalog_parse(
-            args['rsa_encrypted_key']
+            args[:rsa_encrypted_key]
           )
           @sha256 =
-            Google::Compute::Property::String.catalog_parse(args['sha256'])
+            Google::Compute::Property::String.catalog_parse(args[:sha256])
         end
       end
     end
