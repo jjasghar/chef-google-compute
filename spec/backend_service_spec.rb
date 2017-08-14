@@ -985,7 +985,7 @@ context 'gcompute_backend_service' do
                     'maxConnections' => 824_204_419,
                     'maxConnectionsPerInstance' => 2_749_819_302,
                     'maxRate' => 400_354_212,
-                    'maxRatePerInstance' => 17_253_532.50,
+                    'maxRatePerInstance' => 17_253_532.5,
                     'maxUtilization' => 10_960_213.46
                   },
                   {
@@ -1221,7 +1221,7 @@ context 'gcompute_backend_service' do
                     'maxConnections' => 824_204_419,
                     'maxConnectionsPerInstance' => 2_749_819_302,
                     'maxRate' => 400_354_212,
-                    'maxRatePerInstance' => 17_253_532.50,
+                    'maxRatePerInstance' => 17_253_532.5,
                     'maxUtilization' => 10_960_213.46
                   },
                   {
