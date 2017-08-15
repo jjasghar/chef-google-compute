@@ -64,7 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_global_address 'chef-my-app-loadbalancer' do
+gcompute_global_address 'my-app-lb' do
   action :create
   project 'google.com:graphite-playground'
   credential 'mycred'

@@ -378,7 +378,7 @@ included in the request.
 ```ruby
 # Backend Service requires various other services to be setup beforehand. Please
 # make sure they are defined as well:
-#   - gcompute_instance_group 'my-puppet-masters' do ... end
+#   - gcompute_instance_group 'my-masters' do ... end
 #   - Health check
 my_health_check = [
   'https://www.googleapis.com/compute/v1',
@@ -389,7 +389,7 @@ my_health_check = [
 gcompute_backend_service 'my-app-backend' do
   action :create
   backends [
-    { group: 'my-puppet-masters' }
+    { group: 'my-masters' }
   ]
   enable_cdn true
   health_checks [
@@ -710,7 +710,7 @@ you need.
 #### Example
 
 ```ruby
-gcompute_firewall 'test-firewall-allow-ssh' do
+gcompute_firewall 'test-fw-allow-ssh' do
   action :create
   allowed [
     {
@@ -807,7 +807,7 @@ HTTP(S) load balancing.
 #### Example
 
 ```ruby
-gcompute_global_address 'chef-my-app-loadbalancer' do
+gcompute_global_address 'my-app-lb' do
   action :create
   project 'google.com:graphite-playground'
   credential 'mycred'
@@ -1362,7 +1362,7 @@ and add instances to an instance group manually.
 ```ruby
 # Instance group requires a network and a region, so define them in your recipe:
 #   - gcompute_network 'my-network' do ... end
-gcompute_instance_group 'my-puppet-masters' do
+gcompute_instance_group 'my-masters' do
   action :create
   named_ports [
     {
@@ -1443,7 +1443,7 @@ advocate of IPv6 and it is an important future direction.
 #### Example
 
 ```ruby
-gcompute_network "mynetwork" do
+gcompute_network 'mynetwork' do
   action :create
   auto_create_subnetworks true
   project 'google.com:graphite-playground'
@@ -1683,7 +1683,7 @@ connections from the user.
 # code.
 # *******
 
-gcompute_ssl_certificate 'my-site-ssl-certificate' do
+gcompute_ssl_certificate 'my-site-ssl-cert' do
   action :create
   certificate(
     <<-CERTIFICATE

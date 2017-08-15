@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~backend_service]"
+#       "recipe[gcompute::tests~backend_service]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,7 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-masters' do
+gcompute_instance_group 'chef-e2e-my-masters' do
   action :create
   zone 'us-central1-a'
   project 'google.com:graphite-playground'
@@ -77,10 +77,10 @@ my_health_check = [
   'global/healthChecks/another-hc'
 ].join('/')
 
-gcompute_backend_service 'my-app-backend' do
+gcompute_backend_service 'chef-e2e-my-app-backend' do
   action :create
   backends [
-    { group: 'my-masters' }
+    { group: 'chef-e2e-my-masters' }
   ]
   enable_cdn true
   health_checks [

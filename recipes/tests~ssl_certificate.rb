@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~backend_service]"
+#       "recipe[gcompute::tests~ssl_certificate]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,28 +64,45 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-masters' do
-  action :create
-  zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
+# *******
+# WARNING: This recipe is for example purposes only. It is *not* advisable to
+# have the key embedded like this because if you check this file into source
+# control you are publishing the private key to whomever can access the source
+# code.
+# *******
 
-my_health_check = [
-  'https://www.googleapis.com/compute/v1',
-  'projects/google.com:graphite-playground',
-  'global/healthChecks/another-hc'
-].join('/')
-
-gcompute_backend_service 'my-app-backend' do
+gcompute_ssl_certificate 'chef-e2e-my-site-ssl-cert' do
   action :create
-  backends [
-    { group: 'my-masters' }
-  ]
-  enable_cdn true
-  health_checks [
-    my_health_check
-  ]
+  certificate(
+    <<-CERTIFICATE
+       -----BEGIN CERTIFICATE-----
+       MIICqjCCAk+gAwIBAgIJAIuJ+0352Kq4MAoGCCqGSM49BAMCMIGwMQswCQYDVQQG
+       EwJVUzETMBEGA1UECAwKV2FzaGluZ3RvbjERMA8GA1UEBwwIS2lya2xhbmQxFTAT
+       BgNVBAoMDEdvb2dsZSwgSW5jLjEeMBwGA1UECwwVR29vZ2xlIENsb3VkIFBsYXRm
+       b3JtMR8wHQYDVQQDDBZ3d3cubXktc2VjdXJlLXNpdGUuY29tMSEwHwYJKoZIhvcN
+       AQkBFhJuZWxzb25hQGdvb2dsZS5jb20wHhcNMTcwNjI4MDQ1NjI2WhcNMjcwNjI2
+       MDQ1NjI2WjCBsDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCldhc2hpbmd0b24xETAP
+       BgNVBAcMCEtpcmtsYW5kMRUwEwYDVQQKDAxHb29nbGUsIEluYy4xHjAcBgNVBAsM
+       FUdvb2dsZSBDbG91ZCBQbGF0Zm9ybTEfMB0GA1UEAwwWd3d3Lm15LXNlY3VyZS1z
+       aXRlLmNvbTEhMB8GCSqGSIb3DQEJARYSbmVsc29uYUBnb29nbGUuY29tMFkwEwYH
+       KoZIzj0CAQYIKoZIzj0DAQcDQgAEHGzpcRJ4XzfBJCCPMQeXQpTXwlblimODQCuQ
+       4mzkzTv0dXyB750fOGN02HtkpBOZzzvUARTR10JQoSe2/5PIwaNQME4wHQYDVR0O
+       BBYEFKIQC3A2SDpxcdfn0YLKineDNq/BMB8GA1UdIwQYMBaAFKIQC3A2SDpxcdfn
+       0YLKineDNq/BMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSQAwRgIhALs4vy+O
+       M3jcqgA4fSW/oKw6UJxp+M6a+nGMX+UJR3YgAiEAvvl39QRVAiv84hdoCuyON0lJ
+       zqGNhIPGq2ULqXKK8BY=
+       -----END CERTIFICATE-----
+       CERTIFICATE
+  ).split("\n").map(&:strip).join("\n")
+  private_key(
+    <<-PRIVATE_KEY
+       -----BEGIN EC PRIVATE KEY-----
+       MHcCAQEEIObtRo8tkUqoMjeHhsOh2ouPpXCgBcP+EDxZCB/tws15oAoGCCqGSM49
+       AwEHoUQDQgAEHGzpcRJ4XzfBJCCPMQeXQpTXwlblimODQCuQ4mzkzTv0dXyB750f
+       OGN02HtkpBOZzzvUARTR10JQoSe2/5PIwQ==
+       -----END EC PRIVATE KEY-----
+       PRIVATE_KEY
+  ).split("\n").map(&:strip).join("\n")
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

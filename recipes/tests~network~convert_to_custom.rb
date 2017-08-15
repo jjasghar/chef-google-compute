@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~backend_service]"
+#       "recipe[gcompute::tests~network~convert_to_custom]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,28 +64,19 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-masters' do
-  action :create
-  zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
+raise "Missing parameter 'network_id'. Please read docs at #{__FILE__}" \
+  unless ENV.key?('network_id')
 
-my_health_check = [
-  'https://www.googleapis.com/compute/v1',
-  'projects/google.com:graphite-playground',
-  'global/healthChecks/another-hc'
-].join('/')
-
-gcompute_backend_service 'my-app-backend' do
+# The environment variable 'network_id' defines a suffix for a network name when
+# using this example. If running from the command line, you can pass this suffix
+# in via the command line:
+#
+# network_id="some_suffix" chef-client -z --runlist \
+#   "recipe[gcompute::examples~network~auto]"
+puts 'Converting network to Custom'
+gcompute_network "chef-e2e-mynetwork-#{ENV['network_id']}" do
   action :create
-  backends [
-    { group: 'my-masters' }
-  ]
-  enable_cdn true
-  health_checks [
-    my_health_check
-  ]
+  auto_create_subnetworks false
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

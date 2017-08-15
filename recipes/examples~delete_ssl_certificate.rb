@@ -64,7 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_ssl_certificate 'my-site-ssl-certificate' do
+gcompute_ssl_certificate 'my-site-ssl-cert' do
   action :delete
   project 'google.com:graphite-playground'
   credential 'mycred'

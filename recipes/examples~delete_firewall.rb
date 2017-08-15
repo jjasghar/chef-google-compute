@@ -64,7 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_firewall 'test-firewall-allow-ssh' do
+gcompute_firewall 'test-fw-allow-ssh' do
   action :delete
   project 'google.com:graphite-playground'
   credential 'mycred'

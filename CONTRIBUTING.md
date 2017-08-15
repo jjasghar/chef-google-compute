@@ -177,6 +177,46 @@ chef-codegen:
   * recipes/examples~route.rb
   * recipes/examples~ssl_certificate.rb
   * recipes/examples~subnetwork.rb
+  * recipes/README.md
+  * recipes/tests~address.rb
+  * recipes/tests~backend_bucket.rb
+  * recipes/tests~backend_service.rb
+  * recipes/tests~delete_address.rb
+  * recipes/tests~delete_backend_bucket.rb
+  * recipes/tests~delete_backend_service.rb
+  * recipes/tests~delete_disk.rb
+  * recipes/tests~delete_firewall.rb
+  * recipes/tests~delete_global_address.rb
+  * recipes/tests~delete_health_check.rb
+  * recipes/tests~delete_http_health_check.rb
+  * recipes/tests~delete_https_health_check.rb
+  * recipes/tests~delete_image.rb
+  * recipes/tests~delete_instance.rb
+  * recipes/tests~delete_instance_group.rb
+  * recipes/tests~delete_network.rb
+  * recipes/tests~delete_route.rb
+  * recipes/tests~delete_ssl_certificate.rb
+  * recipes/tests~delete_subnetwork.rb
+  * recipes/tests~disk.rb
+  * recipes/tests~disk_type.rb
+  * recipes/tests~firewall.rb
+  * recipes/tests~firewall~change1.rb
+  * recipes/tests~global_address.rb
+  * recipes/tests~health_check.rb
+  * recipes/tests~http_health_check.rb
+  * recipes/tests~https_health_check.rb
+  * recipes/tests~image.rb
+  * recipes/tests~instance.rb
+  * recipes/tests~instance_group.rb
+  * recipes/tests~license.rb
+  * recipes/tests~network~auto.rb
+  * recipes/tests~network~convert_to_custom.rb
+  * recipes/tests~network~custom.rb
+  * recipes/tests~network~legacy.rb
+  * recipes/tests~region.rb
+  * recipes/tests~route.rb
+  * recipes/tests~ssl_certificate.rb
+  * recipes/tests~subnetwork.rb
   * resources/address.rb
   * resources/backend_bucket.rb
   * resources/backend_service.rb

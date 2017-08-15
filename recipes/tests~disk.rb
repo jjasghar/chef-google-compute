@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~backend_service]"
+#       "recipe[gcompute::tests~disk]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,28 +64,13 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-masters' do
+gcompute_disk 'chef-e2e-data-disk-1' do
   action :create
+  size_gb 50
+  disk_encryption_key({
+    raw_key: 'SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0='
+  })
   zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-my_health_check = [
-  'https://www.googleapis.com/compute/v1',
-  'projects/google.com:graphite-playground',
-  'global/healthChecks/another-hc'
-].join('/')
-
-gcompute_backend_service 'my-app-backend' do
-  action :create
-  backends [
-    { group: 'my-masters' }
-  ]
-  enable_cdn true
-  health_checks [
-    my_health_check
-  ]
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

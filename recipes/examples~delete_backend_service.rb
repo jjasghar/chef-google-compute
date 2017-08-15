@@ -64,7 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-puppet-masters' do
+gcompute_instance_group 'my-masters' do
   action :create
   zone 'us-central1-a'
   project 'google.com:graphite-playground'

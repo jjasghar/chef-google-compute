@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~backend_service]"
+#       "recipe[gcompute::tests~delete_subnetwork]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,28 +64,22 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-masters' do
+gcompute_network 'chef-e2e-my-network' do
   action :create
-  zone 'us-central1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
 
-my_health_check = [
-  'https://www.googleapis.com/compute/v1',
-  'projects/google.com:graphite-playground',
-  'global/healthChecks/another-hc'
-].join('/')
-
-gcompute_backend_service 'my-app-backend' do
+gcompute_region 'chef-e2e-some-region' do
   action :create
-  backends [
-    { group: 'my-masters' }
-  ]
-  enable_cdn true
-  health_checks [
-    my_health_check
-  ]
+  r_label 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_subnetwork 'chef-e2e-servers' do
+  action :delete
+  region 'chef-e2e-some-region'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

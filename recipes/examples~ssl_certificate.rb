@@ -71,7 +71,7 @@ end
 # code.
 # *******
 
-gcompute_ssl_certificate 'my-site-ssl-certificate' do
+gcompute_ssl_certificate 'my-site-ssl-cert' do
   action :create
   certificate(
     <<-CERTIFICATE

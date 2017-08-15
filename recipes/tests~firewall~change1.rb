@@ -43,7 +43,7 @@
 #
 #   CRED_PATH=/path/to/my/cred.json \
 #     chef-client -z --runlist \
-#       "recipe[gcompute::examples~backend_service]"
+#       "recipe[gcompute::tests~firewall~change1]"
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -64,27 +64,17 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_instance_group 'my-masters' do
+gcompute_firewall 'chef-e2e-test-fw-allow-ssh' do
   action :create
-  zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-my_health_check = [
-  'https://www.googleapis.com/compute/v1',
-  'projects/google.com:graphite-playground',
-  'global/healthChecks/another-hc'
-].join('/')
-
-gcompute_backend_service 'my-app-backend' do
-  action :create
-  backends [
-    { group: 'my-masters' }
-  ]
-  enable_cdn true
-  health_checks [
-    my_health_check
+  allowed [
+    {
+      ip_protocol: 'tcp',
+      ports: ['22']
+    },
+    {
+      ip_protocol: 'tcp',
+      ports: ['2222']
+    }
   ]
   project 'google.com:graphite-playground'
   credential 'mycred'

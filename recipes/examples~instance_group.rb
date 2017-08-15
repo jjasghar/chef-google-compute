@@ -70,7 +70,7 @@ gcompute_network 'my-network' do
   credential 'mycred'
 end
 
-gcompute_instance_group 'my-puppet-masters' do
+gcompute_instance_group 'my-masters' do
   action :create
   named_ports [
     {
