@@ -268,6 +268,25 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_address 'id-for-resource' do
+  address            string
+  creation_timestamp time
+  description        string
+  id                 integer
+  name               string
+  region             reference to gcompute_region
+  users              [
+    string,
+    ...
+  ]
+  project            string
+  credential         reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -335,6 +354,21 @@ gcompute_backend_bucket 'be-bucket-connection' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_backend_bucket 'id-for-resource' do
+  bucket_name        string
+  creation_timestamp time
+  description        string
+  enable_cdn         boolean
+  id                 integer
+  name               string
+  project            string
+  credential         reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -410,6 +444,62 @@ gcompute_backend_service 'my-app-backend' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_backend_service 'id-for-resource' do
+  affinity_cookie_ttl_sec integer
+  backends                [
+    {
+      balancing_mode               'UTILIZATION', 'RATE' or 'CONNECTION',
+      capacity_scaler              double,
+      description                  string,
+      group                        reference to gcompute_instance_group,
+      max_connections              integer,
+      max_connections_per_instance integer,
+      max_rate                     integer,
+      max_rate_per_instance        double,
+      max_utilization              double,
+    },
+    ...
+  ]
+  cdn_policy              {
+    cache_key_policy {
+      include_host           boolean,
+      include_protocol       boolean,
+      include_query_string   boolean,
+      query_string_blacklist [
+        string,
+        ...
+      ],
+      query_string_whitelist [
+        string,
+        ...
+      ],
+    },
+  }
+  connection_draining     {
+    draining_timeout_sec integer,
+  }
+  creation_timestamp      time
+  description             string
+  enable_cdn              boolean
+  health_checks           [
+    string,
+    ...
+  ]
+  id                      integer
+  name                    string
+  port_name               string
+  protocol                'HTTP', 'HTTPS', 'TCP' or 'SSL'
+  region                  reference to gcompute_region
+  session_affinity        'NONE', 'CLIENT_IP', 'GENERATED_COOKIE', 'CLIENT_IP_PROTO' or 'CLIENT_IP_PORT_PROTO'
+  timeout_sec             integer
+  project                 string
+  credential              reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -614,6 +704,27 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_disk_type 'id-for-resource' do
+  creation_timestamp     time
+  default_disk_size_gb   integer
+  deprecated_deleted     time
+  deprecated_deprecated  time
+  deprecated_obsolete    time
+  deprecated_replacement string
+  deprecated_state       'DEPRECATED', 'OBSOLETE' or 'DELETED'
+  description            string
+  id                     integer
+  name                   string
+  valid_disk_size        string
+  zone                   string
+  project                string
+  credential             reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -716,6 +827,48 @@ gcompute_disk 'data-disk-1' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_disk 'id-for-resource' do
+  creation_timestamp             time
+  description                    string
+  disk_encryption_key            {
+    raw_key string,
+    sha256  string,
+  }
+  id                             integer
+  last_attach_timestamp          time
+  last_detach_timestamp          time
+  licenses                       [
+    string,
+    ...
+  ]
+  name                           string
+  size_gb                        integer
+  source_image                   string
+  source_image_encryption_key    {
+    raw_key string,
+    sha256  string,
+  }
+  source_image_id                string
+  source_snapshot                string
+  source_snapshot_encryption_key {
+    raw_key string,
+    sha256  string,
+  }
+  source_snapshot_id             string
+  type                           string
+  users                          [
+    string,
+    ...
+  ]
+  zone                           string
+  project                        string
+  credential                     reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -910,6 +1063,42 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_firewall 'id-for-resource' do
+  allowed            [
+    {
+      ip_protocol string,
+      ports       [
+        string,
+        ...
+      ],
+    },
+    ...
+  ]
+  creation_timestamp time
+  description        string
+  id                 integer
+  name               string
+  network            string
+  source_ranges      [
+    string,
+    ...
+  ]
+  source_tags        [
+    string,
+    ...
+  ]
+  target_tags        [
+    string,
+    ...
+  ]
+  project            string
+  credential         reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -1019,6 +1208,21 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_global_address 'id-for-resource' do
+  address            string
+  creation_timestamp time
+  description        string
+  id                 integer
+  name               string
+  region             string
+  project            string
+  credential         reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -1084,6 +1288,26 @@ gcompute_http_health_check 'app-health-check' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_http_health_check 'id-for-resource' do
+  check_interval_sec  integer
+  creation_timestamp  time
+  description         string
+  healthy_threshold   integer
+  host                string
+  id                  integer
+  name                string
+  port                integer
+  request_path        string
+  timeout_sec         integer
+  unhealthy_threshold integer
+  project             string
+  credential          reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -1175,6 +1399,26 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_https_health_check 'id-for-resource' do
+  check_interval_sec  integer
+  creation_timestamp  time
+  description         string
+  healthy_threshold   integer
+  host                string
+  id                  integer
+  name                string
+  port                integer
+  request_path        string
+  timeout_sec         integer
+  unhealthy_threshold integer
+  project             string
+  credential          reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -1251,6 +1495,52 @@ An HealthCheck resource. This resource defines a template for how individual vir
 ```ruby
 # TODO(alexstephen): Add example here
 
+```
+
+#### Reference
+
+```ruby
+gcompute_health_check 'id-for-resource' do
+  check_interval_sec  integer
+  creation_timestamp  time
+  description         string
+  healthy_threshold   integer
+  http_health_check   {
+    host         string,
+    port         integer,
+    port_name    string,
+    proxy_header 'NONE' or 'PROXY_V1',
+    request_path string,
+  }
+  https_health_check  {
+    host         string,
+    port         integer,
+    port_name    string,
+    proxy_header 'NONE' or 'PROXY_V1',
+    request_path string,
+  }
+  id                  integer
+  name                string
+  ssl_health_check    {
+    port         integer,
+    port_name    string,
+    proxy_header 'NONE' or 'PROXY_V1',
+    request      string,
+    response     string,
+  }
+  tcp_health_check    {
+    port         integer,
+    port_name    string,
+    proxy_header 'NONE' or 'PROXY_V1',
+    request      string,
+    response     string,
+  }
+  timeout_sec         integer
+  type                'TCP', 'SSL' or 'HTTP'
+  unhealthy_threshold integer
+  project             string
+  credential          reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -1430,6 +1720,17 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_license 'id-for-resource' do
+  charges_use_fee boolean
+  name            string
+  project         string
+  credential      reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -1485,6 +1786,55 @@ gcompute_image 'test-image' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_image 'id-for-resource' do
+  archive_size_bytes         integer
+  creation_timestamp         time
+  deprecated                 {
+    deleted     time,
+    deprecated  time,
+    obsolete    time,
+    replacement string,
+    state       'DEPRECATED', 'OBSOLETE' or 'DELETED',
+  }
+  description                string
+  disk_size_gb               integer
+  family                     string
+  guest_os_features          [
+    {
+      type VIRTIO_SCSI_MULTIQUEUE,
+    },
+    ...
+  ]
+  id                         integer
+  image_encryption_key       {
+    raw_key string,
+    sha256  string,
+  }
+  licenses                   [
+    string,
+    ...
+  ]
+  name                       string
+  raw_disk                   {
+    container_type TAR,
+    sha1_checksum  string,
+    source         string,
+  }
+  source_disk                reference to gcompute_disk
+  source_disk_encryption_key {
+    raw_key string,
+    sha256  string,
+  }
+  source_disk_id             string
+  source_type                RAW
+  project                    string
+  credential                 reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -1683,6 +2033,85 @@ gcompute_instance 'instance-test' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_instance 'id-for-resource' do
+  can_ip_forward     boolean
+  cpu_platform       string
+  creation_timestamp string
+  disks              [
+    {
+      auto_delete         boolean,
+      boot                boolean,
+      device_name         string,
+      disk_encryption_key {
+        raw_key           string,
+        rsa_encrypted_key string,
+        sha256            string,
+      },
+      index               integer,
+      initialize_params   {
+        disk_name    string,
+        disk_size_gb integer,
+        disk_type    integer,
+        source_image integer,
+      },
+      source              reference to gcompute_disk,
+    },
+    ...
+  ]
+  guest_accelerators [
+    {
+      accelerator_count integer,
+      accelerator_type  string,
+    },
+    ...
+  ]
+  id                 integer
+  label_fingerprint  string
+  machine_type       string
+  min_cpu_platform   string
+  name               string
+  network_interfaces [
+    {
+      name       string,
+      network    reference to gcompute_network,
+      network_ip string,
+      subnetwork string,
+    },
+    ...
+  ]
+  scheduling         {
+    automatic_restart   boolean,
+    on_host_maintenance string,
+    preemptible         boolean,
+  }
+  service_accounts   [
+    {
+      email  boolean,
+      scopes [
+        string,
+        ...
+      ],
+    },
+    ...
+  ]
+  status             string
+  status_message     string
+  tags               {
+    fingerprint string,
+    items       [
+      string,
+      ...
+    ],
+  }
+  zone               string
+  project            string
+  credential         reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -1948,6 +2377,30 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_instance_group 'id-for-resource' do
+  creation_timestamp time
+  description        string
+  id                 integer
+  name               string
+  named_ports        [
+    {
+      name string,
+      port integer,
+    },
+    ...
+  ]
+  network            reference to gcompute_network
+  region             reference to gcompute_region
+  subnetwork         reference to gcompute_subnetwork
+  zone               string
+  project            string
+  credential         reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -2037,6 +2490,26 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_network 'id-for-resource' do
+  auto_create_subnetworks boolean
+  creation_timestamp      time
+  description             string
+  gateway_ipv4            string
+  id                      integer
+  ipv4_range              string
+  name                    string
+  subnetworks             [
+    string,
+    ...
+  ]
+  project                 string
+  credential              reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -2110,6 +2583,28 @@ gcompute_region 'us-west1' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_region 'id-for-resource' do
+  creation_timestamp     time
+  deprecated_deleted     time
+  deprecated_deprecated  time
+  deprecated_obsolete    time
+  deprecated_replacement string
+  deprecated_state       'DEPRECATED', 'OBSOLETE' or 'DELETED'
+  description            string
+  id                     integer
+  name                   string
+  zones                  [
+    string,
+    ...
+  ]
+  project                string
+  credential             reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -2214,6 +2709,27 @@ gcompute_route 'corp-route' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_route 'id-for-resource' do
+  dest_range          string
+  name                string
+  network             reference to gcompute_network
+  next_hop_gateway    string
+  next_hop_instance   string
+  next_hop_ip         string
+  next_hop_vpn_tunnel string
+  priority            integer
+  tags                [
+    string,
+    ...
+  ]
+  project             string
+  credential          reference to gauth_credential
+end
 ```
 
 #### Actions
@@ -2336,6 +2852,21 @@ end
 
 ```
 
+#### Reference
+
+```ruby
+gcompute_ssl_certificate 'id-for-resource' do
+  certificate        string
+  creation_timestamp time
+  description        string
+  id                 integer
+  name               string
+  private_key        string
+  project            string
+  credential         reference to gauth_credential
+end
+```
+
 #### Actions
 
 * `create` -
@@ -2419,6 +2950,24 @@ gcompute_subnetwork 'servers' do
   credential 'mycred'
 end
 
+```
+
+#### Reference
+
+```ruby
+gcompute_subnetwork 'id-for-resource' do
+  creation_timestamp       time
+  description              string
+  gateway_address          string
+  id                       integer
+  ip_cidr_range            string
+  name                     string
+  network                  reference to gcompute_network
+  private_ip_google_access boolean
+  region                   reference to gcompute_region
+  project                  string
+  credential               reference to gauth_credential
+end
 ```
 
 #### Actions
