@@ -78,8 +78,8 @@ context 'gcompute_backend_service' do
                 region: 'selflink(resource(region,2))'
               expect_network_get_success_instance_group 1
               expect_network_get_success_instance_group 2
-              expect_network_get_success_region 1
               expect_network_get_success_instance_group 3
+              expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
             end
@@ -88,8 +88,8 @@ context 'gcompute_backend_service' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_backend_service gcompute_instance_group
-                              gcompute_region],
+                step_into: %w[gcompute_backend_service gcompute_region
+                              gcompute_instance_group],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -115,18 +115,18 @@ context 'gcompute_backend_service' do
                     credential 'mycred'
                   end
 
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
                   gcompute_instance_group 'resource(instance_group,2)' do
                     action :create
                     ig_label 'test name#2 data'
                     zone 'test zone#2 data'
                     project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
                     credential 'mycred'
                   end
 
@@ -508,8 +508,8 @@ context 'gcompute_backend_service' do
                 region: 'selflink(resource(region,2))'
               expect_network_get_success_instance_group 1
               expect_network_get_success_instance_group 2
-              expect_network_get_success_region 1
               expect_network_get_success_instance_group 3
+              expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
             end
@@ -518,8 +518,8 @@ context 'gcompute_backend_service' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_backend_service gcompute_instance_group
-                              gcompute_region],
+                step_into: %w[gcompute_backend_service gcompute_region
+                              gcompute_instance_group],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -545,18 +545,18 @@ context 'gcompute_backend_service' do
                     credential 'mycred'
                   end
 
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
                   gcompute_instance_group 'resource(instance_group,2)' do
                     action :create
                     ig_label 'test name#2 data'
                     zone 'test zone#2 data'
                     project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
                     credential 'mycred'
                   end
 
@@ -1039,8 +1039,8 @@ context 'gcompute_backend_service' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_backend_service gcompute_instance_group
-                            gcompute_region],
+              step_into: %w[gcompute_backend_service gcompute_region
+                            gcompute_instance_group],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1273,8 +1273,8 @@ context 'gcompute_backend_service' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_backend_service gcompute_instance_group
-                            gcompute_region],
+              step_into: %w[gcompute_backend_service gcompute_region
+                            gcompute_instance_group],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1451,8 +1451,8 @@ context 'gcompute_backend_service' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_backend_service gcompute_instance_group
-                            gcompute_region],
+              step_into: %w[gcompute_backend_service gcompute_region
+                            gcompute_instance_group],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1504,8 +1504,8 @@ context 'gcompute_backend_service' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_backend_service gcompute_instance_group
-                            gcompute_region],
+              step_into: %w[gcompute_backend_service gcompute_region
+                            gcompute_instance_group],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1560,8 +1560,8 @@ context 'gcompute_backend_service' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_backend_service gcompute_instance_group
-                            gcompute_region],
+              step_into: %w[gcompute_backend_service gcompute_region
+                            gcompute_instance_group],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1617,8 +1617,8 @@ context 'gcompute_backend_service' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_backend_service gcompute_instance_group
-                            gcompute_region],
+              step_into: %w[gcompute_backend_service gcompute_region
+                            gcompute_instance_group],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'

@@ -80,25 +80,22 @@ context 'gcompute_instance_group' do
                 region: 'selflink(resource(region,2))',
                 subnetwork: 'selflink(resource(subnetwork,2))'
               expect_network_get_success_network 1
-              expect_network_get_success_region 1
-              expect_network_get_success_subnetwork 1,
-                                                    region: 'test name#0 data'
               expect_network_get_success_network 2
-              expect_network_get_success_region 2
-              expect_network_get_success_subnetwork 2,
-                                                    region: 'test name#1 data'
               expect_network_get_success_network 3
+              expect_network_get_success_region 1
+              expect_network_get_success_region 2
               expect_network_get_success_region 3
-              expect_network_get_success_subnetwork 3,
-                                                    region: 'test name#2 data'
+              expect_network_get_success_subnetwork 1
+              expect_network_get_success_subnetwork 2
+              expect_network_get_success_subnetwork 3
             end
 
             let(:runner) do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_instance_group gcompute_network
-                              gcompute_region gcompute_subnetwork],
+                step_into: %w[gcompute_instance_group gcompute_region
+                              gcompute_subnetwork gcompute_network],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -115,39 +112,9 @@ context 'gcompute_instance_group' do
                     credential 'mycred'
                   end
 
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_subnetwork 'resource(subnetwork,0)' do
-                    action :create
-                    region 'resource(region,0)'
-                    s_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
                   gcompute_network 'resource(network,1)' do
                     action :create
                     n_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,1)' do
-                    action :create
-                    r_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_subnetwork 'resource(subnetwork,1)' do
-                    action :create
-                    region 'resource(region,1)'
-                    s_label 'test name#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
                   end
@@ -159,10 +126,40 @@ context 'gcompute_instance_group' do
                     credential 'mycred'
                   end
 
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,1)' do
+                    action :create
+                    r_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
                   gcompute_region 'resource(region,2)' do
                     action :create
                     r_label 'test name#2 data'
                     project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_subnetwork 'resource(subnetwork,0)' do
+                    action :create
+                    region 'resource(region,0)'
+                    s_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_subnetwork 'resource(subnetwork,1)' do
+                    action :create
+                    region 'resource(region,1)'
+                    s_label 'test name#1 data'
+                    project 'test project#1 data'
                     credential 'mycred'
                   end
 
@@ -420,25 +417,22 @@ context 'gcompute_instance_group' do
                 region: 'selflink(resource(region,2))',
                 subnetwork: 'selflink(resource(subnetwork,2))'
               expect_network_get_success_network 1
-              expect_network_get_success_region 1
-              expect_network_get_success_subnetwork 1,
-                                                    region: 'test name#0 data'
               expect_network_get_success_network 2
-              expect_network_get_success_region 2
-              expect_network_get_success_subnetwork 2,
-                                                    region: 'test name#1 data'
               expect_network_get_success_network 3
+              expect_network_get_success_region 1
+              expect_network_get_success_region 2
               expect_network_get_success_region 3
-              expect_network_get_success_subnetwork 3,
-                                                    region: 'test name#2 data'
+              expect_network_get_success_subnetwork 1
+              expect_network_get_success_subnetwork 2
+              expect_network_get_success_subnetwork 3
             end
 
             let(:runner) do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_instance_group gcompute_network
-                              gcompute_region gcompute_subnetwork],
+                step_into: %w[gcompute_instance_group gcompute_region
+                              gcompute_subnetwork gcompute_network],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -455,39 +449,9 @@ context 'gcompute_instance_group' do
                     credential 'mycred'
                   end
 
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_subnetwork 'resource(subnetwork,0)' do
-                    action :create
-                    region 'resource(region,0)'
-                    s_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
                   gcompute_network 'resource(network,1)' do
                     action :create
                     n_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,1)' do
-                    action :create
-                    r_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_subnetwork 'resource(subnetwork,1)' do
-                    action :create
-                    region 'resource(region,1)'
-                    s_label 'test name#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
                   end
@@ -499,10 +463,40 @@ context 'gcompute_instance_group' do
                     credential 'mycred'
                   end
 
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,1)' do
+                    action :create
+                    r_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
                   gcompute_region 'resource(region,2)' do
                     action :create
                     r_label 'test name#2 data'
                     project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_subnetwork 'resource(subnetwork,0)' do
+                    action :create
+                    region 'resource(region,0)'
+                    s_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_subnetwork 'resource(subnetwork,1)' do
+                    action :create
+                    region 'resource(region,1)'
+                    s_label 'test name#1 data'
+                    project 'test project#1 data'
                     credential 'mycred'
                   end
 
@@ -836,15 +830,15 @@ context 'gcompute_instance_group' do
               subnetwork: 'selflink(resource(subnetwork,0))'
             expect_network_get_success_network 1
             expect_network_get_success_region 1
-            expect_network_get_success_subnetwork 1, region: 'test name#0 data'
+            expect_network_get_success_subnetwork 1
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance_group gcompute_network
-                            gcompute_region gcompute_subnetwork],
+              step_into: %w[gcompute_instance_group gcompute_region
+                            gcompute_subnetwork gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1016,15 +1010,15 @@ context 'gcompute_instance_group' do
               subnetwork: 'selflink(resource(subnetwork,0))'
             expect_network_get_success_network 1
             expect_network_get_success_region 1
-            expect_network_get_success_subnetwork 1, region: 'test name#0 data'
+            expect_network_get_success_subnetwork 1
           end
 
           let(:runner) do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance_group gcompute_network
-                            gcompute_region gcompute_subnetwork],
+              step_into: %w[gcompute_instance_group gcompute_region
+                            gcompute_subnetwork gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1163,8 +1157,8 @@ context 'gcompute_instance_group' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance_group gcompute_network
-                            gcompute_region gcompute_subnetwork],
+              step_into: %w[gcompute_instance_group gcompute_region
+                            gcompute_subnetwork gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1217,8 +1211,8 @@ context 'gcompute_instance_group' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance_group gcompute_network
-                            gcompute_region gcompute_subnetwork],
+              step_into: %w[gcompute_instance_group gcompute_region
+                            gcompute_subnetwork gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1274,8 +1268,8 @@ context 'gcompute_instance_group' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance_group gcompute_network
-                            gcompute_region gcompute_subnetwork],
+              step_into: %w[gcompute_instance_group gcompute_region
+                            gcompute_subnetwork gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1332,8 +1326,8 @@ context 'gcompute_instance_group' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance_group gcompute_network
-                            gcompute_region gcompute_subnetwork],
+              step_into: %w[gcompute_instance_group gcompute_region
+                            gcompute_subnetwork gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1640,6 +1634,68 @@ context 'gcompute_instance_group' do
     )
   end
 
+  def expect_network_get_success_region(id, data = {})
+    id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
+    body = load_network_result_region("success#{id}~" \
+                                                           "#{id_data}.yaml")
+           .to_json
+    uri = uri_data_region(id).merge(data)
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    debug_network "!! GET #{uri}"
+    expect(Google::Compute::Network::Get).to receive(:new)
+      .with(self_link_region(uri),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug_network ">> GET #{args}"
+      request
+    end
+  end
+
+  def load_network_result_region(file)
+    results = File.join(File.dirname(__FILE__), 'data', 'network',
+                        'gcompute_region', file)
+    raise "Network result data file #{results}" unless File.exist?(results)
+    data = YAML.safe_load(File.read(results))
+    raise "Invalid network results #{results}" unless data.class <= Hash
+    data
+  end
+
+  # Creates variable test data to comply with self_link URI parameters
+  # Only used for gcompute_region objects
+  def uri_data_region(id)
+    {
+      project: GoogleTests::Constants::R_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::R_PROJECT_DATA.size],
+      name: GoogleTests::Constants::R_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::R_NAME_DATA.size]
+    }
+  end
+
+  def self_link_region(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables_region(
+        'projects/{{project}}/regions/{{name}}',
+        data
+      )
+    )
+  end
+
+  # Creates and prefetch type so exports can be resolved without network access.
+  def prefetch_region
+    expect_network_get_success_region 1
+
+    resource = Puppet::Type.type(:gcompute_region).new(
+      project: 'test project#0 data',
+      name: 'test name#0 data'
+    )
+
+    Puppet::Type.type(:gcompute_region).provider(:google)
+                .prefetch(resource: resource)
+  end
+
   def debug(message)
     puts(message) if ENV['RSPEC_DEBUG']
   end
@@ -1661,6 +1717,11 @@ context 'gcompute_instance_group' do
 
   def expand_variables_subnetwork(template, data, ext_dat = {})
     Google::GCOMPUTE::Subnetwork
+      .action_class.expand_variables(template, data, ext_dat)
+  end
+
+  def expand_variables_region(template, data, ext_dat = {})
+    Google::GCOMPUTE::Region
       .action_class.expand_variables(template, data, ext_dat)
   end
 

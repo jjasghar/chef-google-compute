@@ -88,7 +88,7 @@ context 'gcompute_instance' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+                step_into: %w[gcompute_instance gcompute_network gcompute_disk],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -760,7 +760,7 @@ context 'gcompute_instance' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+                step_into: %w[gcompute_instance gcompute_network gcompute_disk],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -1605,7 +1605,7 @@ context 'gcompute_instance' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+              step_into: %w[gcompute_instance gcompute_network gcompute_disk],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -2037,7 +2037,7 @@ context 'gcompute_instance' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+              step_into: %w[gcompute_instance gcompute_network gcompute_disk],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -2325,7 +2325,7 @@ context 'gcompute_instance' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+              step_into: %w[gcompute_instance gcompute_network gcompute_disk],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -2378,7 +2378,7 @@ context 'gcompute_instance' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+              step_into: %w[gcompute_instance gcompute_network gcompute_disk],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -2434,7 +2434,7 @@ context 'gcompute_instance' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+              step_into: %w[gcompute_instance gcompute_network gcompute_disk],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -2491,7 +2491,7 @@ context 'gcompute_instance' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_instance gcompute_disk gcompute_network],
+              step_into: %w[gcompute_instance gcompute_network gcompute_disk],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'

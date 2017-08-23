@@ -77,10 +77,10 @@ context 'gcompute_subnetwork' do
                 network: 'selflink(resource(network,2))',
                 region: 'test name#2 data'
               expect_network_get_success_network 1
-              expect_network_get_success_region 1
               expect_network_get_success_network 2
-              expect_network_get_success_region 2
               expect_network_get_success_network 3
+              expect_network_get_success_region 1
+              expect_network_get_success_region 2
               expect_network_get_success_region 3
             end
 
@@ -88,8 +88,8 @@ context 'gcompute_subnetwork' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_subnetwork gcompute_network
-                              gcompute_region],
+                step_into: %w[gcompute_subnetwork gcompute_region
+                              gcompute_network],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -106,23 +106,9 @@ context 'gcompute_subnetwork' do
                     credential 'mycred'
                   end
 
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
                   gcompute_network 'resource(network,1)' do
                     action :create
                     n_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,1)' do
-                    action :create
-                    r_label 'test name#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
                   end
@@ -131,6 +117,20 @@ context 'gcompute_subnetwork' do
                     action :create
                     n_label 'test name#2 data'
                     project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,1)' do
+                    action :create
+                    r_label 'test name#1 data'
+                    project 'test project#1 data'
                     credential 'mycred'
                   end
 
@@ -339,10 +339,10 @@ context 'gcompute_subnetwork' do
                 network: 'selflink(resource(network,2))',
                 region: 'test name#2 data'
               expect_network_get_success_network 1
-              expect_network_get_success_region 1
               expect_network_get_success_network 2
-              expect_network_get_success_region 2
               expect_network_get_success_network 3
+              expect_network_get_success_region 1
+              expect_network_get_success_region 2
               expect_network_get_success_region 3
             end
 
@@ -350,8 +350,8 @@ context 'gcompute_subnetwork' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: %w[gcompute_subnetwork gcompute_network
-                              gcompute_region],
+                step_into: %w[gcompute_subnetwork gcompute_region
+                              gcompute_network],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -368,23 +368,9 @@ context 'gcompute_subnetwork' do
                     credential 'mycred'
                   end
 
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
                   gcompute_network 'resource(network,1)' do
                     action :create
                     n_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,1)' do
-                    action :create
-                    r_label 'test name#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
                   end
@@ -393,6 +379,20 @@ context 'gcompute_subnetwork' do
                     action :create
                     n_label 'test name#2 data'
                     project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,1)' do
+                    action :create
+                    r_label 'test name#1 data'
+                    project 'test project#1 data'
                     credential 'mycred'
                   end
 
@@ -655,8 +655,8 @@ context 'gcompute_subnetwork' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_subnetwork gcompute_network
-                            gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_region
+                            gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -782,8 +782,8 @@ context 'gcompute_subnetwork' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_subnetwork gcompute_network
-                            gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_region
+                            gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -896,8 +896,8 @@ context 'gcompute_subnetwork' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_subnetwork gcompute_network
-                            gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_region
+                            gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -958,8 +958,8 @@ context 'gcompute_subnetwork' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_subnetwork gcompute_network
-                            gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_region
+                            gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1025,8 +1025,8 @@ context 'gcompute_subnetwork' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_subnetwork gcompute_network
-                            gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_region
+                            gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -1091,8 +1091,8 @@ context 'gcompute_subnetwork' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: %w[gcompute_subnetwork gcompute_network
-                            gcompute_region],
+              step_into: %w[gcompute_subnetwork gcompute_region
+                            gcompute_network],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
