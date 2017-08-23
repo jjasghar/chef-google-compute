@@ -64,4 +64,17 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Add example here
+gcompute_health_check 'my-app-tcp-hc' do
+  action :create
+  type 'TCP'
+  tcp_health_check(
+    port_name: 'service-health',
+    request: 'ping',
+    response: 'pong'
+  )
+  healthy_threshold 10
+  timeout_sec 2
+  unhealthy_threshold 5
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
