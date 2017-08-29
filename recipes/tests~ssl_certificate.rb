@@ -93,7 +93,8 @@ gcompute_ssl_certificate 'chef-e2e-my-site-ssl-cert' do
        zqGNhIPGq2ULqXKK8BY=
        -----END CERTIFICATE-----
        CERTIFICATE
-  ).split("\n").map(&:strip).join("\n")
+       .split("\n").map(&:strip).join("\n")
+  )
   private_key(
     <<-PRIVATE_KEY
        -----BEGIN EC PRIVATE KEY-----
@@ -102,7 +103,8 @@ gcompute_ssl_certificate 'chef-e2e-my-site-ssl-cert' do
        OGN02HtkpBOZzzvUARTR10JQoSe2/5PIwQ==
        -----END EC PRIVATE KEY-----
        PRIVATE_KEY
-  ).split("\n").map(&:strip).join("\n")
+       .split("\n").map(&:strip).join("\n")
+  )
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

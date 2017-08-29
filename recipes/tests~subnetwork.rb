@@ -64,8 +64,9 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_network 'chef-e2e-my-network' do
+gcompute_network 'chef-e2e-mynetwork-subnetwork' do
   action :create
+  auto_create_subnetworks false
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -77,10 +78,10 @@ gcompute_region 'chef-e2e-some-region' do
   credential 'mycred'
 end
 
-gcompute_subnetwork 'servers' do
+gcompute_subnetwork 'chef-e2e-servers' do
   action :create
   ip_cidr_range '172.16.0.0/16'
-  network 'chef-e2e-my-network'
+  network 'chef-e2e-mynetwork-subnetwork'
   region 'chef-e2e-some-region'
   project 'google.com:graphite-playground'
   credential 'mycred'

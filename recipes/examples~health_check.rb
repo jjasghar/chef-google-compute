@@ -64,11 +64,11 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_health_check 'my-app-tcp-hc' do
+gcompute_health_check 'app-health-check' do
   action :create
   type 'TCP'
   tcp_health_check(
-    port_name: 'service-health',
+    port: 6123,
     request: 'ping',
     response: 'pong'
   )

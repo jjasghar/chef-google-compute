@@ -64,8 +64,9 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_network 'my-network' do
+gcompute_network 'mynetwork-subnetwork' do
   action :create
+  auto_create_subnetworks false
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -80,7 +81,7 @@ end
 gcompute_subnetwork 'servers' do
   action :create
   ip_cidr_range '172.16.0.0/16'
-  network 'my-network'
+  network 'mynetwork-subnetwork'
   region 'some-region'
   project 'google.com:graphite-playground'
   credential 'mycred'

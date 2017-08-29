@@ -66,7 +66,6 @@ end
 
 gcompute_health_check 'app-health-check' do
   action :delete
-  hhc_label 'my-app-tcp-hc'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

@@ -64,8 +64,9 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_network 'chef-e2e-my-network' do
+gcompute_network 'chef-e2e-mynetwork-subnetwork' do
   action :create
+  auto_create_subnetworks false
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

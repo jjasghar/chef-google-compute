@@ -77,7 +77,7 @@ gcompute_region 'chef-e2e-some-region' do
   credential 'mycred'
 end
 
-gcompute_route 'corp-route' do
+gcompute_route 'chef-e2e-corp-route' do
   action :create
   dest_range '192.168.6.0/24'
   next_hop_gateway 'global/gateways/default-internet-gateway'

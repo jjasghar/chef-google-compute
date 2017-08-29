@@ -1493,11 +1493,11 @@ An HealthCheck resource. This resource defines a template for how individual vir
 #### Example
 
 ```ruby
-gcompute_health_check 'my-app-tcp-hc' do
+gcompute_health_check 'app-health-check' do
   action :create
   type 'TCP'
   tcp_health_check(
-    port_name: 'service-health',
+    port: 6123,
     request: 'ping',
     response: 'pong'
   )
@@ -2849,7 +2849,8 @@ gcompute_ssl_certificate 'my-site-ssl-cert' do
        zqGNhIPGq2ULqXKK8BY=
        -----END CERTIFICATE-----
        CERTIFICATE
-  ).split("\n").map(&:strip).join("\n")
+       .split("\n").map(&:strip).join("\n")
+  )
   private_key(
     <<-PRIVATE_KEY
        -----BEGIN EC PRIVATE KEY-----
@@ -2858,7 +2859,8 @@ gcompute_ssl_certificate 'my-site-ssl-cert' do
        OGN02HtkpBOZzzvUARTR10JQoSe2/5PIwQ==
        -----END EC PRIVATE KEY-----
        PRIVATE_KEY
-  ).split("\n").map(&:strip).join("\n")
+       .split("\n").map(&:strip).join("\n")
+  )
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -2957,7 +2959,7 @@ of the network, even entire subnets, using firewall rules.
 gcompute_subnetwork 'servers' do
   action :create
   ip_cidr_range '172.16.0.0/16'
-  network 'my-network'
+  network 'mynetwork-subnetwork'
   region 'some-region'
   project 'google.com:graphite-playground'
   credential 'mycred'

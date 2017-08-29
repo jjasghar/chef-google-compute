@@ -64,17 +64,12 @@ gauth_credential 'mycred' do
   ]
 end
 
-# TODO(alexstephen): Uncomment out when Rubocop ignores recipes
-# gcompute_disk 'data-disk-1' do
-#  action :create
-#  size_gb 50
-#  disk_encryption_key({
-#    raw_key: 'SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0='
-#  })
-#  zone 'us-central1-a'
-#  project 'google.com:graphite-playground'
-#  credential 'mycred'
-# end
+gcompute_disk 'chef-e2e-data-disk-1' do
+ action :create
+ zone 'us-central1-a'
+ project 'google.com:graphite-playground'
+ credential 'mycred'
+end
 
 gcompute_image 'chef-e2e-test-image' do
   action :create
