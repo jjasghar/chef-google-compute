@@ -254,7 +254,7 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
-            message = 'InstanceGroup cannot be edited'
+            message = 'Instance cannot be edited'
             Chef::Log.fatal message
             raise message
           end
