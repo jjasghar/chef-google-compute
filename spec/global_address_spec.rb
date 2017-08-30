@@ -70,7 +70,7 @@ context 'gcompute_global_address' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: 'gcompute_global_address',
+                step_into: %w[gcompute_global_address gcompute_region],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -175,7 +175,7 @@ context 'gcompute_global_address' do
               cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                                 File.join(File.dirname(__FILE__), 'cookbooks')]
               ChefSpec::SoloRunner.new(
-                step_into: 'gcompute_global_address',
+                step_into: %w[gcompute_global_address gcompute_region],
                 cookbook_path: cookbook_paths,
                 platform: 'ubuntu',
                 version: '16.04'
@@ -329,7 +329,7 @@ context 'gcompute_global_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_global_address',
+              step_into: %w[gcompute_global_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -397,7 +397,7 @@ context 'gcompute_global_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_global_address',
+              step_into: %w[gcompute_global_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -466,7 +466,7 @@ context 'gcompute_global_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_global_address',
+              step_into: %w[gcompute_global_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -518,7 +518,7 @@ context 'gcompute_global_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_global_address',
+              step_into: %w[gcompute_global_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -573,7 +573,7 @@ context 'gcompute_global_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_global_address',
+              step_into: %w[gcompute_global_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -629,7 +629,7 @@ context 'gcompute_global_address' do
             cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
                               File.join(File.dirname(__FILE__), 'cookbooks')]
             ChefSpec::SoloRunner.new(
-              step_into: 'gcompute_global_address',
+              step_into: %w[gcompute_global_address gcompute_region],
               cookbook_path: cookbook_paths,
               platform: 'ubuntu',
               version: '16.04'
@@ -740,6 +740,11 @@ context 'gcompute_global_address' do
     body = { kind: 'compute#operation',
              status: 'DONE', targetLink: self_link(merged_uri) }.to_json
 
+    # Remove refs that are also part of the body
+    expected_body = Hash[expected_body.map do |k, v|
+      [k.is_a?(Symbol) ? k.id2name : k, v]
+    end]
+
     request = double('request')
     allow(request).to receive(:send).and_return(http_success(body))
 
@@ -781,6 +786,55 @@ context 'gcompute_global_address' do
     data
   end
 
+  def expect_network_get_success_region(id, data = {})
+    id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
+    body = load_network_result_region("success#{id}~" \
+                                                           "#{id_data}.yaml")
+           .to_json
+    uri = uri_data_region(id).merge(data)
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    debug_network "!! GET #{uri}"
+    expect(Google::Compute::Network::Get).to receive(:new)
+      .with(self_link_region(uri),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug_network ">> GET #{args}"
+      request
+    end
+  end
+
+  def load_network_result_region(file)
+    results = File.join(File.dirname(__FILE__), 'data', 'network',
+                        'gcompute_region', file)
+    raise "Network result data file #{results}" unless File.exist?(results)
+    data = YAML.safe_load(File.read(results))
+    raise "Invalid network results #{results}" unless data.class <= Hash
+    data
+  end
+
+  # Creates variable test data to comply with self_link URI parameters
+  # Only used for gcompute_region objects
+  def uri_data_region(id)
+    {
+      project: GoogleTests::Constants::R_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::R_PROJECT_DATA.size],
+      name: GoogleTests::Constants::R_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::R_NAME_DATA.size]
+    }
+  end
+
+  def self_link_region(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables_region(
+        'projects/{{project}}/regions/{{name}}',
+        data
+      )
+    )
+  end
+
   def debug(message)
     puts(message) if ENV['RSPEC_DEBUG']
   end
@@ -788,6 +842,11 @@ context 'gcompute_global_address' do
   def debug_network(message)
     puts("Network #{message}") \
       if ENV['RSPEC_DEBUG'] || ENV['RSPEC_HTTP_VERBOSE']
+  end
+
+  def expand_variables_region(template, data, ext_dat = {})
+    Google::GCOMPUTE::Region
+      .action_class.expand_variables(template, data, ext_dat)
   end
 
   def collection(data)

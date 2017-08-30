@@ -40,6 +40,7 @@ require 'google/compute/property/integer'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
 require 'google/compute/property/time'
+require 'google/compute/property/zone_name'
 require 'google/hash_utils'
 
 module Google
@@ -96,8 +97,8 @@ module Google
                coerce: ::Google::Compute::Property::StringArray.coerce,
                desired_state: true
       property :zone,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+               [String, ::Google::Compute::Data::ZoneNameRef],
+               coerce: ::Google::Compute::Property::ZoneNameRef.coerce,
                desired_state: true
       property :disk_encryption_key,
                [Hash, ::Google::Compute::Data::DiskDiskEncryKey],
@@ -175,10 +176,6 @@ module Google
             ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.size_gb =
             ::Google::Compute::Property::Integer.api_parse(fetch['sizeGb'])
-          @current_resource.source_image =
-            ::Google::Compute::Property::String.api_parse(
-              fetch['sourceImage']
-            )
           @current_resource.type =
             ::Google::Compute::Property::String.api_parse(fetch['type'])
           @current_resource.users =
@@ -238,6 +235,11 @@ module Google
             Chef::Log.fatal message
             raise message
           end
+        end
+
+        def self.fetch_export(resource, type, id, property)
+          return if id.nil?
+          resource.resources("#{type}[#{id}]").exports[property]
         end
 
         # rubocop:disable Metrics/MethodLength

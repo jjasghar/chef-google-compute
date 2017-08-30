@@ -33,6 +33,7 @@ module Google
       class InstancNetworkInterfa
         include Comparable
 
+        attr_reader :access_configs
         attr_reader :name
         attr_reader :network
         attr_reader :network_ip
@@ -40,6 +41,7 @@ module Google
 
         def to_json(_arg = nil)
           {
+            'accessConfigs' => access_configs,
             'name' => name,
             'network' => network,
             'networkIP' => network_ip,
@@ -49,6 +51,9 @@ module Google
 
         def to_s
           {
+            access_configs: ['[',
+                             access_configs.map(&:to_json).join(', '),
+                             ']'].join(' '),
             name: name.to_s,
             network: network.to_s,
             network_ip: network_ip.to_s,
@@ -83,6 +88,7 @@ module Google
 
         def compare_fields(other)
           [
+            { self: access_configs, other: other.access_configs },
             { self: name, other: other.name },
             { self: network, other: other.network },
             { self: network_ip, other: other.network_ip },
@@ -95,6 +101,10 @@ module Google
       # Data is coming from the GCP API
       class InstancNetworkInterfaApi < InstancNetworkInterfa
         def initialize(args)
+          @access_configs =
+            Google::Compute::Property::InstancAccessConfigsArray.api_parse(
+              args['accessConfigs']
+            )
           @name = Google::Compute::Property::String.api_parse(args['name'])
           @network = Google::Compute::Property::NetwoSelfLinkRef.api_parse(
             args['network']
@@ -110,6 +120,10 @@ module Google
       # Data is coming from the Chef catalog
       class InstancNetworkInterfaCatalog < InstancNetworkInterfa
         def initialize(args)
+          @access_configs =
+            Google::Compute::Property::InstancAccessConfigsArray.catalog_parse(
+              args[:access_configs]
+            )
           @name = Google::Compute::Property::String.catalog_parse(args[:name])
           @network = Google::Compute::Property::NetwoSelfLinkRef.catalog_parse(
             args[:network]

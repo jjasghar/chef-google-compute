@@ -95,6 +95,7 @@ chef-codegen:
   * libraries/google/compute/network/get.rb
   * libraries/google/compute/network/post.rb
   * libraries/google/compute/network/put.rb
+  * libraries/google/compute/property/address_address.rb
   * libraries/google/compute/property/array.rb
   * libraries/google/compute/property/backendservice_backends.rb
   * libraries/google/compute/property/backendservice_cache_key_policy.rb
@@ -117,6 +118,7 @@ chef-codegen:
   * libraries/google/compute/property/image_image_encryption_key.rb
   * libraries/google/compute/property/image_raw_disk.rb
   * libraries/google/compute/property/image_source_disk_encryption_key.rb
+  * libraries/google/compute/property/instance_access_configs.rb
   * libraries/google/compute/property/instance_disk_encryption_key.rb
   * libraries/google/compute/property/instance_disks.rb
   * libraries/google/compute/property/instance_guest_accelerators.rb
@@ -128,6 +130,8 @@ chef-codegen:
   * libraries/google/compute/property/instancegroup_named_ports.rb
   * libraries/google/compute/property/instancegroup_selflink.rb
   * libraries/google/compute/property/integer.rb
+  * libraries/google/compute/property/machinetype_deprecated.rb
+  * libraries/google/compute/property/machinetype_selflink.rb
   * libraries/google/compute/property/network_selflink.rb
   * libraries/google/compute/property/region_name.rb
   * libraries/google/compute/property/region_selflink.rb
@@ -135,6 +139,8 @@ chef-codegen:
   * libraries/google/compute/property/string_array.rb
   * libraries/google/compute/property/subnetwork_selflink.rb
   * libraries/google/compute/property/time.rb
+  * libraries/google/compute/property/zone_deprecated.rb
+  * libraries/google/compute/property/zone_name.rb
   * LICENSE
   * metadata.rb
   * README.md
@@ -169,6 +175,7 @@ chef-codegen:
   * recipes/examples~instance.rb
   * recipes/examples~instance_group.rb
   * recipes/examples~license.rb
+  * recipes/examples~machine_type.rb
   * recipes/examples~network~auto.rb
   * recipes/examples~network~convert_to_custom.rb
   * recipes/examples~network~custom.rb
@@ -177,6 +184,7 @@ chef-codegen:
   * recipes/examples~route.rb
   * recipes/examples~ssl_certificate.rb
   * recipes/examples~subnetwork.rb
+  * recipes/examples~zone.rb
   * recipes/README.md
   * recipes/tests~address.rb
   * recipes/tests~backend_bucket.rb
@@ -209,6 +217,7 @@ chef-codegen:
   * recipes/tests~instance.rb
   * recipes/tests~instance_group.rb
   * recipes/tests~license.rb
+  * recipes/tests~machine_type.rb
   * recipes/tests~network~auto.rb
   * recipes/tests~network~convert_to_custom.rb
   * recipes/tests~network~custom.rb
@@ -217,6 +226,7 @@ chef-codegen:
   * recipes/tests~route.rb
   * recipes/tests~ssl_certificate.rb
   * recipes/tests~subnetwork.rb
+  * recipes/tests~zone.rb
   * resources/address.rb
   * resources/backend_bucket.rb
   * resources/backend_service.rb
@@ -231,11 +241,13 @@ chef-codegen:
   * resources/instance.rb
   * resources/instance_group.rb
   * resources/license.rb
+  * resources/machine_type.rb
   * resources/network.rb
   * resources/region.rb
   * resources/route.rb
   * resources/ssl_certificate.rb
   * resources/subnetwork.rb
+  * resources/zone.rb
   * spec/address_spec.rb
   * spec/backend_bucket_spec.rb
   * spec/backend_service_spec.rb
@@ -325,6 +337,12 @@ chef-codegen:
   * spec/data/network/gcompute_license/success2~title.yaml
   * spec/data/network/gcompute_license/success3~name.yaml
   * spec/data/network/gcompute_license/success3~title.yaml
+  * spec/data/network/gcompute_machine_type/success1~name.yaml
+  * spec/data/network/gcompute_machine_type/success1~title.yaml
+  * spec/data/network/gcompute_machine_type/success2~name.yaml
+  * spec/data/network/gcompute_machine_type/success2~title.yaml
+  * spec/data/network/gcompute_machine_type/success3~name.yaml
+  * spec/data/network/gcompute_machine_type/success3~title.yaml
   * spec/data/network/gcompute_network/success1~name.yaml
   * spec/data/network/gcompute_network/success1~title.yaml
   * spec/data/network/gcompute_network/success2~name.yaml
@@ -355,6 +373,12 @@ chef-codegen:
   * spec/data/network/gcompute_subnetwork/success2~title.yaml
   * spec/data/network/gcompute_subnetwork/success3~name.yaml
   * spec/data/network/gcompute_subnetwork/success3~title.yaml
+  * spec/data/network/gcompute_zone/success1~name.yaml
+  * spec/data/network/gcompute_zone/success1~title.yaml
+  * spec/data/network/gcompute_zone/success2~name.yaml
+  * spec/data/network/gcompute_zone/success2~title.yaml
+  * spec/data/network/gcompute_zone/success3~name.yaml
+  * spec/data/network/gcompute_zone/success3~title.yaml
   * spec/disk_spec.rb
   * spec/disk_type_spec.rb
   * spec/fake_auth.rb
@@ -369,6 +393,7 @@ chef-codegen:
   * spec/instance_group_spec.rb
   * spec/instance_spec.rb
   * spec/license_spec.rb
+  * spec/machine_type_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb
   * spec/network_delete_spec.rb
@@ -382,6 +407,7 @@ chef-codegen:
   * spec/ssl_certificate_spec.rb
   * spec/subnetwork_spec.rb
   * spec/test_constants.rb
+  * spec/zone_spec.rb
 
 The list below contains all the files that were automatically sourced from a
 central location:

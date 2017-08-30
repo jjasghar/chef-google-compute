@@ -154,6 +154,11 @@ For complete details about the credential cookbook please visit ________
     use an instance template. Unlike managed instance groups, you must
     create
     and add instances to an instance group manually.
+* [`gcompute_machine_type`](#gcompute_machine_type) -
+    Represents a MachineType resource. Machine types determine the
+    virtualized
+    hardware specifications of your virtual machine instances, such as the
+    amount of memory or number of virtual CPUs.
 * [`gcompute_network`](#gcompute_network) -
     Represents a Network resource.
     Your Cloud Platform Console project can contain multiple networks, and
@@ -231,6 +236,8 @@ For complete details about the credential cookbook please visit ________
     region, using their RFC1918 private IP addresses. You can isolate
     portions
     of the network, even entire subnets, using firewall rules.
+* [`gcompute_zone`](#gcompute_zone) -
+    Represents a Zone resource.
 
 
 ### gcompute_address
@@ -719,7 +726,7 @@ gcompute_disk_type 'id-for-resource' do
   id                     integer
   name                   string
   valid_disk_size        string
-  zone                   string
+  zone                   reference to gcompute_zone
   project                string
   credential             reference to gauth_credential
 end
@@ -788,7 +795,7 @@ end
   "10GB-10TB".
 
 * `zone` -
-  Required. URL of the zone where the disk type resides.
+  Required. A reference to Zone resource
 
 #### Label
 Set the `dt_label` property when attempting to set primary key
@@ -865,7 +872,7 @@ gcompute_disk 'id-for-resource' do
     string,
     ...
   ]
-  zone                           string
+  zone                           reference to gcompute_zone
   project                        string
   credential                     reference to gauth_credential
 end
@@ -948,7 +955,7 @@ end
   project/zones/zone/instances/instance
 
 * `zone` -
-  Required. URL of the zone where the autoscaler resides.
+  Required. A reference to Zone resource
 
 * `disk_encryption_key` -
   Encrypts the disk using a customer-supplied encryption key.
@@ -1217,7 +1224,7 @@ gcompute_global_address 'id-for-resource' do
   description        string
   id                 integer
   name               string
-  region             string
+  region             reference to gcompute_region
   project            string
   credential         reference to gauth_credential
 end
@@ -1260,9 +1267,7 @@ end
   character, which cannot be a dash.
 
 * `region` -
-  Output only. URL of the region where the regional address resides. This
-  field is
-  not applicable to global addresses.
+  Output only. A reference to Region resource
 
 #### Label
 Set the `ga_label` property when attempting to set primary key
@@ -2023,25 +2028,41 @@ An instance is a virtual machine (VM) hosted on Google's infrastructure.
 #### Example
 
 ```ruby
-# Tip: Remember to define gsql_disk to match the 'disk' property.
-# Tip: Remember to define gsql_network to match the 'network' property.
+# Power Tips:
+#   1) Remember to define the resources needed to allocate the VM:
+#      a) gcompute_disk (to be used in 'disks' property)
+#      b) gcompute_network (to be used in 'network' property)
+#      c) gcompute_address (to be used in 'access_configs', if your machine
+#         needs external ingress access)
+#      d) gcompute_zone (to determine where the VM will be allocated)
+#      e) gcompute_machine_type (to determine the kind of machine to be created)
+#   2) Don't forget to define a source_image for the OS of the boot disk
+#      a) You can use the provided gcompute_image_family function to specify the
+#         latest version of an operating system of a given family
+#         e.g. Ubuntu 16.04
 gcompute_instance 'instance-test' do
   action :create
-  machine_type ['https://www.googleapis.com/compute/v1/projects/',
-                'google.com:graphite-playground/zones/us-central1-a/',
-                'machineTypes/n1-standard-1'].join
+  machine_type 'n1-standard-1'
   disks [
     {
       boot: true,
-      source: 'data-disk-1'
+      auto_delete: true,
+      source: 'instance-test-os-1'
     }
   ]
   network_interfaces [
     {
-      network: 'mynetwork-test'
+      network: 'mynetwork-test',
+      access_configs: [
+        {
+          name: 'External NAT',
+          nat_ip: 'instance-test-ip',
+          type: 'ONE_TO_ONE_NAT'
+        }
+      ]
     }
   ]
-  zone 'us-central1-a'
+  zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -2085,15 +2106,23 @@ gcompute_instance 'id-for-resource' do
   ]
   id                 integer
   label_fingerprint  string
-  machine_type       string
+  machine_type       reference to gcompute_machine_type
   min_cpu_platform   string
   name               string
   network_interfaces [
     {
-      name       string,
-      network    reference to gcompute_network,
-      network_ip string,
-      subnetwork string,
+      access_configs [
+        {
+          name   string,
+          nat_ip reference to gcompute_address,
+          type   ONE_TO_ONE_NAT,
+        },
+        ...
+      ],
+      name           string,
+      network        reference to gcompute_network,
+      network_ip     string,
+      subnetwork     string,
     },
     ...
   ]
@@ -2121,7 +2150,7 @@ gcompute_instance 'id-for-resource' do
       ...
     ],
   }
-  zone               string
+  zone               reference to gcompute_zone
   project            string
   credential         reference to gauth_credential
 end
@@ -2250,10 +2279,7 @@ end
   up-to-date fingerprint hash in order to update or change metadata.
 
 * `machine_type` -
-  Full or partial URL of the machine type resource to use
-  for this instance, in the format:
-  zones/zone/machineTypes/machine-type. This is provided by the client
-  when the instance is created.
+  A reference to MachineType resource
 
 * `min_cpu_platform` -
   Specifies a minimum CPU platform for the VM instance. Applicable
@@ -2274,6 +2300,24 @@ end
   interface is configured to interact with other network services, such
   as connecting to the internet. Only one network interface is supported
   per instance.
+
+* `network_interfaces[]/access_configs`
+  An array of configurations for this interface. Currently, only
+  one access config, ONE_TO_ONE_NAT, is supported. If there are no
+  accessConfigs specified, then this instance will have no
+  external internet access.
+
+* `network_interfaces[]/access_configs[]/name`
+  Required. The name of this access configuration. The default and recommended
+  name is External NAT but you can use any arbitrary string you would like. For
+  example, My external IP or Network Access.
+
+* `network_interfaces[]/access_configs[]/nat_ip`
+  Required. A reference to Address resource
+
+* `network_interfaces[]/access_configs[]/type`
+  Required. The type of configuration. The default and only option is
+  ONE_TO_ONE_NAT.
 
 * `network_interfaces[]/name`
   Output only. The name of the network interface, generated by the server. For
@@ -2355,7 +2399,7 @@ end
   comply with RFC1035.
 
 * `zone` -
-  Required. URL of the zone where the disk type resides.
+  Required. A reference to Zone resource
 
 #### Label
 Set the `i_label` property when attempting to set primary key
@@ -2408,7 +2452,7 @@ gcompute_instance_group 'id-for-resource' do
   network            reference to gcompute_network
   region             reference to gcompute_region
   subnetwork         reference to gcompute_subnetwork
-  zone               string
+  zone               reference to gcompute_zone
   project            string
   credential         reference to gauth_credential
 end
@@ -2466,10 +2510,142 @@ end
   A reference to Subnetwork resource
 
 * `zone` -
-  Required. URL of the zone where the autoscaler resides.
+  Required. A reference to Zone resource
 
 #### Label
 Set the `ig_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_machine_type
+Represents a MachineType resource. Machine types determine the virtualized
+hardware specifications of your virtual machine instances, such as the
+amount of memory or number of virtual CPUs.
+
+
+#### Example
+
+```ruby
+gcompute_machine_type 'n1-standard-1' do
+  action :create
+  zone 'us-west1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Reference
+
+```ruby
+gcompute_machine_type 'id-for-resource' do
+  creation_timestamp               time
+  deprecated                       {
+    deleted     time,
+    deprecated  time,
+    obsolete    time,
+    replacement string,
+    state       'DEPRECATED', 'OBSOLETE' or 'DELETED',
+  }
+  description                      string
+  guest_cpus                       integer
+  id                               integer
+  is_shared_cpu                    boolean
+  maximum_persistent_disks         integer
+  maximum_persistent_disks_size_gb integer
+  memory_mb                        integer
+  name                             string
+  zone                             reference to gcompute_zone
+  project                          string
+  credential                       reference to gauth_credential
+end
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_machine_type` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_machine_type` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `creation_timestamp` -
+  Output only. Creation timestamp in RFC3339 text format.
+
+* `deprecated` -
+  Output only. The deprecation status associated with this machine type.
+
+* `deprecated/deleted`
+  Output only. An optional RFC3339 timestamp on or after which the state of
+  this
+  resource is intended to change to DELETED. This is only
+  informational and the status will not change unless the client
+  explicitly changes it.
+
+* `deprecated/deprecated`
+  Output only. An optional RFC3339 timestamp on or after which the state of
+  this
+  resource is intended to change to DEPRECATED. This is only
+  informational and the status will not change unless the client
+  explicitly changes it.
+
+* `deprecated/obsolete`
+  Output only. An optional RFC3339 timestamp on or after which the state of
+  this
+  resource is intended to change to OBSOLETE. This is only
+  informational and the status will not change unless the client
+  explicitly changes it.
+
+* `deprecated/replacement`
+  Output only. The URL of the suggested replacement for a deprecated resource.
+  The suggested replacement resource must be the same kind of
+  resource as the deprecated resource.
+
+* `deprecated/state`
+  Output only. The deprecation state of this resource. This can be DEPRECATED,
+  OBSOLETE, or DELETED. Operations which create a new resource
+  using a DEPRECATED resource will return successfully, but with a
+  warning indicating the deprecated resource and recommending its
+  replacement. Operations which use OBSOLETE or DELETED resources
+  will be rejected and result in an error.
+
+* `description` -
+  Output only. An optional textual description of the resource.
+
+* `guest_cpus` -
+  Output only. The number of virtual CPUs that are available to the instance.
+
+* `id` -
+  Output only. The unique identifier for the resource.
+
+* `is_shared_cpu` -
+  Output only. Whether this machine type has a shared CPU. See Shared-core
+  machine
+  types for more information.
+
+* `maximum_persistent_disks` -
+  Output only. Maximum persistent disks allowed.
+
+* `maximum_persistent_disks_size_gb` -
+  Output only. Maximum total persistent disks size (GB) allowed.
+
+* `memory_mb` -
+  Output only. The amount of physical memory available to the instance,
+  defined in
+  MB.
+
+* `name` -
+  Name of the resource.
+
+* `zone` -
+  Required. A reference to Zone resource
+
+#### Label
+Set the `mt_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
 
@@ -3040,5 +3216,113 @@ end
 
 #### Label
 Set the `s_label` property when attempting to set primary key
+of this object. The primary key will always be referred to by the initials of
+the resource followed by "_label"
+
+### gcompute_zone
+Represents a Zone resource.
+
+#### Example
+
+```ruby
+gcompute_zone 'us-west1-a' do
+  action :create
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+```
+
+#### Reference
+
+```ruby
+gcompute_zone 'id-for-resource' do
+  creation_timestamp time
+  deprecated         {
+    deleted     time,
+    deprecated  time,
+    obsolete    time,
+    replacement string,
+    state       'DEPRECATED', 'OBSOLETE' or 'DELETED',
+  }
+  description        string
+  id                 integer
+  name               string
+  region             reference to gcompute_region
+  status             'UP' or 'DOWN'
+  project            string
+  credential         reference to gauth_credential
+end
+```
+
+#### Actions
+
+* `create` -
+  Converges the `gcompute_zone` resource into the final
+  state described within the block. If the resource does not exist, Chef will
+  attempt to create it.
+* `delete` -
+  Ensures the `gcompute_zone` resource is not present.
+  If the resource already exists Chef will attempt to delete it.
+
+#### Properties
+
+* `creation_timestamp` -
+  Output only. Creation timestamp in RFC3339 text format.
+
+* `deprecated` -
+  Output only. The deprecation status associated with this machine type.
+
+* `deprecated/deleted`
+  Output only. An optional RFC3339 timestamp on or after which the state of
+  this
+  resource is intended to change to DELETED. This is only
+  informational and the status will not change unless the client
+  explicitly changes it.
+
+* `deprecated/deprecated`
+  Output only. An optional RFC3339 timestamp on or after which the state of
+  this
+  resource is intended to change to DEPRECATED. This is only
+  informational and the status will not change unless the client
+  explicitly changes it.
+
+* `deprecated/obsolete`
+  Output only. An optional RFC3339 timestamp on or after which the state of
+  this
+  resource is intended to change to OBSOLETE. This is only
+  informational and the status will not change unless the client
+  explicitly changes it.
+
+* `deprecated/replacement`
+  Output only. The URL of the suggested replacement for a deprecated resource.
+  The suggested replacement resource must be the same kind of
+  resource as the deprecated resource.
+
+* `deprecated/state`
+  Output only. The deprecation state of this resource. This can be DEPRECATED,
+  OBSOLETE, or DELETED. Operations which create a new resource
+  using a DEPRECATED resource will return successfully, but with a
+  warning indicating the deprecated resource and recommending its
+  replacement. Operations which use OBSOLETE or DELETED resources
+  will be rejected and result in an error.
+
+* `description` -
+  Output only. An optional textual description of the resource.
+
+* `id` -
+  Output only. The unique identifier for the resource.
+
+* `name` -
+  Name of the resource.
+
+* `region` -
+  Output only. A reference to Region resource
+
+* `status` -
+  Output only. The status of the zone.
+
+#### Label
+Set the `z_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"

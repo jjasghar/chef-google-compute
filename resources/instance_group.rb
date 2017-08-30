@@ -40,6 +40,7 @@ require 'google/compute/property/region_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/subnetwork_selflink'
 require 'google/compute/property/time'
+require 'google/compute/property/zone_name'
 require 'google/hash_utils'
 
 module Google
@@ -85,8 +86,8 @@ module Google
                coerce: ::Google::Compute::Property::SubneSelfLinkRef.coerce,
                desired_state: true
       property :zone,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+               [String, ::Google::Compute::Data::ZoneNameRef],
+               coerce: ::Google::Compute::Property::ZoneNameRef.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true

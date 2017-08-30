@@ -34,6 +34,7 @@ require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
 require 'google/compute/property/integer'
+require 'google/compute/property/region_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/time'
 require 'google/hash_utils'
@@ -66,8 +67,8 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
       property :region,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+               [String, ::Google::Compute::Data::RegioSelfLinkRef],
+               coerce: ::Google::Compute::Property::RegioSelfLinkRef.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -105,7 +106,9 @@ module Google
           @current_resource.ga_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.region =
-            ::Google::Compute::Property::String.api_parse(fetch['region'])
+            ::Google::Compute::Property::RegioSelfLinkRef.api_parse(
+              fetch['region']
+            )
 
           update
         end
@@ -151,6 +154,11 @@ module Google
                                                   resource_to_request)
             wait_for_operation update_req.send, @new_resource
           end
+        end
+
+        def self.fetch_export(resource, type, id, property)
+          return if id.nil?
+          resource.resources("#{type}[#{id}]").exports[property]
         end
 
         def self.resource_to_hash(resource)

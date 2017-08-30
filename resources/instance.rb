@@ -33,8 +33,11 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
+require 'google/compute/property/address_address'
 require 'google/compute/property/boolean'
 require 'google/compute/property/disk_selflink'
+require 'google/compute/property/enum'
+require 'google/compute/property/instance_access_configs'
 require 'google/compute/property/instance_disk_encryption_key'
 require 'google/compute/property/instance_disks'
 require 'google/compute/property/instance_guest_accelerators'
@@ -44,9 +47,11 @@ require 'google/compute/property/instance_scheduling'
 require 'google/compute/property/instance_service_accounts'
 require 'google/compute/property/instance_tags'
 require 'google/compute/property/integer'
+require 'google/compute/property/machinetype_selflink'
 require 'google/compute/property/network_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
+require 'google/compute/property/zone_name'
 require 'google/hash_utils'
 
 module Google
@@ -89,8 +94,8 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                desired_state: true
       property :machine_type,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+               [String, ::Google::Compute::Data::MachTypeSelfLinkRef],
+               coerce: ::Google::Compute::Property::MachTypeSelfLinkRef.coerce,
                desired_state: true
       property :min_cpu_platform,
                String,
@@ -131,8 +136,8 @@ module Google
                coerce: ::Google::Compute::Property::InstanceTags.coerce,
                desired_state: true
       property :zone,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+               [String, ::Google::Compute::Data::ZoneNameRef],
+               coerce: ::Google::Compute::Property::ZoneNameRef.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -178,7 +183,7 @@ module Google
               fetch['labelFingerprint']
             )
           @current_resource.machine_type =
-            ::Google::Compute::Property::String.api_parse(
+            ::Google::Compute::Property::MachTypeSelfLinkRef.api_parse(
               fetch['machineType']
             )
           @current_resource.min_cpu_platform =

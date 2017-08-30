@@ -37,6 +37,7 @@ require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
 require 'google/compute/property/time'
+require 'google/compute/property/zone_name'
 require 'google/hash_utils'
 
 module Google
@@ -91,8 +92,8 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                desired_state: true
       property :zone,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+               [String, ::Google::Compute::Data::ZoneNameRef],
+               coerce: ::Google::Compute::Property::ZoneNameRef.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -195,6 +196,11 @@ module Google
             Chef::Log.fatal message
             raise message
           end
+        end
+
+        def self.fetch_export(resource, type, id, property)
+          return if id.nil?
+          resource.resources("#{type}[#{id}]").exports[property]
         end
 
         # rubocop:disable Metrics/MethodLength

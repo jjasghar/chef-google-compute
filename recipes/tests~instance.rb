@@ -64,9 +64,16 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_disk 'chef-e2e-data-disk-1' do
+gcompute_zone 'us-west1-a' do
   action :create
-  zone 'us-central1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_disk 'chef-e2e-instance-test-os-1' do
+  action :create
+  source_image 'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
+  zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -77,23 +84,49 @@ gcompute_network 'chef-e2e-mynetwork-test' do
   credential 'mycred'
 end
 
+gcompute_region 'us-west1' do
+  action :create
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_address 'chef-e2e-instance-test-ip' do
+  action :create
+  region 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_machine_type 'n1-standard-1' do
+  action :create
+  zone 'us-west1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
 gcompute_instance 'chef-e2e-instance-test' do
   action :create
-  machine_type ['https://www.googleapis.com/compute/v1/projects/',
-                'google.com:graphite-playground/zones/us-central1-a/',
-                'machineTypes/n1-standard-1'].join
+  machine_type 'n1-standard-1'
   disks [
     {
       boot: true,
-      source: 'chef-e2e-data-disk-1'
+      auto_delete: true,
+      source: 'chef-e2e-instance-test-os-1'
     }
   ]
   network_interfaces [
     {
-      network: 'chef-e2e-mynetwork-test'
+      network: 'chef-e2e-mynetwork-test',
+      access_configs: [
+        {
+          name: 'External NAT',
+          nat_ip: 'chef-e2e-instance-test-ip',
+          type: 'ONE_TO_ONE_NAT'
+        }
+      ]
     }
   ]
-  zone 'us-central1-a'
+  zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

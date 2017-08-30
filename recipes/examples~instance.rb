@@ -64,9 +64,16 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_disk 'data-disk-1' do
+gcompute_zone 'us-west1-a' do
   action :create
-  zone 'us-central1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_disk 'instance-test-os-1' do
+  action :create
+  source_image 'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
+  zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
@@ -77,23 +84,49 @@ gcompute_network 'mynetwork-test' do
   credential 'mycred'
 end
 
+gcompute_region 'us-west1' do
+  action :create
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_address 'instance-test-ip' do
+  action :create
+  region 'us-west1'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
+gcompute_machine_type 'n1-standard-1' do
+  action :create
+  zone 'us-west1-a'
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
 gcompute_instance 'instance-test' do
   action :create
-  machine_type ['https://www.googleapis.com/compute/v1/projects/',
-                'google.com:graphite-playground/zones/us-central1-a/',
-                'machineTypes/n1-standard-1'].join
+  machine_type 'n1-standard-1'
   disks [
     {
       boot: true,
-      source: 'data-disk-1'
+      auto_delete: true,
+      source: 'instance-test-os-1'
     }
   ]
   network_interfaces [
     {
-      network: 'mynetwork-test'
+      network: 'mynetwork-test',
+      access_configs: [
+        {
+          name: 'External NAT',
+          nat_ip: 'instance-test-ip',
+          type: 'ONE_TO_ONE_NAT'
+        }
+      ]
     }
   ]
-  zone 'us-central1-a'
+  zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end

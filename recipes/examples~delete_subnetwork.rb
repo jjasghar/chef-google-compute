@@ -64,13 +64,6 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_network 'mynetwork-subnetwork' do
-  action :create
-  auto_create_subnetworks false
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
 gcompute_region 'some-region' do
   action :create
   r_label 'us-west1'

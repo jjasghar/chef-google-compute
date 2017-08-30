@@ -64,7 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_region 'chef-e2e-us-west1' do
+gcompute_region 'us-west1' do
   action :create
   project 'google.com:graphite-playground'
   credential 'mycred'

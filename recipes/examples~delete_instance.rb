@@ -64,14 +64,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_disk 'data-disk-1' do
-  action :create
-  zone 'us-central1-a'
-  project 'google.com:graphite-playground'
-  credential 'mycred'
-end
-
-gcompute_network 'mynetwork-test' do
+gcompute_zone 'us-west1-a' do
   action :create
   project 'google.com:graphite-playground'
   credential 'mycred'
@@ -79,7 +72,7 @@ end
 
 gcompute_instance 'instance-test' do
   action :delete
-  zone 'us-central1-a'
+  zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
 end
