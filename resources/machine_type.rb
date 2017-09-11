@@ -45,6 +45,7 @@ require 'google/hash_utils'
 module Google
   module GCOMPUTE
     # A provider to manage Google Compute Engine resources.
+    # rubocop:disable Metrics/ClassLength
     class MachineType < Chef::Resource
       resource_name :gcompute_machine_type
 
@@ -211,6 +212,7 @@ module Google
           resource.resources("#{type}[#{id}]").exports[property]
         end
 
+        # rubocop:disable Metrics/MethodLength
         def self.resource_to_hash(resource)
           {
             project: resource.project,
@@ -229,6 +231,7 @@ module Google
             zone: resource.zone
           }.reject { |_, v| v.nil? }
         end
+        # rubocop:enable Metrics/MethodLength
 
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
@@ -385,5 +388,6 @@ module Google
         end
       end
     end
+    # rubocop:enable Metrics/ClassLength
   end
 end
