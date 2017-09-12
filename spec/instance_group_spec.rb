@@ -61,36 +61,27 @@ context 'gcompute_instance_group' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success \
-                1,
-                name: 'title0',
-                network: 'selflink(resource(network,0))',
-                region: 'selflink(resource(region,0))',
-                subnetwork: 'selflink(resource(subnetwork,0))',
-                zone: 'test name#0 data'
-              expect_network_get_success \
-                2,
-                name: 'title1',
-                network: 'selflink(resource(network,1))',
-                region: 'selflink(resource(region,1))',
-                subnetwork: 'selflink(resource(subnetwork,1))',
-                zone: 'test name#1 data'
-              expect_network_get_success \
-                3,
-                name: 'title2',
-                network: 'selflink(resource(network,2))',
-                region: 'selflink(resource(region,2))',
-                subnetwork: 'selflink(resource(subnetwork,2))',
-                zone: 'test name#2 data'
+              expect_network_get_success 1,
+                                         name: 'title0',
+                                         zone: 'test name#0 data'
+              expect_network_get_success 2,
+                                         name: 'title1',
+                                         zone: 'test name#1 data'
+              expect_network_get_success 3,
+                                         name: 'title2',
+                                         zone: 'test name#2 data'
               expect_network_get_success_network 1
               expect_network_get_success_network 2
               expect_network_get_success_network 3
               expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
-              expect_network_get_success_subnetwork 1
-              expect_network_get_success_subnetwork 2
-              expect_network_get_success_subnetwork 3
+              expect_network_get_success_subnetwork 1,
+                                                    region: 'test name#0 data'
+              expect_network_get_success_subnetwork 2,
+                                                    region: 'test name#1 data'
+              expect_network_get_success_subnetwork 3,
+                                                    region: 'test name#2 data'
               expect_network_get_success_zone 1
               expect_network_get_success_zone 2
               expect_network_get_success_zone 3
@@ -440,33 +431,21 @@ context 'gcompute_instance_group' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success \
-                1,
-                network: 'selflink(resource(network,0))',
-                region: 'selflink(resource(region,0))',
-                subnetwork: 'selflink(resource(subnetwork,0))',
-                zone: 'test name#0 data'
-              expect_network_get_success \
-                2,
-                network: 'selflink(resource(network,1))',
-                region: 'selflink(resource(region,1))',
-                subnetwork: 'selflink(resource(subnetwork,1))',
-                zone: 'test name#1 data'
-              expect_network_get_success \
-                3,
-                network: 'selflink(resource(network,2))',
-                region: 'selflink(resource(region,2))',
-                subnetwork: 'selflink(resource(subnetwork,2))',
-                zone: 'test name#2 data'
+              expect_network_get_success 1, zone: 'test name#0 data'
+              expect_network_get_success 2, zone: 'test name#1 data'
+              expect_network_get_success 3, zone: 'test name#2 data'
               expect_network_get_success_network 1
               expect_network_get_success_network 2
               expect_network_get_success_network 3
               expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
-              expect_network_get_success_subnetwork 1
-              expect_network_get_success_subnetwork 2
-              expect_network_get_success_subnetwork 3
+              expect_network_get_success_subnetwork 1,
+                                                    region: 'test name#0 data'
+              expect_network_get_success_subnetwork 2,
+                                                    region: 'test name#1 data'
+              expect_network_get_success_subnetwork 3,
+                                                    region: 'test name#2 data'
               expect_network_get_success_zone 1
               expect_network_get_success_zone 2
               expect_network_get_success_zone 3
@@ -858,13 +837,9 @@ context 'gcompute_instance_group' do
         # Ensure present: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed \
-              1,
-              name: 'title0',
-              network: 'selflink(resource(network,0))',
-              region: 'selflink(resource(region,0))',
-              subnetwork: 'selflink(resource(subnetwork,0))',
-              zone: 'test name#0 data'
+            expect_network_get_failed 1,
+                                      name: 'title0',
+                                      zone: 'test name#0 data'
             expect_network_create \
               1,
               {
@@ -898,20 +873,11 @@ context 'gcompute_instance_group' do
                 'subnetwork' => 'selflink(resource(subnetwork,0))'
               },
               name: 'title0',
-              network: 'selflink(resource(network,0))',
-              region: 'selflink(resource(region,0))',
-              subnetwork: 'selflink(resource(subnetwork,0))',
               zone: 'test name#0 data'
-            expect_network_get_async \
-              1,
-              name: 'title0',
-              network: 'selflink(resource(network,0))',
-              region: 'selflink(resource(region,0))',
-              subnetwork: 'selflink(resource(subnetwork,0))',
-              zone: 'test name#0 data'
+            expect_network_get_async 1, name: 'title0', zone: 'test name#0 data'
             expect_network_get_success_network 1
             expect_network_get_success_region 1
-            expect_network_get_success_subnetwork 1
+            expect_network_get_success_subnetwork 1, region: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -1058,12 +1024,7 @@ context 'gcompute_instance_group' do
         # Ensure present: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed \
-              1,
-              network: 'selflink(resource(network,0))',
-              region: 'selflink(resource(region,0))',
-              subnetwork: 'selflink(resource(subnetwork,0))',
-              zone: 'test name#0 data'
+            expect_network_get_failed 1, zone: 'test name#0 data'
             expect_network_create \
               1,
               {
@@ -1096,19 +1057,11 @@ context 'gcompute_instance_group' do
                 'region' => 'selflink(resource(region,0))',
                 'subnetwork' => 'selflink(resource(subnetwork,0))'
               },
-              network: 'selflink(resource(network,0))',
-              region: 'selflink(resource(region,0))',
-              subnetwork: 'selflink(resource(subnetwork,0))',
               zone: 'test name#0 data'
-            expect_network_get_async \
-              1,
-              network: 'selflink(resource(network,0))',
-              region: 'selflink(resource(region,0))',
-              subnetwork: 'selflink(resource(subnetwork,0))',
-              zone: 'test name#0 data'
+            expect_network_get_async 1, zone: 'test name#0 data'
             expect_network_get_success_network 1
             expect_network_get_success_region 1
-            expect_network_get_success_subnetwork 1
+            expect_network_get_success_subnetwork 1, region: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -1260,7 +1213,9 @@ context 'gcompute_instance_group' do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed 1, name: 'title0'
+            expect_network_get_failed 1,
+                                      name: 'title0',
+                                      zone: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -1325,7 +1280,7 @@ context 'gcompute_instance_group' do
         # Ensure absent: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1
+            expect_network_get_failed 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -1393,7 +1348,9 @@ context 'gcompute_instance_group' do
         # Ensure absent: resource exists, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_success 1, name: 'title0'
+            expect_network_get_success 1,
+                                       name: 'title0',
+                                       zone: 'test name#0 data'
             expect_network_delete 1, 'title0', zone: 'test name#0 data'
             expect_network_get_async 1, name: 'title0', zone: 'test name#0 data'
             expect_network_get_success_zone 1
@@ -1462,7 +1419,7 @@ context 'gcompute_instance_group' do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_success 1
+            expect_network_get_success 1, zone: 'test name#0 data'
             expect_network_delete 1, nil, zone: 'test name#0 data'
             expect_network_get_async 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1

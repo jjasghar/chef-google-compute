@@ -981,7 +981,9 @@ context 'gcompute_disk' do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed 1, name: 'title0'
+            expect_network_get_failed 1,
+                                      name: 'title0',
+                                      zone: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -1042,7 +1044,7 @@ context 'gcompute_disk' do
         # Ensure absent: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1
+            expect_network_get_failed 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -1106,7 +1108,9 @@ context 'gcompute_disk' do
         # Ensure absent: resource exists, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_success 1, name: 'title0'
+            expect_network_get_success 1,
+                                       name: 'title0',
+                                       zone: 'test name#0 data'
             expect_network_delete 1, 'title0', zone: 'test name#0 data'
             expect_network_get_async 1, name: 'title0', zone: 'test name#0 data'
             expect_network_get_success_zone 1
@@ -1171,7 +1175,7 @@ context 'gcompute_disk' do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_success 1
+            expect_network_get_success 1, zone: 'test name#0 data'
             expect_network_delete 1, nil, zone: 'test name#0 data'
             expect_network_get_async 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1

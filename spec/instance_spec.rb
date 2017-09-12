@@ -61,45 +61,33 @@ context 'gcompute_instance' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success \
-                1,
-                name: 'title0',
-                disk: 'selflink(resource(disk,0))',
-                zone: 'test name#0 data',
-                machine_type: 'selflink(resource(machine_type,0))',
-                address: 'test address#0 data',
-                network: 'selflink(resource(network,0))'
-              expect_network_get_success \
-                2,
-                name: 'title1',
-                disk: 'selflink(resource(disk,1))',
-                zone: 'test name#1 data',
-                machine_type: 'selflink(resource(machine_type,1))',
-                address: 'test address#1 data',
-                network: 'selflink(resource(network,1))'
-              expect_network_get_success \
-                3,
-                name: 'title2',
-                disk: 'selflink(resource(disk,2))',
-                zone: 'test name#2 data',
-                machine_type: 'selflink(resource(machine_type,2))',
-                address: 'test address#2 data',
-                network: 'selflink(resource(network,2))'
-              expect_network_get_success_disk 1
-              expect_network_get_success_disk 2
-              expect_network_get_success_disk 3
+              expect_network_get_success 1,
+                                         name: 'title0',
+                                         zone: 'test name#0 data'
+              expect_network_get_success 2,
+                                         name: 'title1',
+                                         zone: 'test name#1 data'
+              expect_network_get_success 3,
+                                         name: 'title2',
+                                         zone: 'test name#2 data'
               expect_network_get_success_zone 1
               expect_network_get_success_zone 2
               expect_network_get_success_zone 3
-              expect_network_get_success_machine_type 1
-              expect_network_get_success_machine_type 2
-              expect_network_get_success_machine_type 3
-              expect_network_get_success_address 1
-              expect_network_get_success_address 2
-              expect_network_get_success_address 3
+              expect_network_get_success_disk 1, zone: 'test name#0 data'
+              expect_network_get_success_disk 2, zone: 'test name#1 data'
+              expect_network_get_success_disk 3, zone: 'test name#2 data'
+              expect_network_get_success_machine_type 1,
+                                                      zone: 'test name#0 data'
+              expect_network_get_success_machine_type 2,
+                                                      zone: 'test name#1 data'
+              expect_network_get_success_machine_type 3,
+                                                      zone: 'test name#2 data'
               expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
+              expect_network_get_success_address 1, region: 'test name#0 data'
+              expect_network_get_success_address 2, region: 'test name#1 data'
+              expect_network_get_success_address 3, region: 'test name#2 data'
               expect_network_get_success_network 1
               expect_network_get_success_network 2
               expect_network_get_success_network 3
@@ -125,6 +113,27 @@ context 'gcompute_instance' do
             let(:chef_run) do
               apply_recipe(
                 <<-MANIFEST
+                  gcompute_zone 'resource(zone,0)' do
+                    action :create
+                    z_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_zone 'resource(zone,1)' do
+                    action :create
+                    z_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_zone 'resource(zone,2)' do
+                    action :create
+                    z_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
                   gcompute_disk 'resource(disk,0)' do
                     action :create
                     d_label 'test name#0 data'
@@ -145,27 +154,6 @@ context 'gcompute_instance' do
                     action :create
                     d_label 'test name#2 data'
                     zone 'resource(zone,2)'
-                    project 'test project#2 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_zone 'resource(zone,0)' do
-                    action :create
-                    z_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_zone 'resource(zone,1)' do
-                    action :create
-                    z_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_zone 'resource(zone,2)' do
-                    action :create
-                    z_label 'test name#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
                   end
@@ -194,6 +182,27 @@ context 'gcompute_instance' do
                     credential 'mycred'
                   end
 
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,1)' do
+                    action :create
+                    r_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,2)' do
+                    action :create
+                    r_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
                   gcompute_address 'resource(address,0)' do
                     action :create
                     a_label 'test name#0 data'
@@ -214,27 +223,6 @@ context 'gcompute_instance' do
                     action :create
                     a_label 'test name#2 data'
                     region 'resource(region,2)'
-                    project 'test project#2 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,1)' do
-                    action :create
-                    r_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,2)' do
-                    action :create
-                    r_label 'test name#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
                   end
@@ -1040,42 +1028,27 @@ context 'gcompute_instance' do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success \
-                1,
-                disk: 'selflink(resource(disk,0))',
-                zone: 'test name#0 data',
-                machine_type: 'selflink(resource(machine_type,0))',
-                address: 'test address#0 data',
-                network: 'selflink(resource(network,0))'
-              expect_network_get_success \
-                2,
-                disk: 'selflink(resource(disk,1))',
-                zone: 'test name#1 data',
-                machine_type: 'selflink(resource(machine_type,1))',
-                address: 'test address#1 data',
-                network: 'selflink(resource(network,1))'
-              expect_network_get_success \
-                3,
-                disk: 'selflink(resource(disk,2))',
-                zone: 'test name#2 data',
-                machine_type: 'selflink(resource(machine_type,2))',
-                address: 'test address#2 data',
-                network: 'selflink(resource(network,2))'
-              expect_network_get_success_disk 1
-              expect_network_get_success_disk 2
-              expect_network_get_success_disk 3
+              expect_network_get_success 1, zone: 'test name#0 data'
+              expect_network_get_success 2, zone: 'test name#1 data'
+              expect_network_get_success 3, zone: 'test name#2 data'
               expect_network_get_success_zone 1
               expect_network_get_success_zone 2
               expect_network_get_success_zone 3
-              expect_network_get_success_machine_type 1
-              expect_network_get_success_machine_type 2
-              expect_network_get_success_machine_type 3
-              expect_network_get_success_address 1
-              expect_network_get_success_address 2
-              expect_network_get_success_address 3
+              expect_network_get_success_disk 1, zone: 'test name#0 data'
+              expect_network_get_success_disk 2, zone: 'test name#1 data'
+              expect_network_get_success_disk 3, zone: 'test name#2 data'
+              expect_network_get_success_machine_type 1,
+                                                      zone: 'test name#0 data'
+              expect_network_get_success_machine_type 2,
+                                                      zone: 'test name#1 data'
+              expect_network_get_success_machine_type 3,
+                                                      zone: 'test name#2 data'
               expect_network_get_success_region 1
               expect_network_get_success_region 2
               expect_network_get_success_region 3
+              expect_network_get_success_address 1, region: 'test name#0 data'
+              expect_network_get_success_address 2, region: 'test name#1 data'
+              expect_network_get_success_address 3, region: 'test name#2 data'
               expect_network_get_success_network 1
               expect_network_get_success_network 2
               expect_network_get_success_network 3
@@ -1101,6 +1074,27 @@ context 'gcompute_instance' do
             let(:chef_run) do
               apply_recipe(
                 <<-MANIFEST
+                  gcompute_zone 'resource(zone,0)' do
+                    action :create
+                    z_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_zone 'resource(zone,1)' do
+                    action :create
+                    z_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_zone 'resource(zone,2)' do
+                    action :create
+                    z_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
                   gcompute_disk 'resource(disk,0)' do
                     action :create
                     d_label 'test name#0 data'
@@ -1121,27 +1115,6 @@ context 'gcompute_instance' do
                     action :create
                     d_label 'test name#2 data'
                     zone 'resource(zone,2)'
-                    project 'test project#2 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_zone 'resource(zone,0)' do
-                    action :create
-                    z_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_zone 'resource(zone,1)' do
-                    action :create
-                    z_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_zone 'resource(zone,2)' do
-                    action :create
-                    z_label 'test name#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
                   end
@@ -1170,6 +1143,27 @@ context 'gcompute_instance' do
                     credential 'mycred'
                   end
 
+                  gcompute_region 'resource(region,0)' do
+                    action :create
+                    r_label 'test name#0 data'
+                    project 'test project#0 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,1)' do
+                    action :create
+                    r_label 'test name#1 data'
+                    project 'test project#1 data'
+                    credential 'mycred'
+                  end
+
+                  gcompute_region 'resource(region,2)' do
+                    action :create
+                    r_label 'test name#2 data'
+                    project 'test project#2 data'
+                    credential 'mycred'
+                  end
+
                   gcompute_address 'resource(address,0)' do
                     action :create
                     a_label 'test name#0 data'
@@ -1190,27 +1184,6 @@ context 'gcompute_instance' do
                     action :create
                     a_label 'test name#2 data'
                     region 'resource(region,2)'
-                    project 'test project#2 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,0)' do
-                    action :create
-                    r_label 'test name#0 data'
-                    project 'test project#0 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,1)' do
-                    action :create
-                    r_label 'test name#1 data'
-                    project 'test project#1 data'
-                    credential 'mycred'
-                  end
-
-                  gcompute_region 'resource(region,2)' do
-                    action :create
-                    r_label 'test name#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
                   end
@@ -2052,14 +2025,9 @@ context 'gcompute_instance' do
         # Ensure present: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed \
-              1,
-              name: 'title0',
-              disk: 'selflink(resource(disk,0))',
-              zone: 'test name#0 data',
-              machine_type: 'selflink(resource(machine_type,0))',
-              address: 'test address#0 data',
-              network: 'selflink(resource(network,0))'
+            expect_network_get_failed 1,
+                                      name: 'title0',
+                                      zone: 'test name#0 data'
             expect_network_create \
               1,
               {
@@ -2239,32 +2207,21 @@ context 'gcompute_instance' do
                 }
               },
               name: 'title0',
-              disk: 'selflink(resource(disk,0))',
-              zone: 'test name#0 data',
-              machine_type: 'selflink(resource(machine_type,0))',
-              address: 'test address#0 data',
-              network: 'selflink(resource(network,0))'
-            expect_network_get_async \
-              1,
-              name: 'title0',
-              disk: 'selflink(resource(disk,0))',
-              zone: 'test name#0 data',
-              machine_type: 'selflink(resource(machine_type,0))',
-              address: 'test address#0 data',
-              network: 'selflink(resource(network,0))'
-            expect_network_get_success_disk 1
-            expect_network_get_success_disk 2
-            expect_network_get_success_disk 3
+              zone: 'test name#0 data'
+            expect_network_get_async 1, name: 'title0', zone: 'test name#0 data'
             expect_network_get_success_zone 1
             expect_network_get_success_zone 2
             expect_network_get_success_zone 3
-            expect_network_get_success_machine_type 1
-            expect_network_get_success_address 1
-            expect_network_get_success_address 2
-            expect_network_get_success_address 3
+            expect_network_get_success_disk 1, zone: 'test name#0 data'
+            expect_network_get_success_disk 2, zone: 'test name#1 data'
+            expect_network_get_success_disk 3, zone: 'test name#2 data'
+            expect_network_get_success_machine_type 1, zone: 'test name#0 data'
             expect_network_get_success_region 1
             expect_network_get_success_region 2
             expect_network_get_success_region 3
+            expect_network_get_success_address 1, region: 'test name#0 data'
+            expect_network_get_success_address 2, region: 'test name#1 data'
+            expect_network_get_success_address 3, region: 'test name#2 data'
             expect_network_get_success_network 1
             expect_network_get_success_network 2
           end
@@ -2289,6 +2246,27 @@ context 'gcompute_instance' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
+                gcompute_zone 'resource(zone,0)' do
+                  action :create
+                  z_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_zone 'resource(zone,1)' do
+                  action :create
+                  z_label 'test name#1 data'
+                  project 'test project#1 data'
+                  credential 'mycred'
+                end
+
+                gcompute_zone 'resource(zone,2)' do
+                  action :create
+                  z_label 'test name#2 data'
+                  project 'test project#2 data'
+                  credential 'mycred'
+                end
+
                 gcompute_disk 'resource(disk,0)' do
                   action :create
                   d_label 'test name#0 data'
@@ -2313,32 +2291,32 @@ context 'gcompute_instance' do
                   credential 'mycred'
                 end
 
-                gcompute_zone 'resource(zone,0)' do
-                  action :create
-                  z_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
-                gcompute_zone 'resource(zone,1)' do
-                  action :create
-                  z_label 'test name#1 data'
-                  project 'test project#1 data'
-                  credential 'mycred'
-                end
-
-                gcompute_zone 'resource(zone,2)' do
-                  action :create
-                  z_label 'test name#2 data'
-                  project 'test project#2 data'
-                  credential 'mycred'
-                end
-
                 gcompute_machine_type 'resource(machine_type,0)' do
                   action :create
                   mt_label 'test name#0 data'
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_region 'resource(region,0)' do
+                  action :create
+                  r_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_region 'resource(region,1)' do
+                  action :create
+                  r_label 'test name#1 data'
+                  project 'test project#1 data'
+                  credential 'mycred'
+                end
+
+                gcompute_region 'resource(region,2)' do
+                  action :create
+                  r_label 'test name#2 data'
+                  project 'test project#2 data'
                   credential 'mycred'
                 end
 
@@ -2362,27 +2340,6 @@ context 'gcompute_instance' do
                   action :create
                   a_label 'test name#2 data'
                   region 'resource(region,2)'
-                  project 'test project#2 data'
-                  credential 'mycred'
-                end
-
-                gcompute_region 'resource(region,0)' do
-                  action :create
-                  r_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
-                gcompute_region 'resource(region,1)' do
-                  action :create
-                  r_label 'test name#1 data'
-                  project 'test project#1 data'
-                  credential 'mycred'
-                end
-
-                gcompute_region 'resource(region,2)' do
-                  action :create
-                  r_label 'test name#2 data'
                   project 'test project#2 data'
                   credential 'mycred'
                 end
@@ -2669,13 +2626,7 @@ context 'gcompute_instance' do
         # Ensure present: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed \
-              1,
-              disk: 'selflink(resource(disk,0))',
-              zone: 'test name#0 data',
-              machine_type: 'selflink(resource(machine_type,0))',
-              address: 'test address#0 data',
-              network: 'selflink(resource(network,0))'
+            expect_network_get_failed 1, zone: 'test name#0 data'
             expect_network_create \
               1,
               {
@@ -2854,31 +2805,21 @@ context 'gcompute_instance' do
                   'items' => %w[hh ii jj]
                 }
               },
-              disk: 'selflink(resource(disk,0))',
-              zone: 'test name#0 data',
-              machine_type: 'selflink(resource(machine_type,0))',
-              address: 'test address#0 data',
-              network: 'selflink(resource(network,0))'
-            expect_network_get_async \
-              1,
-              disk: 'selflink(resource(disk,0))',
-              zone: 'test name#0 data',
-              machine_type: 'selflink(resource(machine_type,0))',
-              address: 'test address#0 data',
-              network: 'selflink(resource(network,0))'
-            expect_network_get_success_disk 1
-            expect_network_get_success_disk 2
-            expect_network_get_success_disk 3
+              zone: 'test name#0 data'
+            expect_network_get_async 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1
             expect_network_get_success_zone 2
             expect_network_get_success_zone 3
-            expect_network_get_success_machine_type 1
-            expect_network_get_success_address 1
-            expect_network_get_success_address 2
-            expect_network_get_success_address 3
+            expect_network_get_success_disk 1, zone: 'test name#0 data'
+            expect_network_get_success_disk 2, zone: 'test name#1 data'
+            expect_network_get_success_disk 3, zone: 'test name#2 data'
+            expect_network_get_success_machine_type 1, zone: 'test name#0 data'
             expect_network_get_success_region 1
             expect_network_get_success_region 2
             expect_network_get_success_region 3
+            expect_network_get_success_address 1, region: 'test name#0 data'
+            expect_network_get_success_address 2, region: 'test name#1 data'
+            expect_network_get_success_address 3, region: 'test name#2 data'
             expect_network_get_success_network 1
             expect_network_get_success_network 2
           end
@@ -2903,6 +2844,27 @@ context 'gcompute_instance' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
+                gcompute_zone 'resource(zone,0)' do
+                  action :create
+                  z_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_zone 'resource(zone,1)' do
+                  action :create
+                  z_label 'test name#1 data'
+                  project 'test project#1 data'
+                  credential 'mycred'
+                end
+
+                gcompute_zone 'resource(zone,2)' do
+                  action :create
+                  z_label 'test name#2 data'
+                  project 'test project#2 data'
+                  credential 'mycred'
+                end
+
                 gcompute_disk 'resource(disk,0)' do
                   action :create
                   d_label 'test name#0 data'
@@ -2927,32 +2889,32 @@ context 'gcompute_instance' do
                   credential 'mycred'
                 end
 
-                gcompute_zone 'resource(zone,0)' do
-                  action :create
-                  z_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
-                gcompute_zone 'resource(zone,1)' do
-                  action :create
-                  z_label 'test name#1 data'
-                  project 'test project#1 data'
-                  credential 'mycred'
-                end
-
-                gcompute_zone 'resource(zone,2)' do
-                  action :create
-                  z_label 'test name#2 data'
-                  project 'test project#2 data'
-                  credential 'mycred'
-                end
-
                 gcompute_machine_type 'resource(machine_type,0)' do
                   action :create
                   mt_label 'test name#0 data'
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_region 'resource(region,0)' do
+                  action :create
+                  r_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
+                gcompute_region 'resource(region,1)' do
+                  action :create
+                  r_label 'test name#1 data'
+                  project 'test project#1 data'
+                  credential 'mycred'
+                end
+
+                gcompute_region 'resource(region,2)' do
+                  action :create
+                  r_label 'test name#2 data'
+                  project 'test project#2 data'
                   credential 'mycred'
                 end
 
@@ -2976,27 +2938,6 @@ context 'gcompute_instance' do
                   action :create
                   a_label 'test name#2 data'
                   region 'resource(region,2)'
-                  project 'test project#2 data'
-                  credential 'mycred'
-                end
-
-                gcompute_region 'resource(region,0)' do
-                  action :create
-                  r_label 'test name#0 data'
-                  project 'test project#0 data'
-                  credential 'mycred'
-                end
-
-                gcompute_region 'resource(region,1)' do
-                  action :create
-                  r_label 'test name#1 data'
-                  project 'test project#1 data'
-                  credential 'mycred'
-                end
-
-                gcompute_region 'resource(region,2)' do
-                  action :create
-                  r_label 'test name#2 data'
                   project 'test project#2 data'
                   credential 'mycred'
                 end
@@ -3288,7 +3229,9 @@ context 'gcompute_instance' do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_failed 1, name: 'title0'
+            expect_network_get_failed 1,
+                                      name: 'title0',
+                                      zone: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -3355,7 +3298,7 @@ context 'gcompute_instance' do
         # Ensure absent: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_failed 1
+            expect_network_get_failed 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1
           end
 
@@ -3425,7 +3368,9 @@ context 'gcompute_instance' do
         # Ensure absent: resource exists, ignore, no name, pass
         context 'title == name (pass)' do
           before do
-            expect_network_get_success 1, name: 'title0'
+            expect_network_get_success 1,
+                                       name: 'title0',
+                                       zone: 'test name#0 data'
             expect_network_delete 1, 'title0', zone: 'test name#0 data'
             expect_network_get_async 1, name: 'title0', zone: 'test name#0 data'
             expect_network_get_success_zone 1
@@ -3496,7 +3441,7 @@ context 'gcompute_instance' do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
           before do
-            expect_network_get_success 1
+            expect_network_get_success 1, zone: 'test name#0 data'
             expect_network_delete 1, nil, zone: 'test name#0 data'
             expect_network_get_async 1, zone: 'test name#0 data'
             expect_network_get_success_zone 1
