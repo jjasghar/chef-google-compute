@@ -25,7 +25,7 @@
 #
 # ----------------------------------------------------------------------------
 
-name 'gcompute'
+name 'google-gcompute'
 maintainer 'Google'
 maintainer_email 'nelsona@google.com'
 license 'apachev2'
