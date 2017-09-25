@@ -267,7 +267,7 @@ context 'gcompute_zone' do
     File.open(recipe_loc, 'w') do |file|
       file.write([build_cred, recipe].join("\n"))
     end
-    recipe_path = "gcompute::#{recipe_name}"
+    recipe_path = "google-gcompute::#{recipe_name}"
     begin
       yield recipe_path
     ensure
