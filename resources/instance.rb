@@ -36,21 +36,27 @@ require 'google/compute/network/put'
 require 'google/compute/property/address_address'
 require 'google/compute/property/boolean'
 require 'google/compute/property/disk_selflink'
+require 'google/compute/property/disktype_selflink'
 require 'google/compute/property/enum'
 require 'google/compute/property/instance_access_configs'
+require 'google/compute/property/instance_alias_ip_ranges'
 require 'google/compute/property/instance_disk_encryption_key'
 require 'google/compute/property/instance_disks'
 require 'google/compute/property/instance_guest_accelerators'
 require 'google/compute/property/instance_initialize_params'
+require 'google/compute/property/instance_metadata'
 require 'google/compute/property/instance_network_interfaces'
 require 'google/compute/property/instance_scheduling'
 require 'google/compute/property/instance_service_accounts'
+require 'google/compute/property/instance_source_image_encryption_key'
 require 'google/compute/property/instance_tags'
 require 'google/compute/property/integer'
 require 'google/compute/property/machinetype_selflink'
+require 'google/compute/property/namevalues'
 require 'google/compute/property/network_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
+require 'google/compute/property/subnetwork_selflink'
 require 'google/compute/property/zone_name'
 require 'google/hash_utils'
 
@@ -92,6 +98,10 @@ module Google
       property :label_fingerprint,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
+      property :metadata,
+               [Hash, ::Google::Compute::Data::InstanceMetadata],
+               coerce: ::Google::Compute::Property::InstanceMetadata.coerce,
                desired_state: true
       property :machine_type,
                [String, ::Google::Compute::Data::MachTypeSelfLinkRef],
@@ -182,6 +192,10 @@ module Google
             ::Google::Compute::Property::String.api_parse(
               fetch['labelFingerprint']
             )
+          @current_resource.metadata =
+            ::Google::Compute::Property::InstanceMetadata.api_parse(
+              fetch['metadata']
+            )
           @current_resource.machine_type =
             ::Google::Compute::Property::MachTypeSelfLinkRef.api_parse(
               fetch['machineType']
@@ -236,6 +250,7 @@ module Google
 
       action_class do
         # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength
         def resource_to_request
           request = {
             kind: 'compute#instance',
@@ -243,6 +258,7 @@ module Google
             disks: new_resource.disks,
             guestAccelerators: new_resource.guest_accelerators,
             labelFingerprint: new_resource.label_fingerprint,
+            metadata: new_resource.metadata,
             machineType: new_resource.machine_type,
             minCpuPlatform: new_resource.min_cpu_platform,
             name: new_resource.i_label,
@@ -253,6 +269,7 @@ module Google
           }.reject { |_, v| v.nil? }
           request.to_json
         end
+        # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/AbcSize
 
         def update
@@ -285,6 +302,7 @@ module Google
             guest_accelerators: resource.guest_accelerators,
             id: resource.id,
             label_fingerprint: resource.label_fingerprint,
+            metadata: resource.metadata,
             machine_type: resource.machine_type,
             min_cpu_platform: resource.min_cpu_platform,
             network_interfaces: resource.network_interfaces,

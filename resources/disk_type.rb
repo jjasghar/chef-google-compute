@@ -99,6 +99,10 @@ module Google
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
 
+      # TODO(alexstephen): Check w/ Chef how to not expose this property yet
+      # allow the resource to store the @fetched API results for exports usage.
+      property :__fetched, Hash, desired_state: false, required: false
+
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#diskType')
@@ -112,7 +116,8 @@ module Google
               collection(@new_resource), fetch_auth(@new_resource),
               'application/json', resource_to_request
             )
-            return_if_object create_req.send, 'compute#diskType'
+            @new_resource.__fetched =
+              return_if_object create_req.send, 'compute#diskType'
           end
         else
           @current_resource = @new_resource.clone
@@ -156,6 +161,7 @@ module Google
             ::Google::Compute::Property::String.api_parse(
               fetch['validDiskSize']
             )
+          @new_resource.__fetched = fetch
 
           update
         end
@@ -176,12 +182,19 @@ module Google
 
       # TODO(nelsonjr): Add actions :manage and :modify
 
+      def exports
+        {
+          self_link: __fetched['selfLink']
+        }
+      end
+
       private
 
       action_class do
         def resource_to_request
           request = {
-            kind: 'compute#diskType'
+            kind: 'compute#diskType',
+            name: new_resource.dt_label
           }.reject { |_, v| v.nil? }
           request.to_json
         end

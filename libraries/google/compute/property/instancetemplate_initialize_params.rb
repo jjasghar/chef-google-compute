@@ -28,8 +28,8 @@
 module Google
   module Compute
     module Data
-      # A class to manage data for initialize_params for instance.
-      class InstancInitialParams
+      # A class to manage data for initialize_params for instance_template.
+      class InstaTemplInitiParam
         include Comparable
 
         attr_reader :disk_name
@@ -59,7 +59,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstancInitialParams
+          return false unless other.is_a? InstaTemplInitiParam
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -68,7 +68,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstancInitialParams
+          return false unless other.is_a? InstaTemplInitiParam
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -97,9 +97,9 @@ module Google
         end
       end
 
-      # Manages a InstancInitialParams nested object
+      # Manages a InstaTemplInitiParam nested object
       # Data is coming from the GCP API
-      class InstancInitialParamsApi < InstancInitialParams
+      class InstaTemplInitiParamApi < InstaTemplInitiParam
         def initialize(args)
           @disk_name =
             Google::Compute::Property::String.api_parse(args['diskName'])
@@ -111,15 +111,15 @@ module Google
           @source_image =
             Google::Compute::Property::String.api_parse(args['sourceImage'])
           @source_image_encryption_key =
-            Google::Compute::Property::InstSourImagEncrKey.api_parse(
+            Google::Compute::Property::InsTemSouImaEncKey.api_parse(
               args['sourceImageEncryptionKey']
             )
         end
       end
 
-      # Manages a InstancInitialParams nested object
+      # Manages a InstaTemplInitiParam nested object
       # Data is coming from the Chef catalog
-      class InstancInitialParamsCatalog < InstancInitialParams
+      class InstaTemplInitiParamCatalog < InstaTemplInitiParam
         def initialize(args)
           @disk_name =
             Google::Compute::Property::String.catalog_parse(args[:disk_name])
@@ -133,7 +133,7 @@ module Google
           @source_image =
             Google::Compute::Property::String.catalog_parse(args[:source_image])
           @source_image_encryption_key =
-            Google::Compute::Property::InstSourImagEncrKey.catalog_parse(
+            Google::Compute::Property::InsTemSouImaEncKey.catalog_parse(
               args[:source_image_encryption_key]
             )
         end
@@ -141,26 +141,26 @@ module Google
     end
 
     module Property
-      # A class to manage input to initialize_params for instance.
-      class InstancInitialParams
+      # A class to manage input to initialize_params for instance_template.
+      class InstaTemplInitiParam
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::InstancInitialParams.catalog_parse(x)
+            ::Google::Compute::Property::InstaTemplInitiParam.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstancInitialParams
-          Data::InstancInitialParamsCatalog.new(value)
+          return value if value.is_a? Data::InstaTemplInitiParam
+          Data::InstaTemplInitiParamCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstancInitialParams
-          Data::InstancInitialParamsApi.new(value)
+          return value if value.is_a? Data::InstaTemplInitiParam
+          Data::InstaTemplInitiParamApi.new(value)
         end
       end
     end

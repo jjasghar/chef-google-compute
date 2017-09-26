@@ -176,6 +176,7 @@ module Google
 
       def exports
         {
+          name: mt_label,
           self_link: __fetched['selfLink']
         }
       end

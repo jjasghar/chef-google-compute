@@ -103,9 +103,11 @@ chef-codegen:
   * libraries/google/compute/property/backendservice_connection_draining.rb
   * libraries/google/compute/property/boolean.rb
   * libraries/google/compute/property/disk_disk_encryption_key.rb
+  * libraries/google/compute/property/disk_name.rb
   * libraries/google/compute/property/disk_selflink.rb
   * libraries/google/compute/property/disk_source_image_encryption_key.rb
   * libraries/google/compute/property/disk_source_snapshot_encryption_key.rb
+  * libraries/google/compute/property/disktype_selflink.rb
   * libraries/google/compute/property/double.rb
   * libraries/google/compute/property/enum.rb
   * libraries/google/compute/property/firewall_allowed.rb
@@ -119,19 +121,37 @@ chef-codegen:
   * libraries/google/compute/property/image_raw_disk.rb
   * libraries/google/compute/property/image_source_disk_encryption_key.rb
   * libraries/google/compute/property/instance_access_configs.rb
+  * libraries/google/compute/property/instance_alias_ip_ranges.rb
   * libraries/google/compute/property/instance_disk_encryption_key.rb
   * libraries/google/compute/property/instance_disks.rb
   * libraries/google/compute/property/instance_guest_accelerators.rb
   * libraries/google/compute/property/instance_initialize_params.rb
+  * libraries/google/compute/property/instance_metadata.rb
   * libraries/google/compute/property/instance_network_interfaces.rb
   * libraries/google/compute/property/instance_scheduling.rb
   * libraries/google/compute/property/instance_service_accounts.rb
+  * libraries/google/compute/property/instance_source_image_encryption_key.rb
   * libraries/google/compute/property/instance_tags.rb
   * libraries/google/compute/property/instancegroup_named_ports.rb
   * libraries/google/compute/property/instancegroup_selflink.rb
+  * libraries/google/compute/property/instancetemplate_access_configs.rb
+  * libraries/google/compute/property/instancetemplate_alias_ip_ranges.rb
+  * libraries/google/compute/property/instancetemplate_disk_encryption_key.rb
+  * libraries/google/compute/property/instancetemplate_disks.rb
+  * libraries/google/compute/property/instancetemplate_guest_accelerators.rb
+  * libraries/google/compute/property/instancetemplate_initialize_params.rb
+  * libraries/google/compute/property/instancetemplate_metadata.rb
+  * libraries/google/compute/property/instancetemplate_network_interfaces.rb
+  * libraries/google/compute/property/instancetemplate_properties.rb
+  * libraries/google/compute/property/instancetemplate_scheduling.rb
+  * libraries/google/compute/property/instancetemplate_service_accounts.rb
+  * libraries/google/compute/property/instancetemplate_source_image_encryption_key.rb
+  * libraries/google/compute/property/instancetemplate_tags.rb
   * libraries/google/compute/property/integer.rb
   * libraries/google/compute/property/machinetype_deprecated.rb
+  * libraries/google/compute/property/machinetype_name.rb
   * libraries/google/compute/property/machinetype_selflink.rb
+  * libraries/google/compute/property/namevalues.rb
   * libraries/google/compute/property/network_selflink.rb
   * libraries/google/compute/property/region_name.rb
   * libraries/google/compute/property/region_selflink.rb
@@ -158,7 +178,7 @@ chef-codegen:
   * recipes/examples~delete_https_health_check.rb
   * recipes/examples~delete_image.rb
   * recipes/examples~delete_instance.rb
-  * recipes/examples~delete_instance_group.rb
+  * recipes/examples~delete_instance_template.rb
   * recipes/examples~delete_network.rb
   * recipes/examples~delete_route.rb
   * recipes/examples~delete_ssl_certificate.rb
@@ -173,7 +193,7 @@ chef-codegen:
   * recipes/examples~https_health_check.rb
   * recipes/examples~image.rb
   * recipes/examples~instance.rb
-  * recipes/examples~instance_group.rb
+  * recipes/examples~instance_template.rb
   * recipes/examples~license.rb
   * recipes/examples~machine_type.rb
   * recipes/examples~network~auto.rb
@@ -200,7 +220,7 @@ chef-codegen:
   * recipes/tests~delete_https_health_check.rb
   * recipes/tests~delete_image.rb
   * recipes/tests~delete_instance.rb
-  * recipes/tests~delete_instance_group.rb
+  * recipes/tests~delete_instance_template.rb
   * recipes/tests~delete_network.rb
   * recipes/tests~delete_route.rb
   * recipes/tests~delete_ssl_certificate.rb
@@ -215,7 +235,7 @@ chef-codegen:
   * recipes/tests~https_health_check.rb
   * recipes/tests~image.rb
   * recipes/tests~instance.rb
-  * recipes/tests~instance_group.rb
+  * recipes/tests~instance_template.rb
   * recipes/tests~license.rb
   * recipes/tests~machine_type.rb
   * recipes/tests~network~auto.rb
@@ -240,6 +260,7 @@ chef-codegen:
   * resources/image.rb
   * resources/instance.rb
   * resources/instance_group.rb
+  * resources/instance_template.rb
   * resources/license.rb
   * resources/machine_type.rb
   * resources/network.rb
@@ -331,6 +352,12 @@ chef-codegen:
   * spec/data/network/gcompute_instance_group/success2~title.yaml
   * spec/data/network/gcompute_instance_group/success3~name.yaml
   * spec/data/network/gcompute_instance_group/success3~title.yaml
+  * spec/data/network/gcompute_instance_template/success1~name.yaml
+  * spec/data/network/gcompute_instance_template/success1~title.yaml
+  * spec/data/network/gcompute_instance_template/success2~name.yaml
+  * spec/data/network/gcompute_instance_template/success2~title.yaml
+  * spec/data/network/gcompute_instance_template/success3~name.yaml
+  * spec/data/network/gcompute_instance_template/success3~title.yaml
   * spec/data/network/gcompute_license/success1~name.yaml
   * spec/data/network/gcompute_license/success1~title.yaml
   * spec/data/network/gcompute_license/success2~name.yaml
@@ -392,6 +419,7 @@ chef-codegen:
   * spec/image_spec.rb
   * spec/instance_group_spec.rb
   * spec/instance_spec.rb
+  * spec/instance_template_spec.rb
   * spec/license_spec.rb
   * spec/machine_type_spec.rb
   * spec/network_blocker.rb

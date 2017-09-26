@@ -33,22 +33,40 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
-require 'google/compute/property/disk_disk_encryption_key'
-require 'google/compute/property/disk_source_image_encryption_key'
-require 'google/compute/property/disk_source_snapshot_encryption_key'
+require 'google/compute/property/address_address'
+require 'google/compute/property/boolean'
+require 'google/compute/property/disk_name'
+require 'google/compute/property/disktype_selflink'
+require 'google/compute/property/enum'
+require 'google/compute/property/instancetemplate_access_configs'
+require 'google/compute/property/instancetemplate_alias_ip_ranges'
+require 'google/compute/property/instancetemplate_disk_encryption_key'
+require 'google/compute/property/instancetemplate_disks'
+require 'google/compute/property/instancetemplate_guest_accelerators'
+require 'google/compute/property/instancetemplate_initialize_params'
+require 'google/compute/property/instancetemplate_metadata'
+require 'google/compute/property/instancetemplate_network_interfaces'
+require 'google/compute/property/instancetemplate_properties'
+require 'google/compute/property/instancetemplate_scheduling'
+require 'google/compute/property/instancetemplate_service_accounts'
+require 'google/compute/property/instancetemplate_source_image_encryption_key'
+require 'google/compute/property/instancetemplate_tags'
 require 'google/compute/property/integer'
+require 'google/compute/property/machinetype_name'
+require 'google/compute/property/namevalues'
+require 'google/compute/property/network_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
+require 'google/compute/property/subnetwork_selflink'
 require 'google/compute/property/time'
-require 'google/compute/property/zone_name'
 require 'google/hash_utils'
 
 module Google
   module GCOMPUTE
     # A provider to manage Google Compute Engine resources.
     # rubocop:disable Metrics/ClassLength
-    class Disk < Chef::Resource
-      resource_name :gcompute_disk
+    class InstanceTemplate < Chef::Resource
+      resource_name :gcompute_instance_template
 
       property :creation_timestamp,
                Time,
@@ -62,81 +80,25 @@ module Google
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
                desired_state: true
-      property :last_attach_timestamp,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      property :last_detach_timestamp,
-               Time,
-               coerce: ::Google::Compute::Property::Time.coerce,
-               desired_state: true
-      # licenses is Array of Google::Compute::Property::StringArray
-      property :licenses,
-               Array,
-               coerce: ::Google::Compute::Property::StringArray.coerce,
-               desired_state: true
-      property :d_label,
+      property :it_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      property :size_gb,
-               Integer,
-               coerce: ::Google::Compute::Property::Integer.coerce,
-               desired_state: true
-      property :source_image,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      property :type,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      # users is Array of Google::Compute::Property::StringArray
-      property :users,
-               Array,
-               coerce: ::Google::Compute::Property::StringArray.coerce,
-               desired_state: true
-      property :zone,
-               [String, ::Google::Compute::Data::ZoneNameRef],
-               coerce: ::Google::Compute::Property::ZoneNameRef.coerce,
-               desired_state: true
-      property :disk_encryption_key,
-               [Hash, ::Google::Compute::Data::DiskDiskEncryKey],
-               coerce: ::Google::Compute::Property::DiskDiskEncryKey.coerce,
-               desired_state: true
-      property :source_image_encryption_key,
-               [Hash, ::Google::Compute::Data::DiskSourImagEncrKey],
-               coerce: ::Google::Compute::Property::DiskSourImagEncrKey.coerce,
-               desired_state: true
-      property :source_image_id,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      property :source_snapshot,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
-               desired_state: true
-      property :source_snapshot_encryption_key,
-               [Hash, ::Google::Compute::Data::DiskSourSnapEncrKey],
-               coerce: ::Google::Compute::Property::DiskSourSnapEncrKey.coerce,
-               desired_state: true
-      property :source_snapshot_id,
-               String,
-               coerce: ::Google::Compute::Property::String.coerce,
+      property :properties,
+               [Hash, ::Google::Compute::Data::InstancTemplatPropert],
+               coerce: \
+                 ::Google::Compute::Property::InstancTemplatPropert.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
 
-      # TODO(alexstephen): Check w/ Chef how to not expose this property yet
-      # allow the resource to store the @fetched API results for exports usage.
-      property :__fetched, Hash, desired_state: false, required: false
-
       action :create do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#disk')
+                               'compute#instanceTemplate')
         if fetch.nil?
-          converge_by "Creating gcompute_disk[#{new_resource.name}]" do
+          converge_by ['Creating gcompute_instance_template',
+                       "[#{new_resource.name}]"].join do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -145,8 +107,7 @@ module Google
               collection(@new_resource), fetch_auth(@new_resource),
               'application/json', resource_to_request
             )
-            @new_resource.__fetched =
-              wait_for_operation create_req.send, @new_resource
+            wait_for_operation create_req.send, @new_resource
           end
         else
           @current_resource = @new_resource.clone
@@ -160,27 +121,12 @@ module Google
             )
           @current_resource.id =
             ::Google::Compute::Property::Integer.api_parse(fetch['id'])
-          @current_resource.last_attach_timestamp =
-            ::Google::Compute::Property::Time.api_parse(
-              fetch['lastAttachTimestamp']
-            )
-          @current_resource.last_detach_timestamp =
-            ::Google::Compute::Property::Time.api_parse(
-              fetch['lastDetachTimestamp']
-            )
-          @current_resource.licenses =
-            ::Google::Compute::Property::StringArray.api_parse(
-              fetch['licenses']
-            )
-          @current_resource.d_label =
+          @current_resource.it_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
-          @current_resource.size_gb =
-            ::Google::Compute::Property::Integer.api_parse(fetch['sizeGb'])
-          @current_resource.type =
-            ::Google::Compute::Property::String.api_parse(fetch['type'])
-          @current_resource.users =
-            ::Google::Compute::Property::StringArray.api_parse(fetch['users'])
-          @new_resource.__fetched = fetch
+          @current_resource.properties =
+            ::Google::Compute::Property::InstancTemplatPropert.api_parse(
+              fetch['properties']
+            )
 
           update
         end
@@ -188,9 +134,10 @@ module Google
 
       action :delete do
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
-                               'compute#disk')
+                               'compute#instanceTemplate')
         unless fetch.nil?
-          converge_by "Deleting gcompute_disk[#{new_resource.name}]" do
+          converge_by ['Deleting gcompute_instance_template',
+                       "[#{new_resource.name}]"].join do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -201,28 +148,15 @@ module Google
 
       # TODO(nelsonjr): Add actions :manage and :modify
 
-      def exports
-        {
-          name: d_label,
-          self_link: __fetched['selfLink']
-        }
-      end
-
       private
 
       action_class do
         def resource_to_request
           request = {
-            kind: 'compute#disk',
+            kind: 'compute#instanceTemplate',
             description: new_resource.description,
-            licenses: new_resource.licenses,
-            name: new_resource.d_label,
-            sizeGb: new_resource.size_gb,
-            sourceImage: new_resource.source_image,
-            diskEncryptionKey: new_resource.disk_encryption_key,
-            sourceImageEncryptionKey: new_resource.source_image_encryption_key,
-            sourceSnapshotEncryptionKey:
-              new_resource.source_snapshot_encryption_key
+            name: new_resource.it_label,
+            properties: new_resource.properties
           }.reject { |_, v| v.nil? }
           request.to_json
         end
@@ -233,9 +167,12 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
-            message = 'Disk cannot be edited'
-            Chef::Log.fatal message
-            raise message
+            update_req =
+              ::Google::Compute::Network::Put.new(self_link(@new_resource),
+                                                  fetch_auth(@new_resource),
+                                                  'application/json',
+                                                  resource_to_request)
+            wait_for_operation update_req.send, @new_resource
           end
         end
 
@@ -244,33 +181,17 @@ module Google
           resource.resources("#{type}[#{id}]").exports[property]
         end
 
-        # rubocop:disable Metrics/MethodLength
         def self.resource_to_hash(resource)
           {
             project: resource.project,
-            name: resource.d_label,
-            kind: 'compute#disk',
+            name: resource.it_label,
+            kind: 'compute#instanceTemplate',
             creation_timestamp: resource.creation_timestamp,
             description: resource.description,
             id: resource.id,
-            last_attach_timestamp: resource.last_attach_timestamp,
-            last_detach_timestamp: resource.last_detach_timestamp,
-            licenses: resource.licenses,
-            size_gb: resource.size_gb,
-            source_image: resource.source_image,
-            type: resource.type,
-            users: resource.users,
-            zone: resource.zone,
-            disk_encryption_key: resource.disk_encryption_key,
-            source_image_encryption_key: resource.source_image_encryption_key,
-            source_image_id: resource.source_image_id,
-            source_snapshot: resource.source_snapshot,
-            source_snapshot_encryption_key:
-              resource.source_snapshot_encryption_key,
-            source_snapshot_id: resource.source_snapshot_id
+            properties: resource.properties
           }.reject { |_, v| v.nil? }
         end
-        # rubocop:enable Metrics/MethodLength
 
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
@@ -348,7 +269,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/zones/{{zone}}/disks',
+              'projects/{{project}}/global/instanceTemplates',
               data
             )
           )
@@ -362,7 +283,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/zones/{{zone}}/disks/{{name}}',
+              'projects/{{project}}/global/instanceTemplates/{{name}}',
               data
             )
           )
@@ -425,7 +346,7 @@ module Google
           URI.join(
             'https://www.googleapis.com/compute/v1/',
             expand_variables(
-              'projects/{{project}}/zones/{{zone}}/operations/{{op_id}}',
+              'projects/{{project}}/global/operations/{{op_id}}',
               data, extra_data
             )
           )
@@ -440,7 +361,7 @@ module Google
             resource,
             URI.parse(::Google::HashUtils.navigate(wait_done,
                                                    %w[targetLink])),
-            'compute#disk'
+            'compute#instanceTemplate'
           )
         end
 
@@ -451,7 +372,7 @@ module Google
             debug("Waiting for completion of operation #{op_id}")
             raise_if_errors op_result, %w[error errors], 'message'
             sleep 1.0
-            raise "Invalid result '#{status}' on gcompute_disk." \
+            raise "Invalid result '#{status}' on gcompute_instance_template." \
               unless %w[PENDING RUNNING DONE].include?(status)
             op_result = fetch_resource(resource, op_uri, 'compute#operation')
             status = ::Google::HashUtils.navigate(op_result, %w[status])
