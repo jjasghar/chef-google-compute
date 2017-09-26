@@ -129,7 +129,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#image')
         if fetch.nil?
-          converge_by "Creating gcompute_image[#{name}]" do
+          converge_by "Creating gcompute_image[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -207,7 +207,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#image')
         unless fetch.nil?
-          converge_by "Deleting gcompute_image[#{name}]" do
+          converge_by "Deleting gcompute_image[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -221,26 +221,28 @@ module Google
       private
 
       action_class do
+        # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def resource_to_request
           request = {
             kind: 'compute#image',
-            description: description,
-            diskSizeGb: disk_size_gb,
-            family: family,
-            guestOsFeatures: guest_os_features,
-            imageEncryptionKey: image_encryption_key,
-            licenses: licenses,
-            name: i_label,
-            rawDisk: raw_disk,
-            sourceDisk: source_disk,
-            sourceDiskEncryptionKey: source_disk_encryption_key,
-            sourceDiskId: source_disk_id,
-            sourceType: source_type
+            description: new_resource.description,
+            diskSizeGb: new_resource.disk_size_gb,
+            family: new_resource.family,
+            guestOsFeatures: new_resource.guest_os_features,
+            imageEncryptionKey: new_resource.image_encryption_key,
+            licenses: new_resource.licenses,
+            name: new_resource.i_label,
+            rawDisk: new_resource.raw_disk,
+            sourceDisk: new_resource.source_disk,
+            sourceDiskEncryptionKey: new_resource.source_disk_encryption_key,
+            sourceDiskId: new_resource.source_disk_id,
+            sourceType: new_resource.source_type
           }.reject { |_, v| v.nil? }
           request.to_json
         end
         # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/AbcSize
 
         def update
           converge_if_changed do |_vars|

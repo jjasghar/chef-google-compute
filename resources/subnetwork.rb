@@ -96,7 +96,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#subnetwork')
         if fetch.nil?
-          converge_by "Creating gcompute_subnetwork[#{name}]" do
+          converge_by "Creating gcompute_subnetwork[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -136,7 +136,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#subnetwork')
         unless fetch.nil?
-          converge_by "Deleting gcompute_subnetwork[#{name}]" do
+          converge_by "Deleting gcompute_subnetwork[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -159,13 +159,13 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#subnetwork',
-            description: description,
-            gatewayAddress: gateway_address,
-            ipCidrRange: ip_cidr_range,
-            name: s_label,
-            network: network,
-            privateIpGoogleAccess: private_ip_google_access,
-            region: region
+            description: new_resource.description,
+            gatewayAddress: new_resource.gateway_address,
+            ipCidrRange: new_resource.ip_cidr_range,
+            name: new_resource.s_label,
+            network: new_resource.network,
+            privateIpGoogleAccess: new_resource.private_ip_google_access,
+            region: new_resource.region
           }.reject { |_, v| v.nil? }
           request.to_json
         end

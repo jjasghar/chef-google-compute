@@ -77,7 +77,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#sslCertificate')
         if fetch.nil?
-          converge_by "Creating gcompute_ssl_certificate[#{name}]" do
+          converge_by ['Creating gcompute_ssl_certificate',
+                       "[#{new_resource.name}]"].join do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -115,7 +116,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#sslCertificate')
         unless fetch.nil?
-          converge_by "Deleting gcompute_ssl_certificate[#{name}]" do
+          converge_by ['Deleting gcompute_ssl_certificate',
+                       "[#{new_resource.name}]"].join do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -132,10 +134,10 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#sslCertificate',
-            certificate: certificate,
-            description: description,
-            name: sc_label,
-            privateKey: private_key
+            certificate: new_resource.certificate,
+            description: new_resource.description,
+            name: new_resource.sc_label,
+            privateKey: new_resource.private_key
           }.reject { |_, v| v.nil? }
           request.to_json
         end

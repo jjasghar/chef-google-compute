@@ -136,7 +136,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#disk')
         if fetch.nil?
-          converge_by "Creating gcompute_disk[#{name}]" do
+          converge_by "Creating gcompute_disk[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -190,7 +190,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#disk')
         unless fetch.nil?
-          converge_by "Deleting gcompute_disk[#{name}]" do
+          converge_by "Deleting gcompute_disk[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -213,14 +213,15 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#disk',
-            description: description,
-            licenses: licenses,
-            name: d_label,
-            sizeGb: size_gb,
-            sourceImage: source_image,
-            diskEncryptionKey: disk_encryption_key,
-            sourceImageEncryptionKey: source_image_encryption_key,
-            sourceSnapshotEncryptionKey: source_snapshot_encryption_key
+            description: new_resource.description,
+            licenses: new_resource.licenses,
+            name: new_resource.d_label,
+            sizeGb: new_resource.size_gb,
+            sourceImage: new_resource.source_image,
+            diskEncryptionKey: new_resource.disk_encryption_key,
+            sourceImageEncryptionKey: new_resource.source_image_encryption_key,
+            sourceSnapshotEncryptionKey:
+              new_resource.source_snapshot_encryption_key
           }.reject { |_, v| v.nil? }
           request.to_json
         end

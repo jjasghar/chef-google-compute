@@ -147,7 +147,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#instance')
         if fetch.nil?
-          converge_by "Creating gcompute_instance[#{name}]" do
+          converge_by "Creating gcompute_instance[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -221,7 +221,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#instance')
         unless fetch.nil?
-          converge_by "Deleting gcompute_instance[#{name}]" do
+          converge_by "Deleting gcompute_instance[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -235,23 +235,25 @@ module Google
       private
 
       action_class do
+        # rubocop:disable Metrics/AbcSize
         def resource_to_request
           request = {
             kind: 'compute#instance',
-            canIpForward: can_ip_forward,
-            disks: disks,
-            guestAccelerators: guest_accelerators,
-            labelFingerprint: label_fingerprint,
-            machineType: machine_type,
-            minCpuPlatform: min_cpu_platform,
-            name: i_label,
-            networkInterfaces: network_interfaces,
-            scheduling: scheduling,
-            serviceAccounts: service_accounts,
-            tags: tags
+            canIpForward: new_resource.can_ip_forward,
+            disks: new_resource.disks,
+            guestAccelerators: new_resource.guest_accelerators,
+            labelFingerprint: new_resource.label_fingerprint,
+            machineType: new_resource.machine_type,
+            minCpuPlatform: new_resource.min_cpu_platform,
+            name: new_resource.i_label,
+            networkInterfaces: new_resource.network_interfaces,
+            scheduling: new_resource.scheduling,
+            serviceAccounts: new_resource.service_accounts,
+            tags: new_resource.tags
           }.reject { |_, v| v.nil? }
           request.to_json
         end
+        # rubocop:enable Metrics/AbcSize
 
         def update
           converge_if_changed do |_vars|

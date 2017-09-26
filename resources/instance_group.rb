@@ -101,7 +101,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#instanceGroup')
         if fetch.nil?
-          converge_by "Creating gcompute_instance_group[#{name}]" do
+          converge_by ['Creating gcompute_instance_group',
+                       "[#{new_resource.name}]"].join do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -153,7 +154,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#instanceGroup')
         unless fetch.nil?
-          converge_by "Deleting gcompute_instance_group[#{name}]" do
+          converge_by ['Deleting gcompute_instance_group',
+                       "[#{new_resource.name}]"].join do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -176,12 +178,12 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#instanceGroup',
-            description: description,
-            name: ig_label,
-            namedPorts: named_ports,
-            network: network,
-            region: region,
-            subnetwork: subnetwork
+            description: new_resource.description,
+            name: new_resource.ig_label,
+            namedPorts: new_resource.named_ports,
+            network: new_resource.network,
+            region: new_resource.region,
+            subnetwork: new_resource.subnetwork
           }.reject { |_, v| v.nil? }
           request.to_json
         end

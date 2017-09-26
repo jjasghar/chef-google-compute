@@ -91,7 +91,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#route')
         if fetch.nil?
-          converge_by "Creating gcompute_route[#{name}]" do
+          converge_by "Creating gcompute_route[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -117,7 +117,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#route')
         unless fetch.nil?
-          converge_by "Deleting gcompute_route[#{name}]" do
+          converge_by "Deleting gcompute_route[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -134,15 +134,15 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#route',
-            destRange: dest_range,
-            name: r_label,
-            network: network,
-            priority: priority,
-            tags: tags,
-            nextHopGateway: next_hop_gateway,
-            nextHopInstance: next_hop_instance,
-            nextHopIp: next_hop_ip,
-            nextHopVpnTunnel: next_hop_vpn_tunnel
+            destRange: new_resource.dest_range,
+            name: new_resource.r_label,
+            network: new_resource.network,
+            priority: new_resource.priority,
+            tags: new_resource.tags,
+            nextHopGateway: new_resource.next_hop_gateway,
+            nextHopInstance: new_resource.next_hop_instance,
+            nextHopIp: new_resource.next_hop_ip,
+            nextHopVpnTunnel: new_resource.next_hop_vpn_tunnel
           }.reject { |_, v| v.nil? }
           request.to_json
         end

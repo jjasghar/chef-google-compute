@@ -128,7 +128,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#backendService')
         if fetch.nil?
-          converge_by "Creating gcompute_backend_service[#{name}]" do
+          converge_by ['Creating gcompute_backend_service',
+                       "[#{new_resource.name}]"].join do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -200,7 +201,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#backendService')
         unless fetch.nil?
-          converge_by "Deleting gcompute_backend_service[#{name}]" do
+          converge_by ['Deleting gcompute_backend_service',
+                       "[#{new_resource.name}]"].join do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -214,27 +216,29 @@ module Google
       private
 
       action_class do
+        # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def resource_to_request
           request = {
             kind: 'compute#backendService',
-            affinityCookieTtlSec: affinity_cookie_ttl_sec,
-            backends: backends,
-            cdnPolicy: cdn_policy,
-            connectionDraining: connection_draining,
-            description: description,
-            enableCDN: enable_cdn,
-            healthChecks: health_checks,
-            name: bs_label,
-            portName: port_name,
-            protocol: protocol,
-            region: region,
-            sessionAffinity: session_affinity,
-            timeoutSec: timeout_sec
+            affinityCookieTtlSec: new_resource.affinity_cookie_ttl_sec,
+            backends: new_resource.backends,
+            cdnPolicy: new_resource.cdn_policy,
+            connectionDraining: new_resource.connection_draining,
+            description: new_resource.description,
+            enableCDN: new_resource.enable_cdn,
+            healthChecks: new_resource.health_checks,
+            name: new_resource.bs_label,
+            portName: new_resource.port_name,
+            protocol: new_resource.protocol,
+            region: new_resource.region,
+            sessionAffinity: new_resource.session_affinity,
+            timeoutSec: new_resource.timeout_sec
           }.reject { |_, v| v.nil? }
           request.to_json
         end
         # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/AbcSize
 
         def update
           converge_if_changed do |_vars|

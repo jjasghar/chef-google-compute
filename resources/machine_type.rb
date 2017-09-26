@@ -105,7 +105,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#machineType')
         if fetch.nil?
-          converge_by "Creating gcompute_machine_type[#{name}]" do
+          converge_by "Creating gcompute_machine_type[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -163,7 +163,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#machineType')
         unless fetch.nil?
-          converge_by "Deleting gcompute_machine_type[#{name}]" do
+          converge_by "Deleting gcompute_machine_type[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -186,8 +186,8 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#machineType',
-            name: mt_label,
-            zone: zone
+            name: new_resource.mt_label,
+            zone: new_resource.zone
           }.reject { |_, v| v.nil? }
           request.to_json
         end

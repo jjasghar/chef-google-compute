@@ -110,7 +110,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#healthCheck')
         if fetch.nil?
-          converge_by "Creating gcompute_health_check[#{name}]" do
+          converge_by "Creating gcompute_health_check[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -178,7 +178,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#healthCheck')
         unless fetch.nil?
-          converge_by "Deleting gcompute_health_check[#{name}]" do
+          converge_by "Deleting gcompute_health_check[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -192,23 +192,25 @@ module Google
       private
 
       action_class do
+        # rubocop:disable Metrics/AbcSize
         def resource_to_request
           request = {
             kind: 'compute#healthCheck',
-            checkIntervalSec: check_interval_sec,
-            description: description,
-            healthyThreshold: healthy_threshold,
-            name: hc_label,
-            timeoutSec: timeout_sec,
-            unhealthyThreshold: unhealthy_threshold,
-            type: type,
-            httpHealthCheck: http_health_check,
-            httpsHealthCheck: https_health_check,
-            tcpHealthCheck: tcp_health_check,
-            sslHealthCheck: ssl_health_check
+            checkIntervalSec: new_resource.check_interval_sec,
+            description: new_resource.description,
+            healthyThreshold: new_resource.healthy_threshold,
+            name: new_resource.hc_label,
+            timeoutSec: new_resource.timeout_sec,
+            unhealthyThreshold: new_resource.unhealthy_threshold,
+            type: new_resource.type,
+            httpHealthCheck: new_resource.http_health_check,
+            httpsHealthCheck: new_resource.https_health_check,
+            tcpHealthCheck: new_resource.tcp_health_check,
+            sslHealthCheck: new_resource.ssl_health_check
           }.reject { |_, v| v.nil? }
           request.to_json
         end
+        # rubocop:enable Metrics/AbcSize
 
         def update
           converge_if_changed do |_vars|

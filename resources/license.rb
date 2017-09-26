@@ -60,7 +60,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#license')
         if fetch.nil?
-          converge_by "Creating gcompute_license[#{name}]" do
+          converge_by "Creating gcompute_license[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -88,7 +88,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#license')
         unless fetch.nil?
-          converge_by "Deleting gcompute_license[#{name}]" do
+          converge_by "Deleting gcompute_license[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )

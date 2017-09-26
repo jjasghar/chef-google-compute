@@ -95,7 +95,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#firewall')
         if fetch.nil?
-          converge_by "Creating gcompute_firewall[#{name}]" do
+          converge_by "Creating gcompute_firewall[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -147,7 +147,7 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#firewall')
         unless fetch.nil?
-          converge_by "Deleting gcompute_firewall[#{name}]" do
+          converge_by "Deleting gcompute_firewall[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -164,13 +164,13 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#firewall',
-            allowed: allowed,
-            description: description,
-            name: f_label,
-            network: network,
-            sourceRanges: source_ranges,
-            sourceTags: source_tags,
-            targetTags: target_tags
+            allowed: new_resource.allowed,
+            description: new_resource.description,
+            name: new_resource.f_label,
+            network: new_resource.network,
+            sourceRanges: new_resource.source_ranges,
+            sourceTags: new_resource.source_tags,
+            targetTags: new_resource.target_tags
           }.reject { |_, v| v.nil? }
           request.to_json
         end

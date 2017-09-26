@@ -97,7 +97,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#httpHealthCheck')
         if fetch.nil?
-          converge_by "Creating gcompute_http_health_check[#{name}]" do
+          converge_by ['Creating gcompute_http_health_check',
+                       "[#{new_resource.name}]"].join do
             # TODO(nelsonjr): Show a list of variables to create
             # TODO(nelsonjr): Determine how to print green like update converge
             puts # making a newline until we find a better way TODO: find!
@@ -155,7 +156,8 @@ module Google
         fetch = fetch_resource(@new_resource, self_link(@new_resource),
                                'compute#httpHealthCheck')
         unless fetch.nil?
-          converge_by "Deleting gcompute_http_health_check[#{name}]" do
+          converge_by ['Deleting gcompute_http_health_check',
+                       "[#{new_resource.name}]"].join do
             delete_req = ::Google::Compute::Network::Delete.new(
               self_link(@new_resource), fetch_auth(@new_resource)
             )
@@ -172,15 +174,15 @@ module Google
         def resource_to_request
           request = {
             kind: 'compute#httpHealthCheck',
-            checkIntervalSec: check_interval_sec,
-            description: description,
-            healthyThreshold: healthy_threshold,
-            host: host,
-            name: hhc_label,
-            port: port,
-            requestPath: request_path,
-            timeoutSec: timeout_sec,
-            unhealthyThreshold: unhealthy_threshold
+            checkIntervalSec: new_resource.check_interval_sec,
+            description: new_resource.description,
+            healthyThreshold: new_resource.healthy_threshold,
+            host: new_resource.host,
+            name: new_resource.hhc_label,
+            port: new_resource.port,
+            requestPath: new_resource.request_path,
+            timeoutSec: new_resource.timeout_sec,
+            unhealthyThreshold: new_resource.unhealthy_threshold
           }.reject { |_, v| v.nil? }
           request.to_json
         end
