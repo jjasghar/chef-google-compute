@@ -178,6 +178,7 @@ chef-codegen:
   * recipes/examples~delete_https_health_check.rb
   * recipes/examples~delete_image.rb
   * recipes/examples~delete_instance.rb
+  * recipes/examples~delete_instance_group.rb
   * recipes/examples~delete_instance_template.rb
   * recipes/examples~delete_network.rb
   * recipes/examples~delete_route.rb
@@ -193,6 +194,7 @@ chef-codegen:
   * recipes/examples~https_health_check.rb
   * recipes/examples~image.rb
   * recipes/examples~instance.rb
+  * recipes/examples~instance_group.rb
   * recipes/examples~instance_template.rb
   * recipes/examples~license.rb
   * recipes/examples~machine_type.rb
@@ -220,6 +222,7 @@ chef-codegen:
   * recipes/tests~delete_https_health_check.rb
   * recipes/tests~delete_image.rb
   * recipes/tests~delete_instance.rb
+  * recipes/tests~delete_instance_group.rb
   * recipes/tests~delete_instance_template.rb
   * recipes/tests~delete_network.rb
   * recipes/tests~delete_route.rb
@@ -235,6 +238,7 @@ chef-codegen:
   * recipes/tests~https_health_check.rb
   * recipes/tests~image.rb
   * recipes/tests~instance.rb
+  * recipes/tests~instance_group.rb
   * recipes/tests~instance_template.rb
   * recipes/tests~license.rb
   * recipes/tests~machine_type.rb

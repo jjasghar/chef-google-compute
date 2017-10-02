@@ -787,7 +787,6 @@ type, use the disk type's full or partial URL.
 ```ruby
 gcompute_disk_type 'pd-standard' do
   action :create
-  default_disk_size_gb 500
   zone 'us-central1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'
@@ -3033,6 +3032,7 @@ and add instances to an instance group manually.
 ```ruby
 # Instance group requires a network and a region, so define them in your recipe:
 #   - gcompute_network 'my-network' do ... end
+#   - gcompute_zone 'my-zone' do ... end
 gcompute_instance_group 'my-masters' do
   action :create
   named_ports [

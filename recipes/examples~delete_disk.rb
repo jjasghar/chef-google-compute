@@ -64,6 +64,11 @@ gauth_credential 'mycred' do
   ]
 end
 
+gcompute_zone 'us-central1-a' do
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
 gcompute_disk 'data-disk-1' do
   action :delete
   zone 'us-central1-a'

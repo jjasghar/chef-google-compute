@@ -64,6 +64,11 @@ gauth_credential 'mycred' do
   ]
 end
 
+gcompute_zone 'us-central1-a' do
+  project 'google.com:graphite-playground'
+  credential 'mycred'
+end
+
 gcompute_disk 'chef-e2e-data-disk-1' do
   action :create
   size_gb 50
