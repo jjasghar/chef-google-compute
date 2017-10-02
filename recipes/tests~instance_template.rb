@@ -87,6 +87,10 @@ end
 #  credential 'mycred'
 #end
 
+# Google::Functions must be included at runtime to ensure that the
+# gcompute_image_family function can be used in gcompute_disk blocks.
+::Chef::Resource.send(:include, Google::Functions)
+
 gcompute_network 'chef-e2e-mynetwork-test' do
   action :create
   project 'google.com:graphite-playground'
@@ -106,7 +110,7 @@ gcompute_instance_template 'chef-e2e-instance-template-test' do
         initialize_params: {
           disk_size_gb: 100,
           source_image:
-            'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
+            gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
         }
       }
     ],

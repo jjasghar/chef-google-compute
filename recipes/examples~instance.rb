@@ -70,9 +70,13 @@ gcompute_zone 'us-west1-a' do
   credential 'mycred'
 end
 
+# Google::Functions must be included at runtime to ensure that the
+# gcompute_image_family function can be used in gcompute_disk blocks.
+::Chef::Resource.send(:include, Google::Functions)
+
 gcompute_disk 'instance-test-os-1' do
   action :create
-  source_image 'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
+  source_image gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
   zone 'us-west1-a'
   project 'google.com:graphite-playground'
   credential 'mycred'

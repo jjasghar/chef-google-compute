@@ -1841,7 +1841,7 @@ gcompute_instance_template 'instance-template-test' do
         initialize_params: {
           disk_size_gb: 100,
           source_image:
-            'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
+            gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
         }
       }
     ],
@@ -3941,3 +3941,38 @@ end
 Set the `z_label` property when attempting to set primary key
 of this object. The primary key will always be referred to by the initials of
 the resource followed by "_label"
+
+## Functions
+
+### About Functions
+In order to use these functions inside of a Chef recipe, you'll need to import
+the function first. Before calling a function, add the following line:
+
+```ruby
+::Chef::Resource.send(:include, Google::Functions)
+```
+
+### `gcompute_image_family`
+
+  Builds the family resource identifier required to uniquely identify the
+  family, e.g. to create virtual machines based on it. You can use this
+  function as `source_image` of a `gcompute_instance` resource.
+
+#### Arguments
+
+  - `family_name`:
+    the name of the family, e.g. ubuntu-1604-lts
+
+  - `project_name`:
+    the name of the project that hosts the family,
+    e.g. ubuntu-os-cloud
+
+#### Examples
+
+```puppet
+gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
+```
+
+```puppet
+gcompute_image_family('my-web-server', 'my-project')
+```
