@@ -3037,8 +3037,8 @@ gcompute_instance_group 'my-masters' do
   action :create
   named_ports [
     {
-      name: 'puppet',
-      port: 8140
+      name: 'test-port',
+      port: 8141
     }
   ]
   network 'my-network'
@@ -3969,10 +3969,10 @@ the function first. Before calling a function, add the following line:
 
 #### Examples
 
-```puppet
+```ruby
 gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
 ```
 
-```puppet
+```ruby
 gcompute_image_family('my-web-server', 'my-project')
 ```

@@ -79,8 +79,8 @@ gcompute_instance_group 'my-masters' do
   action :create
   named_ports [
     {
-      name: 'puppet',
-      port: 8140
+      name: 'test-port',
+      port: 8141
     }
   ]
   network 'my-network'

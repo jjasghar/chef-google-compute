@@ -79,8 +79,8 @@ gcompute_instance_group 'chef-e2e-my-masters' do
   action :create
   named_ports [
     {
-      name: 'puppet',
-      port: 8140
+      name: 'test-port',
+      port: 8141
     }
   ]
   network 'chef-e2e-my-network'
