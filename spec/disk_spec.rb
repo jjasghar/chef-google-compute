@@ -1399,19 +1399,6 @@ context 'gcompute_disk' do
     )
   end
 
-  # Creates and prefetch type so exports can be resolved without network access.
-  def prefetch_zone
-    expect_network_get_success_zone 1
-
-    resource = Puppet::Type.type(:gcompute_zone).new(
-      project: 'test project#0 data',
-      name: 'test name#0 data'
-    )
-
-    Puppet::Type.type(:gcompute_zone).provider(:google)
-                .prefetch(resource: resource)
-  end
-
   def debug(message)
     puts(message) if ENV['RSPEC_DEBUG']
   end
