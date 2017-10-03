@@ -117,8 +117,8 @@ end
 
 ```
 
-TODO(nelsonjr): Add location here once auth module is published:
-For complete details about the credential cookbook please visit ________
+For complete details of the authentication cookbook, visit the
+[google-gauth][] cookbook documentation.
 
 ## Resources
 
@@ -3976,3 +3976,6 @@ gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
 ```ruby
 gcompute_image_family('my-web-server', 'my-project')
 ```
+
+
+[google-gauth]: https://supermarket.chef.io/cookbooks/google-gauth
