@@ -70,8 +70,22 @@ context 'gcompute_route' do
             end
 
             let(:runner) do
-              cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                                File.join(File.dirname(__FILE__), 'cookbooks')]
+              # This path ensures that the current cookbook is
+              # loaded for testing.
+              # This path will load all other cookbooks in the
+              # parent directory.
+              # Under most circumstances, this will include the
+              # real google-gauth cookbook.
+              parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+              cookbook_paths = [parent_dir]
+
+              # If there's no real version of the google-gauth ,
+              # add in the mocked version so that the tests do not fail.
+              # Since cookbooks can have any name, we assume that
+              # any directory with the word auth is the google-gauth cookbook.
+              if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+                cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+              end
               ChefSpec::SoloRunner.new(
                 step_into: %w[gcompute_route gcompute_network],
                 cookbook_path: cookbook_paths,
@@ -325,8 +339,22 @@ context 'gcompute_route' do
             end
 
             let(:runner) do
-              cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                                File.join(File.dirname(__FILE__), 'cookbooks')]
+              # This path ensures that the current cookbook is
+              # loaded for testing.
+              # This path will load all other cookbooks in the
+              # parent directory.
+              # Under most circumstances, this will include the
+              # real google-gauth cookbook.
+              parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+              cookbook_paths = [parent_dir]
+
+              # If there's no real version of the google-gauth ,
+              # add in the mocked version so that the tests do not fail.
+              # Since cookbooks can have any name, we assume that
+              # any directory with the word auth is the google-gauth cookbook.
+              if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+                cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+              end
               ChefSpec::SoloRunner.new(
                 step_into: %w[gcompute_route gcompute_network],
                 cookbook_path: cookbook_paths,
@@ -628,8 +656,22 @@ context 'gcompute_route' do
           end
 
           let(:runner) do
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            # This path ensures that the current cookbook is
+            # loaded for testing.
+            # This path will load all other cookbooks in the
+            # parent directory.
+            # Under most circumstances, this will include the
+            # real google-gauth cookbook.
+            parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+            cookbook_paths = [parent_dir]
+
+            # If there's no real version of the google-gauth ,
+            # add in the mocked version so that the tests do not fail.
+            # Since cookbooks can have any name, we assume that
+            # any directory with the word auth is the google-gauth cookbook.
+            if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+              cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+            end
             ChefSpec::SoloRunner.new(
               step_into: %w[gcompute_route gcompute_network],
               cookbook_path: cookbook_paths,
@@ -752,8 +794,22 @@ context 'gcompute_route' do
           end
 
           let(:runner) do
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            # This path ensures that the current cookbook is
+            # loaded for testing.
+            # This path will load all other cookbooks in the
+            # parent directory.
+            # Under most circumstances, this will include the
+            # real google-gauth cookbook.
+            parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+            cookbook_paths = [parent_dir]
+
+            # If there's no real version of the google-gauth ,
+            # add in the mocked version so that the tests do not fail.
+            # Since cookbooks can have any name, we assume that
+            # any directory with the word auth is the google-gauth cookbook.
+            if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+              cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+            end
             ChefSpec::SoloRunner.new(
               step_into: %w[gcompute_route gcompute_network],
               cookbook_path: cookbook_paths,
@@ -867,10 +923,22 @@ context 'gcompute_route' do
           end
 
           let(:runner) do
-            # Second path runs first - gets dummy gauth cookbook
-            # First path guarantees that this cookbook will be loaded
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            # This path ensures that the current cookbook is
+            # loaded for testing.
+            # This path will load all other cookbooks in the
+            # parent directory.
+            # Under most circumstances, this will include the
+            # real google-gauth cookbook.
+            parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+            cookbook_paths = [parent_dir]
+
+            # If there's no real version of the google-gauth ,
+            # add in the mocked version so that the tests do not fail.
+            # Since cookbooks can have any name, we assume that
+            # any directory with the word auth is the google-gauth cookbook.
+            if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+              cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+            end
             ChefSpec::SoloRunner.new(
               step_into: %w[gcompute_route gcompute_network],
               cookbook_path: cookbook_paths,
@@ -919,10 +987,22 @@ context 'gcompute_route' do
           end
 
           let(:runner) do
-            # Second path runs first - gets dummy gauth cookbook
-            # First path guarantees that this cookbook will be loaded
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            # This path ensures that the current cookbook is
+            # loaded for testing.
+            # This path will load all other cookbooks in the
+            # parent directory.
+            # Under most circumstances, this will include the
+            # real google-gauth cookbook.
+            parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+            cookbook_paths = [parent_dir]
+
+            # If there's no real version of the google-gauth ,
+            # add in the mocked version so that the tests do not fail.
+            # Since cookbooks can have any name, we assume that
+            # any directory with the word auth is the google-gauth cookbook.
+            if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+              cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+            end
             ChefSpec::SoloRunner.new(
               step_into: %w[gcompute_route gcompute_network],
               cookbook_path: cookbook_paths,
@@ -976,8 +1056,22 @@ context 'gcompute_route' do
           end
 
           let(:runner) do
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            # This path ensures that the current cookbook is
+            # loaded for testing.
+            # This path will load all other cookbooks in the
+            # parent directory.
+            # Under most circumstances, this will include the
+            # real google-gauth cookbook.
+            parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+            cookbook_paths = [parent_dir]
+
+            # If there's no real version of the google-gauth ,
+            # add in the mocked version so that the tests do not fail.
+            # Since cookbooks can have any name, we assume that
+            # any directory with the word auth is the google-gauth cookbook.
+            if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+              cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+            end
             ChefSpec::SoloRunner.new(
               step_into: %w[gcompute_route gcompute_network],
               cookbook_path: cookbook_paths,
@@ -1032,8 +1126,22 @@ context 'gcompute_route' do
           end
 
           let(:runner) do
-            cookbook_paths = [File.join(File.dirname(__FILE__), '..', '..'),
-                              File.join(File.dirname(__FILE__), 'cookbooks')]
+            # This path ensures that the current cookbook is
+            # loaded for testing.
+            # This path will load all other cookbooks in the
+            # parent directory.
+            # Under most circumstances, this will include the
+            # real google-gauth cookbook.
+            parent_dir = File.join(File.dirname(__FILE__), '..', '..')
+            cookbook_paths = [parent_dir]
+
+            # If there's no real version of the google-gauth ,
+            # add in the mocked version so that the tests do not fail.
+            # Since cookbooks can have any name, we assume that
+            # any directory with the word auth is the google-gauth cookbook.
+            if Dir.entries(parent_dir).select { |p| p.include? 'auth' }.empty?
+              cookbook_paths << File.join(File.dirname(__FILE__), 'cookbooks')
+            end
             ChefSpec::SoloRunner.new(
               step_into: %w[gcompute_route gcompute_network],
               cookbook_path: cookbook_paths,

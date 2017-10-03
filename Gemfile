@@ -31,6 +31,8 @@ group :test do
   gem 'chef'
   gem 'chefspec', '~> 6.2.0'
   gem 'foodcritic'
+  gem 'google-api-client', '= 0.10.1'
+  gem 'googleauth'
   gem 'rake', '~> 10.0'
   gem 'rspec'
   gem 'rspec-mocks'
