@@ -39,3 +39,13 @@ issues_url 'https://github.com/GoogleCloudPlatform/chef-google-compute/issues' \
   if respond_to?(:issues_url)
 source_url 'https://github.com/GoogleCloudPlatform/chef-google-compute' \
   if respond_to?(:source_url)
+
+supports 'centos'
+supports 'debian'
+supports 'fedora'
+supports 'freebsd'
+supports 'opensuse'
+supports 'redhat'
+supports 'suse'
+supports 'ubuntu'
+supports 'windows'
