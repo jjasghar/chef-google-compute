@@ -43,6 +43,6 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 15
 
-Style/FileName:
+Naming/FileName:
   Exclude:
     - 'recipes/*.rb'

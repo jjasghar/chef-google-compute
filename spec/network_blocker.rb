@@ -125,13 +125,14 @@ module Net
         next
       end
 
+      # rubocop:disable Metrics/MethodLength
       define_method(m) do |*args|
         request_allowed = true
 
         blocker = Google::Compute::NetworkBlocker.instance
         if !args.empty? && args[0].is_a?(Net::HTTPGenericRequest)
           allow_terms = blocker.allowed_request
-          allow_terms.keys.each do |key|
+          allow_terms.each_key do |key|
             case key
             when :uri
               request_allowed &&= args[0].uri == allow_terms[:uri]
@@ -142,6 +143,7 @@ module Net
             end
           end
         end
+        # rubocop:enable Metrics/MethodLength
 
         return blocker.canned_response if request_allowed
 
