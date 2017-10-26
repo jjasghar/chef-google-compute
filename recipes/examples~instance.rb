@@ -118,6 +118,10 @@ gcompute_instance 'instance-test' do
       source: 'instance-test-os-1'
     }
   ]
+  metadata (
+    'startup-script-url' => 'gs://graphite-playground/bootstrap.sh',
+    'cost-center' => '12345'
+  )
   network_interfaces [
     {
       network: 'mynetwork-test',

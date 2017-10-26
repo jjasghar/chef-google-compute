@@ -143,9 +143,7 @@ module Google
             args['machineType']
           )
           @metadata =
-            Google::Compute::Property::InstancTemplatMetadat.api_parse(
-              args['metadata']
-            )
+            Google::Compute::Property::NameValues.api_parse(args['metadata'])
           @guest_accelerators =
             Google::Compute::Property::InstaTemplGuestAccelArray.api_parse(
               args['guestAccelerators']
@@ -188,9 +186,7 @@ module Google
               args[:machine_type]
             )
           @metadata =
-            Google::Compute::Property::InstancTemplatMetadat.catalog_parse(
-              args[:metadata]
-            )
+            Google::Compute::Property::NameValues.catalog_parse(args[:metadata])
           @guest_accelerators =
             Google::Compute::Property::InstaTemplGuestAccelArray.catalog_parse(
               args[:guest_accelerators]

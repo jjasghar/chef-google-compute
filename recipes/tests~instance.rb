@@ -118,6 +118,10 @@ gcompute_instance 'chef-e2e-instance-test' do
       source: 'chef-e2e-instance-test-os-1'
     }
   ]
+  metadata (
+    'startup-script-url' => 'gs://graphite-playground/bootstrap.sh',
+    'cost-center' => '12345'
+  )
   network_interfaces [
     {
       network: 'chef-e2e-mynetwork-test',

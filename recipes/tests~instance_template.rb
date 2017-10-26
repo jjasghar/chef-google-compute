@@ -114,6 +114,10 @@ gcompute_instance_template 'chef-e2e-instance-template-test' do
         }
       }
     ],
+    metadata: {
+      'startup-script-url' => 'gs://graphite-playground/bootstrap.sh',
+      'cost-center' => '12345'
+    },
     network_interfaces: [
       {
         access_configs: {

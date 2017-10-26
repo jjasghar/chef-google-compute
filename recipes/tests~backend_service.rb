@@ -71,12 +71,6 @@ gcompute_instance_group 'chef-e2e-my-masters' do
   credential 'mycred'
 end
 
-my_health_check = [
-  'https://www.googleapis.com/compute/v1',
-  'projects/google.com:graphite-playground',
-  'global/healthChecks/another-hc'
-].join('/')
-
 gcompute_backend_service 'chef-e2e-my-app-backend' do
   action :create
   backends [
@@ -84,7 +78,7 @@ gcompute_backend_service 'chef-e2e-my-app-backend' do
   ]
   enable_cdn true
   health_checks [
-    my_health_check
+    gcompute_health_check_ref('another-hc', 'google.com:graphite-playground')
   ]
   project 'google.com:graphite-playground'
   credential 'mycred'
