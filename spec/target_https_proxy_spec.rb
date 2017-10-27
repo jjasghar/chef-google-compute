@@ -173,7 +173,7 @@ context 'gcompute_target_https_proxy' do
                   gcompute_target_https_proxy 'title0' do
                     action :create
                     description 'test description#0 data'
-                    ssl_certificates ['resource(ssl_certificate,1)']
+                    ssl_certificates ['resource(ssl_certificate,0)']
                     url_map 'resource(url_map,0)'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -182,7 +182,7 @@ context 'gcompute_target_https_proxy' do
                   gcompute_target_https_proxy 'title1' do
                     action :create
                     description 'test description#1 data'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)']
                     url_map 'resource(url_map,1)'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -191,7 +191,7 @@ context 'gcompute_target_https_proxy' do
                   gcompute_target_https_proxy 'title2' do
                     action :create
                     description 'test description#2 data'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)', 'resource(ssl_certificate,3)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
                     url_map 'resource(url_map,2)'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -404,7 +404,7 @@ context 'gcompute_target_https_proxy' do
                   gcompute_target_https_proxy 'title0' do
                     action :create
                     description 'test description#0 data'
-                    ssl_certificates ['resource(ssl_certificate,1)']
+                    ssl_certificates ['resource(ssl_certificate,0)']
                     thp_label 'test name#0 data'
                     url_map 'resource(url_map,0)'
                     project 'test project#0 data'
@@ -414,7 +414,7 @@ context 'gcompute_target_https_proxy' do
                   gcompute_target_https_proxy 'title1' do
                     action :create
                     description 'test description#1 data'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)']
                     thp_label 'test name#1 data'
                     url_map 'resource(url_map,1)'
                     project 'test project#1 data'
@@ -424,7 +424,7 @@ context 'gcompute_target_https_proxy' do
                   gcompute_target_https_proxy 'title2' do
                     action :create
                     description 'test description#2 data'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)', 'resource(ssl_certificate,3)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
                     thp_label 'test name#2 data'
                     url_map 'resource(url_map,2)'
                     project 'test project#2 data'
@@ -573,7 +573,7 @@ context 'gcompute_target_https_proxy' do
                 'description' => 'test description#0 data',
                 'name' => 'title0',
                 'sslCertificates' => [
-                  'self_link(resource(ssl_certificate,1))'
+                  'selflink(resource(ssl_certificate,0))'
                 ],
                 'urlMap' => 'selflink(resource(url_map,0))'
               },
@@ -638,7 +638,7 @@ context 'gcompute_target_https_proxy' do
                 gcompute_target_https_proxy 'title0' do
                   action :create
                   description 'test description#0 data'
-                  ssl_certificates ['resource(ssl_certificate,1)']
+                  ssl_certificates ['resource(ssl_certificate,0)']
                   url_map 'resource(url_map,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -699,7 +699,7 @@ context 'gcompute_target_https_proxy' do
               'description' => 'test description#0 data',
               'name' => 'test name#0 data',
               'sslCertificates' => [
-                'self_link(resource(ssl_certificate,1))'
+                'selflink(resource(ssl_certificate,0))'
               ],
               'urlMap' => 'selflink(resource(url_map,0))'
             expect_network_get_async 1
@@ -762,7 +762,7 @@ context 'gcompute_target_https_proxy' do
                 gcompute_target_https_proxy 'title0' do
                   action :create
                   description 'test description#0 data'
-                  ssl_certificates ['resource(ssl_certificate,1)']
+                  ssl_certificates ['resource(ssl_certificate,0)']
                   thp_label 'test name#0 data'
                   url_map 'resource(url_map,0)'
                   project 'test project#0 data'

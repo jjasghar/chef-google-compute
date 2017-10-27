@@ -148,7 +148,7 @@ context 'gcompute_target_ssl_proxy' do
                     description 'test description#0 data'
                     proxy_header 'NONE'
                     service 'resource(backend_service,0)'
-                    ssl_certificates ['resource(ssl_certificate,1)']
+                    ssl_certificates ['resource(ssl_certificate,0)']
                     project 'test project#0 data'
                     credential 'mycred'
                   end
@@ -158,7 +158,7 @@ context 'gcompute_target_ssl_proxy' do
                     description 'test description#1 data'
                     proxy_header 'PROXY_V1'
                     service 'resource(backend_service,1)'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)']
                     project 'test project#1 data'
                     credential 'mycred'
                   end
@@ -168,7 +168,7 @@ context 'gcompute_target_ssl_proxy' do
                     description 'test description#2 data'
                     proxy_header 'NONE'
                     service 'resource(backend_service,2)'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)', 'resource(ssl_certificate,3)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
                     project 'test project#2 data'
                     credential 'mycred'
                   end
@@ -361,7 +361,7 @@ context 'gcompute_target_ssl_proxy' do
                     description 'test description#0 data'
                     proxy_header 'NONE'
                     service 'resource(backend_service,0)'
-                    ssl_certificates ['resource(ssl_certificate,1)']
+                    ssl_certificates ['resource(ssl_certificate,0)']
                     tsp_label 'test name#0 data'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -372,7 +372,7 @@ context 'gcompute_target_ssl_proxy' do
                     description 'test description#1 data'
                     proxy_header 'PROXY_V1'
                     service 'resource(backend_service,1)'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)']
                     tsp_label 'test name#1 data'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -383,7 +383,7 @@ context 'gcompute_target_ssl_proxy' do
                     description 'test description#2 data'
                     proxy_header 'NONE'
                     service 'resource(backend_service,2)'
-                    ssl_certificates ['resource(ssl_certificate,1)', 'resource(ssl_certificate,2)', 'resource(ssl_certificate,3)']
+                    ssl_certificates ['resource(ssl_certificate,0)', 'resource(ssl_certificate,1)', 'resource(ssl_certificate,2)']
                     tsp_label 'test name#2 data'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -539,7 +539,7 @@ context 'gcompute_target_ssl_proxy' do
                 'proxyHeader' => 'NONE',
                 'service' => 'selflink(resource(backend_service,0))',
                 'sslCertificates' => [
-                  'self_link(resource(ssl_certificate,1))'
+                  'selflink(resource(ssl_certificate,0))'
                 ]
               },
               name: 'title0'
@@ -596,7 +596,7 @@ context 'gcompute_target_ssl_proxy' do
                   description 'test description#0 data'
                   proxy_header 'NONE'
                   service 'resource(backend_service,0)'
-                  ssl_certificates ['resource(ssl_certificate,1)']
+                  ssl_certificates ['resource(ssl_certificate,0)']
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -660,7 +660,7 @@ context 'gcompute_target_ssl_proxy' do
               'proxyHeader' => 'NONE',
               'service' => 'selflink(resource(backend_service,0))',
               'sslCertificates' => [
-                'self_link(resource(ssl_certificate,1))'
+                'selflink(resource(ssl_certificate,0))'
               ]
             expect_network_get_async 1
             expect_network_get_success_backend_service 1
@@ -715,7 +715,7 @@ context 'gcompute_target_ssl_proxy' do
                   description 'test description#0 data'
                   proxy_header 'NONE'
                   service 'resource(backend_service,0)'
-                  ssl_certificates ['resource(ssl_certificate,1)']
+                  ssl_certificates ['resource(ssl_certificate,0)']
                   tsp_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'

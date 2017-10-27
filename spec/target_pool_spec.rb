@@ -206,7 +206,7 @@ context 'gcompute_target_pool' do
                     description 'test description#0 data'
                     failover_ratio 14369408.15
                     health_check 'resource(http_health_check,0)'
-                    instances ['resource(instance,1)']
+                    instances ['resource(instance,0)']
                     region 'resource(region,0)'
                     session_affinity 'NONE'
                     project 'test project#0 data'
@@ -219,7 +219,7 @@ context 'gcompute_target_pool' do
                     description 'test description#1 data'
                     failover_ratio 28738816.31
                     health_check 'resource(http_health_check,1)'
-                    instances ['resource(instance,1)', 'resource(instance,2)', 'resource(instance,3)']
+                    instances ['resource(instance,0)', 'resource(instance,1)', 'resource(instance,2)']
                     region 'resource(region,1)'
                     session_affinity 'CLIENT_IP'
                     project 'test project#1 data'
@@ -232,7 +232,7 @@ context 'gcompute_target_pool' do
                     description 'test description#2 data'
                     failover_ratio 43108224.47
                     health_check 'resource(http_health_check,2)'
-                    instances ['resource(instance,1)']
+                    instances ['resource(instance,0)']
                     region 'resource(region,2)'
                     session_affinity 'CLIENT_IP_PROTO'
                     project 'test project#2 data'
@@ -416,7 +416,7 @@ context 'gcompute_target_pool' do
                     description 'test description#0 data'
                     failover_ratio 14369408.15
                     health_check 'resource(http_health_check,0)'
-                    instances ['resource(instance,1)']
+                    instances ['resource(instance,0)']
                     region 'resource(region,0)'
                     session_affinity 'NONE'
                     tp_label 'test name#0 data'
@@ -430,7 +430,7 @@ context 'gcompute_target_pool' do
                     description 'test description#1 data'
                     failover_ratio 28738816.31
                     health_check 'resource(http_health_check,1)'
-                    instances ['resource(instance,1)', 'resource(instance,2)', 'resource(instance,3)']
+                    instances ['resource(instance,0)', 'resource(instance,1)', 'resource(instance,2)']
                     region 'resource(region,1)'
                     session_affinity 'CLIENT_IP'
                     tp_label 'test name#1 data'
@@ -444,7 +444,7 @@ context 'gcompute_target_pool' do
                     description 'test description#2 data'
                     failover_ratio 43108224.47
                     health_check 'resource(http_health_check,2)'
-                    instances ['resource(instance,1)']
+                    instances ['resource(instance,0)']
                     region 'resource(region,2)'
                     session_affinity 'CLIENT_IP_PROTO'
                     tp_label 'test name#2 data'
@@ -535,7 +535,7 @@ context 'gcompute_target_pool' do
                 'failoverRatio' => 14_369_408.15,
                 'healthCheck' => 'selflink(resource(http_health_check,0))',
                 'instances' => [
-                  'self_link(resource(instance,1))'
+                  'selflink(resource(instance,0))'
                 ],
                 'name' => 'title0',
                 'sessionAffinity' => 'NONE'
@@ -615,7 +615,7 @@ context 'gcompute_target_pool' do
                   description 'test description#0 data'
                   failover_ratio 14369408.15
                   health_check 'resource(http_health_check,0)'
-                  instances ['resource(instance,1)']
+                  instances ['resource(instance,0)']
                   region 'resource(region,0)'
                   session_affinity 'NONE'
                   project 'test project#0 data'
@@ -663,7 +663,7 @@ context 'gcompute_target_pool' do
                 'failoverRatio' => 14_369_408.15,
                 'healthCheck' => 'selflink(resource(http_health_check,0))',
                 'instances' => [
-                  'self_link(resource(instance,1))'
+                  'selflink(resource(instance,0))'
                 ],
                 'name' => 'test name#0 data',
                 'sessionAffinity' => 'NONE'
@@ -740,7 +740,7 @@ context 'gcompute_target_pool' do
                   description 'test description#0 data'
                   failover_ratio 14369408.15
                   health_check 'resource(http_health_check,0)'
-                  instances ['resource(instance,1)']
+                  instances ['resource(instance,0)']
                   region 'resource(region,0)'
                   session_affinity 'NONE'
                   tp_label 'test name#0 data'

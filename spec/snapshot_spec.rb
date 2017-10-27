@@ -174,7 +174,7 @@ context 'gcompute_snapshot' do
                     action :create
                     description 'test description#0 data'
                     labels ['kk', 'll']
-                    licenses ['resource(license,1)', 'resource(license,2)', 'resource(license,3)']
+                    licenses ['resource(license,0)', 'resource(license,1)', 'resource(license,2)']
                     snapshot_encryption_key({
                       raw_key: 'test raw_key#0 data',
                       sha256: 'test sha256#0 data'
@@ -193,7 +193,7 @@ context 'gcompute_snapshot' do
                     action :create
                     description 'test description#1 data'
                     labels ['xx', 'yy', 'zz']
-                    licenses ['resource(license,1)', 'resource(license,2)', 'resource(license,3)']
+                    licenses ['resource(license,0)', 'resource(license,1)', 'resource(license,2)']
                     snapshot_encryption_key({
                       raw_key: 'test raw_key#1 data',
                       sha256: 'test sha256#1 data'
@@ -212,7 +212,7 @@ context 'gcompute_snapshot' do
                     action :create
                     description 'test description#2 data'
                     labels ['kk', 'll', 'mm', 'nn']
-                    licenses ['resource(license,1)']
+                    licenses ['resource(license,0)']
                     snapshot_encryption_key({
                       raw_key: 'test raw_key#2 data',
                       sha256: 'test sha256#2 data'
@@ -486,7 +486,7 @@ context 'gcompute_snapshot' do
                     action :create
                     description 'test description#0 data'
                     labels ['kk', 'll']
-                    licenses ['resource(license,1)', 'resource(license,2)', 'resource(license,3)']
+                    licenses ['resource(license,0)', 'resource(license,1)', 'resource(license,2)']
                     s_label 'test name#0 data'
                     snapshot_encryption_key({
                       raw_key: 'test raw_key#0 data',
@@ -506,7 +506,7 @@ context 'gcompute_snapshot' do
                     action :create
                     description 'test description#1 data'
                     labels ['xx', 'yy', 'zz']
-                    licenses ['resource(license,1)', 'resource(license,2)', 'resource(license,3)']
+                    licenses ['resource(license,0)', 'resource(license,1)', 'resource(license,2)']
                     s_label 'test name#1 data'
                     snapshot_encryption_key({
                       raw_key: 'test raw_key#1 data',
@@ -526,7 +526,7 @@ context 'gcompute_snapshot' do
                     action :create
                     description 'test description#2 data'
                     labels ['kk', 'll', 'mm', 'nn']
-                    licenses ['resource(license,1)']
+                    licenses ['resource(license,0)']
                     s_label 'test name#2 data'
                     snapshot_encryption_key({
                       raw_key: 'test raw_key#2 data',
@@ -729,9 +729,9 @@ context 'gcompute_snapshot' do
                 'name' => 'title0',
                 'description' => 'test description#0 data',
                 'licenses' => [
-                  'self_link(resource(license,1))',
-                  'self_link(resource(license,2))',
-                  'self_link(resource(license,3))'
+                  'selflink(resource(license,0))',
+                  'selflink(resource(license,1))',
+                  'selflink(resource(license,2))'
                 ],
                 'labels' => %w[kk ll],
                 'source' => 'test name#0 data',
@@ -823,7 +823,7 @@ context 'gcompute_snapshot' do
                   action :create
                   description 'test description#0 data'
                   labels ['kk', 'll']
-                  licenses ['resource(license,1)', 'resource(license,2)', 'resource(license,3)']
+                  licenses ['resource(license,0)', 'resource(license,1)', 'resource(license,2)']
                   snapshot_encryption_key({
                     raw_key: 'test raw_key#0 data',
                     sha256: 'test sha256#0 data'
@@ -910,9 +910,9 @@ context 'gcompute_snapshot' do
               'name' => 'test name#0 data',
               'description' => 'test description#0 data',
               'licenses' => [
-                'self_link(resource(license,1))',
-                'self_link(resource(license,2))',
-                'self_link(resource(license,3))'
+                'selflink(resource(license,0))',
+                'selflink(resource(license,1))',
+                'selflink(resource(license,2))'
               ],
               'labels' => %w[kk ll],
               'source' => 'test name#0 data',
@@ -1002,7 +1002,7 @@ context 'gcompute_snapshot' do
                   action :create
                   description 'test description#0 data'
                   labels ['kk', 'll']
-                  licenses ['resource(license,1)', 'resource(license,2)', 'resource(license,3)']
+                  licenses ['resource(license,0)', 'resource(license,1)', 'resource(license,2)']
                   s_label 'test name#0 data'
                   snapshot_encryption_key({
                     raw_key: 'test raw_key#0 data',
