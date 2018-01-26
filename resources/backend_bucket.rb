@@ -138,7 +138,6 @@ module Google
             bucketName: new_resource.bucket_name,
             description: new_resource.description,
             enableCdn: new_resource.enable_cdn,
-            id: new_resource.id,
             name: new_resource.bb_label
           }.reject { |_, v| v.nil? }
           request.to_json
