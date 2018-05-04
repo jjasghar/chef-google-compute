@@ -1,3 +1,9 @@
+# This repository has been deprecated.
+
+Please go to
+[Github](https://github.com/GoogleCloudPlatform/chef-google-compute) for the
+current repository
+
 # Google Compute Engine Chef Cookbook
 
 This cookbook provides the built-in types and services for Chef to manage
